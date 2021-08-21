@@ -6,35 +6,19 @@
 		<meta name="apple-mobile-web-app-capable"content="yes">
 		<meta name="mobile-web-app-capable"content="yes">
 		<meta name="theme-color"content="#111111">
-		<link rel="apple-touch-icon"href="./img/ico192.png">
-		<link rel="icon"href="./img/ico.png">
+		<link rel="apple-touch-icon"href="./ico192.png">
+		<link rel="icon"href="./ico.png">
 		<title>S c r a w l</title>
-		<link rel="stylesheet"href="./css/scrawl.css">
+		<link rel="stylesheet"href="./ui.css">
 	</head>
 	<body>
 		<main>
-			<!-- <button onClick="openOD()">Open</button> -->
-			<header></header>
 			<article></article>
 		</main>
-		<script src="https://js.live.net/v7.2/OneDrive.js"></script>
-		<script src="./js/scrawl.js"></script>
+		<script src="./scrawl.js"></script>
 		<script>
 			'use strict';
 			const scrawl=new Scrawl();
-			/* if('serviceWorker'in navigator){
-				navigator.serviceWorker.register('./sw.js');
-			}; */
-			function openOD(){
-				let ops={
-					clientId:'81b28697-d076-4400-b01c-79b159e71ac1',
-					action:'download',
-					success:(f)=>{console.log(f)},
-					cancel:()=>{console.log('User cancelled.')},
-					error:(err)=>{console.log(err)}
-				}
-				OneDrive.open(ops);
-			}
 		</script>
 	</body>
 </html>
