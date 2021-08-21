@@ -17,7 +17,7 @@
 	--pt:18pt;
 	--rad:calc(var(--pt)/3);
 	--shado:#000;
-	cursor:/* url('./cur.png')-12 -12, */not-allowed;
+	cursor:/* url('./cur.png')-12 -12, */cell;
 	scrollbar-color:currentColor var(--bg);
 	scrollbar-width:thin;
 }

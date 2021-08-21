@@ -6,18 +6,18 @@
 		<meta name="apple-mobile-web-app-capable"content="yes">
 		<meta name="mobile-web-app-capable"content="yes">
 		<meta name="theme-color"content="#111111">
-		<link rel="apple-touch-icon"href="./apple-touch-icon.png">
-		<link rel="icon"href="./ico.png">
+		<link rel="apple-touch-icon"href="apple-touch-icon.png">
+		<link rel="icon"href="ico.png">
 		<title>S c r a w l</title>
-		<link rel="stylesheet"href="./ui.css">
+		<link rel="stylesheet"href="ui.css">
 	</head>
 	<body>
 		<main>
 			<nav>
-				<input id="f"type="file"accept=".md,.htm,.html">
+				<input id="scrawl-inpt-f"type="file"accept=".md,.htm,.html">
 				<span class="material-icons"onclick="scrawl.naew()"title="New">insert_drive_file</span>
 				<span class="material-icons"onclick="scrawl.daen()"title="Save">save</span>
-				<span class="material-icons"onclick="scrawl.opaen(document.getElementById('f'))"title="Open">folder</span>
+				<span class="material-icons"onclick="scrawl.opaen()"title="Open">folder</span>
 				<span class="material-icons cis">more_vert</span>
 				<span class="material-icons"onclick="scrawl.undo()"title="Undo">undo</span>
 				<span class="material-icons"onclick="scrawl.undo(true)"title="Redo">redo</span>
@@ -28,6 +28,7 @@
 				<span class="material-icons"onclick="document.execCommand('insertHTML',false,'	')"title="Tab">keyboard_tab</span>
 				<span class="material-icons cis">more_vert</span>
 				<span class="material-icons"onclick="scrawl.spael()"title="Spellcheck">spellcheck</span>
+				<span class="material-icons"onclick="scrawl.woun()"title="Word Count">pin</span>
 				<span class="material-icons"onclick="scrawl.saerk()"title="Search & Replace">search</span>
 				<span class="material-icons cis">more_vert</span>
 				<span class="material-icons"onclick="scrawl.WYSIWYG()"title="Preview HTML">preview</span>
@@ -37,7 +38,7 @@
 			</nav>
 			<article></article>
 		</main>
-		<script src="./scrawl.js"></script>
+		<script src="scrawl.js"></script>
 		<script>
 			'use strict';
 			const scrawl=new Scrawl();
