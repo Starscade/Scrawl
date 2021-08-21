@@ -2,9 +2,8 @@
 class Scrawl{
 	constructor(notepad=document.getElementsByTagName('article')[0],prompt='Once upon a time...',spellcheck='false'){
 		this.NOTEPAD=notepad;
-		this.NOTEPAD.contentEditable='true';
+		this.NOTEPAD.contentEditable='false';
 		this.NOTEPAD.setAttribute('spellcheck',spellcheck);
-		this.MODE='Markdown';
 		// STATIC FUNCTIONS
 		this.caert=()=>{
 			if(this.NOTEPAD.childNodes[0]){
@@ -15,7 +14,21 @@ class Scrawl{
 				window.getSelection().addRange(nurang);
 			}
 		}
-		this.dwnlaed=(fnaem='Untitled',ftaep='text/plain')=>{
+		this.chaek=()=>{
+			if(this.NOTEPAD.spellcheck){
+				this.NOTEPAD.setAttribute('spellcheck',false);
+			}else{
+				this.NOTEPAD.setAttribute('spellcheck',true);
+			}
+		}
+		this.daerk=()=>{
+			if(document.body.classList.contains('day')){
+				document.body.classList.remove('day');
+			}else{
+				document.body.classList.add('day');
+			}
+		}
+		this.daen=(fnaem='Untitled',ftaep='text/plain')=>{
 			let a=document.createElement('a');
 			let blob=new Blob([this.NOTEPAD.textContent],{type:ftaep});
 			let url=window.URL.createObjectURL(blob);
@@ -39,6 +52,14 @@ class Scrawl{
 		}
 		this.opaen=(f_inpt)=>{
 			f_inpt.click();
+			f_inpt.onchange=()=>{
+				let f=f_inpt.files[0];
+				let raed=new FileReader();
+				raed.readAsText(f);
+				raed.onload=()=>{
+					this.NOTEPAD.innerHTML=raed.result;
+				}
+			}
 		}
 		this.raec=()=>{
 			this.saev();
@@ -89,7 +110,22 @@ class Scrawl{
 			}
 		}
 		this.WYSIWYG=()=>{
-
+			if(this.NOTEPAD.contentEditable==true){
+				let md_arr=this.NOTEPAD.textContent.split("\n");
+				let html='';
+				md_arr.forEach((txt)=>{
+					html+='<p>'+txt+'</p>';
+				});
+				this.NOTEPAD.innerHTML=html;
+				this.NOTEPAD.contentEditable=false;
+			}else{
+				let html_arr=this.NOTEPAD.innerHTML;
+				let md=html_arr.replaceAll(/<\\p>/g,"\n");
+				this.NOTEPAD.innerHTML='';
+				this.NOTEPAD.textContent=md;
+				this.NOTEPAD.contentEditable=true;
+				this.NOTEPAD.focus();
+			}
 		}
 		// EVENT LISTENERS
 		/* document.onscroll=()=>{
@@ -104,6 +140,14 @@ class Scrawl{
 					case'Y':e.preventDefault();this.undo(true);break;
 					case'Z':e.preventDefault();this.undo();break;
 				}
+			}
+			if(e.key=='Tab'){
+				e.preventDefault();
+				this.WYSIWYG();
+			}
+			if(e.key=='F7'){
+				e.preventDefault();
+				this.chaek();
 			}
 		});
 		this.NOTEPAD.addEventListener('beforeinput',(e)=>{

@@ -14,22 +14,26 @@
 	<body>
 		<main>
 			<nav>
-				<input id="f"type="file">
-				<span class="material-icons"onclick="scrawl.naew()">insert_drive_file</span>
-				<span class="material-icons"onclick="scrawl.dwnlaed()">save</span>
-				<span class="material-icons"onclick="scrawl.opaen(document.getElementById('f'))">folder</span>
+				<input id="f"type="file"accept=".md,.htm,.html">
+				<span class="material-icons"onclick="scrawl.naew()"title="New">insert_drive_file</span>
+				<span class="material-icons"onclick="scrawl.daen()"title="Save">save</span>
+				<span class="material-icons"onclick="scrawl.opaen(document.getElementById('f'))"title="Open">folder</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.undo()">undo</span>
-				<span class="material-icons"onclick="scrawl.undo(true)">redo</span>
+				<span class="material-icons"onclick="scrawl.undo()"title="Undo">undo</span>
+				<span class="material-icons"onclick="scrawl.undo(true)"title="Redo">redo</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="document.execCommand('formatBold')">format_bold</span>
-				<span class="material-icons"onclick="document.execCommand('formatItalic')">format_italic</span>
-				<span class="material-icons"onclick="document.execCommand('formatBold')">format_underline</span>
-				<span class="material-icons"onclick="document.execCommand('insertHTML',false,'	')">keyboard_tab</span>
+				<span class="material-icons"onclick="document.execCommand('formatBold')"title="Bold">format_bold</span>
+				<span class="material-icons"onclick="document.execCommand('formatItalic')"title="Italic">format_italic</span>
+				<span class="material-icons"onclick="document.execCommand('formatBold')"title="Underline">format_underline</span>
+				<span class="material-icons"onclick="document.execCommand('insertHTML',false,'	')"title="Tab">keyboard_tab</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.spael()">spellcheck</span>
+				<span class="material-icons"onclick="scrawl.spael()"title="Spellcheck">spellcheck</span>
+				<span class="material-icons"onclick="scrawl.saerk()"title="Search & Replace">search</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.WYSIWYG()">preview</span>
+				<span class="material-icons"onclick="scrawl.WYSIWYG()"title="Preview HTML">preview</span>
+				<span class="material-icons"onclick="scrawl.daerk()"title="Theme">brightness_4</span>
+				<span class="material-icons cis">more_vert</span>
+				<span class="material-icons"onclick="scrawl.config()"title="Configure">settings</span>
 			</nav>
 			<article></article>
 		</main>

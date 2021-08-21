@@ -17,15 +17,15 @@
 	--pt:18pt;
 	--rad:calc(var(--pt)/3);
 	--shado:#000;
-	cursor:url('./cur.png')-12 -12,crosshair;
+	cursor:/* url('./cur.png')-12 -12, */not-allowed;
 	scrollbar-color:currentColor var(--bg);
 	scrollbar-width:thin;
 }
 article{
 	background-color:var(--pg);
-	border:1pt solid var(--mg);
+	border:1pt solid transparent;
 	box-shadow:0 0 1em var(--shado);
-	/* cursor:text; */
+	cursor:text;
 	/* hyphens:auto; */
 	margin:auto;
 	margin-bottom:0;
@@ -37,6 +37,7 @@ article{
 	white-space:pre-wrap;
 	word-wrap:break-word;
 }article:focus{
+	border-color:var(--mg);
 	outline:none;
 }
 body{
@@ -63,12 +64,21 @@ nav{
 }nav:hover{
 	opacity:1;
 }nav span{
+	cursor:pointer;
 	padding:.5em;
 }
 .cis{
 	color:var(--mg);
 }span.cis:focus,span.cis:hover{
 	background-color:transparent!important;
+}
+.day{
+	--bg:#ddd;
+	--fg:#667;
+	/* --hi:Goldenrod; */
+	--mg:#bbb;
+	--pg:#eee;
+	--shado:#ccc;
 }
 span.material-icons:focus,span.material-icons:hover{
 	background-color:var(--mg);
@@ -80,6 +90,7 @@ span.material-icons:focus,span.material-icons:hover{
 		margin-bottom:20vh;
 		margin-top:10vh;
 		max-width:7.5in;
+		min-height:11in;
 		padding:1in;
 	}
 	nav{
