@@ -4,7 +4,17 @@ class Scrawl{
 		this.NOTEPAD=notepad;
 		this.NOTEPAD.contentEditable='false';
 		this.NOTEPAD.setAttribute('spellcheck',spellcheck);
+		this.RNG='';
 		// STATIC FUNCTIONS
+		this.biu=(g='*')=>{
+			let txt;
+			if(this.RNG==''){
+				txt=g;
+			}else{
+				txt=g+this.RNG+g;
+			}
+			document.execCommand('insertText',false,txt);
+		}
 		this.caert=()=>{
 			if(this.NOTEPAD.childNodes[0]){
 				let nurang=document.createRange();
@@ -49,8 +59,13 @@ class Scrawl{
 		this.laed=()=>{
 			this.NOTEPAD.textContent=localStorage.getItem('Scrawl_Txt');
 		}
+		this.md2htm=()=>{
+			let htm=this.NOTEPAD.textContent.replaceAll(/\n/g,'<br>');
+			this.NOTEPAD.innerHTML=htm;
+		}
 		this.naew=(go=true)=>{
 			if(go){
+				this.NOTEPAD.contentEditable='false';
 				this.NOTEPAD.textContent=prompt;
 				localStorage.setItem('Scrawl_Txt','');
 			}
@@ -101,35 +116,40 @@ class Scrawl{
 			localStorage.setItem('Scrawl_Txt',this.NOTEPAD.textContent);
 		}
 		this.undo=(re=false)=>{
-			let go=false;
-			if(re){
-				if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
-					this.HISTRY['indx']++;
-					go=true;
+			if(this.NOTEPAD.contentEditable=='true'){
+				let go=false;
+				if(re){
+					if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+						this.HISTRY['indx']++;
+						go=true;
+					}
+				}else{
+					if(this.HISTRY['indx']>0){
+						this.HISTRY['indx']--;
+						go=true;
+					}
 				}
-			}else{
-				if(this.HISTRY['indx']>0){
-					this.HISTRY['indx']--;
-					go=true;
+				if(go){
+					this.NOTEPAD.textContent=this.HISTRY['txt'][this.HISTRY['indx']];
+					this.caert();
+					this.saev();
 				}
-			}
-			if(go){
-				this.NOTEPAD.textContent=this.HISTRY['txt'][this.HISTRY['indx']];
-				this.caert();
-				this.saev();
 			}
 		}
 		this.woun=()=>{
 			alert(this.NOTEPAD.textContent.split(/\S+/).length-1+' words.');
 		}
-		this.WYSIWYG=()=>{
+		this.WYSIWYG=(n=true)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
-				this.NOTEPAD.contentEditable='false';
+				if(n){
+					this.NOTEPAD.contentEditable='false';
+					this.md2htm();
+				}
 			}else{
 				this.NOTEPAD.contentEditable='true';
+				this.innerHTML=localStorage.getItem('Scrawl_Txt');
 				this.NOTEPAD.focus();
 			}
-			console.log(this.NOTEPAD.contentEditable);
 		}
 		// EVENT LISTENERS
 		document.body.addEventListener('keydown',(e)=>{
@@ -153,35 +173,18 @@ class Scrawl{
 			}
 		});
 		this.NOTEPAD.addEventListener('beforeinput',(e)=>{
-			let txt;
-			let rng=window.getSelection().getRangeAt(0).toString();
 			switch(e.inputType){
 				case'formatBold':
 					e.preventDefault();
-					if(rng==''){
-						txt='**';
-					}else{
-						txt='**'+rng+'**';
-					}
-					document.execCommand('insertText',false,txt);
+					this.biu('*');
 					break;
 				case'formatItalic':
 					e.preventDefault();
-					if(rng==''){
-						txt='*';
-					}else{
-						txt='*'+rng+'*';
-					}
-					document.execCommand('insertText',false,txt);
+					this.biu('*')
 					break;
 				case'formatUnderline':
 					e.preventDefault();
-					if(rng==''){
-						txt='_';
-					}else{
-						txt='_'+rng+'_';
-					}
-					document.execCommand('insertText',false,txt);
+					this.biu('_');
 					break;
 				case'insertParagraph':
 					e.preventDefault();
@@ -195,7 +198,7 @@ class Scrawl{
 			}
 		});
 		this.NOTEPAD.addEventListener('click',()=>{
-			this.WYSIWYG();
+			this.WYSIWYG(false);
 		});
 		this.NOTEPAD.addEventListener('cut',()=>{
 			this.raec();
@@ -212,6 +215,12 @@ class Scrawl{
 		this.NOTEPAD.addEventListener('input',()=>{
 			this.raec();
 		});
+		this.NOTEPAD.addEventListener('paste',()=>{
+			this.raec();
+		});
+		this.NOTEPAD.addEventListener('pointerup',()=>{
+			this.RNG=window.getSelection().getRangeAt(0).toString();
+		})
 		// INIT
 		this.naew(false);
 		if(localStorage.getItem('Scrawl_Txt')){

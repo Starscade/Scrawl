@@ -64,8 +64,12 @@ nav{
 }nav:hover{
 	opacity:1;
 }nav span{
-	cursor:pointer;
 	padding:.5em;
+}nav span:not(.cis){
+	cursor:pointer;
+}nav span.material-icons:not(.cis):focus,nav span.material-icons:not(.cis):hover{
+	background-color:var(--mg);
+	border-radius:var(--rad);
 }
 .cis{
 	color:var(--mg);
@@ -79,10 +83,6 @@ nav{
 	--mg:#bbb;
 	--pg:#eee;
 	--shado:#ccc;
-}
-span.material-icons:focus,span.material-icons:hover{
-	background-color:var(--mg);
-	border-radius:var(--rad);
 }
 @media(orientation:landscape){
 	article{
