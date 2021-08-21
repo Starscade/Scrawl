@@ -51,6 +51,7 @@ nav{
 	font-size:36pt;
 	overflow-x:scroll;
 }nav span{padding:.5em;}
+.cis{color:var(--mg);}
 @media(orientation:landscape){
 	article{
 		border-radius:calc(var(--pt)/3);
