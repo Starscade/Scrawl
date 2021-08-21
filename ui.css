@@ -15,6 +15,7 @@
 	--mg:#333;
 	--pg:#222;
 	--pt:18pt;
+	--rad:calc(var(--pt)/3);
 	--shado:#000;
 	cursor:url('./cur.png')-12 -12,crosshair;
 	scrollbar-color:currentColor var(--bg);
@@ -47,22 +48,41 @@ body{
 	text-align:center;
 }
 input{display:none;}
+main{
+	height:100vh;
+}
 nav{
+	background-color:var(--bg);
 	font-size:36pt;
 	overflow-x:scroll;
+	position:sticky;
+	top:0;
+	transition:opacity .5s;
+	user-select:none;
+	white-space:nowrap;
+}nav:hover{
+	opacity:1;
 }nav span{
 	padding:.5em;
 }
 .cis{
 	color:var(--mg);
-	font-family:monospace;
+}span.cis:focus,span.cis:hover{
+	background-color:transparent!important;
+}
+span.material-icons:focus,span.material-icons:hover{
+	background-color:var(--mg);
+	border-radius:var(--rad);
 }
 @media(orientation:landscape){
 	article{
-		border-radius:calc(var(--pt)/3);
+		border-radius:var(--rad);
 		margin-bottom:20vh;
 		margin-top:10vh;
 		max-width:7.5in;
 		padding:1in;
+	}
+	nav{
+		opacity:0;
 	}
 }

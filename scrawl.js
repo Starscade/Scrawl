@@ -2,11 +2,10 @@
 class Scrawl{
 	constructor(notepad=document.getElementsByTagName('article')[0],prompt='Once upon a time...',spellcheck='false'){
 		this.NOTEPAD=notepad;
-		this.NOTEPAD.autofocus='true';
 		this.NOTEPAD.contentEditable='true';
 		this.NOTEPAD.setAttribute('spellcheck',spellcheck);
-		this.HISTRY={'indx':0,'txt':[],'cart':[0]};
-		this.INIT=true;
+		this.MODE='Markdown';
+		// STATIC FUNCTIONS
 		this.caert=()=>{
 			if(this.NOTEPAD.childNodes[0]){
 				let nurang=document.createRange();
@@ -29,6 +28,17 @@ class Scrawl{
 		},
 		this.laed=()=>{
 			this.NOTEPAD.textContent=localStorage.getItem('Scrawl_Txt');
+		}
+		this.naew=(go=true)=>{
+			if(go){
+				this.NOTEPAD.textContent=prompt;
+				localStorage.setItem('Scrawl_Txt','');
+				this.HISTRY={'indx':0,'txt':[],'cart':[0]};
+			}
+			this.INIT=true;
+		}
+		this.opaen=(f_inpt)=>{
+			f_inpt.click();
 		}
 		this.raec=()=>{
 			this.saev();
@@ -78,11 +88,19 @@ class Scrawl{
 				this.saev();
 			}
 		}
+		this.WYSIWYG=()=>{
+
+		}
+		// EVENT LISTENERS
+		/* document.onscroll=()=>{
+			document.getElementsByTagName('nav')[0].style.opacity='0';
+		} */
 		document.body.addEventListener('keydown',(e)=>{
 			if(e.ctrlKey||e.metaKey){
 				switch(e.key.toUpperCase()){
-					case'O':e.preventDefault();this.laed(e);break;
-					case'S':e.preventDefault();this.saev(e);this.dwnlaed();break;
+					case'N':e.preventDefault();this.naew();break;
+					case'O':e.preventDefault();this.laed();break;
+					case'S':e.preventDefault();this.saev();this.dwnlaed();break;
 					case'Y':e.preventDefault();this.undo(true);break;
 					case'Z':e.preventDefault();this.undo();break;
 				}
@@ -125,6 +143,11 @@ class Scrawl{
 					break;
 			}
 		});
+		this.NOTEPAD.addEventListener('blur',()=>{
+			if(this.INIT==false){
+				this.NOTEPAD.focus();
+			}
+		});
 		this.NOTEPAD.addEventListener('cut',()=>{
 			this.raec();
 		});
@@ -140,14 +163,17 @@ class Scrawl{
 		this.NOTEPAD.addEventListener('input',()=>{
 			this.raec();
 		});
+		// INIT
+		this.naew(false);
 		if(localStorage.getItem('Scrawl_Txt')){
 			this.laed();
 			this.INIT=false;
 			this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
 			this.HISTRY['cart'][this.HISTRY['indx']]=this.NOTEPAD.textContent.length;
 		}else{
-			this.NOTEPAD.textContent=prompt;
+			this.naew();
 		}
+		// END
 		window.onbeforeunload=()=>{
 			confirm('Unsaved changes will be lost!');
 			// e.preventDefault();
