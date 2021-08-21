@@ -24,13 +24,6 @@ class Scrawl{
 				window.getSelection().addRange(nurang);
 			}
 		}
-		this.chaek=()=>{
-			if(this.NOTEPAD.spellcheck){
-				this.NOTEPAD.setAttribute('spellcheck',false);
-			}else{
-				this.NOTEPAD.setAttribute('spellcheck',true);
-			}
-		}
 		this.daerk=()=>{
 			if(document.body.classList.contains('day')){
 				document.body.classList.remove('day');
@@ -110,10 +103,16 @@ class Scrawl{
 				this.HISTRY['cart'].shift();
 				this.HISTRY['indx']--;
 			}
-			console.log(this.HISTRY);
 		}
 		this.saev=()=>{
 			localStorage.setItem('Scrawl_Txt',this.NOTEPAD.textContent);
+		}
+		this.spael=()=>{
+			if(this.NOTEPAD.spellcheck){
+				this.NOTEPAD.setAttribute('spellcheck',false);
+			}else{
+				this.NOTEPAD.setAttribute('spellcheck',true);
+			}
 		}
 		this.undo=(re=false)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
@@ -143,11 +142,13 @@ class Scrawl{
 			if(this.NOTEPAD.contentEditable=='true'){
 				if(n){
 					this.NOTEPAD.contentEditable='false';
+					this.NOTEPAD.style.fontFamily='HTML';
 					this.md2htm();
 				}
 			}else{
 				this.NOTEPAD.contentEditable='true';
 				this.innerHTML=localStorage.getItem('Scrawl_Txt');
+				this.NOTEPAD.style.fontFamily='Markdown';
 				this.NOTEPAD.focus();
 			}
 		}
@@ -169,22 +170,30 @@ class Scrawl{
 			}
 			if(e.key=='F7'){
 				e.preventDefault();
-				this.chaek();
+				this.spael();
+			}
+			if(e.key=='F5'){
+				e.preventDefault();
+				this.daerk();
 			}
 		});
 		this.NOTEPAD.addEventListener('beforeinput',(e)=>{
 			switch(e.inputType){
 				case'formatBold':
 					e.preventDefault();
-					this.biu('*');
+					this.biu('**');
 					break;
 				case'formatItalic':
 					e.preventDefault();
-					this.biu('*')
+					this.biu('*');
 					break;
 				case'formatUnderline':
 					e.preventDefault();
 					this.biu('_');
+					break;
+				case'formatStrikethrough':
+					e.preventDefault();
+					this.biu('~');
 					break;
 				case'insertParagraph':
 					e.preventDefault();
@@ -198,7 +207,9 @@ class Scrawl{
 			}
 		});
 		this.NOTEPAD.addEventListener('click',()=>{
-			this.WYSIWYG(false);
+			if(this.INIT){
+				this.WYSIWYG(false);
+			}
 		});
 		this.NOTEPAD.addEventListener('cut',()=>{
 			this.raec();

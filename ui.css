@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @font-face{
-	font-family:'Font';
+	font-family:'Markdown';
 	src:url('https://fonts.gstatic.com/s/kalam/v11/YA9dr0Wd4kDdMthROCc.woff2');
+}
+@font-face{
+	font-family:'HTML';
+	src:url('https://fonts.gstatic.com/s/josefinsans/v17/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2');
 }
 ::-webkit-scrollbar{
 	width:6px;
@@ -43,15 +47,12 @@ article{
 body{
 	background-color:var(--bg);
 	color:var(--fg);
-	font-family:'Font';
+	font-family:'HTML';
 	font-size:var(--pt);
 	margin:0;
 	text-align:center;
 }
 input{display:none;}
-main{
-	height:100vh;
-}
 nav{
 	background-color:var(--bg);
 	font-size:36pt;
@@ -73,8 +74,6 @@ nav{
 }
 .cis{
 	color:var(--mg);
-}span.cis:focus,span.cis:hover{
-	background-color:transparent!important;
 }
 .day{
 	--bg:#ddd;
