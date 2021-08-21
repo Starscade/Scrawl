@@ -51,7 +51,6 @@ nav{
 	font-size:36pt;
 	overflow-x:scroll;
 }nav span{
-	display:inline-block;
 	padding:.5em;
 }
 .cis{
