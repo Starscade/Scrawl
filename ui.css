@@ -15,7 +15,7 @@
 	--pg:#222;
 	--pt:18pt;
 	--shado:#000;
-	cursor:url('../img/cur.png')-12 -12,crosshair;
+	cursor:url('./cur.png')-12 -12,crosshair;
 	scrollbar-color:currentColor var(--bg);
 	scrollbar-width:thin;
 }
