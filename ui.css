@@ -46,6 +46,7 @@ body{
 	margin:0;
 	text-align:center;
 }
+input{display:none;}
 @media(orientation:landscape){
 	article{
 		border-radius:calc(var(--pt)/3);
