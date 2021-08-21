@@ -47,7 +47,10 @@ body{
 	text-align:center;
 }
 input{display:none;}
-nav{font-size:36pt;}nav span{padding:.5em;}
+nav{
+	font-size:36pt;
+	overflow-x:scroll;
+}nav span{padding:.5em;}
 @media(orientation:landscape){
 	article{
 		border-radius:calc(var(--pt)/3);
