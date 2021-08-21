@@ -1,0 +1,56 @@
+@font-face{
+	font-family:'Font';
+	src:url('https://fonts.gstatic.com/s/kalam/v11/YA9dr0Wd4kDdMthROCc.woff2');
+}
+::-webkit-scrollbar{
+	width:6px;
+}::-webkit-scrollbar-thumb,::selection{
+	background-color:var(--mg);
+}
+:root{
+	--bg:#111;
+	--fg:#eca;
+	/* --hi:Goldenrod; */
+	--mg:#333;
+	--pg:#222;
+	--pt:18pt;
+	--shado:#000;
+	cursor:url('../img/cur.png')-12 -12,crosshair;
+	scrollbar-color:currentColor var(--bg);
+	scrollbar-width:thin;
+}
+article{
+	background-color:var(--pg);
+	border:1pt solid var(--mg);
+	box-shadow:0 0 1em var(--shado);
+	/* cursor:text; */
+	/* hyphens:auto; */
+	margin:auto;
+	margin-bottom:0;
+	margin-top:0;
+	max-width:100%;
+	min-height:100vh;
+	padding:1em;
+	text-align:justify;
+	white-space:pre-wrap;
+	word-wrap:break-word;
+}article:focus{
+	outline:none;
+}
+body{
+	background-color:var(--bg);
+	color:var(--fg);
+	font-family:'Font';
+	font-size:var(--pt);
+	margin:0;
+	text-align:center;
+}
+@media(orientation:landscape){
+	article{
+		border-radius:calc(var(--pt)/3);
+		margin-bottom:20vh;
+		margin-top:10vh;
+		max-width:7.5in;
+		padding:1in;
+	}
+}
