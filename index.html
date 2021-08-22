@@ -14,37 +14,34 @@
 	<body class="day"oncontextmenu="return false;">
 		<main>
 			<nav>
-				<input id="scrawl-inpt-f"type="file"accept=".md,.htm,.html">
-				<span class="material-icons"onclick="scrawl.naew()"title="New">insert_drive_file</span>
-				<span class="material-icons"onclick="scrawl.daen()"title="Save">save</span>
-				<span class="material-icons"onclick="scrawl.opaen()"title="Open">folder</span>
-				<span class="material-icons"onclick="window.print()"title="Print">print</span>
+				<input type="file"accept=".md,.htm,.html">
+				<span id="ui-new"class="material-icons"title="New">insert_drive_file</span>
+				<span id="ui-save"class="material-icons"title="Save">save</span>
+				<span id="ui-open"class="material-icons"title="Open">folder</span>
+				<span id="ui-print"class="material-icons"onclick="window.print()"title="Print">print</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.undo()"title="Undo">undo</span>
-				<span class="material-icons"onclick="scrawl.undo(true)"title="Redo">redo</span>
+				<span id="ui-undo"class="material-icons"title="Undo">undo</span>
+				<span id="ui-redo"class="material-icons"title="Redo">redo</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.biu('**')"title="Bold">format_bold</span>
-				<span class="material-icons"onclick="scrawl.biu()"title="Italic">format_italic</span>
-				<span class="material-icons"onclick="scrawl.biu('_')"title="Underline">format_underline</span>
-				<span class="material-icons"onclick="scrawl.biu('~')"title="Strikethrough">strikethrough_s</span>
-				<span class="material-icons"onclick="document.execCommand('insertHTML',false,'	')"title="Tab">keyboard_tab</span>
+				<span id="ui-bold"class="material-icons"title="Bold">format_bold</span>
+				<span id="ui-italic"class="material-icons"title="Italic">format_italic</span>
+				<span id="ui-underline"class="material-icons"title="Underline">format_underline</span>
+				<span id="ui-strike"class="material-icons"title="Strikethrough">strikethrough_s</span>
+				<span id="ui-tab"class="material-icons"onclick="document.execCommand('insertHTML',false,'	')"title="Tab">keyboard_tab</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.spael()"title="Spellcheck">spellcheck</span>
-				<span class="material-icons"onclick="scrawl.woun()"title="Word Count">pin</span>
-				<span class="material-icons"onclick="scrawl.saerk()"title="Search & Replace">search</span>
+				<span id="ui-spell"class="material-icons"title="Spellcheck">spellcheck</span>
+				<span id="ui-words"class="material-icons"title="Word Count">pin</span>
+				<span id="ui-find"class="material-icons"title="Search & Replace">search</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.WYSIWYG()"title="Preview HTML">preview</span>
-				<span class="material-icons"onclick="scrawl.daerk()"title="Dark Mode">brightness_4</span>
+				<span id="ui-see"class="material-icons"title="Preview HTML">preview</span>
+				<span id="ui-dark"class="material-icons"title="Dark Mode">brightness_4</span>
 				<span class="material-icons cis">more_vert</span>
-				<span class="material-icons"onclick="scrawl.config()"title="Configure">settings</span>
-				<span class="material-icons"onclick="window.open('https://github.com/Starscade/Scrawl/','_Blank')"title="About">live_help</span>
+				<span id="ui-config"class="material-icons"title="Configure">settings</span>
+				<span id="ui-help"class="material-icons"onclick="window.open('https://github.com/Starscade/Scrawl/','_Blank')"title="About">live_help</span>
 			</nav>
 			<article></article>
 		</main>
 		<script src="scrawl.js"></script>
-		<script>
-			'use strict';
-			const scrawl=new Scrawl();
-		</script>
+		<script src="x.js"></script>
 	</body>
 </html>

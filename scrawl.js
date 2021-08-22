@@ -26,15 +26,6 @@ class Scrawl{
 				window.getSelection().addRange(nurang);
 			}
 		}
-		this.daerk=()=>{
-			if(document.body.classList.contains('day')){
-				document.body.classList.remove('day');
-				localStorage.setItem('Scrawl_Day','');
-			}else{
-				document.body.classList.add('day');
-				localStorage.setItem('Scrawl_Day','day');
-			}
-		}
 		this.daen=(ftaep='text/plain')=>{
 			let fnaem=window.prompt('Please enter a filename...','My_Working_Title.md');
 			let a=document.createElement('a');
@@ -70,8 +61,8 @@ class Scrawl{
 			}
 			this.INIT=true;
 		}
-		this.opaen=(f_inpt=document.getElementById('scrawl-inpt-f'))=>{
-			this.WYSIWYG();
+		this.opaen=(f_inpt)=>{
+			// this.WYSIWYG();
 			f_inpt.click();
 			f_inpt.onchange=()=>{
 				let f=f_inpt.files[0];
@@ -162,37 +153,6 @@ class Scrawl{
 			}
 		}
 		// EVENT LISTENERS
-		document.body.addEventListener('keydown',(e)=>{
-			if(e.ctrlKey||e.metaKey){
-				switch(e.key.toUpperCase()){
-					// case'N':e.preventDefault();this.naew();break;
-					case'O':e.preventDefault();this.opaen();break;
-					case'S':e.preventDefault();this.saev();this.dwnlaed();break;
-					// case'W':e.preventDefault();this.wcoun();break;
-					case'Y':e.preventDefault();this.undo(true);break;
-					case'Z':e.preventDefault();this.undo();break;
-				}
-			}else{
-				switch(e.key){
-					case'Tab':
-						e.preventDefault();
-						this.WYSIWYG();
-						break;
-					case'F7':
-						e.preventDefault();
-						this.spael();
-						break;
-					case'F8':
-						e.preventDefault();
-						this.woun();
-						break;
-					case'F10':
-						e.preventDefault();
-						this.daerk();
-						break;
-				}
-			}
-		});
 		this.NOTEPAD.addEventListener('beforeinput',(e)=>{
 			switch(e.inputType){
 				case'formatBold':
