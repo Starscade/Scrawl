@@ -46,9 +46,17 @@ body{
 	margin:0;
 	text-align:center;
 }
+h1{
+	text-transform:uppercase;
+}
 p{
 	margin:0;
 	text-align:justify;
+}p:first-of-type::first-line{
+	font-variant:small-caps;
+	font-weight:bold;
+}p:first-of-type::first-letter{
+	initial-letter:3;
 }p:not(br+p){
 	text-indent:2em;
 }

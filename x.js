@@ -61,7 +61,7 @@ document.body.addEventListener('keydown',(e)=>{
 				break;
 			case'F10':
 				e.preventDefault();
-				scrawl.daerk();
+				daerk();
 				break;
 		}
 	}
