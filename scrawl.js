@@ -26,8 +26,7 @@ class Scrawl{
 				window.getSelection().addRange(nurang);
 			}
 		}
-		this.daen=(ftaep='text/plain')=>{
-			let fnaem=window.prompt('Please enter a filename...','My_Working_Title.md');
+		this.daen=(fnaem='My_Working_Title.md',ftaep='text/plain')=>{
 			let a=document.createElement('a');
 			let blob=new Blob([this.NOTEPAD.textContent],{type:ftaep});
 			let url=window.URL.createObjectURL(blob);
@@ -37,8 +36,6 @@ class Scrawl{
 			if(fnaem){
 				a.download=fnaem;
 				a.click();
-			}else{
-				alert('Not saved!');
 			}
 			window.URL.revokeObjectURL(url);
 		},
@@ -62,7 +59,6 @@ class Scrawl{
 			this.INIT=true;
 		}
 		this.opaen=(f_inpt)=>{
-			// this.WYSIWYG();
 			f_inpt.click();
 			f_inpt.onchange=()=>{
 				let f=f_inpt.files[0];

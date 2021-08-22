@@ -46,3 +46,6 @@ nav{
 .just{
 	text-align:justify;
 }
+#config{
+	display:none;
+}

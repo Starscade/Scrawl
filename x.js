@@ -14,7 +14,8 @@ const ui_eng=document.getElementById('ui-spell');
 const ui_num=document.getElementById('ui-words');
 const ui_get=document.getElementById('ui-find');
 const ui_see=document.getElementById('ui-see');
-const ui_drk=document.getElementById('ui-dark');
+const ui_go=document.getElementById('ui-send');
+// const ui_drk=document.getElementById('ui-dark');
 function daerk(){
 	if(document.body.classList.contains('day')){
 		document.body.classList.remove('day');
@@ -24,9 +25,19 @@ function daerk(){
 		localStorage.setItem('Scrawl_Day','day');
 	}
 }
+function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
+	let ok=confirm(msg);
+	if(ok){
+		albak(argz);
+	}
+}
+function saen(){
+	ok(alert,'',"Data to be sent:\n\n    Item 1: Name\n    Item 2: Email");
+}
 document.body.addEventListener('keydown',(e)=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){
+			case'E':e.preventDefault();saen();break;
 			// case'N':e.preventDefault();scrawl.naew();break;
 			case'O':e.preventDefault();scrawl.opaen(f);break;
 			case'S':e.preventDefault();scrawl.saev();scrawl.dwnlaed();break;
@@ -56,13 +67,17 @@ document.body.addEventListener('keydown',(e)=>{
 	}
 });
 ui_new.onclick=()=>{
-	scrawl.naew();
+	ok(scrawl.naew);
 }
 ui_opn.onclick=()=>{
-	scrawl.opaen(f);
+	ok(scrawl.opaen,f);
 }
 ui_sav.onclick=()=>{
-	scrawl.saev();
+	// scrawl.saev();
+	let fnaem=window.prompt('Please enter a filename...','My_Working_Title.md');
+	if(fnaem){
+		scrawl.daen(fnaem);
+	}
 }
 ui_un.onclick=()=>{
 	scrawl.undo();
@@ -94,6 +109,9 @@ ui_get.onclick=()=>{
 ui_see.onclick=()=>{
 	scrawl.WYSIWYG();
 }
-ui_drk.onclick=()=>{
-	daerk();
+ui_go.onclick=()=>{
+	saen();
 }
+/* ui_drk.onclick=()=>{
+	daerk();
+} */
