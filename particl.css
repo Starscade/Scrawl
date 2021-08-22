@@ -1,0 +1,80 @@
+::-webkit-scrollbar{
+	height:calc(var(--pt)/3);
+	width:calc(var(--pt)/3);
+}::-webkit-scrollbar-thumb,::selection{
+	background-color:var(--mg);
+}
+:root{
+	--bg:#111;
+	--fg:#eca;
+	/* --hi:Goldenrod; */
+	--mg:#333;
+	--pg:#222;
+	--pt:18pt;
+	--font:'Weak',serif;
+	--rad:calc(var(--pt)/3);
+	--shado:#000;
+	cursor:/* url('./cur.png')-12 -12, */cell;
+	scrollbar-color:currentColor var(--bg);
+	scrollbar-width:thin;
+}
+article{
+	background-color:var(--pg);
+	border:1pt solid transparent;
+	box-shadow:0 0 1em var(--shado);
+	cursor:text;
+	/* hyphens:auto; */
+	line-height:150%;
+	margin:auto;
+	margin-bottom:0;
+	margin-top:0;
+	max-width:100%;
+	min-height:100vh;
+	padding:1em;
+	text-align:center;
+	white-space:pre-wrap;
+	word-wrap:break-word;
+}article:focus{
+	border-color:var(--mg);
+	outline:none;
+}
+body{
+	background-color:var(--bg);
+	color:var(--fg);
+	font-family:var(--font);
+	font-size:var(--pt);
+	margin:0;
+	text-align:center;
+}
+p{
+	margin:0;
+	text-align:justify;
+}p:not(br+p){
+	text-indent:2em;
+}
+@media(orientation:landscape){
+	article{
+		border-radius:var(--rad);
+		margin-bottom:20vh;
+		margin-top:10vh;
+		max-width:7.5in;
+		min-height:11in;
+		padding:1in;
+	}
+	nav{
+		opacity:0;
+	}
+}
+@media print{
+	:root{
+		--bg:White!important;
+		--fg:Black!important;
+		--shado:var(--bg)!important;
+	}
+	nav{
+		display:none;
+	}
+}
+@page{
+	margin:1in;
+}

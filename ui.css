@@ -1,3 +1,4 @@
+@import url('particl.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @font-face{
 	font-family:'Markdown';
@@ -7,56 +8,15 @@
 	font-family:'HTML';
 	src:url('https://fonts.gstatic.com/s/josefinsans/v17/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2');
 }
-::-webkit-scrollbar{
-	width:6px;
-}::-webkit-scrollbar-thumb,::selection{
-	background-color:var(--mg);
-}
 :root{
-	--bg:#111;
-	--fg:#eca;
-	/* --hi:Goldenrod; */
-	--mg:#333;
-	--pg:#222;
-	--pt:18pt;
-	--rad:calc(var(--pt)/3);
-	--shado:#000;
-	cursor:/* url('./cur.png')-12 -12, */cell;
-	scrollbar-color:currentColor var(--bg);
-	scrollbar-width:thin;
-}
-article{
-	background-color:var(--pg);
-	border:1pt solid transparent;
-	box-shadow:0 0 1em var(--shado);
-	cursor:text;
-	/* hyphens:auto; */
-	margin:auto;
-	margin-bottom:0;
-	margin-top:0;
-	max-width:100%;
-	min-height:100vh;
-	padding:1em;
-	text-align:justify;
-	white-space:pre-wrap;
-	word-wrap:break-word;
-}article:focus{
-	border-color:var(--mg);
-	outline:none;
-}
-body{
-	background-color:var(--bg);
-	color:var(--fg);
-	font-family:'HTML';
-	font-size:var(--pt);
-	margin:0;
-	text-align:center;
+	--font:'HTML';
 }
 input{display:none;}
 nav{
 	background-color:var(--bg);
 	font-size:36pt;
 	overflow-x:scroll;
+	padding:4pt;
 	position:sticky;
 	top:0;
 	transition:opacity .5s;
@@ -83,16 +43,6 @@ nav{
 	--pg:#eee;
 	--shado:#ccc;
 }
-@media(orientation:landscape){
-	article{
-		border-radius:var(--rad);
-		margin-bottom:20vh;
-		margin-top:10vh;
-		max-width:7.5in;
-		min-height:11in;
-		padding:1in;
-	}
-	nav{
-		opacity:0;
-	}
+.just{
+	text-align:justify;
 }

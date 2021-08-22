@@ -18,8 +18,10 @@ class Scrawl{
 		this.caert=()=>{
 			if(this.NOTEPAD.childNodes[0]){
 				let nurang=document.createRange();
-				nurang.setStart(this.NOTEPAD.childNodes[0],this.HISTRY['cart'][this.HISTRY['indx']]);
-				nurang.collapse(true);
+				let olrang=this.HISTRY['cart'][this.HISTRY['indx']];
+				nurang.setStart(this.NOTEPAD.childNodes[0],olrang[0]);
+				nurang.setEnd(this.NOTEPAD.childNodes[0],olrang[1]);
+				nurang.collapse(false);
 				window.getSelection().removeAllRanges();
 				window.getSelection().addRange(nurang);
 			}
@@ -34,7 +36,7 @@ class Scrawl{
 			}
 		}
 		this.daen=(ftaep='text/plain')=>{
-			let fnaem=window.prompt('Please enter a filename.','Working Title.md');
+			let fnaem=window.prompt('Please enter a filename...','My_Working_Title.md');
 			let a=document.createElement('a');
 			let blob=new Blob([this.NOTEPAD.textContent],{type:ftaep});
 			let url=window.URL.createObjectURL(blob);
@@ -54,7 +56,7 @@ class Scrawl{
 		}
 		this.md2htm=()=>{
 			let htm=this.NOTEPAD.textContent.replaceAll(/\n/g,'<br>');
-			this.NOTEPAD.innerHTML=htm;
+			// this.NOTEPAD.innerHTML=htm;
 		}
 		this.naew=(go=true)=>{
 			if(go){
@@ -62,13 +64,14 @@ class Scrawl{
 				this.NOTEPAD.textContent=prompt;
 				localStorage.setItem('Scrawl_Txt','');
 			}
-			this.HISTRY={'indx':0,'txt':[],'cart':[0]};
+			this.HISTRY={'indx':0,'txt':[],'cart':[0,0]};
 			if(localStorage.getItem('Scrawl_Day')){
 				document.body.classList.add(localStorage.getItem('Scrawl_Day'));
 			}
 			this.INIT=true;
 		}
 		this.opaen=(f_inpt=document.getElementById('scrawl-inpt-f'))=>{
+			this.WYSIWYG();
 			f_inpt.click();
 			f_inpt.onchange=()=>{
 				let f=f_inpt.files[0];
@@ -76,6 +79,7 @@ class Scrawl{
 				raed.readAsText(f);
 				raed.onload=()=>{
 					this.NOTEPAD.innerHTML=raed.result;
+					this.saev();
 				}
 			}
 		}
@@ -97,7 +101,9 @@ class Scrawl{
 				this.HISTRY['indx']++;
 			}
 			this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
-			this.HISTRY['cart'][this.HISTRY['indx']]=window.getSelection().getRangeAt(0).endOffset;
+			let selec=window.getSelection().getRangeAt(0);
+			console.log(selec);
+			this.HISTRY['cart'][this.HISTRY['indx']]=[selec.startOffset,selec.endOffset];
 			if(this.HISTRY['txt'].length>999){
 				this.HISTRY['txt'].shift();
 				this.HISTRY['cart'].shift();
@@ -136,19 +142,22 @@ class Scrawl{
 			}
 		}
 		this.woun=()=>{
-			alert(this.NOTEPAD.textContent.split(/\S+/).length-1+' words.');
+			let wordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
+			alert('There are '+wordz+' words.');
 		}
 		this.WYSIWYG=(n=true)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
 				if(n){
 					this.NOTEPAD.contentEditable='false';
 					this.NOTEPAD.style.fontFamily='HTML';
+					this.NOTEPAD.classList.remove('just');
 					this.md2htm();
 				}
 			}else{
 				this.NOTEPAD.contentEditable='true';
 				this.innerHTML=localStorage.getItem('Scrawl_Txt');
 				this.NOTEPAD.style.fontFamily='Markdown';
+				this.NOTEPAD.classList.add('just');
 				this.NOTEPAD.focus();
 			}
 		}
@@ -163,18 +172,25 @@ class Scrawl{
 					case'Y':e.preventDefault();this.undo(true);break;
 					case'Z':e.preventDefault();this.undo();break;
 				}
-			}
-			if(e.key=='Tab'){
-				e.preventDefault();
-				this.WYSIWYG();
-			}
-			if(e.key=='F7'){
-				e.preventDefault();
-				this.spael();
-			}
-			if(e.key=='F5'){
-				e.preventDefault();
-				this.daerk();
+			}else{
+				switch(e.key){
+					case'Tab':
+						e.preventDefault();
+						this.WYSIWYG();
+						break;
+					case'F7':
+						e.preventDefault();
+						this.spael();
+						break;
+					case'F8':
+						e.preventDefault();
+						this.woun();
+						break;
+					case'F10':
+						e.preventDefault();
+						this.daerk();
+						break;
+				}
 			}
 		});
 		this.NOTEPAD.addEventListener('beforeinput',(e)=>{
@@ -219,7 +235,7 @@ class Scrawl{
 				this.NOTEPAD.textContent='# ';
 				this.INIT=false;
 				this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
-				this.HISTRY['cart'][this.HISTRY['indx']]=this.NOTEPAD.textContent.length;
+				this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
 			}
 			this.caert();
 		});
@@ -229,8 +245,9 @@ class Scrawl{
 		this.NOTEPAD.addEventListener('paste',()=>{
 			this.raec();
 		});
-		this.NOTEPAD.addEventListener('pointerup',()=>{
-			this.RNG=window.getSelection().getRangeAt(0).toString();
+		this.NOTEPAD.addEventListener('mouseup',()=>{
+			this.RNG=window.getSelection().getRangeAt(0);
+			console.log(this.RNG);
 		})
 		// INIT
 		this.naew(false);
@@ -238,9 +255,12 @@ class Scrawl{
 			this.laed();
 			this.INIT=false;
 			this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
-			this.HISTRY['cart'][this.HISTRY['indx']]=this.NOTEPAD.textContent.length;
+			this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
 		}else{
 			this.naew();
+		}
+		if(localStorage.getItem('Scrawl_Day')==''){
+			document.body.classList.remove('day');
 		}
 		// END
 		window.onbeforeunload=()=>{
