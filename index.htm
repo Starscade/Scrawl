@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"oncontextmenu="return false;">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
@@ -11,7 +11,7 @@
 		<title>S c r a w l</title>
 		<link rel="stylesheet"href="ui.css">
 	</head>
-	<body class="day"oncontextmenu="return false;">
+	<body class="day">
 		<main>
 			<nav>
 				<input type="file"accept=".md,.htm,.html">
@@ -33,19 +33,15 @@
 				<span id="ui-words"class="material-icons"title="Word Count">pin</span>
 				<span id="ui-find"class="material-icons"title="Search & Replace">search</span>
 				<span class="material-icons cis">more_vert</span>
-				<span id="ui-see"class="material-icons"title="Toggle Preview">preview</span>
-				<!-- <span id="ui-dark"class="material-icons"title="Dark Mode">brightness_4</span> -->
+				<span id="ui-see"class="material-icons"title="Read / Write">lock</span>
+				<span id="ui-dark"class="material-icons"title="Dark Mode">brightness_4</span>
 				<span id="ui-send"class="material-icons"title="Send to External API">send</span>
 				<span class="material-icons cis">more_vert</span>
-				<span id="ui-config"class="material-icons"title="Configure">settings</span>
 				<span id="ui-help"class="material-icons"onclick="window.open('https://github.com/Starscade/Scrawl/','_Blank')"title="About">live_help</span>
 			</nav>
 			<article></article>
-			<div id="config">
-				<span id="ui-config-dark"class="ui-opt">Dark Mode<span class="material-icons">toggle_off</span></span>
-			</div>
 		</main>
-		<script id="ops"src="scrops.json"></script>
+		<script id="scrops"type="application/json">{"name":"Untitled","dark":false,"apiurl":"http://localhost:8000/myapi.php"}</script>
 		<script src="scrawl.js"></script>
 		<script src="x.js"></script>
 	</body>

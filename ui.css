@@ -11,6 +11,9 @@
 :root{
 	--font:'HTML';
 }
+article{
+	border-color:var(--mg);
+}
 input{display:none;}
 nav{
 	background-color:var(--bg);

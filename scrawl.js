@@ -1,11 +1,12 @@
 'use strict';
 class Scrawl{
-	constructor(notepad=document.getElementsByTagName('article')[0],prompt='Once upon a time...',spellcheck='false'){
+	constructor(notepad=document.getElementsByTagName('article')[0],prompt='<h1>Once upon a time . . .</h1>',spellcheck='false'){
 		this.NOTEPAD=notepad;
 		this.NOTEPAD.contentEditable='false';
 		this.NOTEPAD.setAttribute('spellcheck',spellcheck);
 		this.INIT=true;
 		this.RANG='';
+		this.HISTRY={'txt':[],'indx':0,'cart':[0,0]};
 		// STATIC FUNCTIONS
 		this.biu=(g='*')=>{
 			let txt;
@@ -27,26 +28,58 @@ class Scrawl{
 				window.getSelection().addRange(nurang);
 			}
 		}
+		this.htm2md=(htm=this.NOTEPAD.innerHTML)=>{
+			const regx=[[
+					/<blockquote>(.*)<\/blockquote>/g,
+					/<br>/g,
+					/<em>(.*)<\/em>/g,
+					/<h1>(.*)<\/h1>/g,
+					/<p>(.*)<\/p>/g,
+					/<strong>(.*)<\/strong>/g
+				],[
+					"\t\t> $1",
+					"\n",
+					"<i>$1</i>",
+					"\t# $1\n",
+					"\t$1\n",
+					"<b>$1</b>"
+				]
+			];
+			regx[0].forEach((p,x)=>{
+				htm=htm.replaceAll(p,regx[1][x]);
+			});
+			return htm;
+		}
 		this.laed=(set_txt=true)=>{
-			let txt=localStorage.getItem('Scrawl_Txt');
+			let txt=localStorage.getItem('Scrawl_TXT');
 			if(set_txt){
 				this.NOTEPAD.textContent=txt;
 			}else{
 				this.NOTEPAD.innerHTML=txt;
 			}
 		}
-		this.md2htm=()=>{
-			let htm=this.NOTEPAD.textContent.replaceAll(/\n/g,'<br>');
-			// this.NOTEPAD.innerHTML=htm;
-		}
-		this.naew=(go=true)=>{
-			this.WYSIWYG();
-			if(go){
-				this.INIT=true;
-				this.NOTEPAD.textContent=prompt;
-				localStorage.setItem('Scrawl_Txt','');
-			}
-			this.HISTRY={'indx':0,'txt':[],'cart':[0,0]};
+		this.md2htm=(md=localStorage.getItem('Scrawl_TXT'))=>{
+			const mdarr=md.split(/\n/g,);
+			let htm='';
+			mdarr.forEach((line,i)=>{
+				mdarr[i]=line.replace(/\t/,'').replace(/^\s+(.*)$/,'$1').replace(/^(.*)\s+$/,'$1');
+				switch(mdarr[i][0]){
+					case'#':
+						mdarr[i]=mdarr[i].replace(/^#\s*(.*)/,'<h1>$1</h1>');
+						break;
+					case'>':
+						mdarr[i]=mdarr[i].replace(/^>\s*(.*)/,'<blockquote>$1</blockquote>');
+						break;
+					default:
+						mdarr[i]=mdarr[i].replace(/(.*)/,'<p>$1</p>').replace(/<p><\/p>/,'<br>');
+				}
+				mdarr[i]=mdarr[i].replaceAll(/\*\*(.*)\*\*/g,'<b>$1</b>');
+				mdarr[i]=mdarr[i].replaceAll(/\*(.*)\*/g,'<i>$1</i>');
+				mdarr[i]=mdarr[i].replaceAll(/_(.*)_/g,'<u>$1</u>');
+				mdarr[i]=mdarr[i].replaceAll(/~(.*)~/g,'<s>$1</s>');
+				htm+=mdarr[i];
+			});
+			return htm;
 		}
 		this.opaen=(f_inpt)=>{
 			f_inpt.click();
@@ -55,9 +88,13 @@ class Scrawl{
 				let raed=new FileReader();
 				raed.readAsText(f);
 				raed.onload=()=>{
+					if(this.NOTEPAD.contentEditable=='true'){
+						this.NOTEPAD.innerHTML='';
+						this.WYSIWYG();
+					}
+					this.HISTRY={'txt':[],'indx':0,'cart':[0,0]};
 					this.NOTEPAD.innerHTML=raed.result;
-					this.stoar();
-					this.WYSIWYG();
+					this.stoar(this.htm2md());
 				}
 			}
 		}
@@ -87,15 +124,16 @@ class Scrawl{
 				this.HISTRY['indx']--;
 			}
 		}
-		this.saev=(fnaem='My_Working_Title.md',ftaep='text/plain')=>{
-			let a=document.createElement('a');
-			let blob=new Blob([this.NOTEPAD.textContent],{type:ftaep});
-			let url=window.URL.createObjectURL(blob);
+		this.saev=(fnaem='Untitled',ftaep='text/markdown')=>{
+			const a=document.createElement('a');
+			const md=localStorage.getItem('Scrawl_TXT').replaceAll(/\t/g,'');
+			const blob=new Blob([md],{type:ftaep});
+			const url=window.URL.createObjectURL(blob);
 			document.body.appendChild(a);
 			a.style='display:none';
 			a.href=url;
 			if(fnaem){
-				a.download=fnaem;
+				a.download=fnaem+'.md';
 				a.click();
 			}
 			window.URL.revokeObjectURL(url);
@@ -107,8 +145,8 @@ class Scrawl{
 				this.NOTEPAD.setAttribute('spellcheck',true);
 			}
 		}
-		this.stoar=()=>{
-			localStorage.setItem('Scrawl_Txt',this.NOTEPAD.textContent);
+		this.stoar=(t=this.NOTEPAD.textContent)=>{
+			localStorage.setItem('Scrawl_TXT',t);
 		}
 		this.undo=(re=false)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
@@ -138,11 +176,9 @@ class Scrawl{
 		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){
 				this.NOTEPAD.contentEditable='false';
-				this.NOTEPAD.classList.remove('ugly');
-				this.md2htm();
+				this.NOTEPAD.innerHTML=this.md2htm();
 			}else{
-				this.innerHTML=localStorage.getItem('Scrawl_Txt');
-				this.NOTEPAD.classList.add('ugly');
+				this.laed();
 				this.NOTEPAD.contentEditable='true';
 				this.NOTEPAD.focus();
 			}
@@ -172,22 +208,12 @@ class Scrawl{
 					break;
 			}
 		});
-		this.NOTEPAD.addEventListener('blur',()=>{
-			if(!this.INIT){
-				this.NOTEPAD.focus();
-			}
-		});
-		this.NOTEPAD.addEventListener('click',()=>{
-			if(this.INIT){
-				this.WYSIWYG();
-			}
-		});
 		this.NOTEPAD.addEventListener('cut',()=>{
 			this.raec();
 		});
 		this.NOTEPAD.addEventListener('focus',()=>{
 			if(this.INIT){
-				this.NOTEPAD.textContent='# ';
+				this.NOTEPAD.textContent="\t# ";
 				this.INIT=false;
 				this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
 				this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
@@ -204,14 +230,13 @@ class Scrawl{
 			this.RANG=window.getSelection().getRangeAt(0);
 		})
 		// INIT
-		this.naew(false);
-		if(localStorage.getItem('Scrawl_Txt')){
+		if(localStorage.getItem('Scrawl_TXT')){
 			this.INIT=false;
-			this.laed();
+			this.NOTEPAD.innerHTML=this.md2htm();
 			this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
 			this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
 		}else{
-			this.naew();
+			this.NOTEPAD.innerHTML=prompt;
 		}
 		// END
 		window.onbeforeunload=()=>{

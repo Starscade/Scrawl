@@ -35,7 +35,6 @@ article{
 	white-space:pre-wrap;
 	word-wrap:break-word;
 }article:focus{
-	border-color:var(--mg);
 	outline:none;
 }
 body{
@@ -54,7 +53,7 @@ p{
 	text-align:justify;
 }p:first-of-type::first-line{
 	font-variant:small-caps;
-	font-weight:bold;
+	/* font-weight:bold; */
 }p:first-of-type::first-letter{
 	initial-letter:2;
 }p:not(br+p){
