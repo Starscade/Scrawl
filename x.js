@@ -1,5 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
+const ops=scrops;//JSON.parse(document.getElementById('ops').innerHTML);
 const f=document.getElementsByTagName('input')[0];
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
@@ -33,7 +34,11 @@ function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
 	}
 }
 function saen(){
-	ok(alert,'',"Data to be sent:\n\n    Item 1: Name\n    Item 2: Email");
+	let data='';
+	Object.keys(ops['S2xAPI']['data']).forEach(k=>{
+		data+='    '+k+' --> '+ops['S2xAPI']['data'][k]+"\n";
+	});
+	ok(alert,'','Custom data to be sent to "'+ops['S2xAPI']['apiurl']+"\":\n\n"+data);
 }
 document.body.addEventListener('keydown',(e)=>{
 	if(e.ctrlKey||e.metaKey){
@@ -75,7 +80,7 @@ ui_opn.onclick=()=>{
 }
 ui_sav.onclick=()=>{
 	// scrawl.saev();
-	let fnaem=window.prompt('Please enter a filename...','My_Working_Title.md');
+	let fnaem=window.prompt('Please enter a filename...',ops['doc']['title']);
 	if(fnaem){
 		scrawl.saev(fnaem);
 	}
@@ -122,3 +127,4 @@ ui_go.onclick=()=>{
 /* ui_drk.onclick=()=>{
 	daerk();
 } */
+document.title=ops['doc']['title'];

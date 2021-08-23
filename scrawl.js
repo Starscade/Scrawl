@@ -141,11 +141,11 @@ class Scrawl{
 		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){
 				this.NOTEPAD.contentEditable='false';
-				this.NOTEPAD.classList.remove('as-is');
+				this.NOTEPAD.classList.remove('ugly');
 				this.md2htm();
 			}else{
 				this.innerHTML=localStorage.getItem('Scrawl_Txt');
-				this.NOTEPAD.classList.add('as-is');
+				this.NOTEPAD.classList.add('ugly');
 				this.NOTEPAD.contentEditable='true';
 				this.NOTEPAD.focus();
 			}

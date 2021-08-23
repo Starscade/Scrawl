@@ -1,0 +1,15 @@
+const scrops={
+	"doc":{
+		"title":"Untitled"
+	},
+	"ui":{
+		"theme":"day"
+	},
+	"S2xAPI":{
+		"apiurl":"https://starscade.github.io/Scrawl/",
+		"data":{
+			"call":"25.21.11.Neue.htm",
+			"where":"jarnoot"
+		}
+	}
+};
