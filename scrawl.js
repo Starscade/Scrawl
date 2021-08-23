@@ -47,9 +47,6 @@ class Scrawl{
 				localStorage.setItem('Scrawl_Txt','');
 			}
 			this.HISTRY={'indx':0,'txt':[],'cart':[0,0]};
-			if(localStorage.getItem('Scrawl_Day')){
-				document.body.classList.add(localStorage.getItem('Scrawl_Day'));
-			}
 		}
 		this.opaen=(f_inpt)=>{
 			f_inpt.click();
@@ -215,9 +212,6 @@ class Scrawl{
 			this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
 		}else{
 			this.naew();
-		}
-		if(localStorage.getItem('Scrawl_Day')==''){
-			document.body.classList.remove('day');
 		}
 		// END
 		window.onbeforeunload=()=>{

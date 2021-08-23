@@ -1,6 +1,5 @@
 'use strict';
 const scrawl=new Scrawl();
-const ops=scrops;//JSON.parse(document.getElementById('ops').innerHTML);
 const f=document.getElementsByTagName('input')[0];
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
@@ -17,15 +16,37 @@ const ui_num=document.getElementById('ui-words');
 const ui_get=document.getElementById('ui-find');
 const ui_see=document.getElementById('ui-see');
 const ui_go=document.getElementById('ui-send');
+const ui_cfg=document.getElementById('ui-config');
 // const ui_drk=document.getElementById('ui-dark');
+let ops=scrops;//JSON.parse(document.getElementById('ops').innerHTML);;
+function config(ky,valu){
+	let cfg=JSON.parse(localStorage.getItem('Scrawl_CFG'));
+	if(ky){
+		cfg[ky]=valu;
+		localStorage.setItem('Scrawl_CFG',JSON.stringify(cfg));
+	}else{
+		init(cfg);
+	}
+	ops=cfg;
+}
 function daerk(){
 	if(document.body.classList.contains('day')){
 		document.body.classList.remove('day');
-		localStorage.setItem('Scrawl_Day','');
+		config('dark',true);
 	}else{
 		document.body.classList.add('day');
-		localStorage.setItem('Scrawl_Day','day');
+		config('dark',false);
 	}
+}
+function init(c){
+	if(c['dark']==true){
+		document.body.classList.remove('day');
+	}else{
+		if(!document.body.classList.contains('day')){
+			document.body.classList.remove('day');
+		}
+	}
+	document.title=ops['name'];
 }
 function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
 	let ok=confirm(msg);
@@ -80,7 +101,7 @@ ui_opn.onclick=()=>{
 }
 ui_sav.onclick=()=>{
 	// scrawl.saev();
-	let fnaem=window.prompt('Please enter a filename...',ops['doc']['title']);
+	let fnaem=window.prompt('Please enter a filename...',ops['name']);
 	if(fnaem){
 		scrawl.saev(fnaem);
 	}
@@ -127,4 +148,13 @@ ui_go.onclick=()=>{
 /* ui_drk.onclick=()=>{
 	daerk();
 } */
-document.title=ops['doc']['title'];
+ui_cfg.onclick=()=>{
+	let cfg=window.prompt('JSON Configuration...',JSON.stringify(ops));
+	if(cfg){
+		console.log(cfg);
+		localStorage.setItem('Scrawl_CFG',cfg);
+		ops=JSON.parse(cfg);
+		config();
+	}
+}
+config();

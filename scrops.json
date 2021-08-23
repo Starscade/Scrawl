@@ -1,10 +1,6 @@
 const scrops={
-	"doc":{
-		"title":"Untitled"
-	},
-	"ui":{
-		"theme":"day"
-	},
+	"name":"Untitled",
+	"dark":false,
 	"S2xAPI":{
 		"apiurl":"https://starscade.github.io/Scrawl/",
 		"data":{
