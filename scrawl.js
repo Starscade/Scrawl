@@ -4,14 +4,15 @@ class Scrawl{
 		this.NOTEPAD=notepad;
 		this.NOTEPAD.contentEditable='false';
 		this.NOTEPAD.setAttribute('spellcheck',spellcheck);
-		this.RNG='';
+		this.INIT=true;
+		this.RANG='';
 		// STATIC FUNCTIONS
 		this.biu=(g='*')=>{
 			let txt;
-			if(this.RNG==''){
+			if(this.RANG==''){
 				txt=g;
 			}else{
-				txt=g+this.RNG+g;
+				txt=g+this.RANG+g;
 			}
 			document.execCommand('insertText',false,txt);
 		}
@@ -26,29 +27,22 @@ class Scrawl{
 				window.getSelection().addRange(nurang);
 			}
 		}
-		this.daen=(fnaem='My_Working_Title.md',ftaep='text/plain')=>{
-			let a=document.createElement('a');
-			let blob=new Blob([this.NOTEPAD.textContent],{type:ftaep});
-			let url=window.URL.createObjectURL(blob);
-			document.body.appendChild(a);
-			a.style='display:none';
-			a.href=url;
-			if(fnaem){
-				a.download=fnaem;
-				a.click();
+		this.laed=(set_txt=true)=>{
+			let txt=localStorage.getItem('Scrawl_Txt');
+			if(set_txt){
+				this.NOTEPAD.textContent=txt;
+			}else{
+				this.NOTEPAD.innerHTML=txt;
 			}
-			window.URL.revokeObjectURL(url);
-		},
-		this.laed=()=>{
-			this.NOTEPAD.textContent=localStorage.getItem('Scrawl_Txt');
 		}
 		this.md2htm=()=>{
 			let htm=this.NOTEPAD.textContent.replaceAll(/\n/g,'<br>');
 			// this.NOTEPAD.innerHTML=htm;
 		}
 		this.naew=(go=true)=>{
+			this.WYSIWYG();
 			if(go){
-				this.NOTEPAD.contentEditable='false';
+				this.INIT=true;
 				this.NOTEPAD.textContent=prompt;
 				localStorage.setItem('Scrawl_Txt','');
 			}
@@ -56,7 +50,6 @@ class Scrawl{
 			if(localStorage.getItem('Scrawl_Day')){
 				document.body.classList.add(localStorage.getItem('Scrawl_Day'));
 			}
-			this.INIT=true;
 		}
 		this.opaen=(f_inpt)=>{
 			f_inpt.click();
@@ -66,12 +59,13 @@ class Scrawl{
 				raed.readAsText(f);
 				raed.onload=()=>{
 					this.NOTEPAD.innerHTML=raed.result;
-					this.saev();
+					this.stoar();
+					this.WYSIWYG();
 				}
 			}
 		}
 		this.raec=()=>{
-			this.saev();
+			this.stoar();
 			if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
 				let oldTxt=this.HISTRY['txt'].splice(this.HISTRY['indx']);
 				let oldCart=this.HISTRY['cart'].splice(this.HISTRY['indx']);
@@ -89,7 +83,6 @@ class Scrawl{
 			}
 			this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
 			let selec=window.getSelection().getRangeAt(0);
-			console.log(selec);
 			this.HISTRY['cart'][this.HISTRY['indx']]=[selec.startOffset,selec.endOffset];
 			if(this.HISTRY['txt'].length>999){
 				this.HISTRY['txt'].shift();
@@ -97,8 +90,18 @@ class Scrawl{
 				this.HISTRY['indx']--;
 			}
 		}
-		this.saev=()=>{
-			localStorage.setItem('Scrawl_Txt',this.NOTEPAD.textContent);
+		this.saev=(fnaem='My_Working_Title.md',ftaep='text/plain')=>{
+			let a=document.createElement('a');
+			let blob=new Blob([this.NOTEPAD.textContent],{type:ftaep});
+			let url=window.URL.createObjectURL(blob);
+			document.body.appendChild(a);
+			a.style='display:none';
+			a.href=url;
+			if(fnaem){
+				a.download=fnaem;
+				a.click();
+			}
+			window.URL.revokeObjectURL(url);
 		}
 		this.spael=()=>{
 			if(this.NOTEPAD.spellcheck){
@@ -106,6 +109,9 @@ class Scrawl{
 			}else{
 				this.NOTEPAD.setAttribute('spellcheck',true);
 			}
+		}
+		this.stoar=()=>{
+			localStorage.setItem('Scrawl_Txt',this.NOTEPAD.textContent);
 		}
 		this.undo=(re=false)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
@@ -124,7 +130,7 @@ class Scrawl{
 				if(go){
 					this.NOTEPAD.textContent=this.HISTRY['txt'][this.HISTRY['indx']];
 					this.caert();
-					this.saev();
+					this.stoar();
 				}
 			}
 		}
@@ -132,19 +138,15 @@ class Scrawl{
 			let wordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
 			alert('There are '+wordz+' words.');
 		}
-		this.WYSIWYG=(n=true)=>{
+		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){
-				if(n){
-					this.NOTEPAD.contentEditable='false';
-					this.NOTEPAD.style.fontFamily='HTML';
-					this.NOTEPAD.classList.remove('just');
-					this.md2htm();
-				}
+				this.NOTEPAD.contentEditable='false';
+				this.NOTEPAD.classList.remove('as-is');
+				this.md2htm();
 			}else{
-				this.NOTEPAD.contentEditable='true';
 				this.innerHTML=localStorage.getItem('Scrawl_Txt');
-				this.NOTEPAD.style.fontFamily='Markdown';
-				this.NOTEPAD.classList.add('just');
+				this.NOTEPAD.classList.add('as-is');
+				this.NOTEPAD.contentEditable='true';
 				this.NOTEPAD.focus();
 			}
 		}
@@ -180,7 +182,7 @@ class Scrawl{
 		});
 		this.NOTEPAD.addEventListener('click',()=>{
 			if(this.INIT){
-				this.WYSIWYG(false);
+				this.WYSIWYG();
 			}
 		});
 		this.NOTEPAD.addEventListener('cut',()=>{
@@ -202,14 +204,13 @@ class Scrawl{
 			this.raec();
 		});
 		this.NOTEPAD.addEventListener('mouseup',()=>{
-			this.RNG=window.getSelection().getRangeAt(0);
-			console.log(this.RNG);
+			this.RANG=window.getSelection().getRangeAt(0);
 		})
 		// INIT
 		this.naew(false);
 		if(localStorage.getItem('Scrawl_Txt')){
-			this.laed();
 			this.INIT=false;
+			this.laed();
 			this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
 			this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
 		}else{

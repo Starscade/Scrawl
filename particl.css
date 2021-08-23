@@ -56,7 +56,7 @@ p{
 	font-variant:small-caps;
 	font-weight:bold;
 }p:first-of-type::first-letter{
-	initial-letter:3;
+	initial-letter:2;
 }p:not(br+p){
 	text-indent:2em;
 }

@@ -4,12 +4,13 @@ const f=document.getElementsByTagName('input')[0];
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
 const ui_sav=document.getElementById('ui-save');
+const ui_prln=document.getElementById('ui-print');
 const ui_un=document.getElementById('ui-undo');
 const ui_re=document.getElementById('ui-redo');
-const ui_b=document.getElementById('ui-bold');
+/* const ui_b=document.getElementById('ui-bold');
 const ui_i=document.getElementById('ui-italic');
 const ui_u=document.getElementById('ui-underline');
-const ui_s=document.getElementById('ui-strike');
+const ui_s=document.getElementById('ui-strike'); */
 const ui_eng=document.getElementById('ui-spell');
 const ui_num=document.getElementById('ui-words');
 const ui_get=document.getElementById('ui-find');
@@ -76,8 +77,14 @@ ui_sav.onclick=()=>{
 	// scrawl.saev();
 	let fnaem=window.prompt('Please enter a filename...','My_Working_Title.md');
 	if(fnaem){
-		scrawl.daen(fnaem);
+		scrawl.saev(fnaem);
 	}
+}
+ui_prln.onclick=()=>{
+	if(scrawl.NOTEPAD.contentEditable=='true'){
+		scrawl.WYSIWYG();
+	}
+	window.print();
 }
 ui_un.onclick=()=>{
 	scrawl.undo();
@@ -85,7 +92,7 @@ ui_un.onclick=()=>{
 ui_re.onclick=()=>{
 	scrawl.undo(true);
 }
-ui_b.onclick=()=>{
+/* ui_b.onclick=()=>{
 	scrawl.biu('**');
 }
 ui_i.onclick=()=>{
@@ -96,7 +103,7 @@ ui_u.onclick=()=>{
 }
 ui_s.onclick=()=>{
 	scrawl.biu('~');
-}
+} */
 ui_eng.onclick=()=>{
 	scrawl.spael();
 }

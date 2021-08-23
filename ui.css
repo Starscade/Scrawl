@@ -32,6 +32,10 @@ nav{
 	background-color:var(--mg);
 	border-radius:var(--rad);
 }
+.as-is{
+	font-family:'Markdown';
+	text-align:justify;
+}
 .cis{
 	color:var(--mg);
 }
@@ -42,9 +46,6 @@ nav{
 	--mg:#bbb;
 	--pg:#eee;
 	--shado:#ccc;
-}
-.just{
-	text-align:justify;
 }
 #config{
 	display:none;
