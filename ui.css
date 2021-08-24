@@ -13,6 +13,7 @@
 }
 article{
 	border-color:var(--mg);
+	cursor:not-allowed;
 }
 input{display:none;}
 nav{
@@ -48,6 +49,7 @@ nav{
 	--shado:#ccc;
 }
 .ugly{
+	cursor:text;
 	font-family:'Markdown';
 	text-align:justify;
 }

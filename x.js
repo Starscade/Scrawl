@@ -127,8 +127,9 @@ window.addEventListener('beforeprint',(e)=>{
 document.body.addEventListener('keydown',(e)=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){
-			// case'N':e.preventDefault();scrawl.naew();break;
+			case'K':e.preventDefault();scrawl.biu('~');break;
 			case'M':e.preventDefault();ok(neu);break;
+			// case'N':e.preventDefault();scrawl.naew();break;
 			case'O':e.preventDefault();opn();break;
 			case'S':e.preventDefault();sav();break;
 			// case'W':e.preventDefault();scrawl.wcoun();break;
