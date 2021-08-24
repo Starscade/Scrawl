@@ -17,6 +17,7 @@ article{
 input{display:none;}
 nav{
 	background-color:var(--bg);
+	/* box-shadow:0 0 2pt var(--shado); */
 	font-size:36pt;
 	overflow-x:scroll;
 	padding:4pt;
