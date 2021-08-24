@@ -18,12 +18,12 @@ article{
 input{display:none;}
 nav{
 	background-color:var(--bg);
+	bottom:0;
 	/* box-shadow:0 0 2pt var(--shado); */
 	font-size:36pt;
 	overflow-x:auto;
 	padding:4pt;
-	position:sticky;
-	top:0;
+	position:fixed;
 	transition:opacity .5s;
 	user-select:none;
 	white-space:nowrap;
@@ -55,6 +55,12 @@ nav{
 }
 #config{
 	display:none;
+}
+@media(orientation:landscape){
+	nav{
+		position:sticky;
+		top:0;
+	}
 }
 @media print{
 	.day{
