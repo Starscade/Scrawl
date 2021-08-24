@@ -61,13 +61,17 @@ function lokc(){
 		ui_see.textContent='lock_open';
 	}
 	scrawl.WYSIWYG();
+	naem();
+}
+function naem(){
 	const h1=scrawl.NOTEPAD.innerHTML.match(/<h1>(.*)<\/h1>/);
-		if(h1){
-			config('name',h1[1]);
-		}
+	if(h1){
+		config('name',h1[1]);
+	}
 }
 function neu(){
 	localStorage.setItem('Scrawl_TXT','');
+	config('name',JSON.parse(scrops)['name']);
 	location.reload();
 }
 function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
@@ -77,19 +81,20 @@ function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
 	}
 }
 function opn(){
-	if(scrawl.opaen(f)){
-		if(scrawl.NOTEPAD.contentEditable=='true'){
-			scrawl.NOTEPAD.classList.remove('ugly');
-			ui_see.textContent='lock_open';
-		}
+	scrawl.opaen(f);
+}
+function prln(){
+	if(scrawl.NOTEPAD.contentEditable=='true'){
+		lokc();
 	}
+	window.print();
 }
 function saen(){
 	let apiurl=window.prompt('Please enter a URL...',ops['apiurl']);
 	if(apiurl){
 		config('apiurl',apiurl);
 		const form=new FormData();
-		const bob=new Blob([scrawl.NOTEPAD.innerHTML],{type:"text/html"});
+		const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
 		if(!ops['name']){
 			ops['name']=JSON.parse(scrops)['name'];
 		}
@@ -115,6 +120,10 @@ function sav(){
 		scrawl.saev(fnaem);
 	}
 }
+window.addEventListener('beforeprint',(e)=>{
+	e.preventDefault();
+	prln();
+});
 document.body.addEventListener('keydown',(e)=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){
@@ -161,10 +170,7 @@ ui_sav.onclick=()=>{
 	sav();
 }
 ui_prln.onclick=()=>{
-	if(scrawl.NOTEPAD.contentEditable=='true'){
-		lokc();
-	}
-	window.print();
+	prln();
 }
 ui_un.onclick=()=>{
 	scrawl.undo();
@@ -202,13 +208,5 @@ ui_go.onclick=()=>{
 ui_drk.onclick=()=>{
 	daerk();
 }
-/* ui_cfg.onclick=()=>{
-	let cfg=window.prompt('JSON Configuration...',JSON.stringify(ops));
-	if(cfg){
-		console.log(cfg);
-		localStorage.setItem('Scrawl_CFG',cfg);
-		ops=JSON.parse(cfg);
-		config();
-	}
-} */
 config();
+naem();

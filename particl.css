@@ -73,10 +73,17 @@ p{
 	}
 }
 @media print{
+	*{
+		box-shadow:none;
+	}
 	:root{
 		--bg:White!important;
 		--fg:Black!important;
-		--shado:var(--bg)!important;
+		--pg:var(--bg)!important;
+		--shado:transparent!important;
+	}
+	article{
+		border:none;
 	}
 	nav{
 		display:none;

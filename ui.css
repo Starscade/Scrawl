@@ -53,3 +53,12 @@ nav{
 #config{
 	display:none;
 }
+@media print{
+	.day{
+		--bg:inherit;
+		--fg:inherit;
+		--mg:inherit;
+		--pg:inherit;
+		--shado:inherit;
+	}
+}

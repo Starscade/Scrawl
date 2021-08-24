@@ -30,19 +30,27 @@ class Scrawl{
 		}
 		this.htm2md=(htm=this.NOTEPAD.innerHTML)=>{
 			const regx=[[
+					/<\/*b>/g,
 					/<blockquote>(.*)<\/blockquote>/g,
 					/<br>/g,
-					/<em>(.*)<\/em>/g,
+					/<\/*em>/g,
 					/<h1>(.*)<\/h1>/g,
-					/<p>(.*)<\/p>/g,
-					/<strong>(.*)<\/strong>/g
+					/<\/*i>/g,
+					/<p>/g,
+					/<\/p>/g,
+					/<\/*strong>/g,
+					/&amp;/g
 				],[
+					'**',
 					"\t\t> $1",
 					"\n",
-					"<i>$1</i>",
+					'*',
 					"\t# $1\n",
-					"\t$1\n",
-					"<b>$1</b>"
+					'*',
+					"\t",
+					"\n",
+					'**',
+					'&'
 				]
 			];
 			regx[0].forEach((p,x)=>{
@@ -88,13 +96,8 @@ class Scrawl{
 				let raed=new FileReader();
 				raed.readAsText(f);
 				raed.onload=()=>{
-					if(this.NOTEPAD.contentEditable=='true'){
-						this.NOTEPAD.innerHTML='';
-						this.WYSIWYG();
-					}
-					this.HISTRY={'txt':[],'indx':0,'cart':[0,0]};
-					this.NOTEPAD.innerHTML=raed.result;
-					this.stoar(this.htm2md());
+					this.stoar(this.htm2md(raed.result));
+					location.reload();
 				}
 			}
 		}
@@ -181,6 +184,7 @@ class Scrawl{
 				this.laed();
 				this.NOTEPAD.contentEditable='true';
 				this.NOTEPAD.focus();
+				this.caert();
 			}
 		}
 		// EVENT LISTENERS
@@ -214,9 +218,9 @@ class Scrawl{
 		this.NOTEPAD.addEventListener('focus',()=>{
 			if(this.INIT){
 				this.NOTEPAD.textContent="\t# ";
-				this.INIT=false;
 				this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
 				this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
+				this.INIT=false;
 			}
 			this.caert();
 		});
@@ -233,8 +237,8 @@ class Scrawl{
 		if(localStorage.getItem('Scrawl_TXT')){
 			this.INIT=false;
 			this.NOTEPAD.innerHTML=this.md2htm();
-			this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
-			this.HISTRY['cart'][this.HISTRY['indx']]=[this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length];
+			this.HISTRY['txt'][this.HISTRY['indx']]=localStorage.getItem('Scrawl_TXT');
+			this.HISTRY['cart'][this.HISTRY['indx']]=[localStorage.getItem('Scrawl_TXT').length,localStorage.getItem('Scrawl_TXT').length];
 		}else{
 			this.NOTEPAD.innerHTML=prompt;
 		}
