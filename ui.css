@@ -59,7 +59,8 @@ nav{
 }
 @media(orientation:landscape){
 	nav{
-		position:sticky;
+		bottom:auto;
+		/* position:sticky; */
 		top:0;
 	}
 }
