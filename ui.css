@@ -19,7 +19,7 @@ nav{
 	background-color:var(--bg);
 	/* box-shadow:0 0 2pt var(--shado); */
 	font-size:36pt;
-	overflow-x:scroll;
+	overflow-x:auto;
 	padding:4pt;
 	position:sticky;
 	top:0;
