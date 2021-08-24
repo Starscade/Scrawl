@@ -27,6 +27,7 @@ nav{
 	transition:opacity .5s;
 	user-select:none;
 	white-space:nowrap;
+	width:100%;
 }nav:hover{
 	opacity:1;
 }nav span{
