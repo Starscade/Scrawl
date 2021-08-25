@@ -117,7 +117,7 @@ function sav(){
 	}
 	scrawl.saef(ops['name']);
 }
-window.addEventListener('beforeprint',(e)=>{
+window.addEventListener('print',(e)=>{
 	e.preventDefault();
 	prln();
 });
