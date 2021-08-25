@@ -185,7 +185,7 @@ class Scrawl{
 		}
 		this.tally=()=>{
 			let woordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
-			alert('There are about '+woordz+' words (roughly '+(woordz/250)+' pages).');
+			alert('There are about '+woordz+' words (roughly '+Math.round(woordz/250)+' pages).');
 		}
 		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){
