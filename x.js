@@ -71,7 +71,7 @@ function naem(){
 }
 function neu(){
 	localStorage.setItem('Scrawl_TXT','');
-	config('name',JSON.parse(scrops)['name']);
+	config('name',scrops['name']);
 	location.reload();
 }
 function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
@@ -96,7 +96,7 @@ function saen(){
 		const form=new FormData();
 		const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
 		if(!ops['name']){
-			ops['name']=JSON.parse(scrops)['name'];
+			ops['name']=scrops['name'];
 		}
 		form.append(0,bob,ops['name']);
 		fetch(apiurl,{
@@ -113,7 +113,7 @@ function saen(){
 }
 function sav(){
 	if(!ops['name']){
-		ops['name']=JSON.parse(scrops)['name'];
+		ops['name']=scrops['name'];
 	}
 	scrawl.saef(ops['name']);
 }
