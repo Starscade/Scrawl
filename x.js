@@ -129,7 +129,14 @@ document.body.addEventListener('keydown',(e)=>{
 			case'M':e.preventDefault();ok(neu);break;
 			// case'N':e.preventDefault();scrawl.naew();break;
 			case'O':e.preventDefault();opn();break;
-			case'S':e.preventDefault();sav();break;
+			case'S':
+				e.preventDefault();
+				if(e.shiftKey){
+					saen();
+				}else{
+					sav();
+				}
+				break;
 			// case'W':e.preventDefault();scrawl.wcoun();break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
 			case'Z':e.preventDefault();scrawl.undo();break;
