@@ -183,7 +183,7 @@ class Scrawl{
 				}
 			}
 		}
-		this.woun=()=>{
+		this.tally=()=>{
 			let woordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
 			alert('There are '+woordz+' words.');
 		}

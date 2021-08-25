@@ -136,6 +136,12 @@ document.body.addEventListener('keydown',(e)=>{
 		}
 	}else{
 		switch(e.key){
+			case' ':
+				if(scrawl.NOTEPAD.contentEditable=='false'){
+					e.preventDefault();
+					scrawl.tally();
+				}
+				break;
 			case'Tab':
 				e.preventDefault();
 				lokc();
@@ -146,7 +152,7 @@ document.body.addEventListener('keydown',(e)=>{
 				break;
 			case'F8':
 				e.preventDefault();
-				scrawl.woun();
+				scrawl.tally();
 				break;
 			case'F9':
 				e.preventDefault();
@@ -197,7 +203,7 @@ ui_eng.onclick=()=>{
 	scrawl.spael();
 }
 ui_num.onclick=()=>{
-	scrawl.woun();
+	scrawl.tally();
 }
 ui_get.onclick=()=>{
 	scrawl.saerk();
