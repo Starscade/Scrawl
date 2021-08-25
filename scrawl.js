@@ -184,8 +184,8 @@ class Scrawl{
 			}
 		}
 		this.woun=()=>{
-			let wordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
-			alert('There are '+wordz+' words.');
+			let woordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
+			alert('There are '+woordz+' words.');
 		}
 		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){

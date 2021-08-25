@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const scrops=document.getElementById('scrops').innerHTML;
+const scrops={'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php'};
 const f=document.getElementsByTagName('input')[0];
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
@@ -19,7 +19,7 @@ const ui_see=document.getElementById('ui-see');
 const ui_drk=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
 // const ui_cfg=document.getElementById('ui-config');
-let ops=JSON.parse(scrops);
+let ops=scrops;
 function config(ky,valu){
 	if(!localStorage.getItem('Scrawl_CFG')){
 		localStorage.setItem('Scrawl_CFG',scrops);
