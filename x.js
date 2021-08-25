@@ -115,10 +115,7 @@ function sav(){
 	if(!ops['name']){
 		ops['name']=JSON.parse(scrops)['name'];
 	}
-	let fnaem=window.prompt('Please enter a filename...',ops['name']);
-	if(fnaem){
-		scrawl.saef(fnaem);
-	}
+	scrawl.saef(ops['name']);
 }
 window.addEventListener('beforeprint',(e)=>{
 	e.preventDefault();
