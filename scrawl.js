@@ -127,19 +127,30 @@ class Scrawl{
 				this.HISTRY['indx']--;
 			}
 		}
-		this.saev=(fnaem='Untitled',ftaep='text/markdown')=>{
-			const a=document.createElement('a');
+		this.saef=(fnaem='Untitled',ftaep='text/markdown;charset=utf-8')=>{
 			const md=localStorage.getItem('Scrawl_TXT').replaceAll(/\t/g,'');
-			const blob=new Blob([md],{type:ftaep});
-			const url=window.URL.createObjectURL(blob);
+			const bob=new Blob([md],{type:ftaep});
+			const uri=window.URL.createObjectURL(bob);
+			const a=document.createElement('a');
 			document.body.appendChild(a);
 			a.style='display:none';
-			a.href=url;
+			a.href=uri;
 			if(fnaem){
 				a.download=fnaem+'.md';
 				a.click();
 			}
-			window.URL.revokeObjectURL(url);
+			window.URL.revokeObjectURL(uri);
+		}
+		this.saerk=()=>{
+			if(this.NOTEPAD.contentEditable=='true'){
+				const w=window.prompt('Replace all instances of...').split('|');
+				const rx=new RegExp('\b'+w[0]+'\b','g');
+				this.NOTEPAD.innerHTML=this.NOTEPAD.innerHTML.replaceAll(rx,w[1]);
+				this.raec();
+				alert('Replacing '+(k.length-1)+' occurrences...');
+			}else{
+				alert('Please switch to markdown...');
+			}
 		}
 		this.spael=()=>{
 			if(this.NOTEPAD.spellcheck){

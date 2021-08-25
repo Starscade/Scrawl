@@ -117,7 +117,7 @@ function sav(){
 	}
 	let fnaem=window.prompt('Please enter a filename...',ops['name']);
 	if(fnaem){
-		scrawl.saev(fnaem);
+		scrawl.saef(fnaem);
 	}
 }
 window.addEventListener('beforeprint',(e)=>{
@@ -127,6 +127,7 @@ window.addEventListener('beforeprint',(e)=>{
 document.body.addEventListener('keydown',(e)=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){
+			case'H':e.preventDefault();scrawl.saerk();break;
 			case'K':e.preventDefault();scrawl.biu('~');break;
 			case'M':e.preventDefault();ok(neu);break;
 			// case'N':e.preventDefault();scrawl.naew();break;
@@ -149,6 +150,10 @@ document.body.addEventListener('keydown',(e)=>{
 			case'F8':
 				e.preventDefault();
 				scrawl.woun();
+				break;
+			case'F9':
+				e.preventDefault();
+				scrawl.saerk();
 				break;
 			case'F10':
 				e.preventDefault();
