@@ -59,14 +59,14 @@ class Scrawl{
 			return htm;
 		}
 		this.laed=(set_txt=true)=>{
-			let txt=localStorage.getItem('Scrawl_TXT');
+			let txt=localStorage.Scrawl_TXT;
 			if(set_txt){
 				this.NOTEPAD.textContent=txt;
 			}else{
 				this.NOTEPAD.innerHTML=txt;
 			}
 		}
-		this.md2htm=(md=localStorage.getItem('Scrawl_TXT'))=>{
+		this.md2htm=(md=localStorage.Scrawl_TXT)=>{
 			const mdarr=md.split(/\n/g,);
 			let htm='';
 			mdarr.forEach((line,i)=>{
@@ -128,7 +128,7 @@ class Scrawl{
 			}
 		}
 		this.saef=(fnaem='Untitled',ftaep='text/markdown;charset=utf-8')=>{
-			const md=localStorage.getItem('Scrawl_TXT').replaceAll(/\t/g,'');
+			const md=localStorage.Scrawl_TXT.replaceAll(/\t/g,'');
 			const bob=new Blob([md],{type:ftaep});
 			const uri=window.URL.createObjectURL(bob);
 			const a=document.createElement('a');
@@ -160,7 +160,7 @@ class Scrawl{
 			}
 		}
 		this.stoar=(t=this.NOTEPAD.textContent)=>{
-			localStorage.setItem('Scrawl_TXT',t);
+			localStorage.Scrawl_TXT=t;
 		}
 		this.undo=(re=false)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
@@ -245,11 +245,11 @@ class Scrawl{
 			this.RANG=window.getSelection().getRangeAt(0);
 		})
 		// INIT
-		if(localStorage.getItem('Scrawl_TXT')){
+		if(localStorage.Scrawl_TXT){
 			this.INIT=false;
 			this.NOTEPAD.innerHTML=this.md2htm();
-			this.HISTRY['txt'][this.HISTRY['indx']]=localStorage.getItem('Scrawl_TXT');
-			this.HISTRY['cart'][this.HISTRY['indx']]=[localStorage.getItem('Scrawl_TXT').length,localStorage.getItem('Scrawl_TXT').length];
+			this.HISTRY['txt'][this.HISTRY['indx']]=localStorage.Scrawl_TXT;
+			this.HISTRY['cart'][this.HISTRY['indx']]=[localStorage.Scrawl_TXT.length,localStorage.Scrawl_TXT.length];
 		}else{
 			this.NOTEPAD.innerHTML=prompt;
 		}

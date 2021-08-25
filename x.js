@@ -21,13 +21,13 @@ const ui_go=document.getElementById('ui-send');
 // const ui_cfg=document.getElementById('ui-config');
 let ops=scrops;
 function config(ky,valu){
-	if(!localStorage.getItem('Scrawl_CFG')){
-		localStorage.setItem('Scrawl_CFG',scrops);
+	if(!localStorage.Scrawl_CFG){
+		localStorage.Scrawl_CFG=scrops;
 	}
-	let cfg=JSON.parse(localStorage.getItem('Scrawl_CFG'));
+	let cfg=JSON.parse(localStorage.Scrawl_CFG);
 	if(ky){
 		cfg[ky]=valu;
-		localStorage.setItem('Scrawl_CFG',JSON.stringify(cfg));
+		localStorage.Scrawl_CFG=JSON.stringify(cfg);
 	}else{
 		init(cfg);
 	}
@@ -70,7 +70,7 @@ function naem(){
 	}
 }
 function neu(){
-	localStorage.setItem('Scrawl_TXT','');
+	localStorage.Scrawl_TXT='';
 	config('name',scrops['name']);
 	location.reload();
 }
