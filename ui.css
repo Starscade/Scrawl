@@ -45,6 +45,9 @@ nav{
 .cis{
 	color:var(--mg);
 }
+.daesk#ui-exit{
+	display:inline;
+}
 .day{
 	--bg:#ddd;
 	--fg:#667;

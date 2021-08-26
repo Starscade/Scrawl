@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const scrops={'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php'};
+const scrops={'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php',"edition":"free"};
 const f=document.getElementsByTagName('input')[0];
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
@@ -19,6 +19,7 @@ const ui_see=document.getElementById('ui-see');
 const ui_drk=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
 const ui_cfg=document.getElementById('ui-config');
+const ui_out=document.getElementById('ui-exit');
 let ops=scrops;
 function config(ky,valu){
 	if(!localStorage.Scrawl_CFG){
@@ -44,12 +45,8 @@ function daerk(){
 	config();
 }
 function init(c){
-	if(c['dark']==true){
-		document.body.classList.remove('day');
-	}else{
-		if(!document.body.classList.contains('day')){
-			document.body.classList.remove('day');
-		}
+	if(!c['dark']==true){
+		document.body.classList.add('day');
 	}
 }
 function lokc(){
@@ -260,6 +257,9 @@ ui_go.onclick=()=>{
 }
 ui_drk.onclick=()=>{
 	daerk();
+}
+ui_out.onclick=()=>{
+	window.close();
 }
 if(pro()){
 	ui_cfg.style.display='inline';
