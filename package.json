@@ -3,7 +3,8 @@
 	"main":"https://starscade.github.io/Scrawl/",
 	"window":{
 		"fullscreen":true,
-		"icon":"./ico.png"
+		"icon":"./ico.png",
+		"transparent":true
 	},
 	"user-agent":"ScrawlDaesk_%ver",
 	"version":"A"

@@ -267,3 +267,4 @@ if(pro()){
 }
 config();
 naem();
+document.body.style.opacity='1';
