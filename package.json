@@ -4,5 +4,7 @@
 	"window":{
 		"fullscreen":true,
 		"icon":"./ico.png"
-	}
+	},
+	"user-agent":"ScrawlDesktop_%ver",
+	"version":"1.0"
 }

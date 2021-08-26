@@ -18,7 +18,7 @@ const ui_get=document.getElementById('ui-find');
 const ui_see=document.getElementById('ui-see');
 const ui_drk=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
-// const ui_cfg=document.getElementById('ui-config');
+const ui_cfg=document.getElementById('ui-config');
 let ops=scrops;
 function config(ky,valu){
 	if(!localStorage.Scrawl_CFG){
@@ -132,11 +132,13 @@ function saen(){
 	}
 }
 function saerk(){
-	if(scrawl.NOTEPAD.contentEditable=='false'){
-		lokc();
-	}
 	const w=window.prompt('Replace instances of...');
-	notif(scrawl.saerk(w));
+	if(w){
+		if(scrawl.NOTEPAD.contentEditable=='false'){
+			lokc();
+		}
+		notif(scrawl.saerk(w));
+	}
 }
 function sav(){
 	if(!ops['name']){
@@ -153,9 +155,9 @@ document.body.addEventListener('keydown',(e)=>{
 		switch(e.key.toUpperCase()){
 			case'H':e.preventDefault();saerk();break;
 			case'K':e.preventDefault();scrawl.biu('~');break;
-			case'M':e.preventDefault();ok(neu);break;
-			// case'N':e.preventDefault();scrawl.naew();break;
+			case'N':e.preventDefault();ok(neu);break;
 			case'O':e.preventDefault();opn();break;
+			case'Q':e.preventDefault();ok(window.close);break;
 			case'S':
 				e.preventDefault();
 				if(e.shiftKey){
@@ -164,7 +166,8 @@ document.body.addEventListener('keydown',(e)=>{
 					sav();
 				}
 				break;
-			// case'W':e.preventDefault();scrawl.wcoun();break;
+			case'T':e.preventDefault();notif(scrawl.tally());break;
+			case'W':e.preventDefault();ok(neu);break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
 			case'Z':e.preventDefault();scrawl.undo();break;
 		}
