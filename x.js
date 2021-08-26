@@ -109,6 +109,13 @@ function prln(){
 	}
 	window.print();
 }
+function pro(){
+	if(navigator.userAgent.split('_')[0]==='ScrawlDaesk'){
+		return true;
+	}else{
+		return false;
+	}
+}
 function saen(){
 	let apiurl=window.prompt('Please enter a URL...',ops['apiurl']);
 	if(apiurl){
@@ -160,10 +167,10 @@ document.body.addEventListener('keydown',(e)=>{
 			case'Q':e.preventDefault();ok(window.close);break;
 			case'S':
 				e.preventDefault();
-				if(e.shiftKey){
-					saen();
-				}else{
+				if(pro()){
 					sav();
+				}else{
+					prln();
 				}
 				break;
 			case'T':e.preventDefault();notif(scrawl.tally());break;
@@ -254,8 +261,9 @@ ui_go.onclick=()=>{
 ui_drk.onclick=()=>{
 	daerk();
 }
+if(pro()){
+	ui_cfg.style.display='inline';
+	ui_sav.style.display='inline';
+}
 config();
 naem();
-if(navigator.userAgent.split('_')[0]==='ScrawlDaesk'){
-	ui_cfg.style.display='inline';
-}
