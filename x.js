@@ -94,7 +94,7 @@ function notif(msg='',h='S c r a w l',ico='./ico.png'){
 		}
 	}
 }
-function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
+function ok(albak,argz,msg='Unsaved changes will be lost!'){
 	let ok=confirm(msg);
 	if(ok){
 		albak(argz);
