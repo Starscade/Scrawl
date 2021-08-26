@@ -185,7 +185,7 @@ class Scrawl{
 		}
 		this.tally=()=>{
 			let woordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
-			return woordz+' spaces ('+Math.round(woordz/333)+' pages).';
+			return woordz+' words ('+Math.round(woordz/333)+' pages)';
 		}
 		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){

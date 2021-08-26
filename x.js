@@ -86,7 +86,7 @@ function notif(msg='',h='S c r a w l',ico='./ico.png'){
 				if(perm==='granted'){
 					noet;
 				} else{
-					console.log('Notification blocked by user!');
+					console.log('Notification blocked!');
 				}
 			}).catch((err)=>{
 				console.error(err);
