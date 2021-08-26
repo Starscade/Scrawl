@@ -54,7 +54,7 @@ nav{
 	font-family:'Markdown';
 	text-align:justify;
 }
-#config{
+#ui-save,#ui-send,#ui-config{
 	display:none;
 }
 @media(orientation:landscape){

@@ -256,3 +256,6 @@ ui_drk.onclick=()=>{
 }
 config();
 naem();
+if(navigator.userAgent.split('_')[0]==='ScrawlDaesk'){
+	ui_cfg.style.display='inline';
+}
