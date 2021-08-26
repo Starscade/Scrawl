@@ -1,0 +1,8 @@
+{
+	"name":"scrawl",
+	"main":"https://starscade.github.io/Scrawl/",
+	"window":{
+		"fullscreen":true,
+		"icon":"./ico.png"
+	}
+}
