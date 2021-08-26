@@ -22,7 +22,7 @@ const ui_go=document.getElementById('ui-send');
 let ops=scrops;
 function config(ky,valu){
 	if(!localStorage.Scrawl_CFG){
-		localStorage.Scrawl_CFG=scrops;
+		localStorage.Scrawl_CFG=JSON.stringify(scrops);
 	}
 	let cfg=JSON.parse(localStorage.Scrawl_CFG);
 	if(ky){
@@ -73,6 +73,26 @@ function neu(){
 	localStorage.Scrawl_TXT='';
 	config('name',scrops['name']);
 	location.reload();
+}
+function notif(msg='',h='',ico=''){
+	if(!window.Notification){
+		console.log('Notifications unsupported!');
+	} else{
+		const noet=new Notification(h,{body:msg,icon:ico});
+		if(Notification.permission==='granted'){
+			noet;
+		} else{
+			Notification.requestPermission().then((perm)=>{
+				if(perm==='granted'){
+					noet;
+				} else{
+					console.log('Notification blocked by user!');
+				}
+			}).catch((err)=>{
+				console.error(err);
+			});
+		}
+	}
 }
 function ok(albak,argz,msg='Unsaved changes will be lost! Proceed?'){
 	let ok=confirm(msg);
@@ -146,7 +166,7 @@ document.body.addEventListener('keydown',(e)=>{
 			case' ':
 				if(scrawl.NOTEPAD.contentEditable=='false'){
 					e.preventDefault();
-					scrawl.tally();
+					notif(scrawl.tally(),'Word Count');
 				}
 				break;
 			case'Tab':
@@ -159,7 +179,7 @@ document.body.addEventListener('keydown',(e)=>{
 				break;
 			case'F8':
 				e.preventDefault();
-				scrawl.tally();
+				notif(scrawl.tally(),'Word Count');
 				break;
 			case'F9':
 				e.preventDefault();
@@ -169,10 +189,10 @@ document.body.addEventListener('keydown',(e)=>{
 				e.preventDefault();
 				daerk();
 				break;
-			case'F12':
+			/* case'F12':
 				e.preventDefault();
 				saen();
-				break;
+				break; */
 		}
 	}
 });
@@ -210,7 +230,7 @@ ui_eng.onclick=()=>{
 	scrawl.spael();
 }
 ui_num.onclick=()=>{
-	scrawl.tally();
+	notif(scrawl.tally(),'Word Count');
 }
 ui_get.onclick=()=>{
 	scrawl.saerk();
