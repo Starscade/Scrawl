@@ -141,15 +141,16 @@ class Scrawl{
 			}
 			window.URL.revokeObjectURL(uri);
 		}
-		this.saerk=()=>{
+		this.saerk=(woordz)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
-				const w=window.prompt('Replace all instances of...').split('|');
+				const w=woordz.split('|');
 				const rx=new RegExp('\b'+w[0]+'\b','g');
+				const k=[0,0];
 				this.NOTEPAD.innerHTML=this.NOTEPAD.innerHTML.replaceAll(rx,w[1]);
 				this.raec();
-				alert('Replacing '+(k.length-1)+' occurrences...');
+				return'Replaced '+(k.length-1)+' occurrences...';
 			}else{
-				alert('Please switch to markdown...');
+				return'Cannot make changes in HTML mode.';
 			}
 		}
 		this.spael=()=>{

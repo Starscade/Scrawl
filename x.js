@@ -131,6 +131,13 @@ function saen(){
 		)
 	}
 }
+function saerk(){
+	if(scrawl.NOTEPAD.contentEditable=='false'){
+		lokc();
+	}
+	const w=window.prompt('Replace instances of...');
+	notif(scrawl.saerk(w));
+}
 function sav(){
 	if(!ops['name']){
 		ops['name']=scrops['name'];
@@ -144,7 +151,7 @@ window.addEventListener('print',(e)=>{
 document.body.addEventListener('keydown',(e)=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){
-			case'H':e.preventDefault();scrawl.saerk();break;
+			case'H':e.preventDefault();saerk();break;
 			case'K':e.preventDefault();scrawl.biu('~');break;
 			case'M':e.preventDefault();ok(neu);break;
 			// case'N':e.preventDefault();scrawl.naew();break;
@@ -183,7 +190,7 @@ document.body.addEventListener('keydown',(e)=>{
 				break;
 			case'F9':
 				e.preventDefault();
-				scrawl.saerk();
+				saerk();
 				break;
 			case'F10':
 				e.preventDefault();
@@ -233,7 +240,7 @@ ui_num.onclick=()=>{
 	notif(scrawl.tally());
 }
 ui_get.onclick=()=>{
-	scrawl.saerk();
+	saerk();
 }
 ui_see.onclick=()=>{
 	lokc();
