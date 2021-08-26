@@ -126,7 +126,7 @@ function saen(){
 			resp=>resp.text()
 		).then(
 			resp=>{
-				alert("The API says:\n\n"+resp);
+				notif(resp,'API SAYS:');
 			}
 		)
 	}
