@@ -74,7 +74,7 @@ function neu(){
 	config('name',scrops['name']);
 	location.reload();
 }
-function notif(msg='',h='',ico=''){
+function notif(msg='',h='',ico='./ico.png'){
 	if(!window.Notification){
 		console.log('Notifications unsupported!');
 	} else{
