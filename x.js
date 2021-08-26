@@ -74,7 +74,7 @@ function neu(){
 	config('name',scrops['name']);
 	location.reload();
 }
-function notif(msg='',h='',ico='./ico.png'){
+function notif(msg='',h='S c r a w l',ico='./ico.png'){
 	if(!window.Notification){
 		console.log('Notifications unsupported!');
 	} else{
@@ -126,7 +126,7 @@ function saen(){
 			resp=>resp.text()
 		).then(
 			resp=>{
-				notif(resp,'API SAYS:');
+				notif(resp);
 			}
 		)
 	}
@@ -166,7 +166,7 @@ document.body.addEventListener('keydown',(e)=>{
 			case' ':
 				if(scrawl.NOTEPAD.contentEditable=='false'){
 					e.preventDefault();
-					notif(scrawl.tally(),'Word Count');
+					notif(scrawl.tally());
 				}
 				break;
 			case'Tab':
@@ -179,7 +179,7 @@ document.body.addEventListener('keydown',(e)=>{
 				break;
 			case'F8':
 				e.preventDefault();
-				notif(scrawl.tally(),'Word Count');
+				notif(scrawl.tally());
 				break;
 			case'F9':
 				e.preventDefault();
@@ -230,7 +230,7 @@ ui_eng.onclick=()=>{
 	scrawl.spael();
 }
 ui_num.onclick=()=>{
-	notif(scrawl.tally(),'Word Count');
+	notif(scrawl.tally());
 }
 ui_get.onclick=()=>{
 	scrawl.saerk();
