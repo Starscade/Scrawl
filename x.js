@@ -268,4 +268,9 @@ if(pro()){
 config();
 naem();
 document.body.style.opacity='1';
-notif(navigator.userAgent);
+if(navigator.userAgent.split(' ')[0]==='ScrawlDaesk'){
+	config('edition','pro');
+}
+if(JSON.parse(localStorage.Scrawl_CFG)['edition']==='pro'){
+	notif('Scrawl Pro!');
+}
