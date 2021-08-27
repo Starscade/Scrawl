@@ -119,10 +119,12 @@ function saen(){
 		config('apiurl',apiurl);
 		const form=new FormData();
 		const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
-		if(!ops['name']){
-			ops['name']=scrops['name'];
+		const naem=apiurl.split('|')[1];
+		if(naem){
+			form.append(0,bob,naem);
+		}else{
+			form.append(0,bob,ops['name']);
 		}
-		form.append(0,bob,ops['name']);
 		fetch(apiurl,{
 			method:'POST',
 			body:form
