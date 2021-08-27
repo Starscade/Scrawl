@@ -143,7 +143,7 @@ function saerk(){
 			notif(scrawl.saerk(w));
 		}
 	}else{
-		notif('Please switch to MARKDOWN MODE...');
+		notif('Please switch to markdown...');
 	}
 }
 function sav(){
