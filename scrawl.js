@@ -254,4 +254,5 @@ class Scrawl{
 		}else{
 			this.NOTEPAD.innerHTML=prompt;
 		}
+	}
 }
