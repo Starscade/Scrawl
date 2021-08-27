@@ -182,8 +182,8 @@ document.body.addEventListener('keydown',(e)=>{
 		switch(e.key){
 			case' ':
 				if(scrawl.NOTEPAD.contentEditable=='false'){
-					e.preventDefault();
 					if(e.shiftKey){
+						e.preventDefault();
 						notif(scrawl.tally());
 					}
 				}
