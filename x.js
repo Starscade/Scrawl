@@ -183,7 +183,9 @@ document.body.addEventListener('keydown',(e)=>{
 			case' ':
 				if(scrawl.NOTEPAD.contentEditable=='false'){
 					e.preventDefault();
-					notif(scrawl.tally());
+					if(e.shiftKey){
+						notif(scrawl.tally());
+					}
 				}
 				break;
 			case'Tab':
