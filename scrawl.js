@@ -254,11 +254,4 @@ class Scrawl{
 		}else{
 			this.NOTEPAD.innerHTML=prompt;
 		}
-		// END
-		window.onbeforeunload=()=>{
-			confirm('Unsaved changes will be lost!');
-			// e.preventDefault();
-			// return false;
-		}
-	}
 }

@@ -160,6 +160,7 @@ document.body.addEventListener('keydown',(e)=>{
 		switch(e.key.toUpperCase()){
 			case'H':e.preventDefault();saerk();break;
 			case'K':e.preventDefault();scrawl.biu('~');break;
+			case'L':e.preventDefault();scrawl.spael();break;
 			case'N':e.preventDefault();ok(naew);break;
 			case'O':e.preventDefault();opn();break;
 			case'Q':e.preventDefault();ok(window.close);break;
@@ -187,18 +188,6 @@ document.body.addEventListener('keydown',(e)=>{
 			case'Tab':
 				e.preventDefault();
 				lokc();
-				break;
-			case'F7':
-				e.preventDefault();
-				scrawl.spael();
-				break;
-			case'F8':
-				e.preventDefault();
-				notif(scrawl.tally());
-				break;
-			case'F9':
-				e.preventDefault();
-				saerk();
 				break;
 			case'F10':
 				e.preventDefault();
