@@ -107,7 +107,7 @@ function prln(){
 	window.print();
 }
 function pro(){
-	if(navigator.userAgent.split('_')[0]==='ScrawlDaesk'){
+	if(localStorage.Scrawl_CFG['edition']==='pro'){
 		return true;
 	}else{
 		return false;
@@ -116,7 +116,7 @@ function pro(){
 function saen(){
 	let apiurl=window.prompt('Please enter a URL...',ops['apiurl']).split('|');
 	if(apiurl){
-		config('apiurl',apiurl);
+		config('apiurl',apiurl[0]+'|'+apiurl[1]);
 		const form=new FormData();
 		const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
 		if(apiurl[1]){
@@ -265,13 +265,11 @@ ui_out.onclick=()=>{
 if(pro()){
 	ui_cfg.style.display='inline';
 	ui_sav.style.display='inline';
+	notif('Welcome to Scrawl Pro!');
 }
 config();
 naem();
 document.body.style.opacity='1';
 if(navigator.userAgent.split(' ')[0]==='ScrawlDaesk'){
 	config('edition','pro');
-}
-if(JSON.parse(localStorage.Scrawl_CFG)['edition']==='pro'){
-	notif('Scrawl Pro!');
 }
