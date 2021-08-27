@@ -110,7 +110,7 @@ function pro(){
 	}
 }
 function saen(){
-	let apiurl=window.prompt('Please enter a URL...',config('apiurl').split('|'));
+	let apiurl=window.prompt('Please enter a URL...',config()['apiurl'].split('|'));
 	if(apiurl){
 		config('apiurl',apiurl[0]+'|'+apiurl[1]);
 		const form=new FormData();
