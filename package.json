@@ -5,6 +5,6 @@
 		"fullscreen":true,
 		"icon":"./ico.png"
 	},
-	"user-agent":"ScrawlDaesk %ver",
+	"user-agent":"ScrawlDaesk_%ver",
 	"version":"Σ2021"
 }

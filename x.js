@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const scrops={'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php',"edition":"free"};
+const scrops={'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php','edition':'free'};
 const f=document.getElementsByTagName('input')[0];
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
@@ -20,19 +20,21 @@ const ui_drk=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
 const ui_cfg=document.getElementById('ui-config');
 const ui_out=document.getElementById('ui-exit');
-let ops=scrops;
 function config(ky,valu){
 	if(!localStorage.Scrawl_CFG){
 		localStorage.Scrawl_CFG=JSON.stringify(scrops);
 	}
 	let cfg=JSON.parse(localStorage.Scrawl_CFG);
 	if(ky){
-		cfg[ky]=valu;
-		localStorage.Scrawl_CFG=JSON.stringify(cfg);
+		if(valu){
+			cfg[ky]=valu;
+			localStorage.Scrawl_CFG=JSON.stringify(cfg);
+		}else{
+			return JSON.parse(localStorage.Scrawl_CFG)[ky];
+		}
 	}else{
-		init(cfg);
+		return cfg;
 	}
-	ops=cfg;
 }
 function daerk(){
 	if(document.body.classList.contains('day')){
@@ -41,12 +43,6 @@ function daerk(){
 	}else{
 		document.body.classList.add('day');
 		config('dark',false);
-	}
-	config();
-}
-function init(c){
-	if(!c['dark']==true){
-		document.body.classList.add('day');
 	}
 }
 function lokc(){
@@ -76,7 +72,7 @@ function notif(msg='',h='S c r a w l',ico='./ico.png'){
 		console.log('Notifications unsupported!');
 	} else{
 		const noet=new Notification(h,{body:msg,icon:ico});
-		if(Notification.permission==='granted'){
+		if(Notification.permission=='granted'){
 			noet;
 		} else{
 			Notification.requestPermission().then((perm)=>{
@@ -107,14 +103,14 @@ function prln(){
 	window.print();
 }
 function pro(){
-	if(localStorage.Scrawl_CFG['edition']==='pro'){
+	if(config('edition')=='pro'){
 		return true;
 	}else{
 		return false;
 	}
 }
 function saen(){
-	let apiurl=window.prompt('Please enter a URL...',ops['apiurl']).split('|');
+	let apiurl=window.prompt('Please enter a URL...',config('apiurl').split('|'));
 	if(apiurl){
 		config('apiurl',apiurl[0]+'|'+apiurl[1]);
 		const form=new FormData();
@@ -122,7 +118,7 @@ function saen(){
 		if(apiurl[1]){
 			form.append(0,bob,apiurl[1]);
 		}else{
-			form.append(0,bob,ops['name']);
+			form.append(0,bob,config('name'));
 		}
 		fetch(apiurl[0],{
 			method:'POST',
@@ -146,10 +142,10 @@ function saerk(){
 	}
 }
 function sav(){
-	if(!ops['name']){
-		ops['name']=scrops['name'];
+	if(!config('name')){
+		config('name',scrops['name']);
 	}
-	scrawl.saef(ops['name']);
+	scrawl.saef(config('name'));
 }
 window.addEventListener('print',(e)=>{
 	e.preventDefault();
@@ -262,14 +258,17 @@ ui_drk.onclick=()=>{
 ui_out.onclick=()=>{
 	window.close();
 }
+// INIT
 if(pro()){
 	ui_cfg.style.display='inline';
 	ui_sav.style.display='inline';
-	notif('Welcome to Scrawl Pro!');
+}else{
+	if(navigator.userAgent.includes('ScrawlDaesk')){
+		config('edition','pro');
+	}
 }
-config();
+if(config('dark')==false){
+	document.body.classList.add('day');
+}
 naem();
 document.body.style.opacity='1';
-if(navigator.userAgent.split(' ')[0]==='ScrawlDaesk'){
-	config('edition','pro');
-}
