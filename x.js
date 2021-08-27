@@ -110,16 +110,20 @@ function pro(){
 	}
 }
 function saen(){
-	let apiurl=window.prompt('Please enter a URL...',config()['apiurl'].split('|'));
+	let apiurl=window.prompt('Please enter a URL...',config('apiurl'));
 	if(apiurl){
-		config('apiurl',apiurl[0]+'|'+apiurl[1]);
+		config('apiurl',apiurl);
+		if(apiurl.includes('|')){
+			apiurl=apiurl.split('|');
+			if(!apiurl[1]){
+				apiurl[1]=config('name');
+			}
+		}else{
+			apiurl=[apiurl,config('name')];
+		}
 		const form=new FormData();
 		const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
-		if(apiurl[1]){
-			form.append(0,bob,apiurl[1]);
-		}else{
-			form.append(0,bob,config('name'));
-		}
+		form.append(0,bob,apiurl[1]);
 		fetch(apiurl[0],{
 			method:'POST',
 			body:form
