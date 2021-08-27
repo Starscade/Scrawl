@@ -62,7 +62,7 @@ function naem(){
 		config('name',h1[1]);
 	}
 }
-function neu(){
+function naew(){
 	localStorage.Scrawl_TXT='';
 	config('name',scrops['name']);
 	location.reload();
@@ -156,7 +156,7 @@ document.body.addEventListener('keydown',(e)=>{
 		switch(e.key.toUpperCase()){
 			case'H':e.preventDefault();saerk();break;
 			case'K':e.preventDefault();scrawl.biu('~');break;
-			case'N':e.preventDefault();ok(neu);break;
+			case'N':e.preventDefault();ok(naew);break;
 			case'O':e.preventDefault();opn();break;
 			case'Q':e.preventDefault();ok(window.close);break;
 			case'S':
@@ -168,7 +168,7 @@ document.body.addEventListener('keydown',(e)=>{
 				}
 				break;
 			case'T':e.preventDefault();notif(scrawl.tally());break;
-			case'W':e.preventDefault();ok(neu);break;
+			case'W':e.preventDefault();ok(naew);break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
 			case'Z':e.preventDefault();scrawl.undo();break;
 		}
@@ -208,7 +208,7 @@ document.body.addEventListener('keydown',(e)=>{
 	}
 });
 ui_new.onclick=()=>{
-	ok(neu);
+	ok(naew);
 }
 ui_opn.onclick=()=>{
 	opn();
