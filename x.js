@@ -137,12 +137,13 @@ function saen(){
 	}
 }
 function saerk(){
-	const w=window.prompt('Replace instances of...');
-	if(w){
-		if(scrawl.NOTEPAD.contentEditable=='false'){
-			lokc();
+	if(scrawl.NOTEPAD.contentEditable=='true'){
+		const w=window.prompt('Replace instances of...');
+		if(w){
+			notif(scrawl.saerk(w));
 		}
-		notif(scrawl.saerk(w));
+	}else{
+		notif('Please switch to MARKDOWN MODE...');
 	}
 }
 function sav(){
