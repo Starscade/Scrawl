@@ -114,18 +114,17 @@ function pro(){
 	}
 }
 function saen(){
-	let apiurl=window.prompt('Please enter a URL...',ops['apiurl']);
+	let apiurl=window.prompt('Please enter a URL...',ops['apiurl']).split('|');
 	if(apiurl){
 		config('apiurl',apiurl);
 		const form=new FormData();
 		const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
-		const naem=apiurl.split('|')[1];
-		if(naem){
-			form.append(0,bob,naem);
+		if(apiurl[1]){
+			form.append(0,bob,apiurl[1]);
 		}else{
 			form.append(0,bob,ops['name']);
 		}
-		fetch(apiurl,{
+		fetch(apiurl[0],{
 			method:'POST',
 			body:form
 		}).then(
