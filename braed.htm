@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"oncontextmenu="return false;">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+		<title>3 r a e d</title>
+		<style>
+			@import url('https://starscade.github.io/particl/min.css');
+		</style>
+	</head>
+	<body>
+		<main>
+			<article></article>
+		</main>
+		<script src="scrawl.js"></script>
+		<script>
+			'use strict';
+			const scrawl=new Scrawl();
+			document.body.addEventListener('keydown',(e)=>{
+				if(e.key=='Tab'){
+					e.preventDefault();
+					scrawl.WYSIWYG();
+				}
+			});
+		</script>
+	</body>
+</html>
