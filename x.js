@@ -26,7 +26,7 @@ function alurt(msg='OK!'){
 	modal.classList.add('alurt');
 	modal.textContent=msg;
 	document.body.appendChild(modal);
-	modal.onclick=()=>{
+	modal.onpointerdown=()=>{
 		modal.remove();
 	}
 	modal.onanimationend=()=>{
@@ -272,62 +272,62 @@ document.body.addEventListener('keydown',e=>{
 		}
 	}
 });
-ui_new.onclick=()=>{
+ui_new.onpointerdown=()=>{
 	ok(naew);
 }
-ui_opn.onclick=()=>{
+ui_opn.onpointerdown=()=>{
 	opn();
 }
-ui_sav.onclick=()=>{
+ui_sav.onpointerdown=()=>{
 	sav();
 }
-ui_prln.onclick=()=>{
+ui_prln.onpointerdown=()=>{
 	prln();
 }
-ui_un.onclick=()=>{
+ui_un.onpointerdown=()=>{
 	scrawl.undo();
 }
-ui_re.onclick=()=>{
+ui_re.onpointerdown=()=>{
 	scrawl.undo(true);
 }
-ui_b.onclick=()=>{
+ui_b.onpointerdown=()=>{
 	// scrawl.biu('**');
 	document.execCommand('bold');
 }
-ui_i.onclick=()=>{
+ui_i.onpointerdown=()=>{
 	// scrawl.biu();
 	document.execCommand('italic');
 }
-ui_u.onclick=()=>{
+ui_u.onpointerdown=()=>{
 	// scrawl.biu('_');
 	document.execCommand('underline');
 }
-ui_s.onclick=()=>{
+ui_s.onpointerdown=()=>{
 	// scrawl.biu('~');
 	document.execCommand('strikeThrough');
 }
-ui_eng.onclick=()=>{
+ui_eng.onpointerdown=()=>{
 	spelk();
 }
-ui_num.onclick=()=>{
+ui_num.onpointerdown=()=>{
 	alurt(scrawl.tally());
 }
-ui_get.onclick=()=>{
+ui_get.onpointerdown=()=>{
 	saerk();
 }
-ui_see.onclick=()=>{
+ui_see.onpointerdown=()=>{
 	lokc();
 }
-ui_go.onclick=()=>{
+ui_go.onpointerdown=()=>{
 	saen();
 }
-ui_drk.onclick=()=>{
+ui_drk.onpointerdown=()=>{
 	daerk();
 }
-ui_scr.onclick=()=>{
+ui_scr.onpointerdown=()=>{
 	fulscrn();
 }
-ui_out.onclick=()=>{
+ui_out.onpointerdown=()=>{
 	window.close();
 }
 // INIT
