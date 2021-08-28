@@ -67,24 +67,21 @@ class Scrawl{
 			}
 		}
 		this.md2htm=(md=localStorage.Scrawl_TXT)=>{
-			const mdarr=md.split(/\n/g,);
 			let htm='';
+			const mdarr=md.split(/\n/g,);
 			mdarr.forEach((line,i)=>{
-				mdarr[i]=line.replace(/\t/,'').replace(/^\s+(.*)$/,'$1').replace(/^(.*)\s+$/,'$1');
+				mdarr[i]=line.trim();
 				switch(mdarr[i][0]){
 					case'#':
-						mdarr[i]=mdarr[i].replace(/^#\s*(.*)/,'<h1>$1</h1>');
+						mdarr[i]=mdarr[i].replace(/^#\s*(.*)/g,'<h1>$1</h1>');
 						break;
 					case'>':
-						mdarr[i]=mdarr[i].replace(/^>\s*(.*)/,'<blockquote>$1</blockquote>');
+						mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<blockquote>$1</blockquote>');
 						break;
 					default:
-						mdarr[i]=mdarr[i].replace(/(.*)/,'<p>$1</p>').replace(/<p><\/p>/,'<br>');
+						mdarr[i]=mdarr[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'<br>');
 				}
-				mdarr[i]=mdarr[i].replaceAll(/\*\*(.*)\*\*/g,'<b>$1</b>');
-				mdarr[i]=mdarr[i].replaceAll(/\*(.*)\*/g,'<i>$1</i>');
-				mdarr[i]=mdarr[i].replaceAll(/_(.*)_/g,'<u>$1</u>');
-				mdarr[i]=mdarr[i].replaceAll(/~(.*)~/g,'<s>$1</s>');
+				mdarr[i]=mdarr[i].replace(/\*\*([^*]*)\*\*/g,'<b>$1</b>').replace(/\*([^*]*)\*/g,'<i>$1</i>').replace(/_([^*]*)_/g,'<u>$1</u>').replace(/~([^*]*)~/g,'<s>$1</s>');
 				htm+=mdarr[i];
 			});
 			return htm;
