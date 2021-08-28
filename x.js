@@ -35,6 +35,13 @@ function config(ky,valu){
 		return cfg;
 	}
 }
+function defaet(){
+	const pro_feats=document.getElementsByClassName('pro');
+	while(pro_feats.length){
+		pro_feats[0].classList.remove('pro');
+	}
+	console.log('Pro Edition!');
+}
 function daerk(){
 	if(document.body.classList.contains('day')){
 		document.body.classList.remove('day');
@@ -269,11 +276,7 @@ ui_out.onclick=()=>{
 }
 // INIT
 if(pro()){
-	const pro_feats=document.getElementsByClassName('pro');
-	while(pro_feats.length){
-		pro_feats[0].classList.remove('pro');
-	}
-	console.log('Pro Edition!');
+	defaet();
 }else{
 	if(config('init')=='y'){
 		if(navigator.userAgent.includes('ScrawlDaesk')){
@@ -283,6 +286,7 @@ if(pro()){
 		const key=window.prompt('Please enter your license key...');
 		if(key=='T3BlbiBzZXNhbWUh'){
 			config('edition','pro');
+			defaet();
 			notif("Congratulations! You've unlocked Pro Edition!");
 		}else{
 			alert("Sorry, that didn't Work. Scrawl will run in free mode.");
