@@ -80,7 +80,7 @@ nav{
 .cis,.pro{
 	color:var(--mg);
 }
-.desk,.modal,.rm{
+.desk,.modal,.rm,#ui-full{
 	display:none;
 }
 .day{
@@ -98,6 +98,9 @@ nav{
 	nav{
 		bottom:auto;
 		top:0;
+	}
+	#ui-full{
+		display:inline;
 	}
 }
 @media print{

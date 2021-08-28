@@ -20,7 +20,7 @@ const ui_go=document.getElementById('ui-send');
 const ui_cfg=document.getElementById('ui-config');
 const ui_scr=document.getElementById('ui-full');
 const ui_out=document.getElementById('ui-exit');
-const msgSorry='Sorry, that only works with a license key.';
+const msgSorry='Sorry, that only works with a license.';
 function alurt(msg='OK!'){
 	const modal=document.createElement('div');
 	modal.classList.add('alurt');
@@ -71,7 +71,7 @@ function daerk(){
 }
 function fulscrn(){
 	if(document.fullscreenElement){
-		document.body.parentElement.exitFullscreen();
+		document.exitFullscreen();
 		ui_scr.textContent='fullscreen';
 	}else{
 		if(document.body.parentElement.requestFullscreen){
@@ -208,8 +208,17 @@ function sav(){
 function spelk(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		scrawl.spael();
+		if(scrawl.NOTEPAD.getAttribute('spellcheck')=='true'){
+			ui_eng.style.color='var(--hi)';
+		}else{
+			ui_eng.style.color=ui_get.style.color;
+		}
 	}
 }
+function ver(){
+	return'Scrawl ('+config('edition').charAt(0).toUpperCase()+config('edition').substring(1)+' Edition)';
+}
+// HEY, LISTEN!
 document.body.parentElement.ondragover=(e)=>{
 	e.preventDefault();
 }
@@ -254,12 +263,12 @@ document.body.addEventListener('keydown',e=>{
 				break;
 			case'F11':
 				e.preventDefault();
-				fulscrn();
+				// fulscrn();
 				break;
-			case'F12':
+			/* case'F12':
 				e.preventDefault();
 				saen();
-				break;
+				break; */
 		}
 	}
 });
@@ -328,7 +337,7 @@ if(pro()){
 	if(config('init')=='y'){
 		if(navigator.userAgent.includes('ScrawlDaesk')){
 			config('desk','y');
-			ui_src.classList.add('desk');
+			ui_scr.classList.add('desk');
 			ui_out.classList.remove('desk');
 		}
 		const key=window.prompt('Please enter your license key...');
@@ -337,13 +346,18 @@ if(pro()){
 			defaet();
 			notif("Congratulations! You've unlocked Pro Edition!");
 		}else{
-			alurt("Sorry, that didn't Work. Scrawl will run in free mode.");
+			alurt("Sorry, that didn't Work. :(");
+			notif('Free Edition.');
 		}
 		config('init','n');
 	}
 }
 if(config('dark')=='n'){
 	document.body.classList.add('day');
+}
+if(config('desk')=='y'){
+	ui_scr.classList.add('desk');
+	ui_out.classList.remove('desk');
 }
 ui_un.classList.add('cis');
 ui_re.classList.add('cis');
