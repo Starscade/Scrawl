@@ -54,7 +54,7 @@ class Scrawl{
 				]
 			];
 			regx[0].forEach((p,x)=>{
-				htm=htm.replaceAll(p,regx[1][x]);
+				htm=htm.replace(p,regx[1][x]);
 			});
 			return htm;
 		}
