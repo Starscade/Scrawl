@@ -44,8 +44,8 @@ nav{
 .cis{
 	color:var(--mg);
 }
-.daesk#ui-exit{
-	display:inline;
+.modal,.pro,.rm{
+	display:none;
 }
 .day{
 	--bg:#ddd;
@@ -54,9 +54,6 @@ nav{
 	--mg:#bbb;
 	--pg:#eee;
 	--shado:#ccc;
-}
-.modal,.pro,.rm{
-	display:none;
 }
 .ugly{
 	cursor:text;

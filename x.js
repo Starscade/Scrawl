@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const scrops={'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php','edition':'free'};
+const scrops={'init':true,'desk':false,'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php','edition':'free'};
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
 const ui_sav=document.getElementById('ui-save');
@@ -281,14 +281,16 @@ if(pro()){
 	}
 	console.log('Pro Edition!');
 }else{
-	if(navigator.userAgent.includes('ScralDaesk')){
-		// config('edition','pro');
-		console.log('<isDaesk>');
-	}else{
+	if(config('init')==true){
+		config('init',false);
+		if(navigator.userAgent.includes('ScrawlDaesk')){
+			config('desk',true);
+			console.log('<isDaesk>');
+		}
 		const key=window.prompt('Please enter your license key...');
 		if(key=='T3BlbiBzZXNhbWUh'){
 			config('edition','pro');
-			notif('Congratulations! You unlocked Pro Edition!');
+			notif("Congratulations! You've unlocked Pro Edition!");
 		}else{
 			alert("Sorry, that didn't Work. Scrawl will run in Free Mode.");
 		}
