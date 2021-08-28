@@ -164,6 +164,7 @@ class Scrawl{
 			if(fnaem){
 				a.download=fnaem+'.md';
 				a.click();
+				a.remove();
 			}
 			window.URL.revokeObjectURL(uri);
 		}
@@ -226,7 +227,7 @@ class Scrawl{
 			}
 		}
 		// EVENT LISTENERS
-		this.NOTEPAD.addEventListener('beforeinput',(e)=>{
+		this.NOTEPAD.addEventListener('beforeinput',e=>{
 			switch(e.inputType){
 				case'formatBold':
 					e.preventDefault();

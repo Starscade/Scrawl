@@ -55,22 +55,19 @@ nav{
 	--pg:#eee;
 	--shado:#ccc;
 }
+.modal,.pro,.rm{
+	display:none;
+}
 .ugly{
 	cursor:text;
 	font-family:'Markdown';
 	text-align:justify;
-}
-#ui-save,#ui-config{
-	display:none;
 }
 @media(orientation:landscape){
 	nav{
 		bottom:auto;
 		top:0;
 	}
-	/* #ui-new,#ui-open,#ui-save,#ui-print,#ui-undo,#ui-redo{
-		display:none;
-	} */
 }
 @media print{
 	.day{

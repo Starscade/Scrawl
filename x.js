@@ -1,17 +1,16 @@
 'use strict';
 const scrawl=new Scrawl();
 const scrops={'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php','edition':'free'};
-const f=document.getElementsByTagName('input')[0];
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
 const ui_sav=document.getElementById('ui-save');
 const ui_prln=document.getElementById('ui-print');
 const ui_un=document.getElementById('ui-undo');
 const ui_re=document.getElementById('ui-redo');
-/* const ui_b=document.getElementById('ui-bold');
+const ui_b=document.getElementById('ui-bold');
 const ui_i=document.getElementById('ui-italic');
 const ui_u=document.getElementById('ui-underline');
-const ui_s=document.getElementById('ui-strike'); */
+const ui_s=document.getElementById('ui-strike');
 const ui_eng=document.getElementById('ui-spell');
 const ui_num=document.getElementById('ui-words');
 const ui_get=document.getElementById('ui-find');
@@ -94,6 +93,10 @@ function ok(albak,argz,msg='Unsaved changes will be lost!'){
 	}
 }
 function opn(){
+	const f=document.createElement('input');
+	f.type='file';
+	f.setAttribute('accept','.md,.htm,.html');
+	document.body.appendChild(f);
 	f.click();
 	f.onchange=()=>{
 		const d=f.files[0];
@@ -156,7 +159,7 @@ function sav(){
 	}
 	scrawl.saef(config('name'));
 }
-window.addEventListener('print',(e)=>{
+window.addEventListener('print',e=>{
 	e.preventDefault();
 	prln();
 });
@@ -167,7 +170,7 @@ document.body.parentElement.ondrop=(e)=>{
 	e.preventDefault();
 	scrawl.opaen(e.dataTransfer.items[0].getAsFile());
 }
-document.body.addEventListener('keydown',(e)=>{
+document.body.addEventListener('keydown',e=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){
 			case'H':e.preventDefault();saerk();break;
@@ -176,6 +179,7 @@ document.body.addEventListener('keydown',(e)=>{
 			case'N':e.preventDefault();ok(naew);break;
 			case'O':e.preventDefault();opn();break;
 			case'Q':e.preventDefault();ok(window.close);break;
+			case'R':e.preventDefault();location.reload();break;
 			case'S':
 				e.preventDefault();
 				if(pro()){
@@ -232,18 +236,22 @@ ui_un.onclick=()=>{
 ui_re.onclick=()=>{
 	scrawl.undo(true);
 }
-/* ui_b.onclick=()=>{
-	scrawl.biu('**');
+ui_b.onclick=()=>{
+	// scrawl.biu('**');
+	document.execCommand('bold');
 }
 ui_i.onclick=()=>{
-	scrawl.biu();
+	// scrawl.biu();
+	document.execCommand('italic');
 }
 ui_u.onclick=()=>{
-	scrawl.biu('_');
+	// scrawl.biu('_');
+	document.execCommand('underline');
 }
 ui_s.onclick=()=>{
-	scrawl.biu('~');
-} */
+	// scrawl.biu('~');
+	document.execCommand('strikeThrough');
+}
 ui_eng.onclick=()=>{
 	scrawl.spael();
 }
@@ -267,10 +275,23 @@ ui_out.onclick=()=>{
 }
 // INIT
 if(pro()){
-	console.log('Scrawl Pro!');
+	const pro_feats=document.getElementsByClassName('pro');
+	while(pro_feats.length){
+		pro_feats[0].classList.remove('pro');
+	}
+	console.log('Pro Edition!');
 }else{
-	if(navigator.userAgent.includes('ScrawlDaesk')){
-		config('edition','pro');
+	if(navigator.userAgent.includes('ScralDaesk')){
+		// config('edition','pro');
+		console.log('<isDaesk>');
+	}else{
+		const key=window.prompt('Please enter your license key...');
+		if(key=='T3BlbiBzZXNhbWUh'){
+			config('edition','pro');
+			notif('Congratulations! You unlocked Pro Edition!');
+		}else{
+			alert("Sorry, that didn't Work. Scrawl will run in Free Mode.");
+		}
 	}
 }
 if(config('dark')==false){
