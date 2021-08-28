@@ -41,10 +41,10 @@ nav{
 	background-color:var(--mg);
 	border-radius:var(--rad);
 }
-.cis{
+.cis,.pro{
 	color:var(--mg);
 }
-.modal,.pro,.rm{
+.modal,.rm{
 	display:none;
 }
 .day{

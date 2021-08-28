@@ -36,12 +36,16 @@ function config(ky,valu){
 	}
 }
 function daerk(){
-	if(document.body.classList.contains('day')){
-		document.body.classList.remove('day');
-		config('dark',true);
+	if(pro()){
+		if(document.body.classList.contains('day')){
+			document.body.classList.remove('day');
+			config('dark',true);
+		}else{
+			document.body.classList.add('day');
+			config('dark',false);
+		}
 	}else{
-		document.body.classList.add('day');
-		config('dark',false);
+		alert("Sorry, that's a paid feature.");
 	}
 }
 function lokc(){
@@ -117,30 +121,34 @@ function pro(){
 	}
 }
 function saen(){
-	let apiurl=window.prompt('Please enter a URL...',config('apiurl'));
-	if(apiurl){
-		config('apiurl',apiurl);
-		if(apiurl.includes('|')){
-			apiurl=apiurl.split('|');
-			if(!apiurl[1]){
-				apiurl[1]=config('name');
+	if(pro()){
+		let apiurl=window.prompt('Please enter a URL...',config('apiurl'));
+		if(apiurl){
+			config('apiurl',apiurl);
+			if(apiurl.includes('|')){
+				apiurl=apiurl.split('|');
+				if(!apiurl[1]){
+					apiurl[1]=config('name');
+				}
+			}else{
+				apiurl=[apiurl,config('name')];
 			}
-		}else{
-			apiurl=[apiurl,config('name')];
+			const form=new FormData();
+			const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
+			form.append(0,bob,apiurl[1]);
+			fetch(apiurl[0],{
+				method:'POST',
+				body:form
+			}).then(
+				resp=>resp.text()
+			).then(
+				resp=>{
+					notif(resp);
+				}
+			)
 		}
-		const form=new FormData();
-		const bob=new Blob([scrawl.md2htm()],{type:"text/html"});
-		form.append(0,bob,apiurl[1]);
-		fetch(apiurl[0],{
-			method:'POST',
-			body:form
-		}).then(
-			resp=>resp.text()
-		).then(
-			resp=>{
-				notif(resp);
-			}
-		)
+	}else{
+		alert("Sorry, that's a paid feature.");
 	}
 }
 function saerk(){
@@ -177,14 +185,7 @@ document.body.addEventListener('keydown',e=>{
 			case'P':e.preventDefault();prln();break;
 			case'Q':e.preventDefault();ok(window.close);break;
 			case'R':e.preventDefault();location.reload();break;
-			case'S':
-				e.preventDefault();
-				if(pro()){
-					sav();
-				}else{
-					prln();
-				}
-				break;
+			case'S':e.preventDefault();sav();break;
 			case'T':e.preventDefault();notif(scrawl.tally());break;
 			case'W':e.preventDefault();ok(naew);break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
