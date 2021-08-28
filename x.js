@@ -18,7 +18,21 @@ const ui_see=document.getElementById('ui-see');
 const ui_drk=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
 const ui_cfg=document.getElementById('ui-config');
+const ui_scr=document.getElementById('ui-full');
 const ui_out=document.getElementById('ui-exit');
+const msgSorry='Sorry, that only works with a license key.';
+function alurt(msg='OK!'){
+	const modal=document.createElement('div');
+	modal.classList.add('alurt');
+	modal.textContent=msg;
+	document.body.appendChild(modal);
+	modal.onclick=()=>{
+		modal.remove();
+	}
+	modal.onanimationend=()=>{
+		modal.remove();
+	};
+}
 function config(ky,valu){
 	if(!localStorage.Scrawl_CFG){
 		localStorage.Scrawl_CFG=JSON.stringify(scrops);
@@ -43,22 +57,41 @@ function defaet(){
 	console.log('Pro Edition!');
 }
 function daerk(){
-	if(document.body.classList.contains('day')){
-		document.body.classList.remove('day');
-		config('dark','y');
+	if(pro()){
+		if(document.body.classList.contains('day')){
+			document.body.classList.remove('day');
+			config('dark','y');
+		}else{
+			document.body.classList.add('day');
+			config('dark','n');
+		}
 	}else{
-		document.body.classList.add('day');
-		config('dark','n');
+		alurt(msgSorry);
+	}
+}
+function fulscrn(){
+	if(document.fullscreenElement){
+		document.body.parentElement.exitFullscreen();
+		ui_scr.textContent='fullscreen';
+	}else{
+		if(document.body.parentElement.requestFullscreen){
+			document.body.parentElement.requestFullscreen();
+			ui_scr.textContent='fullscreen_exit';
+		}
 	}
 }
 function lokc(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		scrawl.NOTEPAD.classList.remove('ugly');
+		ui_un.classList.add('cis');
+		ui_re.classList.add('cis');
 		ui_eng.classList.add('cis');
 		ui_get.classList.add('cis');
 		ui_see.textContent='lock';
 	}else{
 		scrawl.NOTEPAD.classList.add('ugly');
+		ui_un.classList.remove('cis');
+		ui_re.classList.remove('cis');
 		ui_eng.classList.remove('cis');
 		ui_get.classList.remove('cis');
 		ui_see.textContent='lock_open';
@@ -155,14 +188,14 @@ function saen(){
 			)
 		}
 	}else{
-		alert("Sorry, that's a paid feature.");
+		alurt(msgSorry);
 	}
 }
 function saerk(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		const w=window.prompt('Replace instances of...');
 		if(w){
-			notif(scrawl.saerk(w));
+			alurt(scrawl.saerk(w));
 		}
 	}
 }
@@ -187,6 +220,8 @@ document.body.parentElement.ondrop=(e)=>{
 document.body.addEventListener('keydown',e=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){
+			case'=':e.preventDefault();scrawl.pt();break;
+			case'-':e.preventDefault();scrawl.pt(false);break;
 			case'H':e.preventDefault();saerk();break;
 			case'K':e.preventDefault();scrawl.biu('~');break;
 			case'L':e.preventDefault();spelk();break;
@@ -196,7 +231,7 @@ document.body.addEventListener('keydown',e=>{
 			case'Q':e.preventDefault();ok(window.close);break;
 			case'R':e.preventDefault();location.reload();break;
 			case'S':e.preventDefault();sav();break;
-			case'T':e.preventDefault();alert(scrawl.tally());break;
+			case'T':e.preventDefault();alurt(scrawl.tally());break;
 			case'W':e.preventDefault();ok(naew);break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
 			case'Z':e.preventDefault();scrawl.undo();break;
@@ -205,10 +240,8 @@ document.body.addEventListener('keydown',e=>{
 		switch(e.key){
 			case' ':
 				if(scrawl.NOTEPAD.contentEditable=='false'){
-					if(e.shiftKey){
-						e.preventDefault();
-						alert(scrawl.tally());
-					}
+					e.preventDefault();
+					alurt(scrawl.tally());
 				}
 				break;
 			case'Tab':
@@ -219,10 +252,14 @@ document.body.addEventListener('keydown',e=>{
 				e.preventDefault();
 				daerk();
 				break;
-			/* case'F12':
+			case'F11':
+				e.preventDefault();
+				fulscrn();
+				break;
+			case'F12':
 				e.preventDefault();
 				saen();
-				break; */
+				break;
 		}
 	}
 });
@@ -264,7 +301,7 @@ ui_eng.onclick=()=>{
 	spelk();
 }
 ui_num.onclick=()=>{
-	alert(scrawl.tally());
+	alurt(scrawl.tally());
 }
 ui_get.onclick=()=>{
 	saerk();
@@ -278,6 +315,9 @@ ui_go.onclick=()=>{
 ui_drk.onclick=()=>{
 	daerk();
 }
+ui_scr.onclick=()=>{
+	fulscrn();
+}
 ui_out.onclick=()=>{
 	window.close();
 }
@@ -288,7 +328,8 @@ if(pro()){
 	if(config('init')=='y'){
 		if(navigator.userAgent.includes('ScrawlDaesk')){
 			config('desk','y');
-			console.log('<isDaesk>');
+			ui_src.classList.add('desk');
+			ui_out.classList.remove('desk');
 		}
 		const key=window.prompt('Please enter your license key...');
 		if(key=='T3BlbiBzZXNhbWUh'){
@@ -296,7 +337,7 @@ if(pro()){
 			defaet();
 			notif("Congratulations! You've unlocked Pro Edition!");
 		}else{
-			alert("Sorry, that didn't Work. Scrawl will run in free mode.");
+			alurt("Sorry, that didn't Work. Scrawl will run in free mode.");
 		}
 		config('init','n');
 	}
@@ -304,6 +345,8 @@ if(pro()){
 if(config('dark')=='n'){
 	document.body.classList.add('day');
 }
+ui_un.classList.add('cis');
+ui_re.classList.add('cis');
 ui_eng.classList.add('cis');
 ui_get.classList.add('cis');
 naem();

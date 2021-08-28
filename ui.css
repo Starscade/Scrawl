@@ -1,4 +1,4 @@
-@import url('https://starscade.github.io/particl/min.css');
+@import url('particl.css');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @font-face{
 	font-family:'Markdown';
@@ -8,12 +8,32 @@
 	font-family:'HTML';
 	src:url('https://fonts.gstatic.com/s/josefinsans/v17/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2');
 }
+@keyframes alurt{
+	0%{
+		opacity:0;
+		transform:translateX(-50%)scale(0);
+	}10%{
+		transform:translateX(-50%)scale(1.1);
+	}15%{
+		transform:translateX(-50%)scale(1);
+	}25%{
+		opacity:1;
+	}90%{
+		opacity:1;
+	}100%{
+		opacity:0;
+	}
+}
+::-webkit-scrollbar-thumb,::selection{
+	background-color:var(--mg);
+}
 :root{
 	--font:'HTML';
 }
 article{
 	border-color:var(--mg);
 	cursor:not-allowed;
+	/* font-size:100%; */
 }
 body{
 	opacity:0;
@@ -41,19 +61,33 @@ nav{
 	background-color:var(--mg);
 	border-radius:var(--rad);
 }
+.alurt{
+	animation:alurt 3s forwards;
+	background-color:var(--fg);
+	border:1pt solid var(--mg);
+	border-radius:var(--rad);
+	box-shadow:var(--shado);
+	color:var(--bg);
+	cursor:pointer;
+	font-size:'x-large';
+	left:50%;
+	padding:1em;
+	position:fixed;
+	top:7%;
+	transform:translate(-50%,10%);
+	user-select:none;
+}
 .cis,.pro{
 	color:var(--mg);
 }
-.modal,.rm{
+.desk,.modal,.rm{
 	display:none;
 }
 .day{
 	--bg:#ddd;
 	--fg:#667;
-	/* --hi:Goldenrod; */
 	--mg:#bbb;
 	--pg:#eee;
-	--shado:#ccc;
 }
 .ugly{
 	cursor:text;

@@ -47,7 +47,7 @@ class Scrawl{
 				],[
 					'**',
 					"\t\t> $1",
-					"\n",
+					"\t\n",
 					'*',
 					"\t# $1\n",
 					'*',
@@ -99,6 +99,7 @@ class Scrawl{
 						/_([^_]*)_/g,
 						/~([^~]*)~/g,
 						/"([^"]*)"/g,
+						/"/g,
 						/'/g,
 						/--/g
 					],[
@@ -107,6 +108,7 @@ class Scrawl{
 						'<u>$1</u>',
 						'<s>$1</s>',
 						'“$1”',
+						'“',
 						'’',
 						'—'
 					]
@@ -129,6 +131,18 @@ class Scrawl{
 					this.stoar(this.htm2md(raed.result));
 				}
 				location.reload();
+			}
+		}
+		this.pt=(plus=true)=>{
+			const ptsz=Math.round(Number(window.getComputedStyle(this.NOTEPAD,null).getPropertyValue('font-size').split('px')[0])*0.75292857248934);
+			if(plus){
+				if(ptsz<36){
+					this.NOTEPAD.style.fontSize=ptsz+6+'pt';
+				}
+			}else{
+				if(ptsz>12){
+					this.NOTEPAD.style.fontSize=ptsz-6+'pt';
+				}
 			}
 		}
 		this.raec=()=>{
