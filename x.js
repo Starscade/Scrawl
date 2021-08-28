@@ -88,13 +88,17 @@ function notif(msg='',h='S c r a w l',ico='./ico.png'){
 	}
 }
 function ok(albak,argz,msg='Unsaved changes will be lost!'){
-	let ok=confirm(msg);
+	const ok=confirm(msg);
 	if(ok){
 		albak(argz);
 	}
 }
 function opn(){
-	scrawl.opaen(f);
+	f.click();
+	f.onchange=()=>{
+		const d=f.files[0];
+		scrawl.opaen(d);
+	}
 }
 function prln(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
@@ -156,6 +160,13 @@ window.addEventListener('print',(e)=>{
 	e.preventDefault();
 	prln();
 });
+document.body.parentElement.ondragover=(e)=>{
+	e.preventDefault();
+}
+document.body.parentElement.ondrop=(e)=>{
+	e.preventDefault();
+	scrawl.opaen(e.dataTransfer.items[0].getAsFile());
+}
 document.body.addEventListener('keydown',(e)=>{
 	if(e.ctrlKey||e.metaKey){
 		switch(e.key.toUpperCase()){

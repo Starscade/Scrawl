@@ -89,12 +89,14 @@ class Scrawl{
 						/\*\*([^*]*)\*\*/g,
 						/\*([^*]*)\*/g,
 						/_([^_]*)_/g,
-						/~([^~]*)~/g
+						/~([^~]*)~/g,
+						/--/g
 					],[
 						'<b>$1</b>',
 						'<i>$1</i>',
 						'<u>$1</u>',
-						'<s>$1</s>'
+						'<s>$1</s>',
+						'—'
 					]
 				]
 				regx[0].forEach((p,x)=>{
@@ -104,16 +106,17 @@ class Scrawl{
 			});
 			return htm;
 		}
-		this.opaen=(f_inpt)=>{
-			f_inpt.click();
-			f_inpt.onchange=()=>{
-				let f=f_inpt.files[0];
-				let raed=new FileReader();
-				raed.readAsText(f);
-				raed.onload=()=>{
+		this.opaen=(f)=>{
+			let raed=new FileReader();
+			raed.readAsText(f);
+			raed.onload=()=>{
+				const dot=f.name.split('.');
+				if(dot[dot.length-1]=='md'){
+					this.stoar(this.htm2md(this.md2htm(raed.result)));
+				}else{
 					this.stoar(this.htm2md(raed.result));
-					location.reload();
 				}
+				location.reload();
 			}
 		}
 		this.raec=()=>{
