@@ -35,9 +35,9 @@ nav{
 	opacity:1;
 }nav span{
 	padding:.5em;
-}nav span:not(.cis){
+}nav span:not(.cis,.pro){
 	cursor:pointer;
-}nav span.material-icons:not(.cis):focus,nav span.material-icons:not(.cis):hover{
+}nav span.material-icons:not(.cis,.pro):focus,nav span.material-icons:not(.cis,.pro):hover{
 	background-color:var(--mg);
 	border-radius:var(--rad);
 }

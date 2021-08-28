@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const scrops={'init':true,'desk':false,'name':'Untitled','dark':false,'apiurl':'http://localhost:8000/myapi.php','edition':'free'};
+const scrops={'init':'y','desk':'n','name':'Untitled','dark':'n','apiurl':'http://localhost:8000/myapi.php','edition':'free'};
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
 const ui_sav=document.getElementById('ui-save');
@@ -36,16 +36,12 @@ function config(ky,valu){
 	}
 }
 function daerk(){
-	if(pro()){
-		if(document.body.classList.contains('day')){
-			document.body.classList.remove('day');
-			config('dark',true);
-		}else{
-			document.body.classList.add('day');
-			config('dark',false);
-		}
+	if(document.body.classList.contains('day')){
+		document.body.classList.remove('day');
+		config('dark','y');
 	}else{
-		alert("Sorry, that's a paid feature.");
+		document.body.classList.add('day');
+		config('dark','n');
 	}
 }
 function lokc(){
@@ -279,9 +275,9 @@ if(pro()){
 	}
 	console.log('Pro Edition!');
 }else{
-	if(config('init')==true){
+	if(config('init')=='y'){
 		if(navigator.userAgent.includes('ScrawlDaesk')){
-			config('desk',true);
+			config('desk','y');
 			console.log('<isDaesk>');
 		}
 		const key=window.prompt('Please enter your license key...');
@@ -291,10 +287,10 @@ if(pro()){
 		}else{
 			alert("Sorry, that didn't Work. Scrawl will run in free mode.");
 		}
-		config('init',false);
+		config('init','n');
 	}
 }
-if(config('dark')==false){
+if(config('dark')=='n'){
 	document.body.classList.add('day');
 }
 naem();
