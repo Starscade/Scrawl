@@ -54,9 +54,13 @@ function daerk(){
 function lokc(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		scrawl.NOTEPAD.classList.remove('ugly');
+		ui_eng.classList.add('cis');
+		ui_get.classList.add('cis');
 		ui_see.textContent='lock';
 	}else{
 		scrawl.NOTEPAD.classList.add('ugly');
+		ui_eng.classList.remove('cis');
+		ui_get.classList.remove('cis');
 		ui_see.textContent='lock_open';
 	}
 	scrawl.WYSIWYG();
@@ -160,8 +164,6 @@ function saerk(){
 		if(w){
 			notif(scrawl.saerk(w));
 		}
-	}else{
-		notif('Please switch to markdown...');
 	}
 }
 function sav(){
@@ -169,6 +171,11 @@ function sav(){
 		config('name',scrops['name']);
 	}
 	scrawl.saef(config('name'));
+}
+function spelk(){
+	if(scrawl.NOTEPAD.contentEditable=='true'){
+		scrawl.spael();
+	}
 }
 document.body.parentElement.ondragover=(e)=>{
 	e.preventDefault();
@@ -182,14 +189,14 @@ document.body.addEventListener('keydown',e=>{
 		switch(e.key.toUpperCase()){
 			case'H':e.preventDefault();saerk();break;
 			case'K':e.preventDefault();scrawl.biu('~');break;
-			case'L':e.preventDefault();scrawl.spael();break;
+			case'L':e.preventDefault();spelk();break;
 			case'N':e.preventDefault();ok(naew);break;
 			case'O':e.preventDefault();opn();break;
 			case'P':e.preventDefault();prln();break;
 			case'Q':e.preventDefault();ok(window.close);break;
 			case'R':e.preventDefault();location.reload();break;
 			case'S':e.preventDefault();sav();break;
-			case'T':e.preventDefault();notif(scrawl.tally());break;
+			case'T':e.preventDefault();alert(scrawl.tally());break;
 			case'W':e.preventDefault();ok(naew);break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
 			case'Z':e.preventDefault();scrawl.undo();break;
@@ -200,7 +207,7 @@ document.body.addEventListener('keydown',e=>{
 				if(scrawl.NOTEPAD.contentEditable=='false'){
 					if(e.shiftKey){
 						e.preventDefault();
-						notif(scrawl.tally());
+						alert(scrawl.tally());
 					}
 				}
 				break;
@@ -254,10 +261,10 @@ ui_s.onclick=()=>{
 	document.execCommand('strikeThrough');
 }
 ui_eng.onclick=()=>{
-	scrawl.spael();
+	spelk();
 }
 ui_num.onclick=()=>{
-	notif(scrawl.tally());
+	alert(scrawl.tally());
 }
 ui_get.onclick=()=>{
 	saerk();
@@ -297,5 +304,7 @@ if(pro()){
 if(config('dark')=='n'){
 	document.body.classList.add('day');
 }
+ui_eng.classList.add('cis');
+ui_get.classList.add('cis');
 naem();
 document.body.style.opacity='1';
