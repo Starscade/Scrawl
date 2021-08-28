@@ -256,8 +256,7 @@ ui_out.onclick=()=>{
 }
 // INIT
 if(pro()){
-	ui_cfg.style.display='inline';
-	ui_sav.style.display='inline';
+	console.log('Scrawl Pro!');
 }else{
 	if(navigator.userAgent.includes('ScrawlDaesk')){
 		config('edition','pro');

@@ -79,9 +79,27 @@ class Scrawl{
 						mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<blockquote>$1</blockquote>');
 						break;
 					default:
-						mdarr[i]=mdarr[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'<br>');
+						if(mdarr[i]==''){
+							mdarr[i]='<br>';
+						}else{
+							mdarr[i]=mdarr[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'');
+						}
 				}
-				mdarr[i]=mdarr[i].replace(/\*\*([^*]*)\*\*/g,'<b>$1</b>').replace(/\*([^*]*)\*/g,'<i>$1</i>').replace(/_([^*]*)_/g,'<u>$1</u>').replace(/~([^*]*)~/g,'<s>$1</s>');
+				const regx=[[
+						/\*\*([^*]*)\*\*/g,
+						/\*([^*]*)\*/g,
+						/_([^_]*)_/g,
+						/~([^~]*)~/g
+					],[
+						'<b>$1</b>',
+						'<i>$1</i>',
+						'<u>$1</u>',
+						'<s>$1</s>'
+					]
+				]
+				regx[0].forEach((p,x)=>{
+					mdarr[i]=mdarr[i].replace(p,regx[1][x]);
+				});
 				htm+=mdarr[i];
 			});
 			return htm;

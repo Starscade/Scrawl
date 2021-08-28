@@ -23,7 +23,6 @@ input{display:none;}
 nav{
 	background-color:var(--bg);
 	bottom:0;
-	/* box-shadow:0 0 2pt var(--shado); */
 	font-size:36pt;
 	overflow-x:auto;
 	padding:4pt;
@@ -67,9 +66,11 @@ nav{
 @media(orientation:landscape){
 	nav{
 		bottom:auto;
-		/* position:sticky; */
 		top:0;
 	}
+	/* #ui-new,#ui-open,#ui-save,#ui-print,#ui-undo,#ui-redo{
+		display:none;
+	} */
 }
 @media print{
 	.day{
