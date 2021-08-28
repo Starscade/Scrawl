@@ -254,6 +254,13 @@ class Scrawl{
 		this.NOTEPAD.addEventListener('cut',()=>{
 			this.raec();
 		});
+		/* this.NOTEPAD.addEventListener('dragover',e=>{
+			e.preventDefault();
+		});
+		this.NOTEPAD.addEventListener('drop',e=>{
+			e.preventDefault();
+			this.opaen(e.dataTransfer.items[0].getAsFile());
+		}); */
 		this.NOTEPAD.addEventListener('focus',()=>{
 			if(this.INIT){
 				this.NOTEPAD.textContent="\t# ";

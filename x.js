@@ -159,10 +159,6 @@ function sav(){
 	}
 	scrawl.saef(config('name'));
 }
-window.addEventListener('print',e=>{
-	e.preventDefault();
-	prln();
-});
 document.body.parentElement.ondragover=(e)=>{
 	e.preventDefault();
 }
@@ -178,6 +174,7 @@ document.body.addEventListener('keydown',e=>{
 			case'L':e.preventDefault();scrawl.spael();break;
 			case'N':e.preventDefault();ok(naew);break;
 			case'O':e.preventDefault();opn();break;
+			case'P':e.preventDefault();prln();break;
 			case'Q':e.preventDefault();ok(window.close);break;
 			case'R':e.preventDefault();location.reload();break;
 			case'S':
@@ -282,7 +279,6 @@ if(pro()){
 	console.log('Pro Edition!');
 }else{
 	if(config('init')==true){
-		config('init',false);
 		if(navigator.userAgent.includes('ScrawlDaesk')){
 			config('desk',true);
 			console.log('<isDaesk>');
@@ -292,8 +288,9 @@ if(pro()){
 			config('edition','pro');
 			notif("Congratulations! You've unlocked Pro Edition!");
 		}else{
-			alert("Sorry, that didn't Work. Scrawl will run in Free Mode.");
+			alert("Sorry, that didn't Work. Scrawl will run in free mode.");
 		}
+		config('init',false);
 	}
 }
 if(config('dark')==false){
