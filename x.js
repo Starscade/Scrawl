@@ -18,7 +18,7 @@ const ui_see=document.getElementById('ui-see');
 const ui_drk=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
 const ui_cfg=document.getElementById('ui-config');
-const ui_scr=document.getElementById('ui-full');
+// const ui_scr=document.getElementById('ui-full');
 const ui_out=document.getElementById('ui-exit');
 const msgSorry='Sorry, that only works with a license.';
 function alurt(msg='OK!'){
@@ -69,7 +69,7 @@ function daerk(){
 		alurt(msgSorry);
 	}
 }
-function fulscrn(){
+/* function fulscrn(){
 	if(document.fullscreenElement){
 		document.exitFullscreen();
 		ui_scr.textContent='fullscreen';
@@ -79,7 +79,7 @@ function fulscrn(){
 			ui_scr.textContent='fullscreen_exit';
 		}
 	}
-}
+} */
 function lokc(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		scrawl.NOTEPAD.classList.remove('ugly');
@@ -324,9 +324,9 @@ ui_go.onpointerdown=()=>{
 ui_drk.onpointerdown=()=>{
 	daerk();
 }
-ui_scr.onpointerdown=()=>{
+/* ui_scr.onpointerdown=()=>{
 	fulscrn();
-}
+} */
 ui_out.onpointerdown=()=>{
 	window.close();
 }
@@ -337,7 +337,7 @@ if(pro()){
 	if(config('init')=='y'){
 		if(navigator.userAgent.includes('ScrawlDaesk')){
 			config('desk','y');
-			ui_scr.classList.add('desk');
+			// ui_scr.classList.add('desk');
 			ui_out.classList.remove('desk');
 		}
 		const key=window.prompt('Please enter your license key...');
@@ -356,7 +356,7 @@ if(config('dark')=='n'){
 	document.body.classList.add('day');
 }
 if(config('desk')=='y'){
-	ui_scr.classList.add('desk');
+	// ui_scr.classList.add('desk');
 	ui_out.classList.remove('desk');
 }
 ui_un.classList.add('cis');
