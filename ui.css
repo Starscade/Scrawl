@@ -97,7 +97,7 @@ nav{
 }
 .menu{
 	background-color:var(--bg);
-	bottom:1.5em;
+	bottom:1.25em;
 	/* height:50vh; */
 	position:fixed;
 	text-align:left;
