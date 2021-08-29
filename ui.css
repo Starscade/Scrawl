@@ -81,7 +81,7 @@ nav{
 .cis,.pro{
 	color:var(--mg);
 }
-.desk,.modal,.rm,#ui-full{
+.desk,.land,.modal,.rm,#ui-full{
 	display:none;
 }
 .day{
@@ -103,8 +103,11 @@ nav{
 		bottom:auto;
 		top:0;
 	}
-	#ui-full{
+	.land,#ui-full{
 		display:inline;
+	}
+	.mobi{
+		display:none;
 	}
 }
 @media print{
