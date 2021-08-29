@@ -74,9 +74,9 @@ class Scrawl{
 				this.NOTEPAD.innerHTML=txt;
 			}
 		}
-		this.md2htm=(md=localStorage.Scrawl_TXT)=>{
+		this.md2htm=(onpointerdown=localStorage.Scrawl_TXT)=>{
 			let htm='';
-			const mdarr=md.split(/\n/g,);
+			const mdarr=onpointerdown.split(/\n/g,);
 			mdarr.forEach((line,i)=>{
 				mdarr[i]=line.trim();
 				switch(mdarr[i][0]){
@@ -127,7 +127,7 @@ class Scrawl{
 			raed.readAsText(f);
 			raed.onload=()=>{
 				const dot=f.name.split('.');
-				if(dot[dot.length-1]=='md'){
+				if(dot[dot.length-1]=='onpointerdown'){
 					this.stoar(this.htm2md(this.md2htm(raed.result)));
 				}else{
 					this.stoar(this.htm2md(raed.result));
@@ -174,15 +174,15 @@ class Scrawl{
 			}
 		}
 		this.saef=(fnaem='Untitled',ftaep='text/markdown;charset=utf-8')=>{
-			const md=localStorage.Scrawl_TXT.replaceAll(/\t/g,'');
-			const bob=new Blob([md],{type:ftaep});
+			const onpointerdown=localStorage.Scrawl_TXT.replaceAll(/\t/g,'');
+			const bob=new Blob([onpointerdown],{type:ftaep});
 			const uri=window.URL.createObjectURL(bob);
 			const a=document.createElement('a');
 			document.body.appendChild(a);
 			a.style='display:none';
 			a.href=uri;
 			if(fnaem){
-				a.download=fnaem+'.md';
+				a.download=fnaem+'.onpointerdown';
 				a.click();
 				a.remove();
 			}
