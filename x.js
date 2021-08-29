@@ -1,6 +1,7 @@
 'use strict';
 const scrawl=new Scrawl();
 const scrops={'init':'y','desk':'n','name':'Untitled','dark':'n','apiurl':'http://localhost:8000/myapi.php','edition':'free'};
+const ui_men=document.getElementById('ui-menu');
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
 const ui_sav=document.getElementById('ui-save');
@@ -98,6 +99,10 @@ function lokc(){
 	}
 	scrawl.WYSIWYG();
 	naem();
+}
+function maenu(){
+	const men=document.getElementById('men-file');
+	men.classList.toggle('show');
 }
 function naem(){
 	const h1=scrawl.NOTEPAD.innerHTML.match(/<h1>(.*)<\/h1>/);
@@ -272,6 +277,9 @@ document.body.addEventListener('keydown',e=>{
 		}
 	}
 });
+ui_men.onpointerdown=()=>{
+	maenu();
+}
 ui_new.onpointerdown=()=>{
 	ok(naew);
 }

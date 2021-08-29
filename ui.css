@@ -35,6 +35,7 @@ article{
 	cursor:not-allowed;
 	/* font-size:100%; */
 	margin-bottom:3em;
+	min-height:80vh;
 }
 body{
 	opacity:0;
@@ -81,7 +82,7 @@ nav{
 .cis,.pro{
 	color:var(--mg);
 }
-.desk,.land,.modal,.rm,#ui-full{
+.desk,.land,.menu,.modal,.rm,#ui-full{
 	display:none;
 }
 .day{
@@ -89,6 +90,20 @@ nav{
 	--fg:#667;
 	--mg:#bbb;
 	--pg:#eee;
+}
+.menu{
+	background-color:var(--bg);
+	bottom:3em;
+	/* height:50vh; */
+	position:fixed;
+	/* text-align:left; */
+	width:100%;
+}.menu span{
+	font-size:xx-large;
+	padding:1em;
+}
+.show{
+	display:block;
 }
 .ugly{
 	cursor:text;
@@ -106,7 +121,7 @@ nav{
 	.land,#ui-full{
 		display:inline;
 	}
-	.mobi{
+	.menu,.mobi{
 		display:none;
 	}
 }
