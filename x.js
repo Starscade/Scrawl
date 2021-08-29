@@ -261,10 +261,10 @@ document.body.addEventListener('keydown',e=>{
 				e.preventDefault();
 				daerk();
 				break;
-			case'F11':
+			/* case'F11':
 				e.preventDefault();
 				// fulscrn();
-				break;
+				break; */
 			/* case'F12':
 				e.preventDefault();
 				saen();
