@@ -1,6 +1,6 @@
 {
 	"name":"scrawl",
-	"main":"https://starscade.github.io/Scrawl/",
+	"main":"https://scrawl.cc/",
 	"window":{
 		"fullscreen":true,
 		"icon":"./ico.png"
