@@ -50,12 +50,12 @@ nav{
 	background-color:var(--bg);
 	bottom:0;
 	font-size:36pt;
-	overflow-x:auto;
+	/* overflow-x:auto; */
 	padding:4pt;
 	position:fixed;
 	transition:opacity .5s;
 	user-select:none;
-	white-space:nowrap;
+	/* white-space:nowrap; */
 	width:100%;
 }nav:hover{
 	opacity:1;
@@ -97,7 +97,7 @@ nav{
 }
 .menu{
 	background-color:var(--bg);
-	bottom:3em;
+	bottom:1.5em;
 	/* height:50vh; */
 	position:fixed;
 	text-align:left;
