@@ -306,6 +306,7 @@ class Scrawl{
 			this.HISTRY['txt'][this.HISTRY['indx']]=localStorage.Scrawl_TXT;
 			this.HISTRY['cart'][this.HISTRY['indx']]=[localStorage.Scrawl_TXT.length,localStorage.Scrawl_TXT.length];
 		}else{
+			localStorage.Scrawl_TXT='	# ';
 			this.NOTEPAD.innerHTML=prompt;
 		}
 	}
