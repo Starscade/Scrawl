@@ -203,7 +203,11 @@ function sav(){
 	if(!config('name')){
 		config('name',scrops['name']);
 	}
-	scrawl.saef(config('name'));
+	if(localStorage.Scrawl_TXT){
+		scrawl.saef(config('name'));
+	}else{
+		alurt('Nothing to save...');
+	}
 }
 function spelk(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
