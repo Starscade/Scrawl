@@ -13,7 +13,7 @@
 	--pt:18pt;
 	--font:'Weak',sans-serif;
 	--rad:calc(var(--pt)/3);
-	--shado:0 0 1em #00000022;
+	--shado:0 0 12px #00000022;
 	scrollbar-color:currentColor var(--bg);
 	scrollbar-width:thin;
 }
