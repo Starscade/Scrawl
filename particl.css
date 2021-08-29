@@ -84,6 +84,7 @@ p{
 	}
 	article{
 		border:none;
+		font-size:var(--pt)!important;
 	}
 	nav{
 		display:none;
