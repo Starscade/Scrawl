@@ -241,7 +241,7 @@ document.body.addEventListener('keydown',e=>{
 			case'R':e.preventDefault();location.reload();break;
 			case'S':e.preventDefault();sav();break;
 			case'T':e.preventDefault();alurt(scrawl.tally());break;
-			case'W':e.preventDefault();ok(naew);break;
+			case'W':e.preventDefault();ok(window.close);break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
 			case'Z':e.preventDefault();scrawl.undo();break;
 		}
