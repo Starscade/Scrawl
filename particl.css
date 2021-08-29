@@ -17,6 +17,11 @@
 	scrollbar-color:currentColor var(--bg);
 	scrollbar-width:thin;
 }
+a{
+	border-bottom:1pt dotted;
+	color:currentColor;
+	text-decoration:none;
+}
 article{
 	background-color:var(--pg);
 	border:1pt solid transparent;
