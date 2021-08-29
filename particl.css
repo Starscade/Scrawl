@@ -53,6 +53,11 @@ body{
 h1{
 	text-transform:uppercase;
 }
+hr{
+	background-image:linear-gradient(to right,transparent,currentColor,transparent);
+	border:none;
+	height:2pt;
+}
 p{
 	margin:0;
 	text-align:justify;
