@@ -13,7 +13,12 @@ class Scrawl{
 			if(this.RANG==''){
 				txt=g;
 			}else{
-				txt=g+this.RANG+g;
+				const rang=String(this.RANG);
+				if(rang.startsWith(g)){
+					txt=rang.substring(g.length,rang.length-g.length);
+				}else{
+					txt=g+this.RANG+g;
+				}
 			}
 			document.execCommand('insertText',false,txt);
 		}
@@ -296,6 +301,16 @@ class Scrawl{
 		});
 		this.NOTEPAD.addEventListener('input',()=>{
 			this.raec();
+		});
+		this.NOTEPAD.addEventListener('keydown',e=>{
+			if(this.NOTEPAD.contentEditable=='true'){
+				if(e.shiftKey){
+					if(e.key==' '){
+						e.preventDefault();
+						document.execCommand('insertHTML',false,"\t");
+					}
+				}
+			}
 		});
 		this.NOTEPAD.addEventListener('paste',()=>{
 			this.raec();
