@@ -16,10 +16,9 @@ const ui_eng=document.getElementById('ui-spell');
 const ui_num=document.getElementById('ui-words');
 const ui_get=document.getElementById('ui-find');
 const ui_see=document.getElementById('ui-see');
-const ui_drk=document.getElementById('ui-dark');
+const ui_day=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
 const ui_cfg=document.getElementById('ui-config');
-// const ui_scr=document.getElementById('ui-full');
 const ui_out=document.getElementById('ui-exit');
 const msgSorry='Sorry, that only works with a license.';
 function alurt(msg='OK!'){
@@ -27,7 +26,7 @@ function alurt(msg='OK!'){
 	modal.classList.add('alurt');
 	modal.textContent=msg;
 	document.body.appendChild(modal);
-	modal.onpointerdown=()=>{
+	modal.onclick=()=>{
 		modal.remove();
 	}
 	modal.onanimationend=()=>{
@@ -70,17 +69,6 @@ function daerk(){
 		alurt(msgSorry);
 	}
 }
-/* function fulscrn(){
-	if(document.fullscreenElement){
-		document.exitFullscreen();
-		ui_scr.textContent='fullscreen';
-	}else{
-		if(document.body.parentElement.requestFullscreen){
-			document.body.parentElement.requestFullscreen();
-			ui_scr.textContent='fullscreen_exit';
-		}
-	}
-} */
 function lokc(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		scrawl.NOTEPAD.classList.remove('ugly');
@@ -266,10 +254,6 @@ document.body.addEventListener('keydown',e=>{
 				e.preventDefault();
 				daerk();
 				break;
-			/* case'F11':
-				e.preventDefault();
-				// fulscrn();
-				break; */
 			/* case'F12':
 				e.preventDefault();
 				saen();
@@ -277,65 +261,62 @@ document.body.addEventListener('keydown',e=>{
 		}
 	}
 });
-ui_men.onpointerdown=()=>{
+ui_men.onclick=()=>{
 	maenu();
 }
-ui_new.onpointerdown=()=>{
+ui_new.onclick=()=>{
 	ok(naew);
 }
-ui_opn.onpointerdown=()=>{
+ui_opn.onclick=()=>{
 	opn();
 }
-ui_sav.onpointerdown=()=>{
+ui_sav.onclick=()=>{
 	sav();
 }
-ui_prln.onpointerdown=()=>{
+ui_prln.onclick=()=>{
 	prln();
 }
-ui_un.onpointerdown=()=>{
+ui_un.onclick=()=>{
 	scrawl.undo();
 }
-ui_re.onpointerdown=()=>{
+ui_re.onclick=()=>{
 	scrawl.undo(true);
 }
-ui_b.onpointerdown=()=>{
+ui_b.onclick=()=>{
 	// scrawl.biu('**');
 	document.execCommand('bold');
 }
-ui_i.onpointerdown=()=>{
+ui_i.onclick=()=>{
 	// scrawl.biu();
 	document.execCommand('italic');
 }
-ui_u.onpointerdown=()=>{
+ui_u.onclick=()=>{
 	// scrawl.biu('_');
 	document.execCommand('underline');
 }
-ui_s.onpointerdown=()=>{
+ui_s.onclick=()=>{
 	// scrawl.biu('~');
 	document.execCommand('strikeThrough');
 }
-ui_eng.onpointerdown=()=>{
+ui_eng.onclick=()=>{
 	spelk();
 }
-ui_num.onpointerdown=()=>{
+ui_num.onclick=()=>{
 	alurt(scrawl.tally());
 }
-ui_get.onpointerdown=()=>{
+ui_get.onclick=()=>{
 	saerk();
 }
-ui_see.onpointerdown=()=>{
+ui_see.onclick=()=>{
 	lokc();
 }
-ui_go.onpointerdown=()=>{
-	saen();
-}
-ui_drk.onpointerdown=()=>{
+ui_day.onclick=()=>{
 	daerk();
 }
-/* ui_scr.onpointerdown=()=>{
-	fulscrn();
-} */
-ui_out.onpointerdown=()=>{
+ui_go.onclick=()=>{
+	saen();
+}
+ui_out.onclick=()=>{
 	window.close();
 }
 // INIT
@@ -345,7 +326,6 @@ if(pro()){
 	if(config('init')=='y'){
 		if(navigator.userAgent.includes('ScrawlDaesk')){
 			config('desk','y');
-			// ui_scr.classList.add('desk');
 			ui_out.classList.remove('desk');
 		}
 		const key=window.prompt('Please enter your license key...');
@@ -364,7 +344,6 @@ if(config('dark')=='n'){
 	document.body.classList.add('day');
 }
 if(config('desk')=='y'){
-	// ui_scr.classList.add('desk');
 	ui_out.classList.remove('desk');
 }
 ui_un.classList.add('cis');

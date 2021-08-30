@@ -97,7 +97,7 @@ p{
 		font-size:var(--pt)!important;
 	}
 	nav{
-		display:none;
+		display:none!important;
 	}
 }
 @page{
