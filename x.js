@@ -284,9 +284,11 @@ ui_prln.onclick=()=>{
 }
 ui_un.onclick=()=>{
 	scrawl.undo();
+	scrawl.NOTEPAD.blur();
 }
 ui_re.onclick=()=>{
 	scrawl.undo(true);
+	scrawl.NOTEPAD.blur();
 }
 ui_b.onclick=()=>{
 	// scrawl.biu('**');
