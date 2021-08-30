@@ -51,9 +51,14 @@ function config(ky,valu){
 }
 function defaet(){
 	const pro_feats=document.getElementsByClassName('pro');
+	const freats=[...document.getElementsByClassName('free')];
+	console.log(freats);
 	while(pro_feats.length){
 		pro_feats[0].classList.remove('pro');
 	}
+	freats.forEach((l,i)=>{
+		l.style.display='none';
+	});
 	console.log('Pro Edition!');
 }
 function daerk(){
@@ -66,7 +71,7 @@ function daerk(){
 			config('dark','n');
 		}
 	}else{
-		alurt(msgSorry);
+		alert(msgSorry);
 	}
 }
 function lokc(){
@@ -144,6 +149,16 @@ function opn(){
 		scrawl.opaen(d);
 	}
 }
+function paey(){
+	const key=window.prompt('Please enter your license key...');
+	if(key=='T3BlbiBzZXNhbWUh'){
+		config('edition','pro');
+		defaet();
+		alert('SUCCESS! Thanks for supporting me.');
+	}else{
+		alert("Sorry, that didn't Work. Running in free mode.");
+	}
+}
 function prln(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		lokc();
@@ -180,19 +195,19 @@ function saen(){
 				resp=>resp.text()
 			).then(
 				resp=>{
-					notif(resp);
+					alert(resp);
 				}
 			)
 		}
 	}else{
-		alurt(msgSorry);
+		alert(msgSorry);
 	}
 }
 function saerk(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		const w=window.prompt('Replace instances of...');
 		if(w){
-			alurt(scrawl.saerk(w));
+			alert(scrawl.saerk(w));
 		}
 	}
 }
@@ -239,7 +254,7 @@ document.body.addEventListener('keydown',e=>{
 			case'Q':e.preventDefault();ok(window.close);break;
 			case'R':e.preventDefault();location.reload();break;
 			case'S':e.preventDefault();sav();break;
-			case'T':e.preventDefault();alurt(scrawl.tally());break;
+			case'T':e.preventDefault();alert(scrawl.tally());break;
 			case'W':e.preventDefault();ok(window.close);break;
 			case'Y':e.preventDefault();scrawl.undo(true);break;
 			case'Z':e.preventDefault();scrawl.undo();break;
@@ -249,7 +264,7 @@ document.body.addEventListener('keydown',e=>{
 			case' ':
 				if(scrawl.NOTEPAD.contentEditable=='false'){
 					e.preventDefault();
-					alurt(scrawl.tally());
+					alert(scrawl.tally());
 				}
 				break;
 			case'Tab':
@@ -310,7 +325,7 @@ ui_eng.onclick=()=>{
 	spelk();
 }
 ui_num.onclick=()=>{
-	alurt(scrawl.tally());
+	alert(scrawl.tally());
 }
 ui_get.onclick=()=>{
 	saerk();
@@ -324,6 +339,9 @@ ui_day.onclick=()=>{
 ui_go.onclick=()=>{
 	saen();
 }
+ui_cfg.onclick=()=>{
+	localStorage.Scrawl_CFG='';
+}
 ui_out.onclick=()=>{
 	window.close();
 }
@@ -332,19 +350,11 @@ if(pro()){
 	defaet();
 }else{
 	if(config('init')=='y'){
-		if(navigator.userAgent.includes('ScrawlDaesk')){
+		/* if(navigator.userAgent.includes('ScrawlDaesk')){
 			config('desk','y');
 			ui_out.classList.remove('desk');
-		}
-		const key=window.prompt('Please enter your license key...');
-		if(key=='T3BlbiBzZXNhbWUh'){
-			config('edition','pro');
-			defaet();
-			notif("Congratulations! You've unlocked Pro Edition!");
-		}else{
-			alurt("Sorry, that didn't Work. :(");
-			notif('Free Edition.');
-		}
+		} */
+		// paey();
 		config('init','n');
 	}
 }
