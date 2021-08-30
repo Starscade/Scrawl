@@ -75,14 +75,18 @@ function lokc(){
 		ui_un.classList.add('cis');
 		ui_re.classList.add('cis');
 		ui_eng.classList.add('cis');
+		document.getElementById('ui-spell-mobil').classList.add('cis');
 		ui_get.classList.add('cis');
+		document.getElementById('ui-find-mobil').classList.add('cis');
 		ui_see.textContent='lock';
 	}else{
 		scrawl.NOTEPAD.classList.add('ugly');
 		ui_un.classList.remove('cis');
 		ui_re.classList.remove('cis');
 		ui_eng.classList.remove('cis');
+		document.getElementById('ui-spell-mobil').classList.remove('cis');
 		ui_get.classList.remove('cis');
+		document.getElementById('ui-find-mobil').classList.remove('cis');
 		ui_see.textContent='lock_open';
 	}
 	scrawl.WYSIWYG();
@@ -203,8 +207,10 @@ function spelk(){
 		scrawl.spael();
 		if(scrawl.NOTEPAD.getAttribute('spellcheck')=='true'){
 			ui_eng.style.color='var(--hi)';
+			document.getElementById('ui-spell-mobil').style.color='var(--hi)';
 		}else{
 			ui_eng.style.color=ui_get.style.color;
+			document.getElementById('ui-spell-mobil').style.color=ui_get.style.color;
 		}
 	}
 }
@@ -349,6 +355,8 @@ if(config('desk')=='y'){
 ui_un.classList.add('cis');
 ui_re.classList.add('cis');
 ui_eng.classList.add('cis');
+document.getElementById('ui-spell-mobil').classList.add('cis');
 ui_get.classList.add('cis');
+document.getElementById('ui-find-mobil').classList.add('cis');
 naem();
 document.body.style.opacity='1';
