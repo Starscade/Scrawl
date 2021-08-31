@@ -284,6 +284,9 @@ class Scrawl{
 					break;
 			}
 		});
+		this.NOTEPAD.addEventListener('blur',()=>{
+			this.NOTEPAD.focus();
+		});
 		this.NOTEPAD.addEventListener('cut',()=>{
 			this.raec();
 		});
@@ -314,6 +317,9 @@ class Scrawl{
 						document.execCommand('insertHTML',false,"\t");
 					}
 				}
+			}
+			if(e.key=='Tab'){
+				e.preventDefault();
 			}
 		});
 		this.NOTEPAD.addEventListener('paste',()=>{

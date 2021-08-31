@@ -156,7 +156,14 @@ function paey(){
 		defaet();
 		alert('SUCCESS! Thanks for supporting me.');
 	}else{
-		alert("Sorry, that didn't Work. Running in free mode.");
+		if(key.length>0){
+			const agan=confirm("Sorry, that didn't Work. Try again?");
+			if(agan){
+				paey();
+			}else{
+				alert('Running in free mode.');
+			}
+		}
 	}
 }
 function prln(){
@@ -204,11 +211,15 @@ function saen(){
 	}
 }
 function saerk(){
-	if(scrawl.NOTEPAD.contentEditable=='true'){
-		const w=window.prompt('Replace instances of...');
-		if(w){
-			alert(scrawl.saerk(w));
+	if(pro()){
+		if(scrawl.NOTEPAD.contentEditable=='true'){
+			const w=window.prompt('Replace instances of...');
+			if(w){
+				alert(scrawl.saerk(w));
+			}
 		}
+	}else{
+		alert(msgSorry);
 	}
 }
 function sav(){
@@ -299,11 +310,11 @@ ui_prln.onclick=()=>{
 }
 ui_un.onclick=()=>{
 	scrawl.undo();
-	scrawl.NOTEPAD.blur();
+	// scrawl.NOTEPAD.blur();
 }
 ui_re.onclick=()=>{
 	scrawl.undo(true);
-	scrawl.NOTEPAD.blur();
+	// scrawl.NOTEPAD.blur();
 }
 ui_b.onclick=()=>{
 	// scrawl.biu('**');

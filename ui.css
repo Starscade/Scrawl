@@ -50,12 +50,12 @@ nav{
 	background-color:var(--bg);
 	bottom:0;
 	font-size:36pt;
-	/* overflow-x:auto; */
+	overflow-x:auto;
 	padding:4pt;
 	position:fixed;
 	transition:opacity .5s;
 	user-select:none;
-	/* white-space:nowrap; */
+	white-space:nowrap;
 	width:100%;
 }nav:hover{
 	opacity:1;
@@ -66,6 +66,8 @@ nav{
 }nav span.material-icons:not(.cis,.pro):focus,nav span.material-icons:not(.cis,.pro):hover{
 	background-color:var(--mg);
 	border-radius:var(--rad);
+}nav#men-file{
+	white-space:normal;
 }
 .alurt{
 	animation:alurt 3s forwards;
