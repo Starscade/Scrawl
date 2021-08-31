@@ -66,7 +66,7 @@ nav{
 	padding:.5em;
 }nav span:not(.cis,.pro){
 	cursor:pointer;
-}nav span.material-icons:not(.cis,.pro):focus,nav span.material-icons:not(.cis,.pro):hover{
+}nav span.material-icons:not(.cis,.pro):active{
 	background-color:var(--mg);
 	border-radius:var(--rad);
 }
@@ -119,7 +119,7 @@ nav{
 }
 #men-file{
 	border-bottom:8pt solid var(--bg);
-	/* box-shadow:0 0 1em #00000077; */
+	box-shadow:0 0 var(--pt) #00000044;
 	white-space:normal;
 }
 @media(orientation:landscape){
@@ -129,6 +129,9 @@ nav{
 	nav{
 		bottom:auto;
 		top:0;
+	}nav span.material-icons:not(.cis,.pro):hover{
+		background-color:var(--mg);
+		border-radius:var(--rad);
 	}
 	.land,#ui-full{
 		display:inline;
