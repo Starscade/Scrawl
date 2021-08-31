@@ -15,6 +15,10 @@ class Scrawl{
 				const regx=new RegExp("\\b"+e+"\\b",'g');
 				txt=txt.replace(regx,lex[e]);
 			});
+			if(this.NOTEPAD.textContent!=txt){
+				this.NOTEPAD.innerHTML=txt;
+				this.raec();
+			}
 			return txt;
 		}
 		this.biu=(g='*')=>{
