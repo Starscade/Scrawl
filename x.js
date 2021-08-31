@@ -89,8 +89,10 @@ function lokc(){
 		ui_re.classList.remove('cis');
 		ui_eng.classList.remove('cis');
 		document.getElementById('ui-spell-mobil').classList.remove('cis');
-		ui_get.classList.remove('cis');
-		document.getElementById('ui-find-mobil').classList.remove('cis');
+		if(pro()){
+			ui_get.classList.remove('cis');
+			document.getElementById('ui-find-mobil').classList.remove('cis');
+		}
 		ui_see.textContent='lock_open';
 	}
 	scrawl.WYSIWYG();
