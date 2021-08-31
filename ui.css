@@ -119,7 +119,7 @@ nav{
 }
 #men-file{
 	border-bottom:8pt solid var(--bg);
-	box-shadow:0 0 1em #00000077;
+	/* box-shadow:0 0 1em #00000077; */
 	white-space:normal;
 }
 @media(orientation:landscape){
