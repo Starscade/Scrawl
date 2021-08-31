@@ -302,7 +302,7 @@ class Scrawl{
 			}
 		});
 		this.NOTEPAD.addEventListener('blur',()=>{
-			this.NOTEPAD.focus();
+			// this.NOTEPAD.focus();
 		});
 		this.NOTEPAD.addEventListener('cut',()=>{
 			this.raec();
