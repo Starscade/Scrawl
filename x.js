@@ -281,6 +281,18 @@ document.body.addEventListener('keydown',e=>{
 				e.preventDefault();
 				lokc();
 				break;
+			case'F7':
+				e.preventDefault();
+				spelk();
+				break;
+			case'F8':
+				e.preventDefault();
+				alert(scrawl.tally());
+				break;
+			case'F9':
+				e.preventDefault();
+				saerk();
+				break;
 			case'F10':
 				e.preventDefault();
 				daerk();

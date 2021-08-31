@@ -15,7 +15,6 @@ class Scrawl{
 				const regx=new RegExp("\\b"+e+"\\b",'g');
 				txt=txt.replace(regx,lex[e]);
 			});
-			// this.raec();
 			return txt;
 		}
 		this.biu=(g='*')=>{
