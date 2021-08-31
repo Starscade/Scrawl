@@ -160,8 +160,6 @@ function paey(){
 			const agan=confirm("Sorry, that didn't Work. Try again?");
 			if(agan){
 				paey();
-			}else{
-				alert('Running in free mode.');
 			}
 		}
 	}
@@ -291,6 +289,11 @@ document.body.addEventListener('keydown',e=>{
 				saen();
 				break; */
 		}
+	}
+});
+scrawl.NOTEPAD.addEventListener('click',()=>{
+	if(document.getElementById('men-file').classList.contains('show')){
+		maenu();
 	}
 });
 ui_men.onclick=()=>{
