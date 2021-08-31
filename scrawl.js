@@ -7,7 +7,7 @@ class Scrawl{
 		this.INIT=true;
 		this.RANG='';
 		this.HISTRY={'txt':[],'indx':0,'cart':[0,0]};
-		this.LEX={"Aint":"Ain't","aint":"ain't","Cant":"Can't","cant":"can't","Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Handt":"Hadn't","handt":"hadn't","i":"I","Im":"I'm","i'm":"I'm","Isnt":"Isn't","isnt":"isn't","Wont":"Won't","wont":"won't","Wouldnt":"Wouldn't",'wouldnt':"wouldn't"};
+		this.LEX={"Aint":"Ain't","aint":"ain't","Cant":"Can't","cant":"can't","Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Handt":"Hadn't","handt":"hadn't","i":"I","Im":"I'm","i'm":"I'm","Isnt":"Isn't","isnt":"isn't","Wont":"Won't","wont":"won't","Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youll":"You'll","youll":"you'll"};
 		// STATIC FUNCTIONS
 		this.autypo=(lex=this.LEX)=>{
 			let txt=this.NOTEPAD.textContent;
