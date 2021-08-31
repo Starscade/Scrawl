@@ -156,7 +156,7 @@ function paey(){
 		defaet();
 		alert('SUCCESS! Thanks for supporting me.');
 	}else{
-		if(key.length>0){
+		if(key!=''){
 			const agan=confirm("Sorry, that didn't Work. Try again?");
 			if(agan){
 				paey();
