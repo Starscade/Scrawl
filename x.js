@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const scrops={'init':'y','desk':'n','name':'Untitled','dark':'n','apiurl':'http://localhost:8000/myapi.php','edition':'free'};
+const SCROPS={'init':'y','desk':'n','name':'Untitled','dark':'n','apiurl':'http://localhost:8000/myapi.php','edition':'free'};
 const ui_men=document.getElementById('ui-menu');
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
@@ -35,7 +35,7 @@ function alurt(msg='OK!'){
 }
 function config(ky,valu){
 	if(!localStorage.Scrawl_CFG){
-		localStorage.Scrawl_CFG=JSON.stringify(scrops);
+		localStorage.Scrawl_CFG=JSON.stringify(SCROPS);
 	}
 	let cfg=JSON.parse(localStorage.Scrawl_CFG);
 	if(ky){
@@ -52,7 +52,6 @@ function config(ky,valu){
 function defaet(){
 	const pro_feats=document.getElementsByClassName('pro');
 	const freats=[...document.getElementsByClassName('free')];
-	console.log(freats);
 	while(pro_feats.length){
 		pro_feats[0].classList.remove('pro');
 	}
@@ -109,7 +108,7 @@ function naem(){
 }
 function naew(){
 	localStorage.Scrawl_TXT='';
-	config('name',scrops['name']);
+	config('name',SCROPS['name']);
 	location.reload();
 }
 function notif(msg='',h='S c r a w l',ico='./ico.png'){
@@ -222,7 +221,7 @@ function saerk(){
 }
 function sav(){
 	if(!config('name')){
-		config('name',scrops['name']);
+		config('name',SCROPS['name']);
 	}
 	scrawl.saef(config('name'));
 }

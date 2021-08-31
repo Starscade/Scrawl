@@ -87,7 +87,8 @@ nav{
 	user-select:none;
 }
 .cis,.pro{
-	color:var(--mg);
+	/* color:var(--mg); */
+	opacity:.5;
 }
 .desk,.land,.menu,.modal,.rm,#ui-full{
 	display:none;

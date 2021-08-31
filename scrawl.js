@@ -7,7 +7,17 @@ class Scrawl{
 		this.INIT=true;
 		this.RANG='';
 		this.HISTRY={'txt':[],'indx':0,'cart':[0,0]};
+		this.LEX={"Aint":"Ain't","aint":"ain't","Cant":"Can't","cant":"can't","Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Handt":"Hadn't","handt":"hadn't","i":"I","Im":"I'm","i'm":"I'm","Isnt":"Isn't","isnt":"isn't","Wont":"Won't","wont":"won't","Wouldnt":"Wouldn't",'wouldnt':"wouldn't"};
 		// STATIC FUNCTIONS
+		this.autypo=(lex=this.LEX)=>{
+			let txt=this.NOTEPAD.textContent;
+			Object.keys(lex).forEach(e=>{
+				const regx=new RegExp("\\b"+e+"\\b",'g');
+				txt=txt.replace(regx,lex[e]);
+			});
+			// this.raec();
+			return txt;
+		}
 		this.biu=(g='*')=>{
 			let txt;
 			if(this.RANG==''){
@@ -251,7 +261,11 @@ class Scrawl{
 		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){
 				this.NOTEPAD.contentEditable='false';
-				this.NOTEPAD.innerHTML=this.md2htm();
+				if(this.NOTEPAD.spellcheck){
+					this.NOTEPAD.innerHTML=this.md2htm(this.autypo());
+				}else{
+					this.NOTEPAD.innerHTML=this.md2htm();
+				}
 			}else{
 				this.laed();
 				this.NOTEPAD.contentEditable='true';
