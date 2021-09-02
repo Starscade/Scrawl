@@ -7,7 +7,7 @@ class Scrawl{
 		this.INIT=true;
 		this.RANG='';
 		this.HISTRY={'txt':[],'indx':0,'cart':[0,0]};
-		this.TYPO={"Aint":"Ain't","aint":"ain't","Cant":"Can't","cant":"can't","Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","i":"I","Im":"I'm","i'm":"I'm","Isnt":"Isn't","isnt":"isn't","Wheres":"Where's","wheres":"where's","Wont":"Won't","wont":"won't","Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youll":"You'll","youll":"you'll"};
+		this.TYPO={"Aint":"Ain't","aint":"ain't","Cant":"Can't","cant":"can't","Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","i":"I","Im":"I'm","i'm":"I'm","Isnt":"Isn't","isnt":"isn't","Mustve":"Must've","mustve":"must've","Wheres":"Where's","wheres":"where's","Wont":"Won't","wont":"won't","Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youll":"You'll","youll":"you'll"};
 		// STATIC FUNCTIONS
 		this.autypo=(typo=this.TYPO)=>{
 			let txt=this.NOTEPAD.textContent;
