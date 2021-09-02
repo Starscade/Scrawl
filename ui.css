@@ -29,6 +29,7 @@
 }
 :root{
 	--font:'HTML';
+	--pt:18pt;
 }
 article{
 	border-color:var(--mg);
