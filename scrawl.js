@@ -7,13 +7,13 @@ class Scrawl{
 		this.INIT=true;
 		this.RANG='';
 		this.HISTRY={'txt':[],'indx':0,'cart':[0,0]};
-		this.LEX={"Aint":"Ain't","aint":"ain't","Cant":"Can't","cant":"can't","Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Handt":"Hadn't","handt":"hadn't","i":"I","Im":"I'm","i'm":"I'm","Isnt":"Isn't","isnt":"isn't","Wont":"Won't","wont":"won't","Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youll":"You'll","youll":"you'll"};
+		this.TYPO={"Aint":"Ain't","aint":"ain't","Cant":"Can't","cant":"can't","Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","i":"I","Im":"I'm","i'm":"I'm","Isnt":"Isn't","isnt":"isn't","Wheres":"Where's","wheres":"where's","Wont":"Won't","wont":"won't","Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youll":"You'll","youll":"you'll"};
 		// STATIC FUNCTIONS
-		this.autypo=(lex=this.LEX)=>{
+		this.autypo=(typo=this.TYPO)=>{
 			let txt=this.NOTEPAD.textContent;
-			Object.keys(lex).forEach(e=>{
+			Object.keys(typo).forEach(e=>{
 				const regx=new RegExp("\\b"+e+"\\b",'g');
-				txt=txt.replace(regx,lex[e]);
+				txt=txt.replace(regx,typo[e]);
 			});
 			if(this.NOTEPAD.textContent!=txt){
 				this.NOTEPAD.innerHTML=txt;
