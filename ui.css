@@ -116,7 +116,7 @@ nav{
 .ugly{
 	cursor:text;
 	font-family:'Markdown';
-	text-align:justify;
+	text-align:left;
 }
 #men-file{
 	border-bottom:8pt solid var(--bg);
