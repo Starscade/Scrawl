@@ -327,14 +327,14 @@ class Scrawl{
 			this.raec();
 		});
 		this.NOTEPAD.addEventListener('keydown',e=>{
-			if(this.NOTEPAD.contentEditable=='true'){
+			/* if(this.NOTEPAD.contentEditable=='true'){
 				if(e.shiftKey){
 					if(e.key==' '){
 						e.preventDefault();
 						document.execCommand('insertHTML',false,"\t");
 					}
 				}
-			}
+			} */
 			if(e.key=='Tab'){
 				e.preventDefault();
 			}

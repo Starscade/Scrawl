@@ -51,6 +51,7 @@ body{
 	text-align:center;
 }
 h1{
+	/* letter-spacing:2pt; */
 	text-transform:uppercase;
 }
 hr{
@@ -63,9 +64,15 @@ p{
 	text-align:justify;
 }p:first-of-type::first-line{
 	font-variant:small-caps;
-	/* font-weight:bold; */
+	font-weight:bold;
+	letter-spacing:1pt;
 }p:first-of-type::first-letter{
+	float:left;
+	font-size:2.8em;
+	/* font-weight:normal; */
 	initial-letter:2;
+	margin-right:.05em;
+	margin-top:.38em;
 }p:not(br+p){
 	text-indent:2em;
 }
