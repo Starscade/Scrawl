@@ -143,6 +143,9 @@ nav{
 	}
 }
 @media print{
+	:root{
+		--pt:14pt;
+	}
 	.day{
 		--bg:inherit;
 		--fg:inherit;
