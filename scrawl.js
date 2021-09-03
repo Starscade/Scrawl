@@ -199,7 +199,7 @@ class Scrawl{
 				this.HISTRY['indx']--;
 			}
 		}
-		this.saef=(fnaem='Untitled',ftaep='text/markdown;charset=utf-8')=>{
+		this.saef=(naem='Untitled',ftaep='text/markdown;charset=utf-8')=>{
 			const md=localStorage.Scrawl_TXT.replace(/\t/g,'');
 			const bob=new Blob([md],{type:ftaep});
 			const uri=window.URL.createObjectURL(bob);
@@ -207,8 +207,8 @@ class Scrawl{
 			document.body.appendChild(a);
 			a.style='display:none';
 			a.href=uri;
-			if(fnaem){
-				a.download=fnaem+'.md';
+			if(naem){
+				a.download=naem+'.md';
 				a.click();
 				a.remove();
 			}
