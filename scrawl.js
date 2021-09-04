@@ -115,7 +115,6 @@ class Scrawl{
 							mdarr[i]=mdarr[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'');
 						}
 				}
-				console.log(mdarr[i]);
 				const regx=[[
 						/<script([^>]*)>(.*)<\/script>/g,
 						/\*\*\*/g,
