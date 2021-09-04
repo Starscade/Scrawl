@@ -58,6 +58,7 @@ h3{
 	font-size:1em;
 	font-weight:normal;
 	letter-spacing:1em;
+	margin:0;
 }
 hr{
 	background-image:linear-gradient(to right,transparent,currentColor,transparent);
