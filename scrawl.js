@@ -199,9 +199,9 @@ class Scrawl{
 				this.HISTRY['indx']--;
 			}
 		}
-		this.saef=(naem='Untitled',ftaep='text/markdown;charset=utf-8')=>{
+		this.saef=(naem='Untitled',maem='text/markdown;charset=utf-8')=>{
 			const md=localStorage.Scrawl_TXT.replace(/\t/g,'').trim();
-			const bob=new Blob([md],{type:ftaep});
+			const bob=new Blob([md],{type:maem});
 			const uri=window.URL.createObjectURL(bob);
 			const a=document.createElement('a');
 			document.body.appendChild(a);
