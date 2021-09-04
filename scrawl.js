@@ -98,7 +98,7 @@ class Scrawl{
 		}
 		this.md2htm=(md=localStorage.Scrawl_TXT)=>{
 			let htm='';
-			const mdarr=md.split(/\n/g,);
+			const mdarr=md.trim().split(/\n/g,);
 			mdarr.forEach((line,i)=>{
 				mdarr[i]=line.trim();
 				switch(mdarr[i][0]){
@@ -115,9 +115,11 @@ class Scrawl{
 							mdarr[i]=mdarr[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'');
 						}
 				}
+				console.log(mdarr[i]);
 				const regx=[[
 						/<script([^>]*)>(.*)<\/script>/g,
-						/^\t+\*\*\* +$/g,
+						/\*\*\*/g,
+						/---/g,
 						/\*\*([^*]*)\*\*/g,
 						/\*([^*]*)\*/g,
 						/_([^_]*)_/g,
@@ -132,6 +134,7 @@ class Scrawl{
 					],[
 						'',
 						'<h3>✶ ✶ ✶</h3>',
+						'<hr>',
 						'<b>$1</b>',
 						'<i>$1</i>',
 						'<u>$1</u>',
