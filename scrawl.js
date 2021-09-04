@@ -164,7 +164,7 @@ class Scrawl{
 		this.pt=(plus=true)=>{
 			const ptsz=Math.round(Number(window.getComputedStyle(this.NOTEPAD,null).getPropertyValue('font-size').split('px')[0])*0.75292857248934);
 			if(plus){
-				if(ptsz<18){
+				if(ptsz<24){
 					this.NOTEPAD.style.fontSize=ptsz+6+'pt';
 				}
 			}else{
@@ -259,7 +259,7 @@ class Scrawl{
 		}
 		this.tally=()=>{
 			let woordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
-			return woordz+' words ('+Math.round(woordz/333)+' pages)';
+			return woordz+' words ('+Math.round(woordz/294)+' pages)';
 		}
 		this.WYSIWYG=()=>{
 			if(this.NOTEPAD.contentEditable=='true'){
