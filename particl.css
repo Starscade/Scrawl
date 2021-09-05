@@ -15,7 +15,7 @@
 	--font:'Font',sans-serif;
 	--rad:calc(var(--pt)/3);
 	--shado:0 0 1rem #00000022;
-	scrollbar-color:currentColor var(--bg);
+	scrollbar-color:var(--fg) var(--bg);
 	scrollbar-width:thin;
 }
 a{
@@ -38,7 +38,6 @@ article{
 	padding:1em;
 	padding-top:2em;
 	text-align:center;
-	white-space:pre-wrap;
 	word-wrap:break-word;
 }article:focus{
 	outline:none;
@@ -79,7 +78,7 @@ p{
 }p:first-of-type::first-letter{
 	float:left;
 	font-size:290%;
-	font-weight:bold;
+	/* font-weight:bold; */
 	/* initial-letter:2; */
 	margin-right:.15em;
 	margin-top:.31em;
