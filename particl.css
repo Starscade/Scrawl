@@ -47,12 +47,12 @@ body{
 	color:var(--fg);
 	font-family:var(--font);
 	font-size:var(--pt);
-	margin:0;
 	text-align:center;
+}body,h1,h3,p{
+	margin:0;
 }
 h1{
 	/* letter-spacing:3pt; */
-	margin:0;
 	/* max-width:80%; */
 	text-transform:uppercase;
 }
@@ -60,7 +60,6 @@ h3{
 	font-size:67%;
 	/* font-weight:normal; */
 	letter-spacing:1.34em;
-	margin:0;
 }
 hr{
 	background-image:linear-gradient(to right,transparent,currentColor,transparent);
@@ -69,12 +68,9 @@ hr{
 }
 p{
 	/* font-kerning:normal; */
-	margin:0;
 	text-align:justify;
-}p:first-of-type::first-line{
-	font-variant:small-caps;
-	/* font-weight:bold; */
-	/* letter-spacing:1pt; */
+}p:not(br+p,p:first-of-type){
+	text-indent:2em;
 }p:first-of-type::first-letter{
 	float:left;
 	font-size:290%;
@@ -86,8 +82,10 @@ p{
 	p:first-of-type::first-letter{
 		margin-top:.19em;
 	}
-}p:not(br+p){
-	text-indent:2em;
+}p:first-of-type::first-line{
+	font-variant:small-caps;
+	/* font-weight:bold; */
+	/* letter-spacing:1pt; */
 }
 @media(orientation:landscape){
 	article{
@@ -98,13 +96,14 @@ p{
 		min-height:11in;
 		padding:1in;
 	}
-	nav{
-		opacity:0;
-	}
 }
 @media print{
 	*{
-		box-shadow:none;
+		box-shadow:none!important;
+	}*:not(article,article *,body,html,main){
+		display:none!important;
+	}*:not(article a){
+		border:none!important;
 	}
 	:root{
 		--bg:White!important;
@@ -113,11 +112,7 @@ p{
 		--shado:transparent!important;
 	}
 	article{
-		border:none;
 		font-size:var(--pt)!important;
-	}
-	nav{
-		display:none!important;
 	}
 }
 @page{

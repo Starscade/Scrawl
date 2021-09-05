@@ -28,7 +28,7 @@
 	background-color:var(--mg);
 }
 :root{
-	/* --font:'HTML'; */
+	--font:'HTML';
 	--pt:18pt;
 }
 article{
@@ -52,7 +52,8 @@ nav{
 	background-color:var(--bg);
 	bottom:0;
 	font-size:36pt;
-	overflow-x:auto;
+	/* overflow-x:auto; */
+	overflow:visible;
 	padding:4pt;
 	position:fixed;
 	transition:opacity .5s;
@@ -70,6 +71,13 @@ nav{
 }nav span.material-icons:not(.cis,.pro):active{
 	background-color:var(--mg);
 	border-radius:var(--rad);
+}
+p:first-of-type::first-line{
+	font-weight:bold;
+}p:first-of-type::first-line{
+	font-weight:bold;
+}p:first-of-type::first-letter{
+	margin-top:.4em;
 }
 .alurt{
 	animation:alurt 3s forwards;
@@ -122,7 +130,10 @@ nav{
 }
 #men-file{
 	border-bottom:8pt solid var(--bg);
+	bottom:1.5em;
 	box-shadow:0 0 var(--pt) #00000044;
+	max-width:5.5em;
+	position:absolute;
 	white-space:normal;
 }
 @media(orientation:landscape){
@@ -131,6 +142,7 @@ nav{
 	}
 	nav{
 		bottom:auto;
+		opacity:0;
 		top:0;
 	}nav span.material-icons:not(.cis,.pro):hover{
 		background-color:var(--mg);
