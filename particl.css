@@ -51,7 +51,7 @@ body{
 	text-align:center;
 }
 h1{
-	letter-spacing:3pt;
+	/* letter-spacing:3pt; */
 	margin:0;
 	/* max-width:80%; */
 	text-transform:uppercase;
@@ -74,7 +74,7 @@ p{
 }p:first-of-type::first-line{
 	font-variant:small-caps;
 	/* font-weight:bold; */
-	letter-spacing:1pt;
+	/* letter-spacing:1pt; */
 }p:first-of-type::first-letter{
 	float:left;
 	font-size:290%;
