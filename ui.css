@@ -72,12 +72,16 @@ nav{
 	background-color:var(--mg);
 	border-radius:var(--rad);
 }
-p:first-of-type::first-line{
+p:first-of-type::first-letter{
+	margin-top:.4em;
+}@-moz-document url-prefix(){
+	p:first-of-type::first-letter{
+		margin-top:.15em;
+	}
+}p:first-of-type::first-line{
 	font-weight:bold;
 }p:first-of-type::first-line{
 	font-weight:bold;
-}p:first-of-type::first-letter{
-	margin-top:.4em;
 }
 .alurt{
 	animation:alurt 3s forwards;
