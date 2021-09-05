@@ -5,13 +5,14 @@
 	background-color:currentColor;
 }
 :root{
+	--ax:DodgerBlue;
 	--bg:#111;
 	--fg:#eca;
-	--hi:DodgerBlue;
+	--hi:currentColor;
 	--mg:#333;
 	--pg:#222;
 	--pt:14pt;
-	--font:'Weak',sans-serif;
+	--font:'Font',sans-serif;
 	--rad:calc(var(--pt)/3);
 	--shado:0 0 1rem #00000022;
 	scrollbar-color:currentColor var(--bg);
@@ -51,7 +52,9 @@ body{
 	text-align:center;
 }
 h1{
-	/* letter-spacing:2pt; */
+	letter-spacing:3pt;
+	margin:0;
+	/* max-width:80%; */
 	text-transform:uppercase;
 }
 h3{
@@ -66,19 +69,24 @@ hr{
 	height:2pt;
 }
 p{
+	/* font-kerning:normal; */
 	margin:0;
 	text-align:justify;
 }p:first-of-type::first-line{
 	font-variant:small-caps;
-	font-weight:bold;
+	/* font-weight:bold; */
 	letter-spacing:1pt;
 }p:first-of-type::first-letter{
 	float:left;
-	font-size:2.8em;
-	/* font-weight:normal; */
-	initial-letter:2;
+	font-size:290%;
+	font-weight:bold;
+	/* initial-letter:2; */
 	margin-right:.15em;
-	margin-top:.38em;
+	margin-top:.31em;
+}@-moz-document url-prefix(){
+	p:first-of-type::first-letter{
+		margin-top:.19em;
+	}
 }p:not(br+p){
 	text-indent:2em;
 }

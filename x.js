@@ -231,8 +231,8 @@ function spelk(){
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		scrawl.spael();
 		if(scrawl.NOTEPAD.getAttribute('spellcheck')=='true'){
-			ui_eng.style.color='var(--hi)';
-			document.getElementById('ui-spell-mobil').style.color='var(--hi)';
+			ui_eng.style.color='var(--ax)';
+			document.getElementById('ui-spell-mobil').style.color='var(--ax)';
 		}else{
 			ui_eng.style.color=ui_get.style.color;
 			document.getElementById('ui-spell-mobil').style.color=ui_get.style.color;

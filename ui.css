@@ -28,7 +28,7 @@
 	background-color:var(--mg);
 }
 :root{
-	--font:'HTML';
+	/* --font:'HTML'; */
 	--pt:18pt;
 }
 article{
