@@ -135,8 +135,9 @@ p:first-of-type::first-letter{
 }
 #men-file{
 	border-bottom:8pt solid var(--bg);
+	border-radius:var(--rad);
 	bottom:1.5em;
-	box-shadow:0 0 var(--pt) #00000044;
+	box-shadow:var(--shado);
 	max-width:5.5em;
 	position:absolute;
 	white-space:normal;
