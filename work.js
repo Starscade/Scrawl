@@ -10,17 +10,12 @@ const CASH={'name':'Scrawl_CASH','cache':[
 self.addEventListener('fetch',e=>{
   e.respondWith(
     const off=await caches.match(e.request);
-    caches.open(CASH['Scrawl_CASH']).then(cash=>{
-      const on=fetch(e.request).then(resp=>{
-        cash.put(e.request,resp.clone());
-        return resp;
-      });
-    });
+    const cash=await caches.open(CASH['Scrawl_CASH']);
+    const on=await fetch(e.request);
+    cash.put(e.request,on.clone());
     if(off){
-      alert(off);
       return off;
     }else{
-      alert(on);
       return on;
     }
   );
