@@ -9,12 +9,12 @@ const CASH={'name':'Scrawl_CASH','cache':[
 ]};
 self.addEventListener('fetch',e=>{
   e.respondWith(
-    const off=await caches.match(e.request);
-    if(off){alert('OFF');}
+    caches.match(e.request)
+    /* if(off){alert('OFF');}
     const cash=await caches.open(CASH['Scrawl_CASH']);
     const on=await fetch(e.request);
     if(on){cash.put(e.request,on.clone());}
-    if(off){return off;}
+    if(off){return off;} */
   );
 });
 self.addEventListener('install',e=>{
