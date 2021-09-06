@@ -8,7 +8,13 @@ const CASH={'name':'Scrawl_CASH','cache':[
   './particl.css'
 ]};
 self.addEventListener('fetch',e=>{
-  e.respondWith(fetch(e.request));
+  e.respondWith(async function(){
+    const cachedResponse = await caches.match(e.request);
+    // Return it if we found one.
+    if (cachedResponse) return cachedResponse;
+    // If we didn't find a match in the cache, use the network.
+    return fetch(e.request);
+  }());
 });
 self.addEventListener('install',e=>{
   console.log('Installed!');
