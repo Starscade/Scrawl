@@ -8,7 +8,7 @@ const CASH={'name':'Scrawl_CASH','cache':[
   './particl.css'
 ]};
 self.addEventListener('fetch',e=>{
-  e.respondWith(return fetch(e.request));
+  e.respondWith(fetch(e.request));
 });
 self.addEventListener('install',e=>{
   console.log('Installed!');
