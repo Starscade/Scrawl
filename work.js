@@ -12,12 +12,8 @@ self.addEventListener('fetch',e=>{
     const off=await caches.match(e.request);
     const cash=await caches.open(CASH['Scrawl_CASH']);
     const on=await fetch(e.request);
-    cash.put(e.request,on.clone());
-    if(off){
-      return off;
-    }else{
-      return on;
-    }
+    if(on){cash.put(e.request,on.clone());}
+    if(off){return off;}
   );
 });
 self.addEventListener('install',e=>{
