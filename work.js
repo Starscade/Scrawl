@@ -16,10 +16,10 @@ self.addEventListener('fetch',e=>{
         return resp;
       });
     });
-    if(on){
-      return on;
-    }else{
+    if(off){
       return off;
+    }else{
+      return on;
     }
   );
 });
