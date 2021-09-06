@@ -9,11 +9,16 @@ const CASH={'name':'Scrawl_CASH','cache':[
 ]};
 self.addEventListener('fetch',e=>{
   console.log(e.request.url);
-  e.respondWith(fetch(e.request).catch(e=>{
-        console.error('Fetching offline resource...',e);
-        return caches.open(CASH['name']).then(cash=>{
-          return cash.match(e.request.url);
-        }););
+  e.respondWith(
+    async function() {
+      // Try to get the response from a cache.
+      const cachedResponse = await caches.match(e.request);
+      // Return it if we found one.
+      if (cachedResponse) return cachedResponse;
+      // If we didn't find a match in the cache, use the network.
+      return fetch(e.request);
+    }()
+  );
 });
 self.addEventListener('install',e=>{
   console.log('Installed!');
