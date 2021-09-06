@@ -9,10 +9,6 @@ const CASH={'name':'Scrawl_CASH','cache':[
 ]};
 self.addEventListener('fetch',e=>{
   e.respondWith(async function(){
-    const cachedResponse = await caches.match(e.request);
-    // Return it if we found one.
-    if (cachedResponse) return cachedResponse;
-    // If we didn't find a match in the cache, use the network.
     return fetch(e.request);
   }());
 });
