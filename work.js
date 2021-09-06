@@ -8,20 +8,14 @@ const CASH={'name':'Scrawl_CASH','cache':[
   './particl.css'
 ]};
 self.addEventListener('fetch',e=>{
-  e.respondWith(
-    caches.match(e.request)
-    /* if(off){alert('OFF');}
-    const cash=await caches.open(CASH['Scrawl_CASH']);
-    const on=await fetch(e.request);
-    if(on){cash.put(e.request,on.clone());}
-    if(off){return off;} */
-  );
+  e.respondWith(caches.match(e.request));
 });
 self.addEventListener('install',e=>{
   console.log('Installed!');
-  e.waitUntil((async ()=>{
-    const cash=await caches.open(CASH['Scrawl_CASH']);
-    await cash.addAll(CASH['cache']);
-    console.log('Cached!');
-  })());
+  e.waitUntil(
+    caches.open(CASH['name']).then(cash=>{
+      cash.addAll(CASH['cache']);
+      console.log('Cached!');
+    })
+  );    
 });
