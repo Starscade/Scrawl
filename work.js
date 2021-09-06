@@ -17,8 +17,10 @@ self.addEventListener('fetch',e=>{
       });
     });
     if(off){
+      alert(off);
       return off;
     }else{
+      alert(on);
       return on;
     }
   );
