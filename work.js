@@ -9,7 +9,11 @@ const CASH={'name':'Scrawl_CASH','cache':[
 ]};
 self.addEventListener('fetch',e=>{
   console.log(e.request.url);
-  e.respondWith(fetch(e.request));
+  e.respondWith(fetch(e.request).catch(e=>{
+        console.error('Fetching offline resource...',e);
+        return caches.open(CASH['name']).then(cash=>{
+          return cash.match(e.request.url);
+        }););
 });
 self.addEventListener('install',e=>{
   console.log('Installed!');
