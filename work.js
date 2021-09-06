@@ -10,11 +10,8 @@ const CASH={'name':'Scrawl_CASH','cache':[
 self.addEventListener('fetch',e=>{
   console.log(e.request);
   e.respondWith(async ()=>{
-    const off=await caches.match(e.request);
-    if(off){return off;}else{
-      const on=await fetch(e.request);
-      return on;
-    }
+    const on=await fetch(e.request);
+    return on;
   });
 });
 self.addEventListener('install',e=>{
