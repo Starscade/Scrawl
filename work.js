@@ -14,8 +14,7 @@ self.addEventListener('install',e=>{
   console.log('Installed!');
   e.waitUntil(
     caches.open(CASH['name']).then(cash=>{
-      cash.addAll(CASH['cache']);
-      console.log('Cached!');
+      return cash.addAll(CASH['cache']);
     })
   );    
 });
