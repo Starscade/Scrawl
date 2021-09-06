@@ -8,8 +8,11 @@ const CASH={'name':'Scrawl_CASH','cache':[
   './particl.css'
 ]};
 self.addEventListener('fetch',e=>{
-  // e.respondWith(caches.match(e.request));
-  e.respondWith('https://starsca.de/+/css/particl.css');
+  e.respondWith(
+    caches.open(CASH['name']).then(cash=>{
+      return cash.match(e.request);
+    })
+  );
 });
 self.addEventListener('install',e=>{
   console.log('Installed!');
