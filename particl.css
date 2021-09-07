@@ -114,6 +114,8 @@ p{
 	}
 	article{
 		font-size:var(--pt)!important;
+		/* margin:0!important; */
+		/* padding:0!important; */
 	}
 }
 @page{
