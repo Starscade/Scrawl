@@ -7,11 +7,8 @@ const CASH={'name':'Scrawl_CASH','cache':[
 	'./ui.css',
 	'./particl.css'
 ]};
-self.addEventListener('activate',e=>{
-	console.log('Active!');
-});
 self.addEventListener('fetch',e=>{
-	console.log(e.request);
+	// console.log(e.request);
 	e.respondWith(
 		(async ()=>{
 			const off=await caches.match(e.request);
@@ -24,7 +21,7 @@ self.addEventListener('fetch',e=>{
 	);
 });
 self.addEventListener('install',e=>{
-	console.log('Installed!');
+	console.log('Appdated!');
 	e.waitUntil(
 		caches.open(CASH['name']).then(cash=>{
 			return cash.addAll(CASH['cache']);
