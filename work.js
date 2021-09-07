@@ -1,23 +1,26 @@
 'use strict';
 const CASH={'name':'Scrawl_CASH','cache':[
-	'/index.htm',
-	'/ico.png',
-	'/x.js',
-	'/scrawl.js',
-	'/ui.css',
-	'/particl.css'
+	'./',
+	'./ico.png',
+	'./x.js',
+	'./scrawl.js',
+	'./ui.css',
+	'./particl.css'
 ]};
+self.addEventListener('activate',e=>{
+	console.log('Active!');
+});
 self.addEventListener('fetch',e=>{
-	console.log(e.request.url);
+	console.log(e.request);
 	e.respondWith(
-		async function() {
-			// Try to get the response from a cache.
-			const cachedResponse = await caches.match(e.request);
-			// Return it if we found one.
-			if (cachedResponse) return cachedResponse;
-			// If we didn't find a match in the cache, use the network.
-			return fetch(e.request);
-		}()
+		(async ()=>{
+			const off=await caches.match(e.request);
+			if(off)return off;
+			const resp=await fetch(e.request);
+			const cash=await caches.open(CASH['name']);
+			cash.put(e.request,resp.clone());
+			return resp;
+		})()
 	);
 });
 self.addEventListener('install',e=>{

@@ -401,5 +401,5 @@ naem();
 document.body.style.opacity='1';
 if('serviceWorker'in navigator){
 	navigator.serviceWorker.register('./work.js');
-	console.log('Registered!');
+	console.log('Employed!');
 };
