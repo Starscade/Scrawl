@@ -1,14 +1,14 @@
 'use strict';
 const CASH={'name':'Scrawl_CASH','cache':[
-	'./',
-	'./ico.png',
-	'./x.js',
-	'./scrawl.js',
-	'./ui.css',
-	'./particl.css',
 	'https://fonts.googleapis.com/icon?family=Material+Icons',
 	'https://fonts.gstatic.com/s/kalam/v11/YA9dr0Wd4kDdMthROCc.woff2',
-	'https://fonts.gstatic.com/s/josefinsans/v17/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2'
+	'https://fonts.gstatic.com/s/josefinsans/v17/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2',
+	'./ico.png',
+	'./scrawl.js',
+	'./x.js',
+	'./particl.css',
+	'./ui.css',
+	'./'
 ]};
 self.addEventListener('fetch',e=>{
 	// console.log(e.request);
