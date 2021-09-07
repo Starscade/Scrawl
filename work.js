@@ -3,10 +3,10 @@ const CASH={'name':'Scrawl_CASH','cache':[
 	'https://fonts.googleapis.com/icon?family=Material+Icons',
 	'https://fonts.gstatic.com/s/kalam/v11/YA9dr0Wd4kDdMthROCc.woff2',
 	'https://fonts.gstatic.com/s/josefinsans/v17/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2',
-	'./scrawl.js',
-	'./x.js',
 	'./particl.css',
 	'./ui.css',
+	'./scrawl.js',
+	'./x.js',
 	'./ico.png',
 	'./'
 ]};
