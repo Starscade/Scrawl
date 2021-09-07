@@ -134,13 +134,13 @@ p:first-of-type::first-letter{
 	white-space:pre-wrap;
 }
 #men-file{
-	border-bottom:8pt solid var(--bg);
+	border:var(--bord);
 	border-radius:var(--rad);
 	bottom:1.5em;
 	box-shadow:var(--shado);
-	max-width:5.5em;
 	position:absolute;
 	white-space:normal;
+	width:5em;
 }
 @media(orientation:landscape){
 	article{

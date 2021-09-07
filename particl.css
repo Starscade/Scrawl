@@ -13,6 +13,7 @@
 	--pg:#222;
 	--pt:14pt;
 	--font:'Font',sans-serif;
+	--bord:2pt solid;
 	--rad:calc(var(--pt)/3);
 	--shado:0 0 1rem #00000022;
 	scrollbar-color:var(--fg) var(--bg);
