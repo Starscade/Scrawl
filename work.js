@@ -12,10 +12,14 @@ self.addEventListener('fetch',e=>{
 	e.respondWith(
 		(async ()=>{
 			const off=await caches.match(e.request);
-			const on=await fetch(e.request);
-			const cash=await caches.open(CASH['name']);
-			cash.put(e.request,on.clone());
-			if(off)return off;
+			try{
+				const on=await fetch(e.request);
+				const cash=await caches.open(CASH['name']);
+				cash.put(e.request,on.clone());
+			}catch(err){
+				console.log(err);
+			}
+			return off;
 		})()
 	);
 });
