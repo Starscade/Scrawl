@@ -398,7 +398,6 @@ document.getElementById('ui-spell-mobil').classList.add('cis');
 ui_get.classList.add('cis');
 document.getElementById('ui-find-mobil').classList.add('cis');
 naem();
-spelk();
 document.body.style.opacity='1';
 if('serviceWorker'in navigator){
 	navigator.serviceWorker.register('./work.js');
