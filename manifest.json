@@ -11,6 +11,6 @@
 	],
 	"start_url":"https://scrawl.cc/",
 	"display":"fullscreen",
-	"theme_color":"#eca",
-	"background_color":"#eca"
+	"theme_color":"#111",
+	"background_color":"#111"
 }
