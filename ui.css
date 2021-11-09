@@ -1,11 +1,11 @@
 @import url('partic1.css');
 @font-face{
 	font-family:'HTML';
-	src:url('/-/josefin.woff2');
+	src:url('josefin.woff2');
 }
 @font-face{
 	font-family:'Material Icons';
-	src:url('/-/matico.woff2');
+	src:url('matico.woff2');
 }
 ::-webkit-scrollbar-thumb,::selection{
 	background-color:var(--mg);
