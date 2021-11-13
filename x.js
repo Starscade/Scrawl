@@ -88,43 +88,6 @@ function duunlob(data,naem='Untitled',taep='text/plain'){
 	a.click();
 	window.URL.revokeObjectURL(uri);
 }
-function gurl(query_obj,acturl='./act/',albak=(resp)=>{alurt(resp)},via_post=false){
-	const Formbody=new FormData();
-	const keys=Object.keys(query_obj);
-	let urlargs='?';
-	for(const k in keys){
-		let key=keys[k];
-		if(via_post){
-			Formbody.append(key,query_obj[key]);
-		}else{
-			urlargs+=key+'='+query_obj[key]+'&';
-		}
-	}
-	if(via_post===true){
-		fetch(acturl,{
-			method:'POST',
-			body:Formbody
-		}).then(
-			resp=>resp.text()
-		).then(
-			resp=>{
-				albak(resp)
-			}
-		)
-	}else{
-		const nurl=acturl+urlargs;
-		console.log('Gurling: '+nurl);
-		fetch(nurl,{
-			method:'GET'
-		}).then(
-			resp=>resp.text()
-		).then(
-			resp=>{
-				albak(resp)
-			}
-		)
-	}
-}
 function lokc(){
 	const bookmark=document.body.parentElement.scrollTop;
 	if(scrawl.NOTEPAD.contentEditable=='true'){
@@ -166,7 +129,7 @@ function naew(){
 	config('haed',SCRoPS['haed']);
 	location.reload();
 }
-function notif(msg=''){
+/* function notif(msg=''){
 	h='S c r a w l';
 	ico='./ico.png';
 	if(!window.Notification){
@@ -187,7 +150,7 @@ function notif(msg=''){
 			});
 		}
 	}
-}
+} */
 function ok(albak,argz,msg='Unsaved changes will be lost!'){
 	const ok=confirm(msg);
 	if(ok){
@@ -213,11 +176,21 @@ function prln(){
 	window.print();
 }
 function saen(){
-	let issu=window.prompt('Issu.Yaer.Monf.Naem',config('issu'));
+	let issu=window.prompt('POST . . .',config('issu'));
 	if(issu){
 		config('issu',issu);
-		gurl({'act':'scrapb','naem':issu,'txt':scrawl.md2htm()},'/-/',alurt,true);
-		gurl({'act':'scrap','naem':issu,'txt':scrawl.md2htm()},'/x/act/phett.php',notif,true);
+		const Formbody=new FormData();
+		Formbody.append(0,new Blob([scrawl.md2htm()]),issu);
+		fetch(config('apiurl'),{
+			method:'POST',
+			body:Formbody
+		}).then(
+			resp=>resp.text()
+		).then(
+			resp=>{
+				alurt(resp)
+			}
+		)
 	}
 }
 function saerk(){

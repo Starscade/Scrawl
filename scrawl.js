@@ -1,6 +1,6 @@
 'use strict';
 class Scrawl{
-	constructor(notepad=document.getElementsByTagName('article')[0],promp='<p></p><p>Once upon a time . . .</p>',spellcheck='false'){
+	constructor(notepad=document.getElementsByTagName('article')[0],promp='<h1>Once upon a time . . .</h1>',spellcheck='false'){
 		this.NOTEPAD=notepad;
 		this.NOTEPAD.contentEditable='false';
 		this.NOTEPAD.setAttribute('spellcheck',spellcheck);

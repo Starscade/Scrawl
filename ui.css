@@ -1,6 +1,6 @@
 @import url('partic1.css');
 @font-face{
-	font-family:'HTML';
+	font-family:'Font';
 	src:url('josefin.woff2');
 }
 @font-face{
@@ -11,7 +11,6 @@
 	background-color:var(--mg);
 }
 :root{
-	--font:'HTML';
 	--pt:18pt;
 	cursor:cell;
 }
@@ -84,6 +83,9 @@ p:first-of-type::first-letter{
 	--mg:#bbb;
 	--pg:#eee;
 }
+.lan,#ui-exit{
+	display:none;
+}
 .material-icons{
 	direction:ltr;
 	display:inline-block;
@@ -110,6 +112,8 @@ p:first-of-type::first-letter{
 }
 @media(orientation:landscape){
 	article{
+		background-color:var(--pg);
+		border:1pt solid transparent;
 		margin-bottom:20vh;
 	}
 	nav{
@@ -120,11 +124,14 @@ p:first-of-type::first-letter{
 		background-color:var(--mg);
 		border-radius:var(--rad);
 	}
-	#ui-full{
+	.lan,#ui-exit{
 		display:inline;
 	}
 	.mobi{
 		display:none;
+	}
+	#ui-full{
+		display:inline;
 	}
 }
 @media print{

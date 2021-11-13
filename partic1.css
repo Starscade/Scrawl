@@ -1,7 +1,41 @@
-@import url('u2.css');
+@keyframes faed{
+	from{
+		opacity:0;
+	}to{
+		opacity:1;
+	}
+}
+::-webkit-scrollbar{
+	height:var(--rad);
+	width:var(--rad);
+}::-webkit-scrollbar-thumb{
+	background-color:currentColor;
+}
+::selection{
+	background-color:var(--hi);
+}
+:root{
+	--ax:DodgerBlue;
+	--bad:Firebrick;
+	--bg:#111;
+	--fg:#eca;
+	--hi:currentColor;
+	--mg:#333;
+	--pg:#222;
+	--pt:14pt;
+	--font:'Font',sans-serif;
+	--bord:var(--thicc) solid;
+	--rad:calc(var(--pt)/3);
+	--shado:0 0 1rem #00000022;
+	--thicc:2pt;
+	cursor:cell;
+	scroll-behavior:smooth;
+	scrollbar-color:var(--fg)var(--bg);
+	scrollbar-width:thin;
+	text-align:center;
+	user-select:none;
+}
 article{
-	background-color:var(--pg);
-	border:1pt solid transparent;
 	box-shadow:var(--shado);
 	/* hyphens:auto; */
 	line-height:150%;
@@ -14,6 +48,14 @@ article{
 	padding-top:2em;
 	/* word-break:break-all; */
 	word-wrap:break-word;
+}
+body{
+	animation:faed 1s forwards;
+	background-color:var(--bg);
+	color:var(--fg);
+	font-family:var(--font);
+	font-size:var(--pt);
+	margin:0;
 }
 h1{
 	letter-spacing:3pt;
