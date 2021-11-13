@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const SCRoPS={'Δ':0,'dark':false,'haed':'Untitled','apiurl':'./act.php','issu':'-1.0.13.X'};
+const SCRoPS={'Δ':0,'dark':false,'haed':'Untitled','post_url':'http://localhost/act.php','post':'-1.0.13.X'};
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
 const ui_sav=document.getElementById('ui-save');
@@ -19,6 +19,7 @@ const ui_see=document.getElementById('ui-see');
 const ui_day=document.getElementById('ui-dark');
 const ui_go=document.getElementById('ui-send');
 const ui_cfg=document.getElementById('ui-config');
+const ui_wut=document.getElementById('ui-help');
 const ui_out=document.getElementById('ui-exit');
 function alurt(msg='OK!'){
 	const moda=document.createElement('div');
@@ -176,12 +177,12 @@ function prln(){
 	window.print();
 }
 function saen(){
-	let issu=window.prompt('POST . . .',config('issu'));
-	if(issu){
-		config('issu',issu);
+	let post=window.prompt('POST . . .',config('post'));
+	if(post){
+		config('post',post);
 		const Formbody=new FormData();
-		Formbody.append(0,new Blob([scrawl.md2htm()]),issu);
-		fetch(config('apiurl'),{
+		Formbody.append(0,new Blob([scrawl.md2htm()]),post);
+		fetch(config('post_url'),{
 			method:'POST',
 			body:Formbody
 		}).then(
@@ -351,12 +352,15 @@ ui_go.onclick=()=>{
 ui_cfg.onclick=()=>{
 	const w=window.prompt('Config . . .',localStorage.Scrawl_CFG);
 	if(w){
-		if(w===null){
+		if(w===' '||w==='{}'){
 			localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
 		}else{
 			localStorage.Scrawl_CFG=w;
 		}
 	}
+}
+ui_wut.onclick=()=>{
+	window.open('https://github.com/Starscade/Scrawl#readme');
 }
 ui_out.onclick=()=>{
 	ok(window.close);

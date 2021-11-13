@@ -296,7 +296,8 @@ class Scrawl{
 			}
 		}
 		this.tally=()=>{
-			let woordz=this.NOTEPAD.textContent.split(/\S+/).length-1;
+			const txt=this.md2htm();
+			const woordz=txt.split(/ +/).length-1;
 			return woordz+' spaces';
 		}
 		this.WYSIWYG=()=>{
