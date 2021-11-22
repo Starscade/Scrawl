@@ -7,8 +7,12 @@
 	font-family:'Material Icons';
 	src:url('matico.woff2');
 }
-::-webkit-scrollbar-thumb,::selection{
-	background-color:var(--mg);
+::-webkit-scrollbar-thumb{
+	background-color:var(--pg);
+}
+::selection{
+	background-color:var(--fg);
+	color:var(--pg);
 }
 :root{
 	--pt:18pt;
@@ -113,7 +117,7 @@ p:first-of-type::first-letter{
 @media(orientation:landscape){
 	article{
 		background-color:var(--pg);
-		border:1pt solid transparent;
+		border:2pt solid var(--mg);
 		margin-bottom:20vh;
 	}
 	nav{
@@ -130,8 +134,10 @@ p:first-of-type::first-letter{
 	.mobi{
 		display:none;
 	}
-	#ui-full{
-		display:inline;
+}
+@media(display-mode:browser){
+	#ui-exit{
+		display:none;
 	}
 }
 @media print{

@@ -1,6 +1,6 @@
 'use strict';
 const scrawl=new Scrawl();
-const SCRoPS={'Δ':0,'dark':false,'haed':'Untitled','post_url':'http://localhost/act.php','post':'-1.0.13.X'};
+const SCRoPS={'Δ':0,'dark':false,'haed':'Untitled','post_url':'http://localhost/act.php','post_override_name':'-1.0.13.X'};
 const ui_new=document.getElementById('ui-new');
 const ui_opn=document.getElementById('ui-open');
 const ui_sav=document.getElementById('ui-save');
@@ -37,7 +37,7 @@ function alurt(msg='OK!'){
 	moda.style.transition='opacity 1s';
 	moda.style.userSelect='none';
 	moda.style.zIndex='1';
-	moda.textContent=msg;
+	moda.innerHTML=msg;
 	console.log('Alurt: '+msg);
 	document.body.appendChild(moda);
 	moda.onclick=()=>{
@@ -90,7 +90,7 @@ function duunlob(data,naem='Untitled',taep='text/plain'){
 	window.URL.revokeObjectURL(uri);
 }
 function lokc(){
-	const bookmark=document.body.parentElement.scrollTop;
+	const bookmark=window.scrollY;
 	if(scrawl.NOTEPAD.contentEditable=='true'){
 		scrawl.NOTEPAD.classList.remove('ugly');
 		ui_un.classList.add('cis');
@@ -177,9 +177,12 @@ function prln(){
 	window.print();
 }
 function saen(){
-	let post=window.prompt('POST . . .',config('post'));
+	let post=window.prompt('POST . . .',config('post_override_name'));
 	if(post){
-		config('post',post);
+		if(scrawl.NOTEPAD.contentEditable=='true'){
+			lokc();
+		}
+		config('post_override_name',post);
 		const Formbody=new FormData();
 		Formbody.append(0,new Blob([scrawl.md2htm()]),post);
 		fetch(config('post_url'),{
