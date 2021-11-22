@@ -322,9 +322,9 @@ class Scrawl{
 				} */
 				this.NOTEPAD.innerHTML=this.md2htm(this.autypo());
 				this.NOTEPAD.blur();
-				if(window.scrollY>document.documentElement.scrollHeight){
+				/* if(window.scrollY>document.documentElement.scrollHeight){
 					window.scrollTo(0,document.documentElement.scrollHeight-1);
-				}
+				} */
 			}else{
 				this.laed();
 				this.NOTEPAD.contentEditable='true';
