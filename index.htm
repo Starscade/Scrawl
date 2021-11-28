@@ -67,10 +67,10 @@
 				color:var(--fg);
 				font-family:var(--font);
 				font-size:var(--pt);
+				opacity:0;
 			}body,h1,h3,p{
 				margin:0;
 			}body,nav{
-				opacity:0;
 				transition:opacity .5s;
 			}
 			h1{
@@ -102,11 +102,11 @@
 			}
 			nav{
 				background-color:var(--bg);
+				bottom:0;
 				box-shadow:0 1em 1em var(--bg);
 				overflow-x:auto;
 				padding-top:.5em;
 				position:fixed;
-				top:0;
 				width:100%;
 			}nav:hover{
 				opacity:1;
@@ -148,6 +148,12 @@
 			}
 			.notouch{
 				opacity:.33;
+			}
+			@media (orientation:landscape){
+				nav{
+					opacity:0;
+					top:0;
+				}
 			}
 			@media print{
 				:root{
@@ -200,7 +206,7 @@
 			</nav>
 			<article>	# </article>
 		</main>
-		<script src="scrawl.js"></script>
+		<script src="skrolt.js"></script>
 		<script>
 			'use strict';
 			const SCRoPS={'Δ':0,'dark':false,'url':'/+/?act=scrapb','issu':'-1.0.13.X','max_cache':1048576};
