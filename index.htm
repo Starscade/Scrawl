@@ -53,7 +53,7 @@
 				border-radius:var(--rad);
 				cursor:text;
 				line-height:150%;
-				margin:10vh auto 10vh auto;
+				margin:auto auto 1em auto;
 				max-width:7.5in;
 				min-height:80vh;
 				padding:1in;
@@ -103,10 +103,11 @@
 			nav{
 				background-color:var(--bg);
 				bottom:0;
-				box-shadow:0 1em 1em var(--bg);
+				box-shadow:0 -1em 1em var(--bg);
 				overflow-x:auto;
 				padding-top:.5em;
 				position:fixed;
+				white-space:nowrap;
 				width:100%;
 			}nav:hover{
 				opacity:1;
@@ -150,8 +151,12 @@
 				opacity:.33;
 			}
 			@media (orientation:landscape){
+				article{
+					margin-top:10vh;
+				}
 				nav{
 					bottom:auto;
+					box-shadow:0 1em 1em var(--bg);
 					opacity:0;
 					top:0;
 				}
@@ -207,7 +212,7 @@
 			</nav>
 			<article>	# </article>
 		</main>
-		<script src="scrawl.js"></script>
+		<script src="skrolt.js"></script>
 		<script>
 			'use strict';
 			const SCRoPS={'Δ':0,'dark':false,'url':'/+/?act=scrapb','issu':'-1.0.13.X','max_cache':1048576};
@@ -366,8 +371,9 @@
 			}
 			scrawl.NOTEPAD.addEventListener('click',()=>{
 				if(scrawl.NOTEPAD.contentEditable=='false'){
-					navigator.clipboard.writeText(scrawl.x2m());
-					alurt('Copied to clipboard . . . (HTML)');
+					// navigator.clipboard.writeText(scrawl.x2m());
+					// alurt('Copied to clipboard . . . (HTML)');
+					alurt("Cannot edit while locked!");
 				}
 			});
 			scrawl.NOTEPAD.addEventListener('contextmenu',()=>{
