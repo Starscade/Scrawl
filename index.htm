@@ -1,50 +1,400 @@
 <!DOCTYPE html>
-<html lang="en"oncontextmenu="return false">
+<html lang="en"class="day"oncontextmenu="return false">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
 		<meta name="apple-mobile-web-app-capable"content="yes">
 		<meta name="mobile-web-app-capable"content="yes">
 		<meta name="theme-color"content="#111111">
-		<!-- <link rel="manifest"href="manifest.json"> -->
 		<link rel="apple-touch-icon"href="ico.png">
 		<link rel="icon"href="ico.png"type="image/png"sizes="192x192">
-		<link rel="stylesheet"href="ui.css">
 		<title>S c r a w l</title>
+		<style>
+			@font-face{
+				font-family:'Font';
+				src:url('https://fonts.gstatic.com/s/josefinsans/v20/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2');
+			}
+			::-webkit-scrollbar{
+				height:var(--rad)*2;
+				width:var(--rad)*2;
+			}::-webkit-scrollbar-thumb{
+				background-color:var(--pg);
+				border-radius:var(--rad);
+				border:var(--bord)var(--mg);
+			}
+			::selection{
+				background-color:var(--fg);
+				color:var(--bg);
+			}
+			:root{
+				--bg:#111;
+				--fg:#eca;
+				--hi:currentColor;
+				--mg:#333;
+				--no:Firebrick;
+				--ok:DodgerBlue;
+				--pg:#222;
+				--pt:18pt;
+				--font:'Font',sans-serif;
+				--bord:var(--thicc) solid;
+				--rad:calc(var(--pt)/3);
+				--shado:0 0 1rem #00000022;
+				--thicc:2pt;
+				cursor:cell;
+				scroll-behavior:smooth;
+				scrollbar-color:var(--pg)var(--bg);
+				scrollbar-width:thin;
+				text-align:center;
+				user-select:none;
+			}
+			article{
+				background-color:var(--pg);
+				border:var(--bord);
+				border-radius:var(--rad);
+				cursor:text;
+				line-height:150%;
+				margin:10vh auto 10vh auto;
+				max-width:7.5in;
+				min-height:80vh;
+				padding:1in;
+				text-align:left;
+				white-space:pre-wrap;
+			}article:focus{
+				outline:none;
+			}
+			body{
+				background-color:var(--bg);
+				color:var(--fg);
+				font-family:var(--font);
+				font-size:var(--pt);
+			}body,h1,h3,p{
+				margin:0;
+			}body,nav{
+				opacity:0;
+				transition:opacity .5s;
+			}
+			h1{
+				letter-spacing:3pt;
+				text-transform:uppercase;
+			}h1,h3{
+				text-align:center;
+			}
+			h3{
+				font-size:67%;
+				letter-spacing:1.34em;
+			}
+			hr{
+				background-image:linear-gradient(to right,transparent,currentColor,transparent);
+				border:none;
+				height:2pt;
+			}
+			p:not(br+p,p:first-of-type){
+				text-indent:2em;
+			}p:first-of-type::first-letter{
+				float:left;
+				font-size:270%;
+				margin-right:.1em;
+				margin-top:.38em;
+			}p:first-of-type::first-line{
+				font-variant:small-caps;
+				font-weight:bold;
+				letter-spacing:2pt;
+			}
+			nav{
+				background-color:var(--bg);
+				box-shadow:0 1em 1em var(--bg);
+				overflow-x:auto;
+				padding-top:.5em;
+				position:fixed;
+				top:0;
+				width:100%;
+			}nav:hover{
+				opacity:1;
+			}nav span{
+				display:inline-block;
+				height:24px;
+				padding:.5em;
+				width:24px;
+			}nav span:not(.notouch){
+				cursor:pointer;
+			}nav span:not(.notouch):hover{
+				background-color:var(--fg);
+				border-radius:var(--rad);
+				color:var(--bg);
+			}nav span:last-of-type{
+				color:var(--no);
+			}
+			svg{
+				fill:currentColor;
+				height:24px;
+				width:24px;
+			}
+			.blu{
+				color:var(--ok);
+			}
+			.day{
+				--bg:#ddd;
+				--fg:#667;
+				--mg:#bbb;
+				--pg:#eee;
+			}
+			.hid{
+				display:none;
+			}
+			.locked{
+				border-color:var(--mg);
+				cursor:not-allowed;
+				text-align:justify;
+			}
+			.notouch{
+				opacity:.33;
+			}
+			@media print{
+				:root{
+					--bg:White;
+					--fg:Black;
+					--mg:transparent;
+					--pg:transparent;
+				}
+				article{
+					margin:0;
+					padding:0;
+				}
+				nav{
+					display:none;
+				}
+			}
+			@page{
+				margin:1in;
+			}
+		</style>
 	</head>
 	<body>
 		<main>
 			<nav>
-				<span id="ui-new"class="material-icons"title="New">insert_drive_file</span>
-				<span id="ui-open"class="material-icons"title="Open">folder</span>
-				<span id="ui-save"class="material-icons"title="Save">save</span>
-				<span id="ui-print"class="material-icons"title="Print">print</span>
-				<span class="material-icons cis">more_vert</span>
-				<span id="ui-undo"class="material-icons cis mobi"title="Undo">undo</span>
-				<span id="ui-redo"class="material-icons cis mobi"title="Redo">redo</span>
-				<span class="material-icons cis mobi">more_vert</span>
-				<!-- <span id="ui-bold"class="material-icons rm"title="Bold">format_bold</span>
-				<span id="ui-italic"class="material-icons rm"title="Italic">format_italic</span>
-				<span id="ui-underline"class="material-icons rm"title="Underline">format_underline</span>
-				<span id="ui-strike"class="material-icons rm"title="Strikethrough">strikethrough_s</span>
-				<span class="material-icons cis rm">more_vert</span> -->
-				<span id="ui-spell"class="material-icons"title="Auto Proof">spellcheck</span>
-				<span id="ui-words"class="material-icons"title="Word Count">pin</span>
-				<span id="ui-find"class="material-icons"title="Search & Replace">search</span>
-				<span class="material-icons cis">more_vert</span>
-				<!-- <span id="ui-bbc"class="material-icons rm"title="HTML 2 BBC">code</span>
-				<span class="material-icons cis mobi rm">more_vert</span> -->
-				<span id="ui-see"class="material-icons"title="Read / Write">lock</span>
-				<span id="ui-dark"class="material-icons"title="Dark Mode">brightness_4</span>
-				<span id="ui-send"class="material-icons"title="Send to External API">send</span>
-				<span class="material-icons cis">more_vert</span>
-				<span id="ui-config"class="material-icons"title="Configure">settings</span>
-				<span id="ui-help"class="material-icons"title="About">live_help</span>
-				<span id="ui-exit"class="material-icons lan"title="Exit">cancel</span>
+				<span title="New"onclick="rush(naeu)"><svg><path d="M12 2v6a2 2 0 0 0 2 2h6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6Z M13.5 2.5V8a.5.5 0 0 0 .5.5h5.5l-6-6Z"/></svg></span>
+				<span title="Open"onclick="opaen()"><svg><path d="M13.821 6.5h5.929a2.25 2.25 0 0 1 2.229 1.938l.016.158.005.154v9a2.25 2.25 0 0 1-2.096 2.245L19.75 20H4.25a2.25 2.25 0 0 1-2.245-2.096L2 17.75v-7.251l6.207.001.196-.009a2.25 2.25 0 0 0 1.088-.393l.156-.12L13.821 6.5Z M8.207 4c.46 0 .908.141 1.284.402l.156.12 2.103 1.751-3.063 2.553-.085.061a.75.75 0 0 1-.29.106L8.206 9 2 8.999V6.25a2.25 2.25 0 0 1 2.096-2.245L4.25 4h3.957Z"/></svg></span>
+				<span title="Save"onclick="saef()"><svg><path d="M6.75 3h-1A2.75 2.75 0 0 0 3 5.75v12.5A2.75 2.75 0 0 0 5.75 21H6v-6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 15v6h.25A2.75 2.75 0 0 0 21 18.25V8.286a3.25 3.25 0 0 0-.952-2.299l-2.035-2.035A3.25 3.25 0 0 0 15.75 3v4.5a2.25 2.25 0 0 1-2.25 2.25H9A2.25 2.25 0 0 1 6.75 7.5V3Z M14.25 3v4.5a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75V3h6ZM16.5 21v-6a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0-.75.75v6h9Z"/></svg></span>
+				<span title="Print"onclick="window.print()"><svg><path d="M18 17.5v1.25A2.25 2.25 0 0 1 15.75 21h-7.5A2.25 2.25 0 0 1 6 18.75v-1.251l-1.75.001A2.25 2.25 0 0 1 2 15.25V9.254a3.25 3.25 0 0 1 3.25-3.25l.749-.001L6 5.25A2.25 2.25 0 0 1 8.25 3h7.502a2.25 2.25 0 0 1 2.25 2.25v.753h.75a3.254 3.254 0 0 1 3.252 3.25l.003 5.997a2.249 2.249 0 0 1-2.248 2.25H18Zm-2.25-4h-7.5a.75.75 0 0 0-.75.75v4.5c0 .414.336.75.75.75h7.5a.75.75 0 0 0 .75-.75v-4.5a.75.75 0 0 0-.75-.75Zm.002-9H8.25a.75.75 0 0 0-.75.75l-.001.753h9.003V5.25a.75.75 0 0 0-.75-.75Z"/></svg></span>
+				<span class="notouch"><svg><path d="M11 5v14a1 1 0 1 0 2 0V5a1 1 0 1 0-2 0Z"/></svg></span>
+				<!-- <span title="Undo">undo</span>
+				<span title="Redo">redo</span>
+				<span class="notouch">more_vert</span>
+				<span title="Bold"onclick="scrawl.biu('**')">format_bold</span>
+				<span title="Italic"onclick="scrawl.biu()">format_italic</span>
+				<span title="Underline"onclick="scrawl.biu('_')">format_underline</span>
+				<span title="Strikethrough"onclick="scrawl.biu('~')">strikethrough_s</span>
+				<span class="notouch">more_vert</span> -->
+				<span id="ui-shex"title="Auto Proof"onclick="shex()"><svg><path d="M10.961 3c.31.005.586.2.693.492l3.581 9.766-1.163 1.184-.468-1.275H7.998L6.7 16.52a.75.75 0 0 1-1.4-.542l1.484-3.833.003-.008 3.467-8.667a.75.75 0 0 1 .707-.47Zm-.041 2.846-2.329 5.82h4.463l-2.134-5.82Z"/><path d="m20.306 12.557-.129-.106-.003-.002a2.263 2.263 0 0 0-2.951.212l-3.803 3.87c-.236.239-.408.529-.503.845l-.587 1.952a5.044 5.044 0 0 1-1.604-.007.037.037 0 0 1-.028-.051l.037-.08c.066-.137.18-.381.218-.632.02-.14.027-.334-.049-.54a1.002 1.002 0 0 0-.422-.512c-.324-.2-.727-.215-1.073-.195a7.936 7.936 0 0 0-1.031.144c-.462.09-.901.297-1.339.503-.576.272-1.15.542-1.771.542-.223 0-.437-.036-.638-.104-.123-.041-.258.059-.227.185.057.228.162.537.392.775a1.08 1.08 0 0 0 1.106.283c1.454-.426 2.42-.658 3.048-.763.132-.022.23.11.19.238-.063.2-.153.578.034.96.202.416.6.59.944.66 1.143.236 2.13.205 3.336-.112a1.08 1.08 0 0 0 .157-.038l.117-.037c.171-.05.347-.105.529-.166a.752.752 0 0 0 .08-.031l1.387-.449c.338-.11.643-.296.887-.545l3.795-3.86c.786-.801.783-2.035.018-2.826l-.117-.113Z"/></svg></span>
+				<span title="Word Count"onclick="alurt(scrawl.tally())"><svg><path d="M2 6a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 12a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1Zm16 6a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM14.035 17.128a.501.501 0 0 0-.132.224 1 1 0 1 1-1.93-.522 2.5 2.5 0 0 1 .7-1.167c.43-.4 1.032-.663 1.796-.663C16.08 15 17 16.25 17 17.364c0 .383-.066 1.016-.466 1.584.032.04.062.082.092.125.248.368.374.806.374 1.29 0 .833-.268 1.54-.813 2.026-.524.466-1.172.611-1.718.611-.491 0-1.032-.086-1.513-.407-.494-.33-.797-.823-.973-1.386a1 1 0 0 1 1.91-.596c.079.255.158.308.174.319.03.02.127.07.402.07.22 0 .337-.06.388-.105.028-.025.143-.136.143-.531 0-.126-.028-.166-.031-.171-.007-.01-.03-.04-.103-.075-.172-.085-.433-.118-.652-.118a1 1 0 1 1 0-2c.28 0 .443-.047.532-.086a.347.347 0 0 0 .147-.109c.064-.085.107-.239.107-.441a.355.355 0 0 0-.104-.215c-.064-.066-.185-.149-.427-.149-.276 0-.386.083-.434.128ZM7.813 17.636c0-.159.065-.335.18-.465A.446.446 0 0 1 8.33 17c.23 0 .402.113.481.24.057.093.14.316-.089.728-.105.189-.27.37-.522.58a9.875 9.875 0 0 1-.416.323l-.064.047c-.133.099-.28.209-.423.322-.685.544-1.485 1.346-1.485 2.76a1 1 0 0 0 1 1H9.832a1 1 0 1 0 0-2H8.31a4.69 4.69 0 0 1 .23-.194c.117-.092.236-.18.37-.28l.07-.052c.156-.117.33-.248.5-.39.342-.285.715-.65.99-1.143.53-.952.533-1.956.043-2.75C10.047 15.433 9.206 15 8.331 15c-1.554 0-2.518 1.393-2.518 2.636a1 1 0 0 0 2 0ZM2.552 19.016a1 1 0 0 1-1.127-1.652c.61-.43 1.053-1.114 1.147-1.567a1 1 0 0 1 1.98.203v6a1 1 0 1 1-2 0v-2.984Z"/></svg></span>
+				<span title="Search & Replace"><svg><path d="M10 2.5a7.5 7.5 0 0 1 5.964 12.048l4.743 4.745a1 1 0 0 1-1.32 1.497l-.094-.083-4.745-4.743A7.5 7.5 0 1 1 10 2.5Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg></span>
+				<span class="notouch"><svg><path d="M11 5v14a1 1 0 1 0 2 0V5a1 1 0 1 0-2 0Z"/></svg></span>
+				<span id="ui-lox"title="Read / Write"onclick="swop()"><svg class="hid"><path d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1.5 0 0 1 20 9.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1 5.5 8H8V6a4 4 0 0 1 4-4Zm0 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM12 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2Z"/></svg><svg><path d="M12 2.004c1.875 0 3.334 1.206 3.928 3.003a.75.75 0 1 1-1.425.47C14.102 4.262 13.185 3.504 12 3.504c-1.407 0-2.42.958-2.496 2.551l-.005.195v1.749h8.251a2.25 2.25 0 0 1 2.245 2.097l.005.154v9.496a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25A2.25 2.25 0 0 1 4.005 19.9L4 19.746V10.25a2.25 2.25 0 0 1 2.096-2.245L6.25 8l1.749-.001v-1.75C8 3.712 9.71 2.005 12 2.005ZM17.75 9.5H6.25a.75.75 0 0 0-.743.648l-.007.102v9.496c0 .38.282.693.648.743l.102.007h11.5a.75.75 0 0 0 .743-.648l.007-.102V10.25a.75.75 0 0 0-.648-.744L17.75 9.5Zm-5.75 4a1.499 1.499 0 1 1 0 2.996 1.499 1.499 0 0 1 0-2.997Z"/></svg></span>
+				<span title="Dark Mode"onclick="dark()"><svg><path d="m15.538 18.999-.29 1.259a2.25 2.25 0 0 1-2.02 1.735l-.173.007h-2.111a2.25 2.25 0 0 1-2.147-1.577l-.046-.167-.29-1.257h7.077ZM12 2.001a7.25 7.25 0 0 1 7.25 7.25c0 2.136-.936 4.093-2.765 5.84a.25.25 0 0 0-.071.125l-.528 2.283H8.114l-.526-2.283a.25.25 0 0 0-.071-.124C5.687 13.344 4.75 11.387 4.75 9.25A7.25 7.25 0 0 1 12 2.001Z"/></svg></span>
+				<span title="Send to External API"onclick="saen()"><svg><path d="m12.815 12.197-7.532 1.256a.5.5 0 0 0-.386.318L2.3 20.728c-.248.64.421 1.25 1.035.943l18-9a.75.75 0 0 0 0-1.342l-18-9c-.614-.307-1.283.304-1.035.943l2.598 6.957a.5.5 0 0 0 .386.319l7.532 1.255a.2.2 0 0 1 0 .394Z"/></svg></span>
+				<span class="notouch"><svg><path d="M11 5v14a1 1 0 1 0 2 0V5a1 1 0 1 0-2 0Z"/></svg></span>
+				<!-- <span title="More">menu</span> -->
+				<span title="Configure"onclick="ops()"><svg><path d="M12.012 2.25c.734.008 1.465.093 2.182.253a.75.75 0 0 1 .582.649l.17 1.527a1.384 1.384 0 0 0 1.927 1.116l1.401-.615a.75.75 0 0 1 .85.174 9.792 9.792 0 0 1 2.204 3.792.75.75 0 0 1-.271.825l-1.242.916a1.381 1.381 0 0 0 0 2.226l1.243.915a.75.75 0 0 1 .272.826 9.797 9.797 0 0 1-2.204 3.792.75.75 0 0 1-.848.175l-1.407-.617a1.38 1.38 0 0 0-1.926 1.114l-.169 1.526a.75.75 0 0 1-.572.647 9.518 9.518 0 0 1-4.406 0 .75.75 0 0 1-.572-.647l-.168-1.524a1.382 1.382 0 0 0-1.926-1.11l-1.406.616a.75.75 0 0 1-.849-.175 9.798 9.798 0 0 1-2.204-3.796.75.75 0 0 1 .272-.826l1.243-.916a1.38 1.38 0 0 0 0-2.226l-1.243-.914a.75.75 0 0 1-.271-.826 9.793 9.793 0 0 1 2.204-3.792.75.75 0 0 1 .85-.174l1.4.615a1.387 1.387 0 0 0 1.93-1.118l.17-1.526a.75.75 0 0 1 .583-.65c.717-.159 1.45-.243 2.201-.252ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span>
+				<!-- <span title="About">live_help</span> -->
+				<span title="Exit"onclick="rush(window.close)"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span>
 			</nav>
-			<article></article>
+			<article>	# </article>
 		</main>
 		<script src="scrawl.js"></script>
-		<script src="x.js"></script>
+		<script>
+			'use strict';
+			const SCRoPS={'Δ':0,'dark':false,'url':'/+/?act=scrapb','issu':'-1.0.13.X','max_cache':1048576};
+			const scrawl=new Scrawl();
+			// scrawl.NOTEPAD.spellcheck='true';
+			function alurt(msg='OK!'){
+				const moda=document.createElement('div');
+				moda.style.backgroundColor='var(--fg)';
+				// moda.style.border='var(--bord)';
+				moda.style.borderRadius='var(--rad)';
+				moda.style.boxShadow='var(--shado)';
+				moda.style.color='var(--bg)';
+				moda.style.cursor='pointer';
+				moda.style.left='50%';
+				moda.style.padding='1em';
+				moda.style.position='fixed';
+				moda.style.top='11%';
+				moda.style.transform='translateX(-50%)';
+				moda.style.transition='opacity 1s';
+				moda.style.userSelect='none';
+				moda.style.zIndex='10';
+				moda.textContent=msg;
+				console.log('Alurt: '+msg);
+				document.body.appendChild(moda);
+				moda.onclick=()=>{
+					moda.remove();
+				}
+				moda.ontransitionend=()=>{
+					moda.remove();
+				}
+				setTimeout(()=>{moda.style.opacity='0'},3000);
+			}
+			function cfg(ky,valu){
+				if(!localStorage.Scrawl_CFG){
+					if(SCRoPS['Δ']==localStorage.Scrawl_CFG['Δ']){
+						localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
+					}
+				}
+				let cfg=JSON.parse(localStorage.Scrawl_CFG);
+				if(ky){
+					if(valu!=null){
+						cfg[ky]=valu;
+						localStorage.Scrawl_CFG=JSON.stringify(cfg);
+					}else{
+						return JSON.parse(localStorage.Scrawl_CFG)[ky];
+					}
+				}else{
+					return cfg;
+				}
+			}
+			function dark(){
+				document.body.parentElement.classList.toggle('day');
+			}
+			function naeu(){
+				localStorage.Scrawl_TXT='	# ';
+				location.reload();
+			}
+			function opaen(){
+				const f=document.createElement('input');
+				f.type='file';
+				f.setAttribute('accept','.md,.htm,.html');
+				document.body.appendChild(f);
+				f.style.display='none';
+				f.click();
+				f.onchange=()=>{
+					const bin=f.files[0];
+					const raed=new FileReader();
+					raed.readAsText(bin);
+					raed.onload=()=>{
+						const dot=bin.name.split('.');
+						if(dot[dot.length-1]=='md'){
+							localStorage.Scrawl_TXT=scrawl.x2m(scrawl.x2m(raed.result),'htm2md');
+						}else{
+							localStorage.Scrawl_TXT=scrawl.x2m(raed.result,'htm2md');
+						}
+						location.reload();
+					}
+				}
+			}
+			function ops(){
+				const cfg=window.prompt('Configure . . .',localStorage.Scrawl_CFG);
+				if(cfg){
+					if(cfg===' '||cfg==='{}'){
+						localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
+					}else{
+						localStorage.Scrawl_CFG=cfg;
+					}
+				}
+			}
+			function rush(albak){
+				const promp=window.confirm('Unsaved changes will be lost!');
+				if(promp){
+					albak();
+				}
+			}
+			function saef(){
+				const md=scrawl.x2m(scrawl.x2m(),'htm2md').replace(/\t/g,'');
+				const bob=new Blob([md],{type:'text/markdown;charset=utf-8'});
+				const uri=window.URL.createObjectURL(bob);
+				const a=document.createElement('a');
+				const h1=localStorage.Scrawl_TXT.trim().split("\n")[0].trim();
+				let naem='Untitled';
+				if(h1.startsWith('#')){
+					naem=h1.replace(/#\s*(.*)/,'$1');
+				}
+				document.body.appendChild(a);
+				a.style='display:none';
+				a.href=uri;
+				a.download=naem+'.md';
+				a.click();
+				a.remove();
+				window.URL.revokeObjectURL(uri);
+			}
+			function saen(){
+				const issu=window.prompt('POST . . .',cfg('issu'));
+				if(issu){
+					cfg('issu',issu);
+					const Formbody=new FormData();
+					Formbody.append(0,new Blob([scrawl.x2m()]),issu);
+					fetch('/+/?act=scrapb',{
+						method:'POST',
+						body:Formbody
+					}).then(
+						resp=>resp.text()
+					).then(
+						resp=>{
+							alurt(resp)
+						}
+					)
+				}
+			}
+			function shex(){
+				if(scrawl.NOTEPAD.spellcheck=='true'){
+					scrawl.NOTEPAD.spellcheck='false';
+					alurt('Spellcheck off . . .');
+				}else{
+					scrawl.NOTEPAD.spellcheck='true';
+					alurt('Spellcheck on . . .');
+				}
+				document.getElementById('ui-shex').classList.toggle('blu');
+			}
+			function swop(){
+				if(scrawl.NOTEPAD.contentEditable=='true'){
+					scrawl.NOTEPAD.contentEditable='false';
+					document.getElementById('ui-lox').children[0].classList.toggle('hid');
+					document.getElementById('ui-lox').children[1].classList.toggle('hid');
+					scrawl.NOTEPAD.innerHTML=scrawl.x2m();
+				}else{
+					scrawl.NOTEPAD.contentEditable='true';
+					document.getElementById('ui-lox').children[0].classList.toggle('hid');
+					document.getElementById('ui-lox').children[1].classList.toggle('hid');
+					scrawl.NOTEPAD.innerHTML=localStorage.Scrawl_TXT;
+					scrawl.NOTEPAD.focus();
+				}
+				scrawl.NOTEPAD.classList.toggle('locked');
+			}
+			scrawl.NOTEPAD.addEventListener('click',()=>{
+				if(scrawl.NOTEPAD.contentEditable=='false'){
+					navigator.clipboard.writeText(scrawl.x2m());
+					alurt('Copied to clipboard . . . (HTML)');
+				}
+			});
+			scrawl.NOTEPAD.addEventListener('contextmenu',()=>{
+				if(scrawl.NOTEPAD.contentEditable=='false'){
+					navigator.clipboard.writeText(scrawl.x2m(scrawl.x2m(),'par2bbc'));
+					alurt('Copied to clipboard . . . (BBC)');
+				}
+			});
+			document.body.addEventListener('keydown',e=>{
+				if(e.ctrlKey||e.metaKey){
+					switch(e.key.toUpperCase()){
+						case'E':e.preventDefault();saen();break;
+						case'K':e.preventDefault();scrawl.biu('~');break;
+						// case'L':e.preventDefault();shex();break;
+						case'N':e.preventDefault();rush(naeu);break;
+						case'O':e.preventDefault();opaen();break;
+						case'Q':case'W':e.preventDefault();rush(window.close);break;
+						case'S':e.preventDefault();saef();break;
+						case'T':e.preventDefault();alurt(scrawl.tally());break;
+						case'Y':e.preventDefault();scrawl.undo(true);break;
+						case'Z':e.preventDefault();scrawl.undo();break;
+					}
+				}else{
+					switch(e.key){
+						case'Tab':e.preventDefault();swop();break;
+						case'F7':e.preventDefault();shex();break;
+						case'F9':e.preventDefault();dark();break;
+					}
+				}
+		});
+		if(localStorage.Scrawl_TXT!='	# '){
+			swop();
+		}
+		document.body.style.opacity=1;
+		</script>
 	</body>
 </html>
