@@ -6,6 +6,7 @@ class Scrawl{
 		this.NOTEPAD.spellcheck='true';
 		this.HISTRY={'max':1048576,'indx':0,'cart':[0,0],'txt':['']};
 		this.RANG=[0,0];
+		this.TYPO={"  ":" ","Aint":"Ain't","aint":"ain't",/*"Cant":"Can't","cant":"can't",*/"Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","Hasnt":"Hasn't","hasnt":"hasn't","Havent":"Haven't","havent":"haven't","Hed":"He'd","hed":"he'd","Hes":"He's","hes":"he's","i":"I","Im":"I'm","i'm":"I'm","im":"I'm","Isnt":"Isn't","isnt":"isn't","Ive":"I've","ive":"I've","Mustnt":"Mustn't","mustnt":"mustn't","Mustve":"Must've","mustve":"must've","Shant":"Shan't","shant":"shan't","Shes":"She's","shes":"she's","Thats":"That's","thats":"that's","Theres":"There's","theres":"there's","Theyd":"They'd","theyd":"they'd","Theyll":"They'll","theyll":"they'll","Theyre":"They're","theyre":"they're","Theyve":"They've","theyve":"they've",/*"Twas":"'Twas","twas":"'twas",*/"Wasnt":"Wasn't","wasnt":"wasn't","Werent":"Weren't","werent":"weren't","Wheres":"Where's","wheres":"where's",/*"Wont":"Won't","wont":"won't",*/"Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youd":"You'd","youd":"you'd","Youll":"You'll","youll":"you'll","Youre":"You're","youre":"you're","Youve":"You've","youve":"you've"};
 		this.REGX={'htm2md':[
 			[
 				/<a ([^>]*)>(.*)<\/a>/g,
@@ -35,7 +36,7 @@ class Scrawl{
 				'...',
 				'*',
 				"\t# $1\n",
-				"\t***\n",
+				"\t+++\n",
 				'===',
 				'*',
 				"\t",
@@ -51,7 +52,7 @@ class Scrawl{
 		],'md2htm':[
 			[
 				/<script([^>]*)>(.*)<\/script>/g,
-				/\*\*\*/g,
+				/\+\+\+/g,
 				/===/g,
 				/\.\.\./g,
 				/\*\*([^*]*)\*\*/g,
@@ -111,6 +112,19 @@ class Scrawl{
 			]
 		}
 		// FUNCTIONS
+		this.autypo=(typo=this.TYPO)=>{
+			let txt=this.NOTEPAD.textContent;
+			Object.keys(typo).forEach(e=>{
+				const regx=new RegExp("\\b"+e+"\\b",'g');
+				txt=txt.replace(regx,typo[e]);
+			});
+			if(this.NOTEPAD.textContent!=txt){
+				this.NOTEPAD.textContent=txt;
+				this.raec();
+				this.cart();
+			}
+			return txt;
+		}
 		this.biu=(g='*')=>{
 			const rang=this.NOTEPAD.textContent.slice(this.RANG[0],this.RANG[1]);
 			let txt;
@@ -129,6 +143,14 @@ class Scrawl{
 			}
 			this.xom(txt,false);
 		}
+		this.cop=(lang='HTML')=>{
+			switch(lang){
+				case'BBC':navigator.clipboard.writeText(scrawl.x2m(scrawl.x2m(),'par2bbc'));break;
+				case'HTML':navigator.clipboard.writeText(scrawl.x2m());break;
+				case'MD':
+				default:navigator.clipboard.writeText(String(scrawl.x2m(scrawl.x2m(),'htm2md')).replaceAll(/\t/g,''));
+			}
+		}
 		this.cart=(pos=null)=>{
 			if(!this.NOTEPAD.childNodes[0]){
 				this.NOTEPAD.append(document.createTextNode(''));
@@ -138,18 +160,32 @@ class Scrawl{
 			if(pos){
 				this.RANG=[pos[0],pos[1]];
 			}
+			// console.log(this.RANG);
 			rang.setStart(this.NOTEPAD.childNodes[0],this.RANG[0]);
 			rang.setEnd(this.NOTEPAD.childNodes[0],this.RANG[1]);
 			selec.removeAllRanges();
 			selec.addRange(rang);
 		}
-		this.nix=()=>{
+		this.nix=(rec=true)=>{
 			if(this.RANG[0]===this.RANG[1]){
 				if(this.RANG[0]>0){
 					this.RANG[0]--;
 				}
 			}
-			this.xom();
+			this.xom('',true,rec);
+		}
+		this.opin=(bin)=>{
+			const raed=new FileReader();
+			raed.readAsText(bin);
+			raed.onload=()=>{
+				const dot=bin.name.split('.');
+				if(dot[dot.length-1]=='md'){
+					localStorage.Scrawl_TXT=this.x2m(this.x2m(raed.result),'htm2md');
+				}else{
+					localStorage.Scrawl_TXT=this.x2m(raed.result,'htm2md');
+				}
+				location.reload();
+			}
 		}
 		this.raec=()=>{
 			localStorage.Scrawl_TXT=this.NOTEPAD.textContent;
@@ -176,7 +212,7 @@ class Scrawl{
 				this.HISTRY['cart'].shift();
 				this.HISTRY['indx']--;
 			}
-			console.log(this.HISTRY);
+			// console.log(this.HISTRY);
 		}
 		this.saerk=(wurdz)=>{
 			if(this.NOTEPAD.contentEditable=='true'){
@@ -187,7 +223,7 @@ class Scrawl{
 				this.raec();
 				return'Replaced '+k+' occurrences . . .';
 			}else{
-				return'Cannot make changes in HTML mode.';
+				return'Cannot make changes while locked!';
 			}
 		}
 		this.tally=()=>{
@@ -201,23 +237,25 @@ class Scrawl{
 			return wurdz+' spaces';
 		}
 		this.undo=(re=false)=>{
-			let go=false;
-			if(re){
-				if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
-					this.HISTRY['indx']++;
-					go=true;
+			if(this.NOTEPAD.contentEditable=='true'){
+				let go=false;
+				if(re){
+					if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+						this.HISTRY['indx']++;
+						go=true;
+					}
+				}else{
+					if(this.HISTRY['indx']>1){
+						this.HISTRY['indx']--;
+						go=true;
+					}
 				}
-			}else{
-				if(this.HISTRY['indx']>1){
-					this.HISTRY['indx']--;
-					go=true;
+				if(go){
+					this.NOTEPAD.textContent=this.HISTRY['txt'][this.HISTRY['indx']];
+					this.RANG=this.HISTRY['cart'][this.HISTRY['indx']];
+					this.cart();
+					localStorage.Scrawl_TXT=this.NOTEPAD.textContent;
 				}
-			}
-			if(go){
-				this.NOTEPAD.textContent=this.HISTRY['txt'][this.HISTRY['indx']];
-				this.RANG=this.HISTRY['cart'][this.HISTRY['indx']];
-				this.cart();
-				localStorage.Scrawl_TXT=this.NOTEPAD.textContent;
 			}
 		}
 		this.x2m=(txt=localStorage.Scrawl_TXT,regx='md2htm')=>{
@@ -239,7 +277,7 @@ class Scrawl{
 								break;
 							}
 						case'*':
-							if(mdarr[i]=='***'){
+							if(mdarr[i]=='+++'){
 								mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<h3>✶ ✶ ✶</h3>');
 								break;
 							}
@@ -263,17 +301,21 @@ class Scrawl{
 			}
 			return txt.trim();
 		}
-		this.xom=(txt='',x=true)=>{
-			this.NOTEPAD.textContent=this.NOTEPAD.textContent.slice(0,this.RANG[0])+txt+this.NOTEPAD.textContent.slice(this.RANG[1]);
-			if(x){
-				this.RANG=[this.RANG[0]+txt.length,this.RANG[0]+txt.length];
-			}else{
-				this.RANG[1]=this.RANG[0]+txt.length;
+		this.xom=(txt='',x=true,rec=true)=>{
+			if(this.NOTEPAD.contentEditable=='true'){
+				this.NOTEPAD.textContent=this.NOTEPAD.textContent.slice(0,this.RANG[0])+txt+this.NOTEPAD.textContent.slice(this.RANG[1]);
+				if(x){
+					this.RANG=[this.RANG[0]+txt.length,this.RANG[0]+txt.length];
+				}else{
+					this.RANG[1]=this.RANG[0]+txt.length;
+				}
+				this.cart();
+				if(rec){
+					this.raec();
+				}
 			}
-			this.cart();
-			this.raec();
 		}
-		// EVENTS
+		// HEY, LISTEN!
 		this.NOTEPAD.addEventListener('beforeinput',e=>{
 			// console.log(e);
 			e.preventDefault();
@@ -286,7 +328,7 @@ class Scrawl{
 				case'formatStrikethrough':this.biu('~');break;
 				case'insertFromPaste':navigator.clipboard.readText().then(txt=>this.xom(txt,false));break;
 				case'insertParagraph':this.xom("\n\t");break;
-				case'insertReplacementText':this.xom(e.dataTransfer.getData('text'),false);break;
+				case'insertReplacementText':window.getSelection().modify('extend','word','forward');window.getSelection().modify('extend','word','backward');const rang=window.getSelection().getRangeAt(0);this.RANG=[rang.startOffset,rang.endOffset];this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
 				case'insertText':this.xom(e.data);break;
 			}
 			const rex=window.getSelection().getRangeAt(0).getClientRects()[0]['top'];
