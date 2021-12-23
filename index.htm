@@ -5,35 +5,33 @@
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
 		<meta name="apple-mobile-web-app-capable"content="yes">
 		<meta name="mobile-web-app-capable"content="yes">
-		<meta name="theme-color"content="#111111">
+		<meta name="theme-color"content="#222">
 		<link rel="apple-touch-icon"href="ico.png">
 		<link rel="icon"href="ico.png"type="image/png"sizes="192x192">
 		<title>S c r a w l</title>
 		<style>
 			@font-face{
 				font-family:'Font';
-				src:url('https://fonts.gstatic.com/s/josefinsans/v20/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_DjQbMZhLw.woff2');
-			}
-			::-webkit-scrollbar{
+				src:url('https://fonts.gstatic.com/s/baloo2/v9/wXK0E3kTposypRydzVT08TS3JnAmtdgazZpo_lc.woff2');
+			}::-webkit-scrollbar{
 				height:var(--rad)*2;
 				width:var(--rad)*2;
 			}::-webkit-scrollbar-thumb{
-				background-color:var(--pg);
+				background-color:var(--fg);
 				border-radius:var(--rad);
-				border:var(--bord)var(--mg);
-			}
-			::selection{
+				border:4pt solid var(--bg);
+			}::selection{
 				background-color:var(--fg);
 				color:var(--bg);
 			}
 			:root{
-				--bg:#111;
+				--bg:#222;
 				--fg:#eca;
 				--hi:currentColor;
-				--mg:#333;
-				--no:Firebrick;
+				--mg:#444;
+				/* --no:Firebrick; */
 				--ok:DodgerBlue;
-				--pg:#222;
+				--pg:#333;
 				--pt:18pt;
 				--font:'Font',sans-serif;
 				--bord:var(--thicc) solid;
@@ -83,10 +81,12 @@
 				transition:opacity .5s;
 			}
 			h1{
+				font-size:100%;
+				font-variant:small-caps;
 				letter-spacing:3pt;
 				margin:auto;
-				max-width:19ch;
-				text-transform:uppercase;
+				/* max-width:19ch; */
+				/* text-transform:uppercase; */
 			}h1,h3{
 				text-align:center;
 			}
@@ -101,7 +101,7 @@
 			}
 			p:not(br+p,p:first-of-type){
 				text-indent:2em;
-			}p:first-of-type::first-letter{
+			}/* p:first-of-type::first-letter{
 				float:left;
 				font-size:270%;
 				margin-right:.1em;
@@ -110,7 +110,7 @@
 				font-variant:small-caps;
 				font-weight:bold;
 				letter-spacing:2pt;
-			}
+			} */
 			nav{
 				background-color:var(--bg);
 				bottom:0;
@@ -133,9 +133,6 @@
 				background-color:var(--fg);
 				border-radius:var(--rad);
 				color:var(--bg);
-			}nav span:last-of-type{
-				color:var(--no);
-				display:none;
 			}
 			svg{
 				fill:currentColor;
@@ -177,8 +174,6 @@
 					box-shadow:0 1em 1em var(--bg);
 					opacity:0;
 					top:0;
-				}nav span:last-of-type{
-					display:inline-block;
 				}
 			}
 			@media print{
@@ -195,9 +190,9 @@
 				nav{
 					display:none;
 				}
-				p:first-of-type::first-letter{
+				/* p:first-of-type::first-letter{
 					margin-top:.4em;
-				}
+				} */
 			}
 			@page{
 				margin:1in;
@@ -231,13 +226,372 @@
 				<!-- <span title="More">menu</span> -->
 				<span title="Configure"onclick="ops()"><svg><path d="M12.012 2.25c.734.008 1.465.093 2.182.253a.75.75 0 0 1 .582.649l.17 1.527a1.384 1.384 0 0 0 1.927 1.116l1.401-.615a.75.75 0 0 1 .85.174 9.792 9.792 0 0 1 2.204 3.792.75.75 0 0 1-.271.825l-1.242.916a1.381 1.381 0 0 0 0 2.226l1.243.915a.75.75 0 0 1 .272.826 9.797 9.797 0 0 1-2.204 3.792.75.75 0 0 1-.848.175l-1.407-.617a1.38 1.38 0 0 0-1.926 1.114l-.169 1.526a.75.75 0 0 1-.572.647 9.518 9.518 0 0 1-4.406 0 .75.75 0 0 1-.572-.647l-.168-1.524a1.382 1.382 0 0 0-1.926-1.11l-1.406.616a.75.75 0 0 1-.849-.175 9.798 9.798 0 0 1-2.204-3.796.75.75 0 0 1 .272-.826l1.243-.916a1.38 1.38 0 0 0 0-2.226l-1.243-.914a.75.75 0 0 1-.271-.826 9.793 9.793 0 0 1 2.204-3.792.75.75 0 0 1 .85-.174l1.4.615a1.387 1.387 0 0 0 1.93-1.118l.17-1.526a.75.75 0 0 1 .583-.65c.717-.159 1.45-.243 2.201-.252ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span>
 				<!-- <span title="About">live_help</span> -->
-				<span title="Exit"onclick="rush(window.close)"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span>
+				<!-- <span id="ui-win"title="Fullscreen"onclick="document.documentElement.requestFullscreen()"><svg><path d="M6.5 3A3.5 3.5 0 0 0 3 6.5v11A3.5 3.5 0 0 0 6.5 21h11a3.5 3.5 0 0 0 3.5-3.5v-11A3.5 3.5 0 0 0 17.5 3h-11ZM5 8h14v9.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 17.5V8Z"/></svg></span> -->
+				<!-- <span title="Exit"onclick="rush(window.close)"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span> -->
 			</nav>
 			<article>	# </article>
 		</main>
-		<script src="skrolt.js"></script>
 		<script>
 			'use strict';
+			class Scrawl{
+				constructor(notepad=document.getElementsByTagName('article')[0]){
+					this.NOTEPAD=notepad;
+					this.NOTEPAD.contentEditable='true';
+					this.NOTEPAD.spellcheck='true';
+					this.HISTRY={'max':1048576,'indx':0,'cart':[0,0],'txt':['']};
+					this.RANG=[0,0];
+					this.TYPO={"  ":" ","Aint":"Ain't","aint":"ain't",/*"Cant":"Can't","cant":"can't",*/"Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","Hasnt":"Hasn't","hasnt":"hasn't","Havent":"Haven't","havent":"haven't","Hed":"He'd","hed":"he'd","Hes":"He's","hes":"he's","i":"I","Im":"I'm","i'm":"I'm","im":"I'm","Isnt":"Isn't","isnt":"isn't","Ive":"I've","ive":"I've","Mustnt":"Mustn't","mustnt":"mustn't","Mustve":"Must've","mustve":"must've","Shant":"Shan't","shant":"shan't","Shes":"She's","shes":"she's","Thats":"That's","thats":"that's","Theres":"There's","theres":"there's","Theyd":"They'd","theyd":"they'd","Theyll":"They'll","theyll":"they'll","Theyre":"They're","theyre":"they're","Theyve":"They've","theyve":"they've",/*"Twas":"'Twas","twas":"'twas",*/"Wasnt":"Wasn't","wasnt":"wasn't","Werent":"Weren't","werent":"weren't","Wheres":"Where's","wheres":"where's",/*"Wont":"Won't","wont":"won't",*/"Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youd":"You'd","youd":"you'd","Youll":"You'll","youll":"you'll","Youre":"You're","youre":"you're","Youve":"You've","youve":"you've"};
+					this.REGX={'htm2md':[
+						[
+							/<a ([^>]*)>(.*)<\/a>/g,
+							/<\/*b>/g,
+							/<blockquote>(.*)<\/blockquote>/g,
+							/<br>/g,
+							/ . . . /g,
+							/<\/*em>/g,
+							/<h1>(.*)<\/h1>/g,
+							/<h3>✶ ✶ ✶<\/h3>/g,
+							/<hr>/g,
+							/<\/*i>/g,
+							/<p>/g,
+							/<\/p>/g,
+							/<\/*strong>/g,
+							/&amp;/g,
+							/—/g,
+							/“/g,
+							/”/g,
+							/‘/g,
+							/’/g
+						],[
+							'<# $2>',
+							'**',
+							"\t\t> $1",
+							"\t\n",
+							'...',
+							'*',
+							"\t# $1\n",
+							"\t+++\n",
+							'===',
+							'*',
+							"\t",
+							"\n",
+							'**',
+							'&',
+							'--',
+							'"',
+							'"',
+							'`',
+							"'"
+						]
+					],'md2htm':[
+						[
+							/<script([^>]*)>(.*)<\/script>/g,
+							/\+\+\+/g,
+							/===/g,
+							/\.\.\./g,
+							/\*\*([^*]*)\*\*/g,
+							/\*([^*]*)\*/g,
+							/_([^_]*)_/g,
+							/~([^~]*)~/g,
+							/(?<![=/])"([^"]*)"/g,
+							// /"/g,
+							/`/g,
+							/'/g,
+							/--/g,
+							/\s\s+/g,
+							/<([\w.]*)@(\w*)\.(\w*)>/g,
+							/<([\w#!:.,?+=&%@!\-\/]*) ([^>]*) _>/g,
+							/<(?!a href)([\w#!:.,?+=&%@!\-\/]*) ([^>]*)>/g
+						],[
+							'<code>$1</code>',
+							'<h3>✶ ✶ ✶</h3>',
+							'<hr>',
+							' . . . ',
+							'<b>$1</b>',
+							'<i>$1</i>',
+							'<u>$1</u>',
+							'<s>$1</s>',
+							'“$1”',
+							// '”',
+							'‘',
+							'’',
+							'—',
+							' ',
+							'<a href="mailto:$1@$2.$3">$1@$2.$3</a>',
+							'<a href="$1"target="_Blank">$2</a>',
+							'<a href="$1">$2</a>'
+							]
+						],'par2bbc':[
+							[
+								/</g,
+								/>/g,
+								/strong\]/g,
+								/em\]/g,
+								/\[h1\](.*?)\[\/h1\]/g,
+								/\[h3\]✶ ✶ ✶\[h3\]/g,
+								/\[br\]/g,
+								/\[p\]/g,
+								/\[\/p\]/g
+							],[
+								'[',
+								']',
+								'b]',
+								'i]',
+								"[c]$1[/c]",
+								'[c]✶ ✶ ✶[/c]',
+								"\n",
+								"\n",
+								''
+							]
+						]
+					}
+					// FUNCTIONS
+					this.autypo=(typo=this.TYPO)=>{
+						let txt=this.NOTEPAD.textContent;
+						Object.keys(typo).forEach(e=>{
+							const regx=new RegExp("\\b"+e+"\\b",'g');
+							txt=txt.replace(regx,typo[e]);
+						});
+						if(this.NOTEPAD.textContent!=txt){
+							this.NOTEPAD.textContent=txt;
+							this.raec();
+							this.cart();
+						}
+						return txt;
+					}
+					this.biu=(g='*')=>{
+						const rang=this.NOTEPAD.textContent.slice(this.RANG[0],this.RANG[1]);
+						let txt;
+						let keep_rang;
+						if(rang.length>0){
+							if(rang.startsWith(g)){
+								if(rang===g){
+									txt='';
+								}else{
+									txt=rang.substring(g.length,rang.length-g.length);
+								}
+							}else{
+								txt=g+rang+g;
+							}
+							keep_rang=false;
+						}else{
+							txt=g;
+							keep_rang=true;
+						}
+						this.xom(txt,keep_rang);
+					}
+					this.cop=(lang='HTML')=>{
+						switch(lang){
+							case'BBC':navigator.clipboard.writeText(scrawl.x2m(scrawl.x2m(),'par2bbc'));break;
+							case'HTML':navigator.clipboard.writeText(scrawl.x2m());break;
+							case'MD':
+							default:navigator.clipboard.writeText(String(scrawl.x2m(scrawl.x2m(),'htm2md')).replaceAll(/\t/g,''));
+						}
+					}
+					this.cart=(pos=null)=>{
+						if(!this.NOTEPAD.childNodes[0]){
+							this.NOTEPAD.append(document.createTextNode(''));
+						}
+						const selec=window.getSelection();
+						const rang=document.createRange();
+						if(pos){
+							this.RANG=[pos[0],pos[1]];
+						}
+						// console.log(this.RANG);
+						rang.setStart(this.NOTEPAD.childNodes[0],this.RANG[0]);
+						rang.setEnd(this.NOTEPAD.childNodes[0],this.RANG[1]);
+						selec.removeAllRanges();
+						selec.addRange(rang);
+					}
+					this.nix=(rec=true)=>{
+						if(this.RANG[0]===this.RANG[1]){
+							if(this.RANG[0]>0){
+								this.RANG[0]--;
+							}
+						}
+						this.xom('',true,rec);
+					}
+					this.opin=(bin)=>{
+						const raed=new FileReader();
+						raed.readAsText(bin);
+						raed.onload=()=>{
+							const dot=bin.name.split('.');
+							if(dot[dot.length-1]=='md'){
+								localStorage.Scrawl_TXT=this.x2m(this.x2m(raed.result),'htm2md');
+							}else{
+								localStorage.Scrawl_TXT=this.x2m(raed.result,'htm2md');
+							}
+							location.reload();
+						}
+					}
+					this.raec=()=>{
+						localStorage.Scrawl_TXT=this.NOTEPAD.textContent;
+						if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+							let oldTxt=this.HISTRY['txt'].splice(this.HISTRY['indx']);
+							let oldCart=this.HISTRY['cart'].splice(this.HISTRY['indx']);
+							this.HISTRY['txt']=this.HISTRY['txt'].concat(oldTxt);
+							oldTxt.pop();
+							oldTxt.reverse();
+							this.HISTRY['txt']=this.HISTRY['txt'].concat(oldTxt);
+							this.HISTRY['cart']=this.HISTRY['cart'].concat(oldCart);
+							oldCart.pop();
+							oldCart.reverse();
+							this.HISTRY['cart']=this.HISTRY['cart'].concat(oldCart);
+							this.HISTRY['indx']=this.HISTRY['txt'].length;
+						}else{
+							this.HISTRY['indx']++;
+						}
+						this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
+						this.HISTRY['cart'][this.HISTRY['indx']]=this.RANG;
+						// const b=new Blob([this.HISTRY['txt']]).size;
+						if(this.HISTRY['txt'].length>99){
+							this.HISTRY['txt'].shift();
+							this.HISTRY['cart'].shift();
+							this.HISTRY['indx']--;
+						}
+						// console.log(this.HISTRY);
+					}
+					this.saerk=(wurdz)=>{
+						if(this.NOTEPAD.contentEditable=='true'){
+							const w=wurdz.split('|');
+							const rx=new RegExp('\\b'+w[0]+'\\b','g');
+							const k=[...this.NOTEPAD.innerHTML.matchAll(rx)].length;
+							this.NOTEPAD.innerHTML=this.NOTEPAD.innerHTML.replaceAll(rx,w[1]);
+							this.raec();
+							return'Replaced '+k+' occurrences . . .';
+						}else{
+							return'Cannot make changes while locked!';
+						}
+					}
+					this.tally=()=>{
+						let txt='';
+						if(window.getSelection().toString().length>0){
+							txt=this.x2m(window.getSelection().toString());
+						}else{
+							txt=this.x2m();
+						}
+						const wurdz=txt.split(/ +/).length-1;
+						return wurdz+' spaces';
+					}
+					this.undo=(re=false)=>{
+						if(this.NOTEPAD.contentEditable=='true'){
+							let go=false;
+							if(re){
+								if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+									this.HISTRY['indx']++;
+									go=true;
+								}
+							}else{
+								if(this.HISTRY['indx']>1){
+									this.HISTRY['indx']--;
+									go=true;
+								}
+							}
+							if(go){
+								this.NOTEPAD.textContent=this.HISTRY['txt'][this.HISTRY['indx']];
+								this.RANG=this.HISTRY['cart'][this.HISTRY['indx']];
+								this.cart();
+								localStorage.Scrawl_TXT=this.NOTEPAD.textContent;
+							}
+						}
+					}
+					this.x2m=(txt=localStorage.Scrawl_TXT,regx='md2htm')=>{
+						if(regx==='md2htm'){
+							let htm='';
+							const mdarr=txt.trim().split(/\n/g,);
+							mdarr.forEach((line,i)=>{
+								mdarr[i]=line.trim();
+								switch(mdarr[i][0]){
+									case'#':
+										mdarr[i]=mdarr[i].replace(/^#\s*(.*)/g,'<h1>$1</h1>');
+										break;
+									case'>':
+										mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<blockquote>$1</blockquote>');
+										break;
+									case'=':
+										if(mdarr[i]=='==='){
+											mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<hr>');
+											break;
+										}
+									case'*':
+										if(mdarr[i]=='+++'){
+											mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<h3>✶ ✶ ✶</h3>');
+											break;
+										}
+									default:
+										if(mdarr[i]==''){
+											mdarr[i]='<br>';
+										}else{
+											mdarr[i]=mdarr[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'');
+										}
+								}
+								this.REGX[regx][0].forEach((p,x)=>{
+									mdarr[i]=mdarr[i].replace(p,this.REGX[regx][1][x]);
+								});
+								htm+=mdarr[i];
+							});
+							txt=htm;
+						}else{
+							this.REGX[regx][0].forEach((p,x)=>{
+								txt=txt.replace(p,this.REGX[regx][1][x]);
+							});
+						}
+						return txt.trim();
+					}
+					this.xom=(txt='',x=true,rec=true)=>{
+						if(this.NOTEPAD.contentEditable=='true'){
+							this.NOTEPAD.textContent=this.NOTEPAD.textContent.slice(0,this.RANG[0])+txt+this.NOTEPAD.textContent.slice(this.RANG[1]);
+							if(x){
+								this.RANG=[this.RANG[0]+txt.length,this.RANG[0]+txt.length];
+							}else{
+								this.RANG[1]=this.RANG[0]+txt.length;
+							}
+							this.cart();
+							if(rec){
+								this.raec();
+							}
+						}
+					}
+					// HEY, LISTEN!
+					this.NOTEPAD.addEventListener('beforeinput',e=>{
+						// console.log(e);
+						e.preventDefault();
+						switch(e.inputType){
+							case'deleteByCut':
+							case'deleteContentBackward':this.nix();break;
+							case'formatBold':this.biu('**');break;
+							case'formatItalic':this.biu();break;
+							case'formatUnderline':this.biu('_');break;
+							case'formatStrikethrough':this.biu('~');break;
+							case'insertFromPaste':navigator.clipboard.readText().then(txt=>this.xom(txt,false));break;
+							case'insertParagraph':this.xom("\n\t");break;
+							case'insertReplacementText':window.getSelection().modify('extend','word','forward');window.getSelection().modify('extend','word','backward');const rang=window.getSelection().getRangeAt(0);this.RANG=[rang.startOffset,rang.endOffset];this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
+							case'insertText':this.xom(e.data);break;
+						}
+						const rex=window.getSelection().getRangeAt(0).getClientRects()[0]['top'];
+						const pos=Math.round(window.scrollY+rex)-(window.innerHeight/3);
+						window.scrollTo(0,pos);
+					});
+					this.NOTEPAD.addEventListener('blur',()=>{
+						this.NOTEPAD.focus();
+					});
+					document.addEventListener('selectionchange',()=>{
+						const selec=window.getSelection().getRangeAt(0);
+						this.RANG=[selec.startOffset,selec.endOffset];
+						// console.log(this.RANG);
+					});
+					// INIT
+					if(!this.NOTEPAD.childNodes[0]){
+						this.NOTEPAD.append(document.createTextNode(''));
+					}
+					if(localStorage.Scrawl_TXT){
+						this.NOTEPAD.textContent=localStorage.Scrawl_TXT;
+					}
+					this.NOTEPAD.focus();
+					this.cart([this.NOTEPAD.textContent.length,this.NOTEPAD.textContent.length]);
+					this.raec();
+				}
+			}
 			const SCRoPS={'Δ':0,'dark':false,'url':'http://localhost/act.php','issu':'-1.0.13.X','max_cache':1048576};
 			const scrawl=new Scrawl();
 			if(!localStorage.Scrawl_CFG){
@@ -314,6 +668,7 @@
 			}
 			function naeu(){
 				localStorage.Scrawl_TXT='	# ';
+				cfg('issu',SCRoPS['issu']);
 				location.reload();
 			}
 			function opaen(ti=null){
@@ -326,7 +681,7 @@
 				}else{
 					const f=document.createElement('input');
 					f.type='file';
-					f.setAttribute('accept','.md,.htm,.html');
+					f.setAttribute('accept','.docx,.htm,.html,.md,.txt');
 					document.body.appendChild(f);
 					f.style.display='none';
 					f.click();
@@ -383,7 +738,7 @@
 				}
 			}
 			function saen(){
-				const issu=window.prompt('Issu . . .',cfg('issu'));
+				const issu=window.prompt('Publish . . .',cfg('issu'));
 				if(issu){
 					cfg('issu',issu);
 					gurl(new Blob([scrawl.x2m()]),issu);
@@ -449,10 +804,7 @@
 						case'T':e.preventDefault();alurt(scrawl.tally());break;
 						case'Y':e.preventDefault();scrawl.undo(true);break;
 						case'Z':e.preventDefault();scrawl.undo();break;
-						case'=':e.preventDefault();break;
-						case'-':e.preventDefault();break;
-						case'_':e.preventDefault();break;
-						case'+':e.preventDefault();break;
+						case'=':case'-':case'_':case'+':e.preventDefault();break;
 					}
 				}else{
 					switch(e.key){
