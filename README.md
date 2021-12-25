@@ -1,6 +1,6 @@
 # Scrawl
 	
-	Is a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! I developed it specifically for my own use as a distraction-free typewriter.	
+Is a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! I developed it specifically for my own use as a distraction-free typewriter.	
 	
 	# Header
 	===	
