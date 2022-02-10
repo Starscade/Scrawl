@@ -15,20 +15,26 @@
 	</head>
 	<body>
 		<main>
-			<article></article>
+			<article><button>GO</button></article>
 		</main>
 		<script>
 			'use strict';
-			let serv='';
-			if('serviceWorker'in navigator){
-				navigator.serviceWorker.getRegistrations().then(
-					function(registrations){
-						for(let registration of registrations){
-							/* if(registration.active.scriptURL=='http://localhost/my-push/myworker.js'){registration.unregister();} */
-							serv+=registration.active.scriptURL+"\n";
-							registration.unregister();
-						}
-					});
+			const butt=document.getElementsByTagName('button');
+			function unreg(){
+				let serv='';
+				if('serviceWorker'in navigator){
+					navigator.serviceWorker.getRegistrations().then(
+						function(registrations){
+							for(let registration of registrations){
+								/* if(registration.active.scriptURL=='http://localhost/my-push/myworker.js'){registration.unregister();} */
+								serv+=registration.active.scriptURL+"\n";
+								registration.unregister();
+							}
+						});
+				}
+			}
+			butt.onclick=()=>{
+				unreg();
 			}
 		</script>
 	</body>
