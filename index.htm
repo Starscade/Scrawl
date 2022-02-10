@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"oncontextmenu="return false">
+<html lang="en"class="day"oncontextmenu="return false">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
@@ -260,27 +260,626 @@
 				<!-- <span id="ui-win"title="Fullscreen"onclick="document.documentElement.requestFullscreen()"><svg><path d="M6.5 3A3.5 3.5 0 0 0 3 6.5v11A3.5 3.5 0 0 0 6.5 21h11a3.5 3.5 0 0 0 3.5-3.5v-11A3.5 3.5 0 0 0 17.5 3h-11ZM5 8h14v9.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 17.5V8Z"/></svg></span> -->
 				<!-- <span title="Exit"onclick="rush(window.close)"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span> -->
 			</nav>
-			<article><button>GO</button></article>
+			<article></article>
 		</main>
 		<script>
 			'use strict';
-			const butt=document.getElementsByTagName('button');
-			function unreg(){
-				let serv='';
-				if('serviceWorker'in navigator){
-					navigator.serviceWorker.getRegistrations().then(
-						function(registrations){
-							for(let registration of registrations){
-								/* if(registration.active.scriptURL=='http://localhost/my-push/myworker.js'){registration.unregister();} */
-								serv+=registration.active.scriptURL+"\n";
-								registration.unregister();
+			class Scrawl{
+				constructor(notepad=document.getElementsByTagName('article')[0]){
+					this.NOTEPAD=notepad;
+					this.NOTEPAD.contentEditable='true';
+					this.NOTEPAD.spellcheck='true';
+					this.HISTRY={'max':1048576,'indx':0,'cart':[0,0],'txt':['']};
+					this.RANG=[0,0];
+					this.TYPO={"Aint":"Ain't","aint":"ain't",/*"Cant":"Can't","cant":"can't",*/"Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","Hasnt":"Hasn't","hasnt":"hasn't","Havent":"Haven't","havent":"haven't","Hed":"He'd","hed":"he'd","Hes":"He's","hes":"he's","i":"I","Im":"I'm","i'm":"I'm","im":"I'm","Isnt":"Isn't","isnt":"isn't","Ive":"I've","ive":"I've","Mustnt":"Mustn't","mustnt":"mustn't","Mustve":"Must've","mustve":"must've","Shant":"Shan't","shant":"shan't","Shes":"She's","shes":"she's","Thats":"That's","thats":"that's","Theres":"There's","theres":"there's","Theyd":"They'd","theyd":"they'd","Theyll":"They'll","theyll":"they'll","Theyre":"They're","theyre":"they're","Theyve":"They've","theyve":"they've",/*"Twas":"'Twas","twas":"'twas",*/"Wasnt":"Wasn't","wasnt":"wasn't","Werent":"Weren't","werent":"weren't","Wheres":"Where's","wheres":"where's",/*"Wont":"Won't","wont":"won't",*/"Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youd":"You'd","youd":"you'd","Youll":"You'll","youll":"you'll","Youre":"You're","youre":"you're","Youve":"You've","youve":"you've"};
+					this.REGX={'htm2md':[
+						[
+							/<a ([^>]*)>([^<]*)<\/a>/g,
+							/<\/*b>/g,
+							/<blockquote>(.*)<\/blockquote>/g,
+							/<br>/g,
+							/ . . . /g,
+							/<\/*em>/g,
+							/<h1>(.*)<\/h1>/g,
+							/<h3>✶ ✶ ✶<\/h3>/g,
+							/<hr>/g,
+							/<\/*i>/g,
+							/<p>/g,
+							/<\/p>/g,
+							/<\/*s>/g,
+							/<\/*strong>/g,
+							/<\/*u>/g,
+							/<sub>(.*)<\/sub>/g,
+							/<sup>(.*)<\/sup>/g,
+							/&amp;/g,
+							/—/g,
+							/“/g,
+							/”/g,
+							/‘/g,
+							/’/g
+						],[
+							'<# $2>',
+							'**',
+							"\t> $1\n",
+							"\t\n",
+							'...',
+							'*',
+							"\t# $1\n",
+							"\t+++\n",
+							'\t===\n',
+							'*',
+							"\t",
+							"\n",
+							'~',
+							'**',
+							'_',
+							'$1',
+							'$1',
+							'&',
+							'--',
+							'"',
+							'"',
+							'`',
+							"'"
+						]
+					],'md2htm':[
+						[
+							/<script([^>]*)>(.*)<\/script>/g,
+							/\+\+\+/g,
+							/===/g,
+							/\.\.\./g,
+							/\*\*([^*]*)\*\*/g,
+							/\*([^*]*)\*/g,
+							/_([^_]*)_/g,
+							/~([^~]*)~/g,
+							/(?<![=/])"([^"]*)"/g,
+							/"/g,
+							/`/g,
+							/'/g,
+							/--/g,
+							/\s\s+/g,
+							/(\d)(st|nd|rd|th)/g,
+							/<([\w.]*)@(\w*)\.(\w*)>/g,
+							/<([\w#!:.,?+=&%@!\-\/]*) ([^>]*) _>/g,
+							/<(?!a href)([\w#!:.,?+=&%@!\-\/]*) ([^>]*)>/g
+						],[
+							'<code>$1</code>',
+							'<h3>✶ ✶ ✶</h3>',
+							'<hr>',
+							' . . . ',
+							'<b>$1</b>',
+							'<i>$1</i>',
+							'<u>$1</u>',
+							'<s>$1</s>',
+							'“$1”',
+							'”',
+							'‘',
+							'’',
+							'—',
+							' ',
+							'$1<sup>$2</sup>',
+							'<a href="mailto:$1@$2.$3">$1@$2.$3</a>',
+							'<a href="$1"target="_Blank">$2</a>',
+							'<a href="$1">$2</a>'
+							]
+						],'par2bbc':[
+							[
+								/</g,
+								/>/g,
+								/strong\]/g,
+								/em\]/g,
+								/\[h1\](.*?)\[\/h1\]/g,
+								/\[h3\]✶ ✶ ✶\[h3\]/g,
+								/\[br\]/g,
+								/\[p\]/g,
+								/\[\/p\]/g
+							],[
+								'[',
+								']',
+								'b]',
+								'i]',
+								"[c]$1[/c]",
+								'[c]✶ ✶ ✶[/c]',
+								"\n",
+								"\n",
+								''
+							]
+						]
+					}
+					// FUN
+					this.autypo=(typo=this.TYPO)=>{
+						let txt=this.NOTEPAD.textContent;
+						Object.keys(typo).forEach(e=>{
+							const regx=new RegExp("\\b"+e+"\\b",'g');
+							txt=txt.replace(regx,typo[e]).replaceAll(/ +/g,' ');
+						});
+						if(this.NOTEPAD.textContent!=txt){
+							this.NOTEPAD.textContent=txt;
+							this.raec();
+							this.cart();
+						}
+						return txt;
+					}
+					this.biu=(g='*')=>{
+						const rang=this.NOTEPAD.textContent.slice(this.RANG[0],this.RANG[1]);
+						let txt;
+						let keep_rang;
+						if(rang.length>0){
+							if(rang.startsWith(g)){
+								if(rang===g){
+									txt='';
+								}else{
+									txt=rang.substring(g.length,rang.length-g.length);
+								}
+							}else{
+								txt=g+rang+g;
+							}
+							keep_rang=false;
+						}else{
+							txt=g;
+							keep_rang=true;
+						}
+						this.xom(txt,keep_rang);
+					}
+					this.cop=(lang='HTML')=>{
+						switch(lang){
+							case'BBC':navigator.clipboard.writeText(scrawl.x2m(scrawl.x2m(),'par2bbc'));break;
+							case'HTML':navigator.clipboard.writeText(scrawl.x2m());break;
+							case'MD':
+							default:navigator.clipboard.writeText(String(scrawl.x2m(scrawl.x2m(),'htm2md')).replaceAll(/\t/g,"\n"));
+						}
+					}
+					this.cart=(pos=null)=>{
+						if(!this.NOTEPAD.childNodes[0]){
+							this.NOTEPAD.append(document.createTextNode(''));
+						}
+						const selec=window.getSelection();
+						const rang=document.createRange();
+						if(pos){
+							this.RANG=[pos[0],pos[1]];
+						}
+						this.RANG.forEach((r,x)=>{
+							const l=this.NOTEPAD.textContent.length;
+							if(r>l){
+								this.RANG[x]=l;
 							}
 						});
+						rang.setStart(this.NOTEPAD.childNodes[0],this.RANG[0]);
+						rang.setEnd(this.NOTEPAD.childNodes[0],this.RANG[1]);
+						selec.removeAllRanges();
+						selec.addRange(rang);
+					}
+					this.nix=(rec=true)=>{
+						if(this.RANG[0]===this.RANG[1]){
+							if(this.RANG[0]>0){
+								this.RANG[0]--;
+							}
+						}
+						this.xom('',true,rec);
+					}
+					this.opin=(bin)=>{
+						const raed=new FileReader();
+						raed.readAsText(bin);
+						raed.onload=()=>{
+							const dot=bin.name.split('.');
+							if(dot[dot.length-1]=='md'){
+								localStorage.Scrawl_TXT=this.x2m(this.x2m(raed.result),'htm2md');
+							}else{
+								localStorage.Scrawl_TXT=this.x2m(raed.result,'htm2md');
+							}
+							location.reload();
+						}
+					}
+					this.raec=()=>{
+						localStorage.Scrawl_TXT=this.NOTEPAD.textContent;
+						if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+							let oldTxt=this.HISTRY['txt'].splice(this.HISTRY['indx']);
+							let oldCart=this.HISTRY['cart'].splice(this.HISTRY['indx']);
+							this.HISTRY['txt']=this.HISTRY['txt'].concat(oldTxt);
+							oldTxt.pop();
+							oldTxt.reverse();
+							this.HISTRY['txt']=this.HISTRY['txt'].concat(oldTxt);
+							this.HISTRY['cart']=this.HISTRY['cart'].concat(oldCart);
+							oldCart.pop();
+							oldCart.reverse();
+							this.HISTRY['cart']=this.HISTRY['cart'].concat(oldCart);
+							this.HISTRY['indx']=this.HISTRY['txt'].length;
+						}else{
+							this.HISTRY['indx']++;
+						}
+						this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
+						this.HISTRY['cart'][this.HISTRY['indx']]=this.RANG;
+						// const b=new Blob([this.HISTRY['txt']]).size;
+						if(this.HISTRY['txt'].length>99){
+							this.HISTRY['txt'].shift();
+							this.HISTRY['cart'].shift();
+							this.HISTRY['indx']--;
+						}
+						// console.log(this.HISTRY);
+					}
+					this.saerk=(wurdz)=>{
+						if(this.NOTEPAD.contentEditable=='true'){
+							const w=wurdz.split('|');
+							const rx=new RegExp('\\b'+w[0]+'\\b','g');
+							const k=[...this.NOTEPAD.innerHTML.matchAll(rx)].length;
+							this.NOTEPAD.innerHTML=this.NOTEPAD.innerHTML.replaceAll(rx,w[1]);
+							this.raec();
+							return'Replaced '+k+' occurrences . . .';
+						}else{
+							return'Cannot make changes while locked!';
+						}
+					}
+					this.tally=()=>{
+						let txt='';
+						if(window.getSelection().toString().length>0){
+							txt=this.x2m(window.getSelection().toString());
+						}else{
+							txt=this.x2m();
+						}
+						const wurdz=txt.split(/ +/).length-1;
+						return wurdz;//+' spaces';
+					}
+					this.undo=(re=false)=>{
+						if(this.NOTEPAD.contentEditable=='true'){
+							let go=false;
+							if(re){
+								if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+									this.HISTRY['indx']++;
+									go=true;
+								}
+							}else{
+								if(this.HISTRY['indx']>1){
+									this.HISTRY['indx']--;
+									go=true;
+								}
+							}
+							if(go){
+								this.NOTEPAD.textContent=this.HISTRY['txt'][this.HISTRY['indx']];
+								this.RANG=this.HISTRY['cart'][this.HISTRY['indx']];
+								this.cart();
+								localStorage.Scrawl_TXT=this.NOTEPAD.textContent;
+							}
+						}
+					}
+					this.x2m=(txt=localStorage.Scrawl_TXT,regx='md2htm')=>{
+						if(regx==='md2htm'){
+							let htm='';
+							const mdarr=txt.split(/\n/g,);
+							mdarr.forEach((line,i)=>{
+								mdarr[i]=line.trim();
+								// console.log(mdarr[i]);
+								switch(mdarr[i][0]){
+									case'#':
+										mdarr[i]=mdarr[i].replace(/^#\s*(.*)/g,'<h1>$1</h1>');
+										break;
+									case'>':
+										mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<blockquote>$1</blockquote>');
+										break;
+									case'+':
+										if(mdarr[i]=='+++'){
+											mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<h3>✶ ✶ ✶</h3>');
+											break;
+										}
+									case'=':
+										if(mdarr[i]=='==='){
+											mdarr[i]=mdarr[i].replace(/^>\s*(.*)/g,'<hr>');
+											break;
+										}
+									default:
+										if(mdarr[i]==''){
+											mdarr[i]='<br>';
+										}else{
+											mdarr[i]=mdarr[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'');
+										}
+								}
+								this.REGX[regx][0].forEach((p,x)=>{
+									mdarr[i]=mdarr[i].replace(p,this.REGX[regx][1][x]);
+								});
+								htm+=mdarr[i];
+							});
+							txt=htm;
+						}else{
+							this.REGX[regx][0].forEach((p,x)=>{
+								txt=txt.replace(p,this.REGX[regx][1][x]);
+							});
+						}
+						return txt.trim();
+					}
+					this.xom=(txt='',x=true,rec=true)=>{
+						if(this.NOTEPAD.contentEditable=='true'){
+							this.NOTEPAD.textContent=this.NOTEPAD.textContent.slice(0,this.RANG[0])+txt+this.NOTEPAD.textContent.slice(this.RANG[1]).replace(/\s+$/,'')+' ';
+							if(x){
+								this.RANG=[this.RANG[0]+txt.length,this.RANG[0]+txt.length];
+							}else{
+								this.RANG[1]=this.RANG[0]+txt.length;
+							}
+							this.cart();
+							if(rec){
+								this.raec();
+							}
+						}
+					}
+					// HEY, LISTEN!
+					this.NOTEPAD.addEventListener('beforeinput',e=>{
+						// console.log(e);
+						e.preventDefault();
+						switch(e.inputType){
+							case'deleteByCut':
+							case'deleteContentBackward':this.nix();break;
+							case'formatBold':this.biu('**');break;
+							case'formatItalic':this.biu();break;
+							case'formatUnderline':this.biu('_');break;
+							case'formatStrikethrough':this.biu('~');break;
+							case'insertFromPaste':navigator.clipboard.readText().then(txt=>this.xom(txt,false));break;
+							case'insertParagraph':this.xom("\n\t");break;
+							case'insertReplacementText':window.getSelection().modify('extend','word','forward');window.getSelection().modify('extend','word','backward');const rang=window.getSelection().getRangeAt(0);this.RANG=[rang.startOffset,rang.endOffset];this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
+							case'insertText':this.xom(e.data);break;
+						}
+						const rex=window.getSelection().getRangeAt(0).getClientRects()[0]['top'];
+						const pos=Math.round(window.scrollY+rex)-(window.innerHeight/3);
+						window.scrollTo(0,pos);
+					});
+					this.NOTEPAD.addEventListener('blur',()=>{
+						this.NOTEPAD.focus();
+					});
+					document.addEventListener('selectionchange',()=>{
+						const selec=window.getSelection().getRangeAt(0);
+						this.RANG=[selec.startOffset,selec.endOffset];
+						/* const txt=this.NOTEPAD.textContent.replaceAll(/\n/g,'⏎').replaceAll(/\t/g,'⇥').replaceAll(/ /g,'◦');
+						console.log(txt,this.RANG,this.NOTEPAD.textContent.length); */
+					});
+					// INIT
+					if(!this.NOTEPAD.childNodes[0]){
+						this.NOTEPAD.append(document.createTextNode(''));
+					}
+					if(localStorage.Scrawl_TXT){
+						this.NOTEPAD.textContent=localStorage.Scrawl_TXT;
+					}
+					this.NOTEPAD.focus();
+					const l=this.NOTEPAD.textContent.length;
+					this.cart([l,l]);
+					this.raec();
 				}
 			}
-			butt.onclick=()=>{
-				unreg();
+			// MAIN
+			const SCRoPS={'Δ':0,'dark':false,'1stime':true,'url':'http://localhost/act.php','issu':'-1.0.13.X','promp':'	# ','max_cache':1048576};
+			const scrawl=new Scrawl();
+			if(!localStorage.Scrawl_CFG){
+				localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
 			}
+			function alurt(msg='OK!'){
+				const moda=document.createElement('div');
+				moda.classList.add('alurt');
+				moda.textContent=msg;
+				console.log('Alurt: '+msg);
+				document.body.appendChild(moda);
+				moda.onclick=()=>{
+					moda.remove();
+				}
+				moda.ontransitionend=()=>{
+					moda.remove();
+				}
+				setTimeout(()=>{moda.style.opacity='0'},2000);
+			}
+			function cfg(ky,valu){
+				if(!localStorage.Scrawl_CFG){
+					if(SCRoPS['Δ']==localStorage.Scrawl_CFG['Δ']){
+						localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
+					}
+				}
+				let cfg=JSON.parse(localStorage.Scrawl_CFG);
+				if(ky){
+					if(valu!=null){
+						cfg[ky]=valu;
+						localStorage.Scrawl_CFG=JSON.stringify(cfg);
+					}else{
+						return JSON.parse(localStorage.Scrawl_CFG)[ky];
+					}
+				}else{
+					return cfg;
+				}
+			}
+			function dark(){
+				document.body.parentElement.classList.toggle('day');
+				if(cfg('dark')=='true'){
+					cfg('dark','false');
+				}else{
+					cfg('dark','true');
+				}
+			}
+			function gurl(bob,naem='Untitled',url='/+/?act=scrapb',albak=(resp)=>{alurt(resp)}){
+				const Formbody=new FormData();
+				Formbody.append(0,bob,naem);
+				fetch(url,{
+					method:'POST',
+					body:Formbody
+				}).then(
+					resp=>resp.text()
+				).then(
+					resp=>{
+						albak(resp)
+					}
+				);
+			}
+			function naeu(){
+				cfg('issu',SCRoPS['issu']);
+				localStorage.Scrawl_TXT='	# ';
+				location.reload();
+			}
+			function opaen(ti=null){
+				if(ti){
+					if(ti.type=='application/vnd.openxmlformats-officedocument.wordprocessingml.document'){
+						gurl(ti,'DOCX','/+/?act=sword',resp=>{localStorage.Scrawl_TXT=scrawl.x2m(resp,'htm2md');location.reload()});
+					}else{
+						scrawl.opin(ti);
+					}
+				}else{
+					const f=document.createElement('input');
+					f.type='file';
+					f.setAttribute('accept','.docx,.htm,.html,.md,.txt');
+					document.body.appendChild(f);
+					f.style.display='none';
+					f.click();
+					f.onchange=()=>{
+						const bin=f.files[0];
+						scrawl.opin(bin);
+					}
+				}
+			}
+			function ops(){
+				const cfg=window.prompt('Configure . . .',localStorage.Scrawl_CFG);
+				if(cfg){
+					if(cfg===' '||cfg==='{}'){
+						localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
+					}else{
+						localStorage.Scrawl_CFG=cfg;
+					}
+				}
+			}
+			function rush(albak){
+				const promp=window.confirm('Unsaved changes will be lost!');
+				if(promp){
+					albak();
+				}
+			}
+			function saef(){
+				const md=scrawl.x2m(scrawl.x2m(),'htm2md').replace(/\t/g,'');
+				const bob=new Blob([md],{type:'text/markdown;charset=utf-8'});
+				const uri=window.URL.createObjectURL(bob);
+				const a=document.createElement('a');
+				const h1=localStorage.Scrawl_TXT.trim().split("\n")[0].trim();
+				let naem='Untitled';
+				if(h1.startsWith('#')){
+					const tyt=h1.replace(/#\s*(.*)/,'$1');
+					if(tyt!=''){
+						naem=tyt;
+					}
+				}
+				document.body.appendChild(a);
+				a.style='display:none';
+				a.href=uri;
+				a.download=naem+'.md';
+				a.click();
+				a.remove();
+				window.URL.revokeObjectURL(uri);
+			}
+			function saerk(){
+				const w=window.prompt('Replace . . .');
+				if(w){
+					if(scrawl.NOTEPAD.contentEditable=='false'){
+						swop();
+					}
+					alurt(scrawl.saerk(w));
+				}
+			}
+			function saen(){
+				const issu=window.prompt('Publish . . .',cfg('issu'));
+				if(issu){
+					cfg('issu',issu);
+					gurl(new Blob([scrawl.x2m()]),issu);
+				}
+			}
+			function spex(){
+				if(scrawl.NOTEPAD.contentEditable=='false'){
+					swop();
+				}
+				if(scrawl.NOTEPAD.spellcheck==true){
+					scrawl.NOTEPAD.setAttribute('spellcheck','false');
+					// alurt('Spellcheck (OFF)');
+				}else{
+					scrawl.NOTEPAD.setAttribute('spellcheck','true');
+					scrawl.autypo();
+					// alurt('Spellcheck (ON)');
+				}
+				document.getElementsByTagName('main')[0].classList.toggle('blu');
+			}
+			function swop(){
+				if(scrawl.NOTEPAD.contentEditable=='true'){
+					if(scrawl.NOTEPAD.spellcheck==true){
+						spex();
+					}
+					scrawl.NOTEPAD.contentEditable='false';
+					document.getElementById('ui-lox').children[0].classList.toggle('hid');
+					document.getElementById('ui-lox').children[1].classList.toggle('hid');
+					scrawl.NOTEPAD.innerHTML=scrawl.x2m();
+				}else{
+					scrawl.NOTEPAD.contentEditable='true';
+					document.getElementById('ui-lox').children[0].classList.toggle('hid');
+					document.getElementById('ui-lox').children[1].classList.toggle('hid');
+					scrawl.NOTEPAD.textContent=localStorage.Scrawl_TXT;
+					scrawl.NOTEPAD.focus();
+					scrawl.cart();
+				}
+				scrawl.NOTEPAD.classList.toggle('locked');
+			}
+			// HEY, LISTEN!
+			document.body.addEventListener('keydown',e=>{
+				if(e.ctrlKey||e.metaKey){
+					if(scrawl.NOTEPAD.contentEditable=='false'){
+						if(e.key.toUpperCase()=='C'){
+							e.preventDefault();
+							if(e.shiftKey){
+								scrawl.cop('BBC');
+								alurt('Copied to clipboard . . . (BBC)');
+							}else{
+								scrawl.cop('HTML');
+								alurt('Copied to clipboard . . . (HTML)');
+							}
+						}
+					}
+					switch(e.key.toUpperCase()){
+						// case'D':e.preventDefault();dark();break;
+						case'E':e.preventDefault();saen();break;
+						case'H':e.preventDefault();saerk();break;
+						case'K':e.preventDefault();scrawl.biu('~');break;
+						case'L':e.preventDefault();spex();break;
+						case'N':e.preventDefault();rush(naeu);break;
+						case'O':e.preventDefault();opaen();break;
+						case'Q':case'W':e.preventDefault();rush(window.close);break;
+						case'S':e.preventDefault();saef();break;
+						case'T':e.preventDefault();alurt(scrawl.tally());break;
+						case'Y':e.preventDefault();scrawl.undo(true);break;
+						case'Z':e.preventDefault();scrawl.undo();break;
+						case'=':case'-':case'_':case'+':e.preventDefault();break;
+					}
+				}else{
+					switch(e.key){
+						case'Tab':e.preventDefault();swop();break;
+						case'F7':e.preventDefault();spex();break;
+						case'F8':e.preventDefault();saerk();break;
+						case'F9':e.preventDefault();dark();break;
+						case'F10':e.preventDefault();ops();break;
+						case'F12':e.preventDefault();saen();break;
+					}
+				}
+		});
+		document.body.parentElement.ondragover=(e)=>{
+			e.preventDefault();
+		}
+		document.body.parentElement.ondrop=(e)=>{
+			e.preventDefault();
+			opaen(e.dataTransfer.items[0].getAsFile());
+		}
+		window.addEventListener('beforeprint',e=>{
+			if(scrawl.NOTEPAD.contentEditable=='true'){
+				swop();
+			}
+		});
+		// INIT
+		if(cfg('dark')=='true'){
+			document.body.parentElement.classList.toggle('day');
+		}
+		spex();
+		if(cfg('1stime')==true){
+			cfg('1stime','false');
+			localStorage.Scrawl_TXT="# Scrawl\n\nIs a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! I developed it specifically for my own use as a distraction-free typewriter.\n\n\n# Header\n===\n+++\n**Bold**\n*Italic*\n~Strikethrough~\n_Underline_\n\"Double quotes\"\n`Single quotes/apostrophes'";
+		}
+		if(localStorage.Scrawl_TXT!=cfg('promp')){
+			swop();
+		}
+		scrawl.NOTEPAD.setAttribute('spellcheck','false');
+		setTimeout(()=>{window.scrollTo(0,0);const l=localStorage.Scrawl_TXT.length;scrawl.RANG=[l,l]},1000);
+		document.body.style.opacity=1;
 		</script>
 	</body>
 </html>
