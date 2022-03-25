@@ -248,17 +248,17 @@
 				<span title="Publish"onclick="saen()"><svg><path d="m12.815 12.197-7.532 1.256a.5.5 0 0 0-.386.318L2.3 20.728c-.248.64.421 1.25 1.035.943l18-9a.75.75 0 0 0 0-1.342l-18-9c-.614-.307-1.283.304-1.035.943l2.598 6.957a.5.5 0 0 0 .386.319l7.532 1.255a.2.2 0 0 1 0 .394Z"/></svg></span>
 				<span class="notouch"><svg><path d="M11 5v14a1 1 0 1 0 2 0V5a1 1 0 1 0-2 0Z"/></svg></span>
 				<span title="Configure"onclick="ops()"><svg><path d="M12.012 2.25c.734.008 1.465.093 2.182.253a.75.75 0 0 1 .582.649l.17 1.527a1.384 1.384 0 0 0 1.927 1.116l1.401-.615a.75.75 0 0 1 .85.174 9.792 9.792 0 0 1 2.204 3.792.75.75 0 0 1-.271.825l-1.242.916a1.381 1.381 0 0 0 0 2.226l1.243.915a.75.75 0 0 1 .272.826 9.797 9.797 0 0 1-2.204 3.792.75.75 0 0 1-.848.175l-1.407-.617a1.38 1.38 0 0 0-1.926 1.114l-.169 1.526a.75.75 0 0 1-.572.647 9.518 9.518 0 0 1-4.406 0 .75.75 0 0 1-.572-.647l-.168-1.524a1.382 1.382 0 0 0-1.926-1.11l-1.406.616a.75.75 0 0 1-.849-.175 9.798 9.798 0 0 1-2.204-3.796.75.75 0 0 1 .272-.826l1.243-.916a1.38 1.38 0 0 0 0-2.226l-1.243-.914a.75.75 0 0 1-.271-.826 9.793 9.793 0 0 1 2.204-3.792.75.75 0 0 1 .85-.174l1.4.615a1.387 1.387 0 0 0 1.93-1.118l.17-1.526a.75.75 0 0 1 .583-.65c.717-.159 1.45-.243 2.201-.252ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span>
-				<span class="bad"title="Quit"onclick="window.close()"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span>
+				<span class="bad"title="Quit"onclick="rush(window.close)"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span>
 			</nav>
 		</main>
-		<!-- <script>
+		<script>
 			'use strict';
 			class Scrawl{
 				constructor(notepad=document.getElementsByTagName('article')[0]){
 					this.NOTEPAD=notepad;
 					this.NOTEPAD.contentEditable='true';
 					this.NOTEPAD.spellcheck='true';
-					this.HISTRY={'max':1048576,'indx':0,'cart':[0,0],'txt':['']};
+					this.HISTRY={'indx':0,'cart':[0,0],'txt':['']};
 					this.RANG=[0,0];
 					this.TYPO={"Aint":"Ain't","aint":"ain't",/*"Cant":"Can't","cant":"can't",*/"Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","Hasnt":"Hasn't","hasnt":"hasn't","Havent":"Haven't","havent":"haven't","Hed":"He'd","hed":"he'd","Hes":"He's","hes":"he's","i":"I","Im":"I'm","i'm":"I'm","im":"I'm","Isnt":"Isn't","isnt":"isn't","Ive":"I've","ive":"I've","Mustnt":"Mustn't","mustnt":"mustn't","Mustve":"Must've","mustve":"must've","Shant":"Shan't","shant":"shan't","Shes":"She's","shes":"she's","Thats":"That's","thats":"that's","Theres":"There's","theres":"there's","Theyd":"They'd","theyd":"they'd","Theyll":"They'll","theyll":"they'll","Theyre":"They're","theyre":"they're","Theyve":"They've","theyve":"they've",/*"Twas":"'Twas","twas":"'twas",*/"Wasnt":"Wasn't","wasnt":"wasn't","Werent":"Weren't","werent":"weren't","Wheres":"Where's","wheres":"where's",/*"Wont":"Won't","wont":"won't",*/"Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youd":"You'd","youd":"you'd","Youll":"You'll","youll":"you'll","Youre":"You're","youre":"you're","Youve":"You've","youve":"you've"};
 					this.REGX={'htm2md':[
@@ -510,7 +510,7 @@
 						}
 						this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
 						this.HISTRY['cart'][this.HISTRY['indx']]=this.RANG;
-						if(this.HISTRY['txt'].length>99){
+						if(this.HISTRY['txt'].length>cfg('max_undo')){
 							this.HISTRY['txt'].shift();
 							this.HISTRY['cart'].shift();
 							this.HISTRY['indx']--;
@@ -662,7 +662,7 @@
 				}
 			}
 			// MAIN
-			const SCRoPS={'Δ':0,'dark':false,'1stime':true,'url':'http://localhost/act.php','issu':'-1.0.13.X','promp':'	# ','max_cache':1048576};
+			const SCRoPS={'Δ':0,'dark':false,'intro':true,'issu':'-1.0.13.X','max_undo':99,'promp':'	# ','puburl':'http://localhost/act.php'};
 			const scrawl=new Scrawl();
 			const prog=document.getElementsByTagName('progress')[0];
 			if(!localStorage.Scrawl_CFG){
@@ -708,7 +708,7 @@
 					cfg('dark','true');
 				}
 			}
-			function gurl(bob,naem='Untitled',url='/+/?act=scrapb',albak=(resp)=>{alurt(resp)}){
+			function gurl(bob,naem='Untitled',url='http://localhost/act.php',albak=(resp)=>{alurt(resp)}){
 				const Formbody=new FormData();
 				Formbody.append(0,bob,naem);
 				fetch(url,{
@@ -783,6 +783,7 @@
 				a.click();
 				a.remove();
 				window.URL.revokeObjectURL(uri);
+				alurt('Saved!');
 			}
 			function saerk(){
 				const w=window.prompt('Replace . . .');
@@ -797,7 +798,7 @@
 				const issu=window.prompt('Publish . . .',cfg('issu'));
 				if(issu){
 					cfg('issu',issu);
-					gurl(new Blob([scrawl.x2m()]),issu);
+					gurl(new Blob([scrawl.x2m()]),issu,cfg('puburl'));
 				}
 			}
 			function spex(){
@@ -901,8 +902,8 @@
 			document.body.parentElement.classList.toggle('day');
 		}
 		spex();
-		if(cfg('1stime')==true){
-			cfg('1stime','false');
+		if(cfg('intro')==true){
+			cfg('intro','false');
 			localStorage.Scrawl_TXT="# Scrawl\n\nIs a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! I developed it specifically for my own use as a distraction-free typewriter.\n\n\n# Header\n===\n+++\n**Bold**\n*Italic*\n~Strikethrough~\n_Underline_\n\"Double quotes\"\n`Single quotes/apostrophes'";
 		}
 		if(localStorage.Scrawl_TXT!=cfg('promp')){
@@ -911,7 +912,6 @@
 		scrawl.NOTEPAD.setAttribute('spellcheck','false');
 		setTimeout(()=>{window.scrollTo(0,0);const l=localStorage.Scrawl_TXT.length;scrawl.RANG=[l,l]},1000);
 		document.body.style.opacity=1;
-		</script> -->
-		<script>document.body.style.opacity=1;</script>
+		</script>
 	</body>
 </html>
