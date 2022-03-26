@@ -670,9 +670,6 @@
 			const scrawl=new Scrawl();
 			const cement=document.getElementById('menu');
 			let HAND=false;
-			if(!localStorage.Scrawl_CFG){
-				localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
-			}
 			function alurt(msg='OK!'){
 				const moda=document.createElement('div');
 				moda.classList.add('alurt');
@@ -689,9 +686,7 @@
 			}
 			function cfg(ky,valu){
 				if(!localStorage.Scrawl_CFG){
-					if(SCRoPS['Δ']==localStorage.Scrawl_CFG['Δ']){
-						localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
-					}
+					localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
 				}
 				let cfg=JSON.parse(localStorage.Scrawl_CFG);
 				if(ky){
