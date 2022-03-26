@@ -23,7 +23,12 @@
 				}
 			}
 			::-webkit-scrollbar{
-				display:none;
+				height:var(--rad)*2;
+				width:var(--rad)*2;
+			}::-webkit-scrollbar-thumb{
+				background-color:var(--mg);
+				border-radius:var(--rad);
+				border:4pt solid var(--bg);
 			}
 			::selection{
 				background-color:var(--fg);
@@ -37,9 +42,10 @@
 				--ok:DodgerBlue;
 				--pg:#333;
 				--pt:18pt;
+				--bord:2pt solid;
 				--font:'Font',sans-serif;
 				--rad:calc(var(--pt)/3);
-				cursor:cell;
+				cursor:crosshair;
 				scroll-behavior:smooth;
 				text-align:center;
 				user-select:none;
@@ -104,21 +110,6 @@
 			p:not(br+p,p:first-of-type){
 				text-indent:2em;
 			}
-			progress{
-				appearance:none;
-				bottom:0;
-				box-shadow:0 -1pt 3pt var(--bg);
-				height:2pt;
-				left:0;
-				opacity:0;
-				position:fixed;
-				transition:opacity .67s;
-				width:100%;
-			}progress::-webkit-progress-bar{
-				background-color:var(--bg);
-			}progress::-webkit-progress-value{
-				background-color:var(--fg);
-			}
 			nav{
 				background-color:var(--bg);
 				bottom:0;
@@ -130,12 +121,12 @@
 				width:100%;
 			}nav:hover{
 				opacity:1;
-			}nav span{
+			}nav span,#menu>span{
 				display:inline-block;
 				height:24px;
 				padding:.5em;
 				width:24px;
-			}nav span:not(.notouch){
+			}nav span:not(.notouch),#menu>span{
 				cursor:pointer;
 			}nav span:not(.notouch):hover{
 				background-color:var(--fg);
@@ -154,7 +145,7 @@
 			.alurt{
 				animation:pop 1s forwards;
 				background-color:var(--fg);
-				border:2pt solid var(--bg);
+				border:var(--bord) var(--pg);
 				border-radius:var(--rad);
 				color:var(--bg);
 				cursor:pointer;
@@ -194,10 +185,26 @@
 			.notouch{
 				opacity:.33;
 			}
+			#menu{
+				/* background-color:var(--pg); */
+				/* border-color:currentColor; */
+				/* color:var(--fg); */
+				display:none;
+				padding:0;
+			}#menu>span{
+				margin:2pt;
+			}#menu>span:first-of-type{
+				border-radius:var(--rad) 0 0 var(--rad);
+			}#menu>span:last-of-type{
+				border-radius:0 var(--rad) var(--rad) 0;
+			}#menu>span:hover{
+				background-color:var(--pg);
+				color:var(--fg);
+			}
 			@media(orientation:landscape){
 				article{
 					background-color:var(--pg);
-					border:2pt solid;
+					border:var(--bord);
 					margin-bottom:10vh;
 					margin-top:10vh;
 					padding:1in;
@@ -232,11 +239,10 @@
 	<body>
 		<main class="blu">
 			<article></article>
-			<progress max="100"value="0"></progress>
 			<nav>
 				<span title="New"onclick="rush(naeu)"><svg><path d="M12 2v6a2 2 0 0 0 2 2h6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6Z M13.5 2.5V8a.5.5 0 0 0 .5.5h5.5l-6-6Z"/></svg></span>
 				<span title="Open"onclick="opaen()"><svg><path d="M13.821 6.5h5.929a2.25 2.25 0 0 1 2.229 1.938l.016.158.005.154v9a2.25 2.25 0 0 1-2.096 2.245L19.75 20H4.25a2.25 2.25 0 0 1-2.245-2.096L2 17.75v-7.251l6.207.001.196-.009a2.25 2.25 0 0 0 1.088-.393l.156-.12L13.821 6.5Z M8.207 4c.46 0 .908.141 1.284.402l.156.12 2.103 1.751-3.063 2.553-.085.061a.75.75 0 0 1-.29.106L8.206 9 2 8.999V6.25a2.25 2.25 0 0 1 2.096-2.245L4.25 4h3.957Z"/></svg></span>
-				<span title="Save"onclick="saef()"oncontextmenu="saef('rtf')"><svg><path d="M6.75 3h-1A2.75 2.75 0 0 0 3 5.75v12.5A2.75 2.75 0 0 0 5.75 21H6v-6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 15v6h.25A2.75 2.75 0 0 0 21 18.25V8.286a3.25 3.25 0 0 0-.952-2.299l-2.035-2.035A3.25 3.25 0 0 0 15.75 3v4.5a2.25 2.25 0 0 1-2.25 2.25H9A2.25 2.25 0 0 1 6.75 7.5V3Z M14.25 3v4.5a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75V3h6ZM16.5 21v-6a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0-.75.75v6h9Z"/></svg></span>
+				<span title="Save"onclick="saef()"oncontextmenu="saef(true)"><svg><path d="M6.75 3h-1A2.75 2.75 0 0 0 3 5.75v12.5A2.75 2.75 0 0 0 5.75 21H6v-6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 15v6h.25A2.75 2.75 0 0 0 21 18.25V8.286a3.25 3.25 0 0 0-.952-2.299l-2.035-2.035A3.25 3.25 0 0 0 15.75 3v4.5a2.25 2.25 0 0 1-2.25 2.25H9A2.25 2.25 0 0 1 6.75 7.5V3Z M14.25 3v4.5a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75V3h6ZM16.5 21v-6a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0-.75.75v6h9Z"/></svg></span>
 				<span title="Print"onclick="window.print()"><svg><path d="M18 17.5v1.25A2.25 2.25 0 0 1 15.75 21h-7.5A2.25 2.25 0 0 1 6 18.75v-1.251l-1.75.001A2.25 2.25 0 0 1 2 15.25V9.254a3.25 3.25 0 0 1 3.25-3.25l.749-.001L6 5.25A2.25 2.25 0 0 1 8.25 3h7.502a2.25 2.25 0 0 1 2.25 2.25v.753h.75a3.254 3.254 0 0 1 3.252 3.25l.003 5.997a2.249 2.249 0 0 1-2.248 2.25H18Zm-2.25-4h-7.5a.75.75 0 0 0-.75.75v4.5c0 .414.336.75.75.75h7.5a.75.75 0 0 0 .75-.75v-4.5a.75.75 0 0 0-.75-.75Zm.002-9H8.25a.75.75 0 0 0-.75.75l-.001.753h9.003V5.25a.75.75 0 0 0-.75-.75Z"/></svg></span>
 				<span class="notouch"><svg><path d="M11 5v14a1 1 0 1 0 2 0V5a1 1 0 1 0-2 0Z"/></svg></span>
 				<span id="ui-spex"title="Auto Proof"onclick="spex()"><svg><path d="M10.961 3c.31.005.586.2.693.492l3.581 9.766-1.163 1.184-.468-1.275H7.998L6.7 16.52a.75.75 0 0 1-1.4-.542l1.484-3.833.003-.008 3.467-8.667a.75.75 0 0 1 .707-.47Zm-.041 2.846-2.329 5.82h4.463l-2.134-5.82Z"/><path d="m20.306 12.557-.129-.106-.003-.002a2.263 2.263 0 0 0-2.951.212l-3.803 3.87c-.236.239-.408.529-.503.845l-.587 1.952a5.044 5.044 0 0 1-1.604-.007.037.037 0 0 1-.028-.051l.037-.08c.066-.137.18-.381.218-.632.02-.14.027-.334-.049-.54a1.002 1.002 0 0 0-.422-.512c-.324-.2-.727-.215-1.073-.195a7.936 7.936 0 0 0-1.031.144c-.462.09-.901.297-1.339.503-.576.272-1.15.542-1.771.542-.223 0-.437-.036-.638-.104-.123-.041-.258.059-.227.185.057.228.162.537.392.775a1.08 1.08 0 0 0 1.106.283c1.454-.426 2.42-.658 3.048-.763.132-.022.23.11.19.238-.063.2-.153.578.034.96.202.416.6.59.944.66 1.143.236 2.13.205 3.336-.112a1.08 1.08 0 0 0 .157-.038l.117-.037c.171-.05.347-.105.529-.166a.752.752 0 0 0 .08-.031l1.387-.449c.338-.11.643-.296.887-.545l3.795-3.86c.786-.801.783-2.035.018-2.826l-.117-.113Z"/></svg></span>
@@ -250,6 +256,7 @@
 				<span title="Configure"onclick="ops()"><svg><path d="M12.012 2.25c.734.008 1.465.093 2.182.253a.75.75 0 0 1 .582.649l.17 1.527a1.384 1.384 0 0 0 1.927 1.116l1.401-.615a.75.75 0 0 1 .85.174 9.792 9.792 0 0 1 2.204 3.792.75.75 0 0 1-.271.825l-1.242.916a1.381 1.381 0 0 0 0 2.226l1.243.915a.75.75 0 0 1 .272.826 9.797 9.797 0 0 1-2.204 3.792.75.75 0 0 1-.848.175l-1.407-.617a1.38 1.38 0 0 0-1.926 1.114l-.169 1.526a.75.75 0 0 1-.572.647 9.518 9.518 0 0 1-4.406 0 .75.75 0 0 1-.572-.647l-.168-1.524a1.382 1.382 0 0 0-1.926-1.11l-1.406.616a.75.75 0 0 1-.849-.175 9.798 9.798 0 0 1-2.204-3.796.75.75 0 0 1 .272-.826l1.243-.916a1.38 1.38 0 0 0 0-2.226l-1.243-.914a.75.75 0 0 1-.271-.826 9.793 9.793 0 0 1 2.204-3.792.75.75 0 0 1 .85-.174l1.4.615a1.387 1.387 0 0 0 1.93-1.118l.17-1.526a.75.75 0 0 1 .583-.65c.717-.159 1.45-.243 2.201-.252ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span>
 				<span class="bad"title="Quit"onclick="rush(window.close)"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span>
 			</nav>
+			<div id="menu"class="alurt"><span onclick="scrawl.biu('**')"><svg><path d="M6 5.75C6 4.784 6.784 4 7.75 4h4.749c2.823 0 4.751 2.34 4.751 4.75 0 .931-.288 1.852-.803 2.632C17.369 12.239 18 13.47 18 15c0 3.133-2.677 5-5 5H7.75A1.75 1.75 0 0 1 6 18.25V5.75Zm3.5 7.75v3H13c.312 0 .71-.138 1.024-.421.288-.26.476-.615.476-1.079 0-.888-.745-1.5-1.5-1.5H9.5Zm0-3.5h3c.715 0 1.25-.592 1.25-1.25 0-.657-.536-1.25-1.251-1.25H9.5V10Z"/></svg></span><span onclick="scrawl.biu()"><svg><path d="M10.649 18.5h3.847a1 1 0 0 1 0 2h-9.5a.997.997 0 0 1-.996-1c0-.552.445-1 .996-1h3.51L13.332 6H9.997a1 1 0 0 1 0-2H18.5a1 1 0 0 1 0 2h-3.025L10.65 18.5Z"/></svg></span><span onclick="scrawl.biu('_')"><svg><path d="M6 4.5a1 1 0 0 1 2 0v6.001c-.003 3.463 1.32 4.999 4.247 4.999 2.928 0 4.253-1.537 4.253-5v-6a1 1 0 1 1 2 0v6c0 4.54-2.18 7-6.253 7S5.996 15.039 6 10.5v-6ZM7 21a1 1 0 1 1 0-2h10.5a1 1 0 1 1 0 2H7Z"/></svg></span><span onclick="scrawl.biu('~')"><svg><path d="M13.848 11.5H19.5a1 1 0 0 1 0 2h-2.387a4.03 4.03 0 0 1 .998 2.684c0 2.93-3.28 4.915-7.033 4.48-2.328-.271-3.965-1.22-4.827-2.833-.26-.487-.207-1.016.248-1.331.455-.316 1.256-.099 1.516.388.533.998 1.604 1.592 3.294 1.789 2.586.3 4.802-.91 4.802-2.492 0-1.099-.547-1.94-2.107-2.685H5a1 1 0 1 1 0-2H13.848ZM6.987 9.695a5.122 5.122 0 0 1-.298-.51c-.3-.59-.468-1.214-.435-1.835.16-2.965 2.934-4.713 6.602-4.287 2.26.263 3.99 1.084 5.147 2.487a.993.993 0 0 1-.153 1.4c-.426.351-1.049.326-1.4-.1-.813-.985-2.068-1.596-3.825-1.8-2.56-.298-4.371.718-4.371 2.323 0 .714.239 1.22.762 1.81.225.254.647.525 1.265.815H7.192a38.03 38.03 0 0 1-.205-.303Z"/></svg></span></div>
 		</main>
 		<script>
 			'use strict';
@@ -321,12 +328,7 @@
 							/<i>/g,
 							/<\/i>/g,
 							/<p>/g,
-							/<\/p>/g,
-							/“/g,
-							/”/g,
-							/‘/g,
-							/’/g,
-							/—/g
+							/<\/p>/g
 						],[
 							'{\\b ',
 							'}',
@@ -336,12 +338,7 @@
 							'{\\i ',
 							'}',
 							'{\\pard\\fi720 ',
-							'\\par}',
-							'"',
-							'"',
-							"'",
-							"'",
-							'--'
+							'\\par}'
 						]
 					],'md2htm':[
 						[
@@ -373,7 +370,7 @@
 							'<u>$1</u>',
 							'<s>$1</s>',
 							'“$1”',
-							'”',
+							'“',
 							'‘',
 							'’',
 							'—',
@@ -383,7 +380,7 @@
 							'<a href="$1"target="_Blank">$2</a>',
 							'<a href="$1">$2</a>'
 							]
-						],'par2bbc':[
+						],'htm2bbc':[
 							[
 								/</g,
 								/>/g,
@@ -444,7 +441,7 @@
 					}
 					this.cop=(lang='HTML')=>{
 						switch(lang){
-							case'BBC':navigator.clipboard.writeText(scrawl.x2m(scrawl.x2m(),'par2bbc'));break;
+							case'BBC':navigator.clipboard.writeText(scrawl.x2m(scrawl.x2m(),'htm2bbc'));break;
 							case'HTML':navigator.clipboard.writeText(scrawl.x2m());break;
 							case'MD':
 							default:navigator.clipboard.writeText(String(scrawl.x2m(scrawl.x2m(),'htm2md')).replaceAll(/\t/g,"\n"));
@@ -528,6 +525,12 @@
 							return'Cannot make changes while locked!';
 						}
 					}
+					this.selmod=(reach='word')=>{
+						window.getSelection().modify('move','backward',reach);
+						window.getSelection().modify('extend','forward',reach);
+						const rang=window.getSelection().getRangeAt(0);
+						this.RANG=[rang.startOffset,rang.endOffset];
+					}
 					this.tally=()=>{
 						let txt='';
 						if(window.getSelection().toString().length>0){
@@ -601,7 +604,7 @@
 								txt=txt.replace(p,this.REGX[regx][1][x]);
 							});
 							if(regx==='htm2rtf'){
-								txt='{\\rtf1\\ansi{\\info{\\author Angus "Starscade" Sheehan}{\\doccomm https://starsca.de}}'+txt+'}';
+								txt='{\\rtf1\\ansi{\\info{\\author '+cfg('author')+'}{\\doccomm '+cfg('comment')+'}}'+txt+'}';
 							}
 						}
 						return txt.trim();
@@ -632,7 +635,7 @@
 							case'formatStrikethrough':this.biu('~');break;
 							case'insertFromPaste':navigator.clipboard.readText().then(txt=>this.xom(txt,false));break;
 							case'insertParagraph':this.xom("\n\t");break;
-							case'insertReplacementText':window.getSelection().modify('extend','word','forward');window.getSelection().modify('extend','word','backward');const rang=window.getSelection().getRangeAt(0);this.RANG=[rang.startOffset,rang.endOffset];this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
+							case'insertReplacementText':this.selmod();this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
 							case'insertText':this.xom(e.data);break;
 						}
 						const rex=window.getSelection().getRangeAt(0).getClientRects()[0]['top'];
@@ -647,6 +650,7 @@
 						this.RANG=[selec.startOffset,selec.endOffset];
 						/* const txt=this.NOTEPAD.textContent.replaceAll(/\n/g,'⏎').replaceAll(/\t/g,'⇥').replaceAll(/ /g,'◦');
 						console.log(txt,this.RANG,this.NOTEPAD.textContent.length); */
+						// alurt(selec.startOffset+'/'+selec.endOffset);
 					});
 					// INIT
 					if(!this.NOTEPAD.childNodes[0]){
@@ -662,9 +666,10 @@
 				}
 			}
 			// MAIN
-			const SCRoPS={'Δ':0,'dark':false,'intro':true,'issu':'-1.0.13.X','max_undo':99,'promp':'	# ','puburl':'http://localhost/act.php'};
+			const SCRoPS={'Δ':0,'author':'Paige Turner','dark':false,'intro':true,'issu':'-1.0.13.X','max_undo':99,'promp':'	# ','webhook':'http://localhost/act.php','comment':'Scrawled with https://scrawl.cc/'};
 			const scrawl=new Scrawl();
-			const prog=document.getElementsByTagName('progress')[0];
+			const cement=document.getElementById('menu');
+			let HAND=false;
 			if(!localStorage.Scrawl_CFG){
 				localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
 			}
@@ -722,6 +727,50 @@
 					}
 				);
 			}
+			async function mkHand(naem){
+				if(HAND===false){
+					const opts={
+						suggestedName:naem,
+						types:[{
+							description:'Markdown',
+							accept:{
+								'text/markdown':['.md']
+							}
+						},{
+							description:'Plaintext',
+							accept:{
+								'text/plain':['.txt']
+							}
+						},{
+							description:'HTML',
+							accept:{
+								'text/HTML':['.htm']
+							}
+						},{
+							description:'Richtext',
+							accept:{
+								'application/rtf':['.rtf']
+							}
+						}]
+					};
+					HAND=await window.showSaveFilePicker(opts);
+				}
+				const fty=await HAND.getFile();
+				const fty2=fty.name.split('.');
+				const rtf=fty2[fty2.length-1];
+				let md;
+				if(rtf=='htm'){
+					md=scrawl.x2m();
+				}else{
+					md=scrawl.x2m(scrawl.x2m(),'htm2'+rtf).replace(/\t/g,'');
+				}
+				const mime={'md':'text/markdown','htm':'text/html','txt':'text/plain','rtf':'application/rtf'};
+				const bob=new Blob([md],{type:mime[rtf]+';charset=utf-8'});
+				const pen=await HAND.createWritable();
+				await pen.write(bob);
+				await pen.close();
+				alurt('Saved!');
+			}
 			function naeu(){
 				cfg('issu',SCRoPS['issu']);
 				localStorage.Scrawl_TXT='	# ';
@@ -763,11 +812,7 @@
 					albak();
 				}
 			}
-			function saef(rtf='md'){
-				const md=scrawl.x2m(scrawl.x2m(),'htm2'+rtf).replace(/\t/g,'');
-				const bob=new Blob([md],{type:'text/markdown;charset=utf-8'});
-				const uri=window.URL.createObjectURL(bob);
-				const a=document.createElement('a');
+			function saef(as=false){
 				const h1=localStorage.Scrawl_TXT.trim().split("\n")[0].trim();
 				let naem='Untitled';
 				if(h1.startsWith('#')){
@@ -776,14 +821,10 @@
 						naem=tyt;
 					}
 				}
-				document.body.appendChild(a);
-				a.style='display:none';
-				a.href=uri;
-				a.download=naem+'.'+rtf;
-				a.click();
-				a.remove();
-				window.URL.revokeObjectURL(uri);
-				alurt('Saved!');
+				if(as){
+					HAND=false;
+				}
+				mkHand(naem);
 			}
 			function saerk(){
 				const w=window.prompt('Replace . . .');
@@ -798,7 +839,7 @@
 				const issu=window.prompt('Publish . . .',cfg('issu'));
 				if(issu){
 					cfg('issu',issu);
-					gurl(new Blob([scrawl.x2m()]),issu,cfg('puburl'));
+					gurl(new Blob([scrawl.x2m()]),issu,cfg('url'));
 				}
 			}
 			function spex(){
@@ -834,11 +875,12 @@
 			}
 			// HEY, LISTEN!
 			document.body.addEventListener('keydown',e=>{
+				cement.style.display='none';
 				if(e.ctrlKey||e.metaKey){
 					if(e.key.toUpperCase()=='S'){
 						e.preventDefault();
 						if(e.shiftKey){
-							saef('rtf');
+							saef(true);
 						}else{
 							saef();
 						}
@@ -881,9 +923,7 @@
 				}
 		});
 		document.body.onscroll=()=>{
-			prog.value=100*(window.scrollY/(document.body.scrollHeight-window.innerHeight));
-			prog.style.opacity=1;
-			setTimeout(()=>{prog.style.opacity=0},333);
+			cement.style.display='none';
 		}
 		document.body.parentElement.ondragover=(e)=>{
 			e.preventDefault();
@@ -897,6 +937,22 @@
 				swop();
 			}
 		});
+		document.body.onclick=(e)=>{
+			cement.style.display='none';
+		}
+		scrawl.NOTEPAD.oncontextmenu=(e)=>{
+			if(scrawl.NOTEPAD.contentEditable=='true'){
+				if(scrawl.RANG[0]===scrawl.RANG[1]){
+					scrawl.selmod();
+				}
+				cement.style.display='block';
+				cement.style.left=(e.clientX+64)+'px';
+				cement.style.top=(e.clientY+24)+'px';
+			}
+		}
+		scrawl.NOTEPAD.ondblclick=(e)=>{
+			scrawl.selmod('sentence');
+		}
 		// INIT
 		if(cfg('dark')=='true'){
 			document.body.parentElement.classList.toggle('day');
