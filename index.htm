@@ -1006,7 +1006,7 @@
 			spex();
 			if(cfg('intro')){
 				cfg('intro',false);
-				localStorage.Scrawl_TXT="# Welcome\n\nScrawl is a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! More information can be found at https://starscade.github.io/Scrawl";
+				localStorage.Scrawl_TXT=cfg('promp');
 			}
 			if(localStorage.Scrawl_TXT!=cfg('promp')){
 				swop();
