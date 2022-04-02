@@ -3,11 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
-		<meta name="apple-mobile-web-app-capable"content="yes">
-		<meta name="mobile-web-app-capable"content="yes">
-		<link rel="manifest"href="manifest.json">
+		<link rel="manifest"href="manifest.json"type="application/manifest+json">
 		<meta name="theme-color"content="#ddd">
-		<link rel="apple-touch-icon"href="ico.png">
 		<link rel="icon"href="ico.png"type="image/png"sizes="192x192">
 		<title>S c r a w l</title>
 		<style>
@@ -63,13 +60,15 @@
 				border-bottom-style:solid;
 			}
 			article{
+				background-color:var(--pg);
+				border:var(--bord);
 				border-radius:var(--rad);
 				cursor:text;
 				line-height:150%;
-				margin:auto auto 1em auto;
+				margin:10vh auto 10vh auto;
 				max-width:7.5in;
 				min-height:80vh;
-				padding:2em;
+				padding:1in;
 				text-align:left;
 				white-space:pre-wrap;
 			}article:focus{
@@ -121,11 +120,13 @@
 			}
 			nav{
 				background-color:var(--bg);
-				bottom:0;
-				box-shadow:0 -1em 1em var(--bg);
+				bottom:auto;
+				box-shadow:0 1em 1em var(--bg);
+				opacity:0;
 				overflow-x:auto;
 				padding-top:.5em;
 				position:fixed;
+				top:0;
 				white-space:nowrap;
 				width:100%;
 			}nav:hover{
@@ -194,9 +195,9 @@
 			.notouch{
 				opacity:.33;
 			}
-			#hunt{
+			/* #hunt{
 				display:none;
-			}
+			} */
 			#menu{
 				/* background-color:var(--pg); */
 				/* border-color:currentColor; */
@@ -212,21 +213,6 @@
 			}#menu>span:hover{
 				background-color:var(--pg);
 				color:var(--fg);
-			}
-			@media(orientation:landscape){
-				article{
-					background-color:var(--pg);
-					border:var(--bord);
-					margin-bottom:10vh;
-					margin-top:10vh;
-					padding:1in;
-				}
-				nav{
-					bottom:auto;
-					box-shadow:0 1em 1em var(--bg);
-					opacity:0;
-					top:0;
-				}
 			}
 			@media print{
 				:root{
@@ -269,7 +255,7 @@
 				<span class="bad"title="Quit"onclick="rush(window.close)"><svg><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm3.53 6.47-.084-.073a.75.75 0 0 0-.882-.007l-.094.08L12 10.939l-2.47-2.47-.084-.072a.75.75 0 0 0-.882-.007l-.094.08-.073.084a.75.75 0 0 0-.007.882l.08.094L10.939 12l-2.47 2.47-.072.084a.75.75 0 0 0-.007.882l.08.094.084.073a.75.75 0 0 0 .882.007l.094-.08L12 13.061l2.47 2.47.084.072a.75.75 0 0 0 .882.007l.094-.08.073-.084a.75.75 0 0 0 .007-.882l-.08-.094L13.061 12l2.47-2.47.072-.084a.75.75 0 0 0 .007-.882l-.08-.094-.084-.073.084.073Z"/></svg></span>
 			</nav>
 			<div id="menu"class="alurt"><span title="Bold"onclick="scrawl.biu('**')"><svg><path d="M6 5.75C6 4.784 6.784 4 7.75 4h4.749c2.823 0 4.751 2.34 4.751 4.75 0 .931-.288 1.852-.803 2.632C17.369 12.239 18 13.47 18 15c0 3.133-2.677 5-5 5H7.75A1.75 1.75 0 0 1 6 18.25V5.75Zm3.5 7.75v3H13c.312 0 .71-.138 1.024-.421.288-.26.476-.615.476-1.079 0-.888-.745-1.5-1.5-1.5H9.5Zm0-3.5h3c.715 0 1.25-.592 1.25-1.25 0-.657-.536-1.25-1.251-1.25H9.5V10Z"/></svg></span><span title="Italic"onclick="scrawl.biu()"><svg><path d="M10.649 18.5h3.847a1 1 0 0 1 0 2h-9.5a.997.997 0 0 1-.996-1c0-.552.445-1 .996-1h3.51L13.332 6H9.997a1 1 0 0 1 0-2H18.5a1 1 0 0 1 0 2h-3.025L10.65 18.5Z"/></svg></span><span title="Underline"onclick="scrawl.biu('_')"><svg><path d="M6 4.5a1 1 0 0 1 2 0v6.001c-.003 3.463 1.32 4.999 4.247 4.999 2.928 0 4.253-1.537 4.253-5v-6a1 1 0 1 1 2 0v6c0 4.54-2.18 7-6.253 7S5.996 15.039 6 10.5v-6ZM7 21a1 1 0 1 1 0-2h10.5a1 1 0 1 1 0 2H7Z"/></svg></span><span title="Strikethrough"onclick="scrawl.biu('~')"><svg><path d="M13.848 11.5H19.5a1 1 0 0 1 0 2h-2.387a4.03 4.03 0 0 1 .998 2.684c0 2.93-3.28 4.915-7.033 4.48-2.328-.271-3.965-1.22-4.827-2.833-.26-.487-.207-1.016.248-1.331.455-.316 1.256-.099 1.516.388.533.998 1.604 1.592 3.294 1.789 2.586.3 4.802-.91 4.802-2.492 0-1.099-.547-1.94-2.107-2.685H5a1 1 0 1 1 0-2H13.848ZM6.987 9.695a5.122 5.122 0 0 1-.298-.51c-.3-.59-.468-1.214-.435-1.835.16-2.965 2.934-4.713 6.602-4.287 2.26.263 3.99 1.084 5.147 2.487a.993.993 0 0 1-.153 1.4c-.426.351-1.049.326-1.4-.1-.813-.985-2.068-1.596-3.825-1.8-2.56-.298-4.371.718-4.371 2.323 0 .714.239 1.22.762 1.81.225.254.647.525 1.265.815H7.192a38.03 38.03 0 0 1-.205-.303Z"/></svg></span></div>
-			<div id="hunt"class="alurt"><input type="text"></div>
+			<!-- <div id="hunt"class="alurt"><input type="text"></div> -->
 		</main>
 		<script>
 			'use strict';
@@ -538,11 +524,25 @@
 							return'Cannot make changes while locked!';
 						}
 					}
-					this.selmod=(reach='word')=>{
-						window.getSelection().modify('move','backward',reach);
-						window.getSelection().modify('extend','forward',reach);
-						const rang=window.getSelection().getRangeAt(0);
-						this.RANG=[rang.startOffset,rang.endOffset];
+					this.selmod=(scope='word')=>{
+						window.getSelection().modify('move','backward',scope);
+						window.getSelection().modify('extend','forward',scope);
+						const selec=window.getSelection();
+						const rang=selec.getRangeAt(0);
+						const nurang=document.createRange();
+						let beg=0;
+						let nd=0;
+						if(selec.toString()[0]=='	'){
+							beg=1;
+						}
+						if(selec.toString()[selec.toString().length-1]==' '){
+							nd=1;
+						}
+						nurang.setStart(this.NOTEPAD.childNodes[0],rang.startOffset+beg);
+						nurang.setEnd(this.NOTEPAD.childNodes[0],rang.endOffset-nd);
+						selec.removeAllRanges();
+						selec.addRange(nurang);
+						this.RANG=[nurang.startOffset,nurang.endOffset];
 					}
 					this.tally=()=>{
 						let txt='';
@@ -661,6 +661,7 @@
 					document.addEventListener('selectionchange',()=>{
 						const selec=window.getSelection().getRangeAt(0);
 						this.RANG=[selec.startOffset,selec.endOffset];
+						// this.HISTRY['cart'][this.HISTRY['indx']]=this.RANG;
 						/* const txt=this.NOTEPAD.textContent.replaceAll(/\n/g,'⏎').replaceAll(/\t/g,'⇥').replaceAll(/ /g,'◦');
 						console.log(txt,this.RANG,this.NOTEPAD.textContent.length); */
 						// alurt(selec.startOffset+'/'+selec.endOffset);
@@ -679,7 +680,7 @@
 				}
 			}
 			// MAIN
-			const SCRoPS={'Δ':0,'author':'Paige Turner','dark':false,'intro':true,'issu':'-1.0.13.X','max_undo':99,'promp':'	# ','webhook':'http://localhost/act.php','comment':'Scrawled with https://scrawl.cc/'};
+			const SCRoPS={'Δ':0,'author':'Angus "Starscade" Sheehan','comment':'https://starsca.de/','dark':false,'intro':true,'issu':'-1.0.13.X','max_undo':99,'post_url':'http://localhost/act.php','promp':'	# '};
 			const scrawl=new Scrawl();
 			const cement=document.getElementById('menu');
 			let HAND=false;
@@ -697,42 +698,56 @@
 				}
 				setTimeout(()=>{moda.style.opacity='0'},2000);
 			}
-			function big(){
+			/* function big(){
 				if(document.fullscreenElement){
 					document.exitFullscreen();
 				}else{
 					document.body.parentElement.requestFullscreen();
 				}
-			}
+			} */
 			function cfg(ky,valu){
 				if(!localStorage.Scrawl_CFG){
 					localStorage.Scrawl_CFG=JSON.stringify(SCRoPS);
 				}
-				let cfg=JSON.parse(localStorage.Scrawl_CFG);
+				const cfg=JSON.parse(localStorage.Scrawl_CFG);
 				if(ky){
 					if(valu!=null){
 						cfg[ky]=valu;
 						localStorage.Scrawl_CFG=JSON.stringify(cfg);
 					}else{
-						return JSON.parse(localStorage.Scrawl_CFG)[ky];
+						return cfg[ky];
 					}
 				}else{
+					if(localStorage.Scrawl_CFG!==JSON.stringify(SCRoPS)){
+						Object.keys(SCRoPS).forEach((i,x)=>{
+							if(!(i in cfg)){
+								cfg[i]=SCRoPS[i];
+							}
+						});
+						Object.keys(cfg).forEach((i,x)=>{
+							if(!(i in SCRoPS)){
+								delete cfg[i];
+							}
+						});
+						localStorage.Scrawl_CFG=JSON.stringify(cfg);
+					}
 					return cfg;
 				}
 			}
+			cfg();
 			function dark(){
 				document.body.parentElement.classList.toggle('day');
 				let rgb;
-				if(cfg('dark')=='true'){
-					cfg('dark','false');
+				if(cfg('dark')){
+					cfg('dark',false);
 					rgb='#ddd';
 				}else{
-					cfg('dark','true');
+					cfg('dark',true);
 					rgb='#222';
 				}
 				document.querySelector("meta[name=theme-color]").setAttribute("content",rgb);
 			}
-			function gurl(bob,naem='Untitled',url='http://localhost/act.php',albak=(resp)=>{alurt(resp)}){
+			function gurl(bob,naem='Untitled',url=cfg('post_url'),albak=(resp)=>{alurt(resp)}){
 				const Formbody=new FormData();
 				Formbody.append(0,bob,naem);
 				fetch(url,{
@@ -746,14 +761,17 @@
 					}
 				);
 			}
-			function hunt(){
+			/* function hunt(){
 				const hunt=document.getElementById('hunt');
 				if(hunt.style.display=='block'){
 					hunt.style.display='none';
 				}else{
 					hunt.style.display='block';
 				}
-			}
+			} */
+			/* function kunfirm(promp='OK?'){
+
+			} */
 			async function mkHand(naem){
 				if(HAND===false){
 					const opts={
@@ -866,7 +884,7 @@
 				const issu=window.prompt('Publish . . .',cfg('issu'));
 				if(issu){
 					cfg('issu',issu);
-					gurl(new Blob([scrawl.x2m()]),issu,cfg('url'));
+					gurl(new Blob([scrawl.x2m()]),issu,cfg('post_url'));
 				}
 			}
 			function spex(){
@@ -916,17 +934,17 @@
 						if(e.key.toUpperCase()=='C'){
 							e.preventDefault();
 							if(e.shiftKey){
-								scrawl.cop('BBC');
-								alurt('Copied to clipboard . . . (BBC)');
-							}else{
 								scrawl.cop('HTML');
 								alurt('Copied to clipboard . . . (HTML)');
+							}else{
+								scrawl.cop('BBC');
+								alurt('Copied to clipboard . . . (BBC)');
 							}
 						}
 					}
 					switch(e.key.toUpperCase()){
 						case'E':e.preventDefault();saen();break;
-						case'F':e.preventDefault();hunt();break;
+						// case'F':e.preventDefault();hunt();break;
 						case'H':e.preventDefault();saerk();break;
 						case'K':e.preventDefault();scrawl.biu('~');break;
 						case'L':e.preventDefault();spex();break;
@@ -941,7 +959,6 @@
 				}else{
 					switch(e.key){
 						case'Tab':e.preventDefault();swop();break;
-						// case'Enter':e.preventDefault();swop();const l=localStorage.Scrawl_TXT.length;scrawl.RANG=[l,l];scrawl.xom("\n\t");window.scrollTo(0,document.body.scrollHeight);break;
 						case'F7':e.preventDefault();spex();break;
 						case'F8':e.preventDefault();saerk();break;
 						case'F9':e.preventDefault();dark();break;
@@ -949,57 +966,57 @@
 						case'F12':e.preventDefault();saen();break;
 					}
 				}
-		});
-		document.body.onscroll=()=>{
-			cement.style.display='none';
-		}
-		document.body.parentElement.ondragover=(e)=>{
-			e.preventDefault();
-		}
-		document.body.parentElement.ondrop=(e)=>{
-			e.preventDefault();
-			opaen(e.dataTransfer.items[0].getAsFile());
-		}
-		window.addEventListener('beforeprint',e=>{
-			if(scrawl.NOTEPAD.contentEditable=='true'){
+			});
+			document.body.onscroll=()=>{
+				cement.style.display='none';
+			}
+			document.body.parentElement.ondragover=(e)=>{
+				e.preventDefault();
+			}
+			document.body.parentElement.ondrop=(e)=>{
+				e.preventDefault();
+				opaen(e.dataTransfer.items[0].getAsFile());
+			}
+			window.addEventListener('beforeprint',e=>{
+				if(scrawl.NOTEPAD.contentEditable=='true'){
+					swop();
+				}
+			});
+			document.body.onclick=(e)=>{
+				cement.style.display='none';
+			}
+			scrawl.NOTEPAD.oncontextmenu=(e)=>{
+				if(scrawl.NOTEPAD.contentEditable=='true'){
+					if(scrawl.RANG[0]===scrawl.RANG[1]){
+						scrawl.selmod();
+					}
+					cement.style.display='block';
+					cement.style.left=(e.clientX+64)+'px';
+					cement.style.top=(e.clientY+24)+'px';
+				}
+			}
+			scrawl.NOTEPAD.ondblclick=(e)=>{
+				scrawl.selmod('sentence');
+			}
+			// INIT
+			if(cfg('dark')){
+				document.body.parentElement.classList.toggle('day');
+				document.querySelector("meta[name=theme-color]").setAttribute("content",'#222');
+			}
+			spex();
+			if(cfg('intro')){
+				cfg('intro',false);
+				localStorage.Scrawl_TXT="# Welcome\n\nScrawl is a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! More information can be found at https://starscade.github.io/Scrawl";
+			}
+			if(localStorage.Scrawl_TXT!=cfg('promp')){
 				swop();
 			}
-		});
-		document.body.onclick=(e)=>{
-			cement.style.display='none';
-		}
-		scrawl.NOTEPAD.oncontextmenu=(e)=>{
-			if(scrawl.NOTEPAD.contentEditable=='true'){
-				if(scrawl.RANG[0]===scrawl.RANG[1]){
-					scrawl.selmod();
-				}
-				cement.style.display='block';
-				cement.style.left=(e.clientX+64)+'px';
-				cement.style.top=(e.clientY+24)+'px';
+			scrawl.NOTEPAD.setAttribute('spellcheck','false');
+			setTimeout(()=>{window.scrollTo(0,0);const l=localStorage.Scrawl_TXT.length;scrawl.RANG=[l,l]},1000);
+			document.body.style.opacity=1;
+			if('serviceWorker'in navigator){
+				navigator.serviceWorker.register('work.js');
 			}
-		}
-		scrawl.NOTEPAD.ondblclick=(e)=>{
-			scrawl.selmod('sentence');
-		}
-		// INIT
-		if(cfg('dark')=='true'){
-			document.body.parentElement.classList.toggle('day');
-			document.querySelector("meta[name=theme-color]").setAttribute("content",'#222');
-		}
-		spex();
-		if(cfg('intro')==true){
-			cfg('intro','false');
-			localStorage.Scrawl_TXT="# Scrawl\n\nIs a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! I developed it specifically for my own use as a distraction-free typewriter.\n\n\n# Header\n===\n+++\n**Bold**\n*Italic*\n~Strikethrough~\n_Underline_\n\"Double quotes\"\n`Single quotes/apostrophes'";
-		}
-		if(localStorage.Scrawl_TXT!=cfg('promp')){
-			swop();
-		}
-		scrawl.NOTEPAD.setAttribute('spellcheck','false');
-		setTimeout(()=>{window.scrollTo(0,0);const l=localStorage.Scrawl_TXT.length;scrawl.RANG=[l,l]},1000);
-		document.body.style.opacity=1;
-		if('serviceWorker'in navigator){
-			navigator.serviceWorker.register('work.js');
-		}
 		</script>
 	</body>
 </html>
