@@ -19,7 +19,12 @@ self.addEventListener('activate',e=>{
 });
 self.addEventListener('fetch',e=>{
 	// console.log(e.request);
-	const off=caches.match(e.request);
+	const off=false;
+	try{
+		off=caches.match(e.request);
+	}catch(err){
+		alurt('Cache Error!');
+	}
 	if(off){
 		e.respondWith(
 			(async ()=>{
