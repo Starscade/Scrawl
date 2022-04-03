@@ -693,14 +693,14 @@
 					});
 					this.NOTEPAD.addEventListener('compositionend',e=>{
 						// console.log(e.data);
-						this.cart();
+						// this.cart();
 					});
 					this.NOTEPAD.addEventListener('input',e=>{
 						e.preventDefault();
 						if(e.inputType==='insertCompositionText'){
 							this.raec();
 							switch(e.data.slice(-1)){
-								case"\n":this.xom("\n\t");break;
+								case"\n":this.xom("\t");break;
 								case' ':this.xom(' ');break;
 							}
 						}
