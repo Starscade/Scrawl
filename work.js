@@ -12,7 +12,8 @@ function addAll(e){
 		})
 	);
 }
-self.addEventListener('activate',()=>{
+self.addEventListener('activate',e=>{
+	addAll(e);
 	return self.clients.claim();
 });
 self.addEventListener('fetch',e=>{
