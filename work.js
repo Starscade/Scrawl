@@ -12,8 +12,7 @@ function addAll(e){
 		})
 	);
 }
-self.addEventListener('activate',e=>{
-	addAll(e);
+self.addEventListener('activate',()=>{
 	return self.clients.claim();
 });
 self.addEventListener('fetch',e=>{
@@ -33,6 +32,7 @@ self.addEventListener('fetch',e=>{
 			}
 		})()
 	);
+	addAll(e);
 });
 self.addEventListener('install',e=>{
 	addAll(e);
