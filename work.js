@@ -1,10 +1,8 @@
 'use strict';
 const CASH={'naem':'Scrawl_CASH','cash':[
 	'manifest.json',
-	'./ico.png',
-	'./',
-	'adapticon.png',
-	'Baloo2.woff2'
+	'ico.png',
+	'.'
 ]};
 function addAll(e){
 	self.skipWaiting();
@@ -14,33 +12,27 @@ function addAll(e){
 		})
 	);
 }
-self.addEventListener('activate',e=>{
+self.addEventListener('activate',()=>{
 	return self.clients.claim();
 });
 self.addEventListener('fetch',e=>{
-	// console.log(e.request);
-	const off=false;
-	try{
-		off=caches.match(e.request);
-	}catch(err){
-		alurt('Cache Error!');
-	}
-	if(off){
-		e.respondWith(
-			(async ()=>{
-				try{
-					const on=await fetch(e.request);
-					const cash=await caches.open(CASH['naem']);
-					cash.put(e.request,on.clone());
-				}catch(err){
-					console.log('Offline...');
+	e.respondWith(
+		(async ()=>{
+			try{
+				const off=await caches.match(e.request);
+				if(off){
+					console.log(off);
+					return off;
 				}
-				return off;
-			})()
-		);
-	}
+			}catch(err){
+				const bob=new Blob('Offline',{type:'text/plain'});
+				const res=new Response(bob);
+				console.log(res);
+				return res;
+			}
+		})()
+	);
 });
 self.addEventListener('install',e=>{
 	addAll(e);
-	console.log('Appdated!');
 });
