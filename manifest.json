@@ -13,7 +13,7 @@
 			"type":"image/png"
 		},{
 			"src":"adapticon.png",
-			"sizes":"420x420",
+			"sizes":"512x512",
 			"type":"image/png",
 			"purpose":"any maskable"
 		}
