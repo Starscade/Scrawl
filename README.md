@@ -10,7 +10,7 @@ Is a simple *Markdown* editor for writers. It lacks many features on purpose, in
 	~Strikethrough~
 	_Underline_
 	"Double quotes"
-	`Single quotes/apostrophes'
+	`Single quote/apostrophe'
 	Elipses...
 	<email@address.com>
 	</ Link>
