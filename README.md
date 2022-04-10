@@ -1,19 +1,3 @@
-# Scrawl
+# Once Upon A Time . . .
 	
-Is a simple *Markdown* editor for writers. It lacks many features on purpose, including the majority of the *Markdown* syntax itself! I developed it specifically for my own use as a distraction-free typewriter.	
-	
-	# Header
-	===	
-	+++
-	**Bold**
-	*Italic*
-	~Strikethrough~
-	_Underline_
-	"Double quotes"
-	`Single quote/apostrophe'
-	Elipses...
-	<email@address.com>
-	</ Link>
-	</ External link _>
-	> Blockquote
-	Em--dash
+Writing fiction is an incredibly simple yet incredibly difficult practice. Concentration is paramount. But distraction is rampant. The last thing you want is the very tool you're using to write with become an obstacle to you getting words down. That was my experience at least. And Scrawl is my self-medicated remedy.
