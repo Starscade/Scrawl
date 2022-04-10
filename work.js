@@ -18,18 +18,14 @@ self.addEventListener('activate',()=>{
 self.addEventListener('fetch',e=>{
 	e.respondWith(
 		(async ()=>{
-			try{
-				const off=await caches.match(e.request);
-				if(off){
-					console.log(off);
-					return off;
-				}
-			}catch(err){
-				const bob=new Blob('Offline',{type:'text/plain'});
-				const res=new Response(bob);
-				console.log(res);
-				return res;
+			let off=await caches.match(e.request);
+			if(off===undefined){
+				off=fetch(e.request).catch(()=>{
+					const bob=new Blob(['Offline'],{type:'text/plain'});
+					return new Response(bob);
+				});
 			}
+			return off;
 		})()
 	);
 	addAll(e);
