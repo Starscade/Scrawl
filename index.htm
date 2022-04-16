@@ -1142,6 +1142,9 @@
 			if('serviceWorker'in navigator){
 				navigator.serviceWorker.register('work.js');
 			}
+			window.onerror=(msg,url,no,col,err)=>{
+				alurt(msg);
+			}
 		</script>
 	</body>
 </html>
