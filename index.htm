@@ -193,7 +193,6 @@
 				color:var(--no);
 			}
 			.blu article{
-				/* border-color:var(--ok); */
 				border-style:dashed;
 			}.blu #ui-spex,.ok{
 				color:var(--ok);
@@ -207,10 +206,12 @@
 			.hid,.inland,.notouch,.peek,#big{
 				display:none;
 			}
-			.locked{
+			.lockt article{
 				border-color:var(--mg);
 				cursor:not-allowed;
 				text-align:justify;
+			}.lockt .moab>span:first-of-type,.lockt .moab>span:last-of-type{
+				display:none;
 			}
 			.notouch{
 				opacity:.33;
@@ -563,6 +564,7 @@
 						rang.setEnd(this.NOTEPAD.childNodes[0],this.RANG[1]);
 						selec.removeAllRanges();
 						selec.addRange(rang);
+						console.log(this.HISTRY);
 					}
 					this.ccp=(mo='cut')=>{
 						this.cart();
@@ -757,7 +759,6 @@
 					this.NOTEPAD.addEventListener('beforeinput',e=>{
 						e.preventDefault();
 						// console.log(e);
-						alurt(e.inputType);
 						switch(e.inputType){
 							case'deleteByCut':
 							case'deleteContentBackward':this.nix();break;
@@ -765,7 +766,7 @@
 							case'formatItalic':this.biu();break;
 							case'formatUnderline':this.biu('_');break;
 							case'formatStrikethrough':this.biu('~');break;
-							case'insertCompositionText':const selec=window.getSelection().getRangeAt(0);this.RANG=[selec.startOffset,selec.endOffset];break;
+							case'insertCompositionText':const selec=window.getSelection().getRangeAt(0);const off=1+selec.endOffset;this.RANG=[off,off];break;
 							case'insertFromPaste':navigator.clipboard.readText().then(txt=>this.xom(txt,false));break;
 							case'insertParagraph':this.xom("\n\t");break;
 							case'insertReplacementText':this.selmod();this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
@@ -782,12 +783,12 @@
 						// console.log(e);
 						e.preventDefault();
 						if(e.inputType==='insertCompositionText'){
-							this.raec();
-							switch(e.data.slice(-1)){
+							/* switch(e.data.slice(-1)){
 								case"\n":this.xom("\n\t");break;
-								case' ':this.xom(' ');break;
-							}
+							} */
+							this.raec();
 						}
+						// alurt(e.data);
 					});
 					document.addEventListener('selectionchange',()=>{
 						const selec=window.getSelection().getRangeAt(0);
@@ -1080,7 +1081,7 @@
 					scrawl.NOTEPAD.focus();
 					scrawl.cart();
 				}
-				scrawl.NOTEPAD.classList.toggle('locked');
+				document.body.classList.toggle('lockt');
 			}
 			// HEY, LISTEN!
 			document.body.addEventListener('keydown',e=>{
@@ -1179,6 +1180,11 @@
 					if(outcome==='accepted'){
 						INSTAL=null;
 					}
+				}
+			}
+			peek.onclick=()=>{
+				if(window.innerHeight>window.innerWidth){
+					peekaboo();
 				}
 			}
 			// INIT
