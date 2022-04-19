@@ -2,9 +2,10 @@
 const CASH={'naem':'Scrawl_CASH','cash':[
 	'manifest.json',
 	'ico.png',
-	'.'
+	'.',
+	'Baloo2.woff2'
 ]};
-function addAll(e){
+function etAll(e){
 	self.skipWaiting();
 	e.waitUntil(
 		caches.open(CASH['naem']).then(cash=>{
@@ -28,8 +29,8 @@ self.addEventListener('fetch',e=>{
 			return off;
 		})()
 	);
-	addAll(e);
+	etAll(e);
 });
 self.addEventListener('install',e=>{
-	addAll(e);
+	etAll(e);
 });
