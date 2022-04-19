@@ -1,0 +1,144 @@
+@font-face {
+	font-family:'Font';
+	src:url('https://fonts.gstatic.com/s/baloo2/v11/wXK0E3kTposypRydzVT08TS3JnAmtdgazZpo_lc.woff2');
+}
+::-webkit-scrollbar{
+	height:var(--rad)*2;
+	width:var(--rad)*2;
+}::-webkit-scrollbar-thumb{
+	background-color:var(--fg);
+	border-radius:var(--rad);
+	border:4pt solid var(--bg);
+}
+::selection{
+	background-color:var(--fg);
+	color:var(--bg);
+}
+:root{
+	--bg:#333;
+	--fg:#eca;
+	--pt:18pt;
+	--font:'Font',sans-serif;
+	--rad:calc(var(--pt)/3);
+	background-color:var(--bg);
+	color:var(--fg);
+	cursor:crosshair;
+	font-family:var(--font);
+	font-size:var(--pt);
+	scrollbar-width:thin;
+	scroll-behavior:smooth;
+	text-align:center;
+	user-select:none;
+}
+article{
+	cursor:text;
+	line-height:150%;
+	margin:auto auto 7vh auto;
+	max-width:8.5in;
+	padding:1em;
+	text-align:left;
+	white-space:pre-wrap;
+}article:focus{
+	outline:none;
+}
+body{
+	opacity:0;
+	transition:1s opacity;
+}
+h1{
+	font-size:100%;
+	font-weight:normal;
+	text-align:center;
+	text-transform:uppercase;
+}h1,p{
+	margin:0;
+}
+nav{
+	display:none;
+	flex-direction:column;
+	height:100vh;
+	justify-content:space-between;
+	left:0;
+	opacity:1;
+	position:fixed;
+	top:0;
+	transition:.33s opacity;
+}nav:hover{
+	opacity:1!important;
+}
+p:not(br+p){
+	text-indent:2em;
+}
+svg{
+	border-radius:0 1em 1em 0;
+	cursor:pointer;
+	display:block;
+	fill:currentColor;
+	height:1em;
+	padding:1em;
+	width:1em;
+}svg:hover{
+	background-color:currentColor;
+	fill:var(--bg);
+}
+.alurt{
+	background-color:var(--fg);
+	border-radius:var(--rad);
+	color:var(--bg);
+	cursor:pointer;
+	left:50%;
+	min-width:6em;
+	padding:.33em .66em .33em .66em;
+	position:fixed;
+	top:11%;
+	transform:translateX(-50%);
+	transition:opacity .5s;
+	user-select:none;
+	white-space:pre;
+	z-index:10;
+}
+.day{
+	--bg:#eee;
+	--fg:#667;
+}
+.lokc{
+	cursor:not-allowed;
+	text-align:justify;
+}
+#contex{
+	display:none;
+	padding:.5em;
+	white-space:normal;
+}#contex svg{
+	border-radius:1em;
+	display:inline;
+}#contex svg:hover{
+	fill:var(--fg);
+}
+@media(orientation:landscape){
+	article{
+		margin-top:10vh;
+	}
+	nav{
+		display:flex;
+	}
+}
+@media print{
+	:root{
+		--bg:White;
+		--fg:Black;
+		--pt:12pt;
+		--font:serif;
+	}
+	article{
+		line-height:200%;
+		margin:0;
+		padding:0;
+	}
+	nav,.alurt{
+		display:none!important;
+	}
+}
+@page{
+	margin:1in;
+}
