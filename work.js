@@ -21,7 +21,7 @@ self.addEventListener('fetch',e=>{
 			let off=await caches.match(e.request);
 			if(off===undefined){
 				off=fetch(e.request).catch(()=>{
-					const bob=new Blob(['Offline'],{type:'text/plain'});
+					const bob=new Blob(['Network Error'],{type:'text/plain'});
 					return new Response(bob);
 				});
 			}
