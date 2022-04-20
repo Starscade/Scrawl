@@ -2,8 +2,7 @@
 const CASH={'naem':'Scrawl_CASH','cash':[
 	'manifest.json',
 	'ico.png',
-	'.',
-	'Baloo2.woff2'
+	'.'
 ]};
 function etAll(e){
 	self.skipWaiting();
