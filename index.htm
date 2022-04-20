@@ -43,7 +43,7 @@
 			article{
 				cursor:text;
 				line-height:150%;
-				margin:10vh auto 7vh auto;
+				margin:10vh auto 10vh auto;
 				max-width:8.5in;
 				padding:1em;
 				text-align:left;
@@ -151,7 +151,8 @@
 			}
 			@media(orientation:portrait){
 				article{
-					margin-top:auto;
+					margin-bottom:4em;
+					margin-top:2em;
 				}
 				svg:hover{
 					background-color:transparent;
@@ -815,7 +816,7 @@
 							// case'insertFromDrop':this.xom(e.dataTransfer.getData('text'));break;
 							case'insertFromPaste':this.ccp('put');break;
 							case'insertParagraph':this.xom("\n\t");break;
-							case'insertReplacementText':this.selmod();this.raec();this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
+							case'insertReplacementText':/* this.selmod();this.raec();this.nix(false);*/this.xom(e.dataTransfer.getData('text'),false);break;
 							case'insertText':this.xom(e.data);break;
 						}
 						this.mov();
@@ -1000,10 +1001,10 @@
 							e.preventDefault();
 							if(e.shiftKey){
 								nib.cop('HTML');
-								alurt('Copied to clipboard (HTML)');
+								alurt('Clipboard (HTML)');
 							}else{
 								nib.cop('BBC');
-								alurt('Copied to clipboard (BBC)');
+								alurt('Clipboard (BBC)');
 							}
 						}
 					}
