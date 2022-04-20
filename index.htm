@@ -43,7 +43,7 @@
 			article{
 				cursor:text;
 				line-height:150%;
-				margin:auto auto 7vh auto;
+				margin:10vh auto 7vh auto;
 				max-width:8.5in;
 				padding:1em;
 				text-align:left;
@@ -52,6 +52,7 @@
 				outline:none;
 			}
 			body{
+				margin:0;
 				opacity:0;
 				transition:1s opacity;
 			}
@@ -64,25 +65,14 @@
 				margin:0;
 			}
 			nav{
-				display:none;
-				flex-direction:column;
-				height:100vh;
-				justify-content:space-between;
-				left:0;
-				opacity:1;
+				background-color:var(--bg);
 				position:fixed;
-				top:0;
-				transition:.33s opacity;
-			}nav:hover{
-				opacity:1!important;
 			}
 			p:not(br+p){
 				text-indent:2em;
 			}
 			svg{
-				border-radius:0 1em 1em 0;
 				cursor:pointer;
-				display:block;
 				fill:currentColor;
 				height:1em;
 				padding:1em;
@@ -111,6 +101,12 @@
 				--bg:#ddd;
 				--fg:#667;
 			}
+			.glass{
+				opacity:0;
+			}
+			.hid{
+				display:none;
+			}
 			.lokc{
 				cursor:not-allowed;
 				text-align:justify;
@@ -120,9 +116,10 @@
 				padding:0;
 				transform:translateX(0);
 				white-space:normal;
+			}#contex span{
+				display:none;
 			}#contex svg{
 				border-radius:0;
-				display:inline;
 			}#contex svg:hover{
 				fill:var(--fg);
 			}#contex svg:first-of-type:hover{
@@ -130,12 +127,52 @@
 			}#contex svg:last-of-type:hover{
 				border-radius:0 var(--rad) var(--rad) 0;
 			}
-			@media(orientation:landscape){
+			#moab{
+				bottom:0;
+				display:none;
+				height:auto;
+				top:auto;
+				width:100%;
+			}
+			#tooble{
+				bottom:0;
+				display:flex;
+				flex-direction:column;
+				justify-content:space-between;
+				top:0;
+				transition:.33s opacity;
+			}#tooble:hover{
+				opacity:1;
+			}#tooble div{
+				display:inline;
+			}#tooble svg{
+				border-radius:0 1em 1em 0;
+				display:block;
+			}
+			@media(orientation:portrait){
 				article{
-					margin-top:10vh;
+					margin-top:auto;
 				}
-				nav{
-					display:flex;
+				svg:hover{
+					background-color:transparent;
+					fill:currentColor;
+				}
+				#contex span{
+					display:inline;
+				}
+				#moab{
+					display:block;
+				}
+				#tooble{
+					bottom:3em;
+					display:none;
+					opacity:1;
+					top:auto;
+					width:100%;
+				}#tooble.peek{
+					display:block;
+				}#tooble svg{
+					display:inline;
 				}
 			}
 			@media print{
@@ -167,7 +204,7 @@
 	<body>
 		<main>
 			<article></article>
-			<nav>
+			<nav id="tooble">
 				<div>
 					<svg title="New"onclick="rush(neu)"><path d="M12 2v6a2 2 0 0 0 2 2h6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6Z"/><path d="M13.5 2.5V8a.5.5 0 0 0 .5.5h5.5l-6-6Z"/></svg>
 					<svg title="Open"onclick="opin()"><path d="M13.821 6.5h5.929a2.25 2.25 0 0 1 2.229 1.938l.016.158.005.154v9a2.25 2.25 0 0 1-2.096 2.245L19.75 20H4.25a2.25 2.25 0 0 1-2.245-2.096L2 17.75v-7.251l6.207.001.196-.009a2.25 2.25 0 0 0 1.088-.393l.156-.12L13.821 6.5ZM8.207 4c.46 0 .908.141 1.284.402l.156.12 2.103 1.751-3.063 2.553-.085.061a.75.75 0 0 1-.29.106L8.206 9 2 8.999V6.25a2.25 2.25 0 0 1 2.096-2.245L4.25 4h3.957Z"/></svg>
@@ -188,18 +225,23 @@
 					<svg title="Config"onclick="conf()"><path d="M12.012 2.25c.734.008 1.465.093 2.182.253a.75.75 0 0 1 .582.649l.17 1.527a1.384 1.384 0 0 0 1.927 1.116l1.401-.615a.75.75 0 0 1 .85.174 9.792 9.792 0 0 1 2.204 3.792.75.75 0 0 1-.271.825l-1.242.916a1.381 1.381 0 0 0 0 2.226l1.243.915a.75.75 0 0 1 .272.826 9.797 9.797 0 0 1-2.204 3.792.75.75 0 0 1-.848.175l-1.407-.617a1.38 1.38 0 0 0-1.926 1.114l-.169 1.526a.75.75 0 0 1-.572.647 9.518 9.518 0 0 1-4.406 0 .75.75 0 0 1-.572-.647l-.168-1.524a1.382 1.382 0 0 0-1.926-1.11l-1.406.616a.75.75 0 0 1-.849-.175 9.798 9.798 0 0 1-2.204-3.796.75.75 0 0 1 .272-.826l1.243-.916a1.38 1.38 0 0 0 0-2.226l-1.243-.914a.75.75 0 0 1-.271-.826 9.793 9.793 0 0 1 2.204-3.792.75.75 0 0 1 .85-.174l1.4.615a1.387 1.387 0 0 0 1.93-1.118l.17-1.526a.75.75 0 0 1 .583-.65c.717-.159 1.45-.243 2.201-.252ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg>
 				</div>
 			</nav>
-			<div id="contex"class="alurt">
+			<nav id="moab">
+				<svg title="Undo"onclick="nib.undo()"><path d="m6.907 6.68 2.734-2.73a6.66 6.66 0 1 1 9.42 9.42l-8.338 8.338a1 1 0 0 1-1.415-1.415l8.339-8.336A4.66 4.66 0 0 0 11.229 5.2l-.174.166-3.641 3.633H12a1 1 0 0 1 .993.884L13 10a1 1 0 0 1-.883.993l-.117.006-7.06-.001-.095-.01-.112-.024-.131-.047-.082-.04-.102-.064a.996.996 0 0 1-.125-.107l-.092-.105-.074-.114-.046-.093-.038-.105-.016-.058-.016-.081-.007-.062L4 10V3.002a1 1 0 0 1 1.993-.116L6 3.002v4.584l3.641-3.635L6.907 6.68Z"/></svg>
+				<svg title="Menu"onclick="peekaboo()"><path d="M8 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM18 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+				<svg title="Redo"onclick="nib.undo(true)"><path d="M18 7.586 14.36 3.951a6.66 6.66 0 1 0-9.42 9.42l8.339 8.337a1 1 0 0 0 1.414-1.415l-8.339-8.336A4.66 4.66 0 0 1 12.771 5.2l.174.166 3.64 3.633H12a1 1 0 0 0-.993.884L11 10a1 1 0 0 0 .883.993l.117.006h7a1 1 0 0 0 .993-.883L20 10V3.002a1 1 0 0 0-1.993-.116L18 3.002v4.584L14.36 3.951 18 7.586Z"/></svg>
+			</nav>
+			<nav id="contex"class="alurt">
 				<svg title="Bold"onclick="nib.biu('**')"><path d="M6 5.75C6 4.784 6.784 4 7.75 4h4.749c2.823 0 4.751 2.34 4.751 4.75 0 .931-.288 1.852-.803 2.632C17.369 12.239 18 13.47 18 15c0 3.133-2.677 5-5 5H7.75A1.75 1.75 0 0 1 6 18.25V5.75Zm3.5 7.75v3H13c.312 0 .71-.138 1.024-.421.288-.26.476-.615.476-1.079 0-.888-.745-1.5-1.5-1.5H9.5Zm0-3.5h3c.715 0 1.25-.592 1.25-1.25 0-.657-.536-1.25-1.251-1.25H9.5V10Z"/></svg>
 				<svg title="Italic"onclick="nib.biu()"><path d="M10.649 18.5h3.847a1 1 0 0 1 0 2h-9.5a.997.997 0 0 1-.996-1c0-.552.445-1 .996-1h3.51L13.332 6H9.997a1 1 0 0 1 0-2H18.5a1 1 0 0 1 0 2h-3.025L10.65 18.5Z"/></svg>
 				<svg title="Underline"onclick="nib.biu('_')"><path d="M6 4.5a1 1 0 0 1 2 0v6.001c-.003 3.463 1.32 4.999 4.247 4.999 2.928 0 4.253-1.537 4.253-5v-6a1 1 0 1 1 2 0v6c0 4.54-2.18 7-6.253 7S5.996 15.039 6 10.5v-6ZM7 21a1 1 0 1 1 0-2h10.5a1 1 0 1 1 0 2H7Z"/></svg>
 				<svg title="Strikethrough"onclick="nib.biu('~')"><path d="M13.848 11.5H19.5a1 1 0 0 1 0 2h-2.387a4.03 4.03 0 0 1 .998 2.684c0 2.93-3.28 4.915-7.033 4.48-2.328-.271-3.965-1.22-4.827-2.833-.26-.487-.207-1.016.248-1.331.455-.316 1.256-.099 1.516.388.533.998 1.604 1.592 3.294 1.789 2.586.3 4.802-.91 4.802-2.492 0-1.099-.547-1.94-2.107-2.685H5a1 1 0 1 1 0-2H13.848ZM6.987 9.695a5.122 5.122 0 0 1-.298-.51c-.3-.59-.468-1.214-.435-1.835.16-2.965 2.934-4.713 6.602-4.287 2.26.263 3.99 1.084 5.147 2.487a.993.993 0 0 1-.153 1.4c-.426.351-1.049.326-1.4-.1-.813-.985-2.068-1.596-3.825-1.8-2.56-.298-4.371.718-4.371 2.323 0 .714.239 1.22.762 1.81.225.254.647.525 1.265.815H7.192a38.03 38.03 0 0 1-.205-.303Z"/></svg>
-				<!-- <div class="moab">
-					<span title="Cut"onclick="scrawl.ccp()"><svg><path d="M7.83 2.44a1 1 0 0 0-1.66 1.117l4.793 7.114-2.326 3.678a4 4 0 1 0 1.57 1.26l1.977-3.126 1.884 2.796a4 4 0 1 0 1.683-1.08l-3.62-5.375v.001L7.83 2.44ZM5 18a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm10 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0ZM14.52 8.79l3.325-5.256a1 1 0 0 0-1.69-1.07L13.3 6.979l1.22 1.812Z"/></svg></span>
-					<span title="Copy"onclick="scrawl.ccp('get')"><svg><path d="M10.25 2h3.5a2.25 2.25 0 0 1 2.236 2h1.764A2.25 2.25 0 0 1 20 6.25v5.248A6.5 6.5 0 0 0 12.81 22H6.25A2.25 2.25 0 0 1 4 19.75V6.25A2.25 2.25 0 0 1 6.25 4h1.764a2.25 2.25 0 0 1 2.236-2Zm3.5 1.5h-3.5a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5Zm9.25 14a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Zm-8.5-.5a.5.5 0 0 0 0 1h4.793l-1.647 1.646a.5.5 0 0 0 .708.708l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 0-.708.708L19.293 17H14.5Z"/></svg></span>
-					<span title="Paste"onclick="scrawl.ccp('put')"><svg><path d="M12.753 2c1.158 0 2.111.875 2.234 2h1.763a2.25 2.25 0 0 1 2.245 2.096L19 6.25a.75.75 0 0 1-.647.742L18.249 7a.75.75 0 0 1-.742-.647L17.5 6.25a.75.75 0 0 0-.648-.743L16.75 5.5h-2.132a2.244 2.244 0 0 1-1.865.993H9.247c-.777 0-1.461-.393-1.865-.992L5.25 5.5a.75.75 0 0 0-.743.648L4.5 6.25v13.505c0 .38.282.693.648.743l.102.007h3a.75.75 0 0 1 .743.647l.007.102a.75.75 0 0 1-.75.75h-3a2.25 2.25 0 0 1-2.245-2.095L3 19.755V6.25a2.25 2.25 0 0 1 2.096-2.245L5.25 4h1.763a2.247 2.247 0 0 1 2.234-2h3.506Zm5.997 6a2.25 2.25 0 0 1 2.245 2.096l.005.154v9.5a2.25 2.25 0 0 1-2.096 2.245L18.75 22h-6.5a2.25 2.25 0 0 1-2.245-2.096L10 19.75v-9.5a2.25 2.25 0 0 1 2.096-2.245L12.25 8h6.5Zm-5.997-4.5H9.247a.747.747 0 0 0 0 1.493h3.506a.747.747 0 1 0 0-1.493Z"/></svg></span>
-				</div> -->
+				<span>
+					<svg title="Cut"onclick="nib.ccp()"><path d="M7.83 2.44a1 1 0 0 0-1.66 1.117l4.793 7.114-2.326 3.678a4 4 0 1 0 1.57 1.26l1.977-3.126 1.884 2.796a4 4 0 1 0 1.683-1.08l-3.62-5.375v.001L7.83 2.44ZM5 18a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm10 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0ZM14.52 8.79l3.325-5.256a1 1 0 0 0-1.69-1.07L13.3 6.979l1.22 1.812Z"/></svg>
+					<svg title="Copy"onclick="nib.ccp('get')"><path d="M10.25 2h3.5a2.25 2.25 0 0 1 2.236 2h1.764A2.25 2.25 0 0 1 20 6.25v5.248A6.5 6.5 0 0 0 12.81 22H6.25A2.25 2.25 0 0 1 4 19.75V6.25A2.25 2.25 0 0 1 6.25 4h1.764a2.25 2.25 0 0 1 2.236-2Zm3.5 1.5h-3.5a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5Zm9.25 14a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0Zm-8.5-.5a.5.5 0 0 0 0 1h4.793l-1.647 1.646a.5.5 0 0 0 .708.708l2.5-2.5a.5.5 0 0 0 0-.708l-2.5-2.5a.5.5 0 0 0-.708.708L19.293 17H14.5Z"/></svg>
+					<svg title="Paste"onclick="nib.ccp('put')"><path d="M12.753 2c1.158 0 2.111.875 2.234 2h1.763a2.25 2.25 0 0 1 2.245 2.096L19 6.25a.75.75 0 0 1-.647.742L18.249 7a.75.75 0 0 1-.742-.647L17.5 6.25a.75.75 0 0 0-.648-.743L16.75 5.5h-2.132a2.244 2.244 0 0 1-1.865.993H9.247c-.777 0-1.461-.393-1.865-.992L5.25 5.5a.75.75 0 0 0-.743.648L4.5 6.25v13.505c0 .38.282.693.648.743l.102.007h3a.75.75 0 0 1 .743.647l.007.102a.75.75 0 0 1-.75.75h-3a2.25 2.25 0 0 1-2.245-2.095L3 19.755V6.25a2.25 2.25 0 0 1 2.096-2.245L5.25 4h1.763a2.247 2.247 0 0 1 2.234-2h3.506Zm5.997 6a2.25 2.25 0 0 1 2.245 2.096l.005.154v9.5a2.25 2.25 0 0 1-2.096 2.245L18.75 22h-6.5a2.25 2.25 0 0 1-2.245-2.096L10 19.75v-9.5a2.25 2.25 0 0 1 2.096-2.245L12.25 8h6.5Zm-5.997-4.5H9.247a.747.747 0 0 0 0 1.493h3.506a.747.747 0 1 0 0-1.493Z"/></svg>
+				</span>
 				<svg title="Lookup"onclick="dinosaur()"><path d="M3.441 9.955a4.926 4.926 0 0 0 6.233 7.571l4.256 4.257a.773.773 0 0 0 1.169-1.007l-.075-.087-4.218-4.218a4.927 4.927 0 0 0-7.365-6.516ZM16.654 16.5c-.225 1.287-.548 2.456-.952 3.454l.029.028.125.14c.22.295.344.624.378.952A10.034 10.034 0 0 0 20.96 16.5h-4.306Zm-4.404-.001 2.284 2.287c.202-.6.381-1.268.53-1.992l.057-.294-2.87-.001Zm-2.936-5.45a3.38 3.38 0 1 1-4.78 4.779 3.38 3.38 0 0 1 4.78-4.78Zm6.136-1.05h-3.7a5.935 5.935 0 0 1 .892 5l2.71.001a26.014 26.014 0 0 0 .132-4.512l-.034-.489Zm1.507 0a28.174 28.174 0 0 1-.033 4.42l-.057.58h4.702a10.047 10.047 0 0 0 .258-5h-4.87Zm-2.095-7.593c.88 1.35 1.536 3.329 1.883 5.654l.062.44h4.59a10.03 10.03 0 0 0-6.109-5.958l-.304-.1-.122-.036ZM12.026 2c-1.277 0-2.561 2.382-3.158 5.839.464.16.912.38 1.331.658l5.088.001c-.54-3.809-1.905-6.498-3.261-6.498Zm-2.837.405a10.027 10.027 0 0 0-6.535 6.093h.995a5.921 5.921 0 0 1 3.743-.968c.322-1.858.846-3.47 1.527-4.68l.162-.275.108-.17Z"/></svg>
-			</div>
+			</nav>
 		</main>
 		<script>
 			'use strict';
@@ -431,6 +473,14 @@
 						selec.removeAllRanges();
 						selec.addRange(rang);
 					}
+					this.ccp=(mo='cut')=>{
+						const selec=window.getSelection().toString();
+						switch(mo){
+							case'cut':navigator.clipboard.writeText(selec);this.nix();break;
+							case'get':navigator.clipboard.writeText(selec);break;
+							case'put':navigator.clipboard.readText().then(txt=>this.xom(txt,false));break;
+						}
+					}
 					this.cop=(lang='HTML')=>{
 						switch(lang){
 							case'BBC':navigator.clipboard.writeText(this.x2y(this.x2y(),'htm2bbc'));break;
@@ -457,7 +507,7 @@
 						const pos=Math.round(window.scrollY+rex)-(window.innerHeight/3);
 						window.scrollTo(0,pos);
 					}
-					this.nix=(rec)=>{
+					this.nix=(rec=true)=>{
 						if(this.RANG[0]===this.RANG[1]){
 							if(this.RANG[0]>0){
 								this.RANG[0]--;
@@ -755,16 +805,15 @@
 					// LISTEN
 					this.NOTEPAD.addEventListener('beforeinput',e=>{
 						e.preventDefault();
-						// alurt(e.inputType+': '+e.data+' ('+this.RANG[0]+','+this.RANG[1]+')');
 						switch(e.inputType){
-							case'deleteByCut':this.raec();
+							case'deleteByCut':this.ccp();
 							case'deleteContentBackward':this.nix();break;
 							case'formatBold':this.biu('**');break;
 							case'formatItalic':this.biu();break;
 							case'formatUnderline':this.biu('_');break;
 							case'formatStrikethrough':this.biu('~');break;
 							// case'insertFromDrop':this.xom(e.dataTransfer.getData('text'));break;
-							case'insertFromPaste':navigator.clipboard.readText().then(txt=>this.xom(txt,false));break;
+							case'insertFromPaste':this.ccp('put');break;
 							case'insertParagraph':this.xom("\n\t");break;
 							case'insertReplacementText':this.selmod();this.raec();this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
 							case'insertText':this.xom(e.data);break;
@@ -807,6 +856,7 @@
 			const nib=new Nib();
 			const jig=new Jig(nib);
 			const contex=document.getElementById('contex');
+			const tooble=document.getElementById('tooble');
 			function alurt(msg='OK!'){
 				const moda=document.createElement('div');
 				moda.classList.add('alurt');
@@ -854,6 +904,9 @@
 				}
 				nib.swop();
 				nib.NOTEPAD.classList.toggle('lokc');
+				const moab=document.getElementById('moab');
+				moab.children[0].classList.toggle('hid');
+				moab.children[2].classList.toggle('hid');
 			}
 			function neu(){
 				nib.memry(jig.cfg('promp'));
@@ -874,6 +927,9 @@
 						jig.lod(bin);
 					}
 				}
+			}
+			function peekaboo(){
+				tooble.classList.toggle('peek');
 			}
 			function prln(){
 				if(nib.iswet()){
@@ -911,6 +967,9 @@
 			function tally(){
 				alurt(nib.tally());
 			}
+			tooble.onclick=()=>{
+				tooble.classList.toggle('peek');
+			}
 			document.body.addEventListener('click',e=>{
 				contex.style.display='none';
 			});
@@ -920,6 +979,9 @@
 					if(window.innerHeight<window.innerWidth){
 						contex.style.left=(e.clientX+24)+'px';
 						contex.style.top=(e.clientY+24)+'px';
+					}else{
+						contex.style.left=0+'px';
+						contex.style.top=0+'px';
 					}
 				}
 			});
@@ -993,7 +1055,7 @@
 			}
 			document.body.style.opacity=1;
 			setTimeout(()=>{
-				document.getElementsByTagName('nav')[0].style.opacity=0;
+				tooble.classList.toggle('glass');
 			},1234);
 			if('serviceWorker'in navigator){
 				navigator.serviceWorker.register('work.js');
