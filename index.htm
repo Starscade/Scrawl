@@ -252,7 +252,7 @@
 					this.CFG={'dark':false,'post_alias':'','post_url':'http://localhost/act.php','promp':'	# ','word_url':'https://www.merriam-webster.com/thesaurus/'};
 					this.HAND=false;
 					this.cfg=(ky,valu)=>{
-						if(!this.mem()){
+						if(!localStorage.Scrawl_CFG){
 							this.mem(this.CFG);
 						}
 						const cfg=this.mem();
@@ -264,7 +264,7 @@
 								return cfg[ky];
 							}
 						}else{
-							if(this.mem()!==JSON.stringify(this.CFG)){
+							if(JSON.stringify(cfg)!==JSON.stringify(this.CFG)){
 								Object.keys(this.CFG).forEach((i,x)=>{
 									if(!(i in cfg)){
 										cfg[i]=this.CFG[i];
@@ -277,6 +277,7 @@
 								});
 								this.mem(cfg);
 							}
+							// console.log(cfg);
 							return cfg;
 						}
 					}
@@ -317,19 +318,19 @@
 							}else{
 								nib.memry(nib.x2y(raed.result,'htm2md'));
 							}
+							this.cfg('post_alias','');
 							location.reload();
 						}
 					}
 					this.mem=(json)=>{
 						if(json){
 							localStorage.Scrawl_CFG=JSON.stringify(json);
-						}else{
-							localStorage.Scrawl_CFG=JSON.stringify(this.CFG);
 						}
 						return JSON.parse(localStorage.Scrawl_CFG);
 					}
 					this.neu=()=>{
 						nib.memry(this.cfg('promp'));
+						this.cfg('post_alias','');
 						location.reload();
 					}
 					this.pub=()=>{
@@ -828,7 +829,7 @@
 						this.mov();
 					});
 					this.NOTEPAD.addEventListener('blur',()=>{
-						this.cart([this.RANG[0],this.RANG[0]]);
+						this.cart([this.RANG[1],this.RANG[1]]);
 						this.NOTEPAD.focus();
 					});
 					this.NOTEPAD.addEventListener('contextmenu',e=>{
@@ -883,12 +884,12 @@
 				setTimeout(()=>{moda.style.opacity='0'},2000);
 			}
 			function conf(){
-				const cfg=window.prompt('Configure . . .',jig.mem());
+				const cfg=window.prompt('Configure . . .',JSON.stringify(jig.mem()));
 				if(cfg){
 					if(cfg===' '||cfg==='{}'){
-						jig.mem();
+						jig.cfg();
 					}else{
-						jig.mem(cfg);
+						jig.mem(JSON.parse(cfg));
 					}
 				}
 			}
