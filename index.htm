@@ -249,7 +249,7 @@
 			// Scrawl
 			class Jig{
 				constructor(nib=new Nib()){
-					this.CFG={'dark':false,'post_alias':'','post_url':'http://localhost/act.php','promp':'	# ','word_url':'https://www.merriam-webster.com/thesaurus/'};
+					this.CFG={'dark':false,'post_alias':'','post_url':'http://localhost/act.php','promp':'	# ','thesaurus_url':'https://www.merriam-webster.com/thesaurus/'};
 					this.HAND=false;
 					this.cfg=(ky,valu)=>{
 						if(!localStorage.Scrawl_CFG){
@@ -907,7 +907,7 @@
 				if(!w){
 					w=window.getSelection().toString();//.split(' ')[0];
 				}
-				window.open(jig.cfg('word_url')+w);
+				window.open(jig.cfg('thesaurus_url')+w);
 			}
 			function lokc(){
 				if(nib.NOTEPAD.spellcheck==true){
