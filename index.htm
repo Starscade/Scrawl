@@ -47,15 +47,20 @@
 				width:10em;
 			}
 			main{
-				left:50%;
-				position:fixed;
-				top:50%;
-				transform:translate(-50%,-57%);
+				margin:auto;
 			}
 			.inv{
 				background-color:var(--fg);
 				color:var(--bg);
 				cursor:pointer;
+			}
+			@media(orientation:landscape){
+				main{
+					left:50%;
+					position:fixed;
+					top:50%;
+					transform:translate(-50%,-57%);
+				}
 			}
 		</style>
 	</head>

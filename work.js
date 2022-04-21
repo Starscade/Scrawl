@@ -1,12 +1,9 @@
 'use strict';
-/* const CASH={'naem':'Scrawl_CASH','cash':[
-	'.'
-]}; */
 function etAll(e){
 	self.skipWaiting();
 	e.waitUntil(
 		caches.open('Scrawl_CASH').then(cash=>{
-			return cash.addAll(['./once-upon-a-time']);
+			return cash.addAll(['ico.png','./once-upon-a-time/']);
 		})
 	);
 }
@@ -14,6 +11,7 @@ self.addEventListener('activate',()=>{
 	return self.clients.claim();
 });
 self.addEventListener('fetch',e=>{
+	console.log(e.request);
 	e.respondWith(
 		(async ()=>{
 			let off=await caches.match(e.request);
