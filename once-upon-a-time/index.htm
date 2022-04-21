@@ -4,8 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
 		<meta name="theme-color"content="#ddd">
-		<!-- <link rel="manifest"href="manifest.json"type="application/manifest+json">
-		<link rel="icon"href="ico.png"> -->
+		<link rel="icon"href="../ico.png">
 		<title>S c r a w l</title>
 		<style>
 			@font-face {
@@ -878,7 +877,7 @@
 					});
 					document.addEventListener('selectionchange',()=>{
 						const selec=window.getSelection().getRangeAt(0);
-						this.RANG=[selec.startOffset,selec.endOffset];
+						this.HISTRY['cart'][this.HISTRY['indx']]=[selec.startOffset,selec.endOffset];
 					});
 					// INIT
 					if(!(this.memry())){
