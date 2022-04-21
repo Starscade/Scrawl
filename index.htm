@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+		<meta name="theme-color"content="#ddd">
 		<link rel="manifest"href="manifest.json"type="application/manifest+json">
 		<link rel="icon"href="ico.png">
 		<title>S c r a w l</title>
@@ -16,6 +17,7 @@
 				--fg:#667;
 				background-color:var(--bg);
 				color:var(--fg);
+				cursor:crosshair;
 				font-family:'Font',sans-serif;
 				font-size:x-large;
 				text-align:center;
@@ -31,6 +33,8 @@
 				min-width:6em;
 				padding:.5em;
 				text-transform:uppercase;
+			}button:focus{
+				outline:none;
 			}button:hover{
 				background-color:var(--bg);
 				color:var(--fg);
@@ -46,7 +50,7 @@
 				left:50%;
 				position:fixed;
 				top:50%;
-				transform:translate(-50%,-50%);
+				transform:translate(-50%,-57%);
 			}
 			.inv{
 				background-color:var(--fg);
