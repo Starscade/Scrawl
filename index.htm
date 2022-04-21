@@ -36,7 +36,7 @@
 				cursor:crosshair;
 				font-family:var(--font);
 				font-size:var(--pt);
-				scrollbar-width:thin;
+				scrollbar-width:thin; /* Firefox */
 				scroll-behavior:smooth;
 				text-align:center;
 				user-select:none;
@@ -60,6 +60,8 @@
 			body{
 				opacity:0;
 				transition:1s opacity;
+			}body:hover::-webkit-scrollbar-thumb{
+				background-color:transparent;
 			}
 			h1{
 				font-size:100%;
@@ -113,6 +115,7 @@
 			.lokc{
 				cursor:not-allowed;
 				text-align:justify;
+				white-space:unset; /* Firefox */
 			}
 			#contex{
 				display:none;
@@ -217,7 +220,7 @@
 					letter-spacing:1pt;
 					text-transform:none;
 				}
-				nav,.alurt{
+				nav,.alurt,#vign{
 					display:none!important;
 				}
 			}
