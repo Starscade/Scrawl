@@ -1,14 +1,12 @@
 'use strict';
-const CASH={'naem':'Scrawl_CASH','cash':[
-	'manifest.json',
-	'ico.png',
+/* const CASH={'naem':'Scrawl_CASH','cash':[
 	'.'
-]};
+]}; */
 function etAll(e){
 	self.skipWaiting();
 	e.waitUntil(
-		caches.open(CASH['naem']).then(cash=>{
-			return cash.addAll(CASH['cash']);
+		caches.open('Scrawl_CASH').then(cash=>{
+			return cash.addAll(['./once-upon-a-time']);
 		})
 	);
 }
@@ -28,7 +26,7 @@ self.addEventListener('fetch',e=>{
 			return off;
 		})()
 	);
-	etAll(e);
+	// etAll(e);
 });
 self.addEventListener('install',e=>{
 	etAll(e);
