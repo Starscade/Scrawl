@@ -17,7 +17,7 @@
 				--fg:#667;
 				background-color:var(--bg);
 				color:var(--fg);
-				/* cursor:crosshair; */
+				cursor:crosshair;
 				font-family:'Font',sans-serif;
 				font-size:x-large;
 				text-align:center;
@@ -28,23 +28,29 @@
 				border:2pt solid var(--fg);
 				border-radius:2em;
 				color:inherit;
+				cursor:crosshair;
 				font-family:inherit;
 				font-size:inherit;
+				line-height:100%;
 				min-width:6em;
-				padding:.5em;
+				padding:.5em 1em .5em 1em;
 				text-transform:uppercase;
 			}button:focus{
 				outline:none;
 			}
 			h1{
 				font-weight:normal;
+				line-height:100%;
 				margin:0;
 			}
 			img{
 				width:10em;
 			}
 			main{
-				margin:auto;
+				left:50%;
+				position:fixed;
+				top:50%;
+				transform:translate(-50%,-57%);
 			}
 			.inv{
 				background-color:var(--fg);
@@ -54,14 +60,6 @@
 				background-color:var(--bg);
 				color:var(--fg);
 			}
-			@media(orientation:landscape){
-				main{
-					left:50%;
-					position:fixed;
-					top:50%;
-					transform:translate(-50%,-57%);
-				}
-			}
 		</style>
 	</head>
 	<body>
@@ -69,7 +67,7 @@
 			<img title="Logo"src="adapticon.png"draggable="false">
 			<h1>The free, Internet typewriter.</h1>
 			<br>
-			<button title="Progressive Web App">Incompatible Browser</button>
+			<button title="☹">Unsupported Browser</button>
 		</main>
 		<script>
 			'use strict';
@@ -89,12 +87,14 @@
 				INSTAL=e;
 				instal.textContent='Install';
 				instal.classList.toggle('inv');
+				instal.title='💾';
 			});
+			if(localStorage.Scrawl_CFG){
+				instal.textContent='Open';
+				instal.title='🙂';
+			}
 			if('serviceWorker'in navigator){
 				navigator.serviceWorker.register('work.js');
-			}
-			if(localStorage.Scrawl_CFG){
-				instal.textContent='Installed';
 			}
 		</script>
 	</body>
