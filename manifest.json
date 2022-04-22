@@ -2,7 +2,7 @@
 	"name":"S c r a w l",
 	"short_name":"Scrawl",
 	"description":"The free, Internet typewriter.",
-	"start_url":"./once-upon-a-time",
+	"start_url":"./once-upon-a-time/",
 	"display":"fullscreen",
 	"theme_color":"#ddd",
 	"background_color":"#ddd",

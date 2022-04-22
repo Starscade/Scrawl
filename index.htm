@@ -17,7 +17,7 @@
 				--fg:#667;
 				background-color:var(--bg);
 				color:var(--fg);
-				cursor:crosshair;
+				/* cursor:crosshair; */
 				font-family:'Font',sans-serif;
 				font-size:x-large;
 				text-align:center;
@@ -35,9 +35,6 @@
 				text-transform:uppercase;
 			}button:focus{
 				outline:none;
-			}button:hover{
-				background-color:var(--bg);
-				color:var(--fg);
 			}
 			h1{
 				font-weight:normal;
@@ -53,6 +50,9 @@
 				background-color:var(--fg);
 				color:var(--bg);
 				cursor:pointer;
+			}.inv:hover{
+				background-color:var(--bg);
+				color:var(--fg);
 			}
 			@media(orientation:landscape){
 				main{
@@ -66,10 +66,10 @@
 	</head>
 	<body>
 		<main>
-			<img src="adapticon.png"draggable="false">
+			<img title="Logo"src="adapticon.png"draggable="false">
 			<h1>The free, Internet typewriter.</h1>
 			<br>
-			<button class="inv">Install</button>
+			<button title="Progressive Web App">Incompatible Browser</button>
 		</main>
 		<script>
 			'use strict';
@@ -81,19 +81,20 @@
 					const{outcome}=await INSTAL.userChoice;
 					if(outcome==='accepted'){
 						INSTAL=null;
-						location.href='./once-upon-a-time';
+						location.href='./once-upon-a-time/';
 					}
 				}
 			}
 			window.addEventListener('beforeinstallprompt',e=>{
 				INSTAL=e;
+				instal.textContent='Install';
+				instal.classList.toggle('inv');
 			});
 			if('serviceWorker'in navigator){
 				navigator.serviceWorker.register('work.js');
 			}
 			if(localStorage.Scrawl_CFG){
 				instal.textContent='Installed';
-				instal.classList.toggle('inv');
 			}
 		</script>
 	</body>

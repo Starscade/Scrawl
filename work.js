@@ -1,17 +1,14 @@
 'use strict';
-function etAll(e){
-	self.skipWaiting();
-	e.waitUntil(
-		caches.open('Scrawl_CASH').then(cash=>{
-			return cash.addAll(['ico.png','./once-upon-a-time/']);
-		})
-	);
+function etAll(){
+	caches.open('Scrawl_CASH').then(cash=>{
+		return cash.addAll(['ico.png','./once-upon-a-time/','Baloo2.woff2']);
+	});
+	console.log('Appdated!');
 }
 self.addEventListener('activate',()=>{
 	return self.clients.claim();
 });
 self.addEventListener('fetch',e=>{
-	console.log(e.request);
 	e.respondWith(
 		(async ()=>{
 			let off=await caches.match(e.request);
@@ -20,12 +17,16 @@ self.addEventListener('fetch',e=>{
 					const bob=new Blob(['Error'],{type:'text/plain'});
 					return new Response(bob);
 				});
+			}else{
+				etAll();
 			}
 			return off;
 		})()
 	);
-	// etAll(e);
 });
 self.addEventListener('install',e=>{
-	etAll(e);
+	self.skipWaiting();
+	e.waitUntil(
+		etAll()
+	);
 });
