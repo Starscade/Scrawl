@@ -275,7 +275,7 @@
 			// Scrawl
 			class Jig{
 				constructor(nib=new Nib()){
-					this.CFG={'dark':false,'post_alias':'','post_url':'http://localhost/act.php','promp':'	# ','thesaurus_url':'https://www.merriam-webster.com/thesaurus/'};
+					this.CFG={'dark':false,'post_alias':'','post_url':'','promp':'	# ','thesaurus_url':'https://www.merriam-webster.com/thesaurus/'};
 					this.HAND=false;
 					this.cfg=(ky,valu)=>{
 						if(!localStorage.Scrawl_CFG){
@@ -306,6 +306,17 @@
 							// console.log(cfg);
 							return cfg;
 						}
+					}
+					this.dl=(bob,naem='naem.txt')=>{
+						const uri=window.URL.createObjectURL(bob);
+						const a=document.createElement('a');
+						document.body.appendChild(a);
+						a.style='display:none';
+						a.href=uri;
+						a.download=naem;
+						a.click();
+						a.remove();
+						window.URL.revokeObjectURL(uri);
 					}
 					this.gurl=async (bob='',naem=nib.sellama(),url=this.cfg('post_url'))=>{
 						return await new Promise((ok,no)=>{
@@ -373,7 +384,15 @@
 							if(issu!==nib.sellama()){
 								this.cfg('post_alias',issu);
 							}
-							return this.gurl(new Blob([nib.x2y()]),issu,this.cfg('post_url'));
+							if(this.cfg('post_url')){
+								return this.gurl(new Blob([nib.x2y()]),issu,this.cfg('post_url'));
+							}else{
+								const boiler=['<!DOCTYPE html><html lang="en"class="day"oncontextmenu="return false"><head><meta charset="utf-8"><meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width"><meta name="theme-color"content="#ddd"><link rel="icon"href="https://scrawl.cc/ico.png"><title>','</title><style>@font-face{font-family:\'Font\';src:url(\'https://scrawl.cc/Baloo2.woff2\');}@keyframes faed{from{opacity:0}to{opacity:1}}::-webkit-scrollbar{height:var(--rad)*2;width:var(--rad)*2;}::-webkit-scrollbar-thumb{background-color:var(--fg);border-radius:var(--rad);border:4pt solid var(--bg);}::selection{background-color:var(--fg);color:var(--bg);}:root{--bg:#ddd;--fg:#667;--pt:18pt;--font:\'Font\',sans-serif;--rad:calc(var(--pt)/3);background-color:var(--bg);color:var(--fg);cursor:crosshair;font-family:var(--font);font-size:var(--pt);scroll-behavior:smooth;scrollbar-width:thin;text-align:center;}article{cursor:text;line-height:150%;margin:10vh auto 10vh auto;max-width:8.5in;padding:1em;}blockquote,body,h1,p{margin:0;}body{animation:faed 1s forwards;}h1{font-size:100%;letter-spacing:2pt;text-transform:uppercase;}p{text-align:justify;}p:not(br+p){text-indent:2em;}@media print{:root{--bg:White;--fg:Black;}}@page{margin:1in;}</style></head><body><main><article>','</article></main></body></html>'];
+								const txt=boiler[0]+issu+boiler[1]+nib.x2y()+boiler[2];
+								const bob=new Blob([txt],{type:'text/html;charset=utf-8'});
+								this.dl(bob,issu+'.htm');
+								return issu+' downloaded';
+							}
 						}
 					}
 					this.sav=async (as=false)=>{
@@ -412,9 +431,8 @@
 									const fn=f.name.split('.');
 									const fx=fn[fn.length-1];
 									let txt;
-									const boiler=['<!DOCTYPE html><html lang="en"class="day"oncontextmenu="return false"><head><meta charset="utf-8"><meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width"><meta name="theme-color"content="#ddd"><link rel="icon"href="https://scrawl.cc/ico.png"><title>','</title><style>@font-face{font-family:\'Font\';src:url(\'https://scrawl.cc/Baloo2.woff2\');}@keyframes faed{from{opacity:0}to{opacity:1}}::-webkit-scrollbar{height:var(--rad)*2;width:var(--rad)*2;}::-webkit-scrollbar-thumb{background-color:var(--fg);border-radius:var(--rad);border:4pt solid var(--bg);}::selection{background-color:var(--fg);color:var(--bg);}:root{--bg:#ddd;--fg:#667;--pt:18pt;--font:\'Font\',sans-serif;--rad:calc(var(--pt)/3);background-color:var(--bg);color:var(--fg);cursor:crosshair;font-family:var(--font);font-size:var(--pt);scroll-behavior:smooth;scrollbar-width:thin;text-align:center;}article{cursor:text;line-height:150%;margin:10vh auto 10vh auto;max-width:8.5in;padding:1em;}blockquote,body,h1,p{margin:0;}body{animation:faed 1s forwards;}h1{font-size:100%;letter-spacing:2pt;text-transform:uppercase;}p{text-align:justify;}p:not(br+p){text-indent:2em;}@media print{:root{--bg:White;--fg:Black;}}@page{margin:1in;}</style></head><body><main><article>','</article></main></body></html>'];
 									switch(fx.toLowerCase()){
-										case'htm':txt=boiler[0]+f.name+boiler[1]+nib.x2y()+boiler[2];break;
+										case'htm':txt=nib.x2y();break;
 										case'md':txt=nib.x2y(nib.x2y(),'htm2md').replaceAll(/\t/g,'');break;
 										default:txt=nib.x2y(nib.x2y(),'htm2md');
 									}
@@ -431,15 +449,7 @@
 							}else{
 								const txt=nib.x2y(nib.x2y(),'htm2md').replace(/\t/g,'');
 								const bob=new Blob([txt],{type:'text/markdown;charset=utf-8'});
-								const uri=window.URL.createObjectURL(bob);
-								const a=document.createElement('a');
-								document.body.appendChild(a);
-								a.style='display:none';
-								a.href=uri;
-								a.download=naem+'.md';
-								a.click();
-								a.remove();
-								window.URL.revokeObjectURL(uri);
+								this.dl(bob,naem+'.md');
 							}
 						});
 					}
