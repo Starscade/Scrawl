@@ -449,7 +449,10 @@
 									const boiler=['<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width"><meta name="theme-color"content="#ddd"><link rel="icon"href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><title>','</title><style>@font-face{font-family:\'Font\';src:url(\'https://scrawl.cc/Baloo2.woff2\');}@keyframes faed{from{opacity:0}to{opacity:1}}::-webkit-scrollbar{height:var(--rad)*2;width:var(--rad)*2;}::-webkit-scrollbar-thumb{background-color:var(--fg);border-radius:var(--rad);border:4pt solid var(--bg);}::selection{background-color:var(--fg);color:var(--bg);}:root{--bg:#ddd;--fg:#444;--pg:#eee;--pt:14pt;--font:\'Font\',sans-serif;--rad:calc(var(--pt)/3);background-color:var(--bg);color:var(--fg);cursor:crosshair;font-family:var(--font);font-size:var(--pt);scroll-behavior:smooth;scrollbar-width:thin;text-align:center;}a{color:currentColor;}article{background-color:var(--pg);cursor:text;line-height:200%;margin:auto;max-width:7.5in;padding:1em;}blockquote,body,p{margin:0;}body{animation:faed 1s forwards;}footer{margin:1em;opacity:.5;}h1{font-weight:normal;letter-spacing:2pt;text-transform:uppercase;}p{text-align:justify;}p:not(br+p){text-indent:2em;}@media(orientation:landscape){article{border-radius:var(--rad);margin:10vh auto 10vh auto;padding:1in;}footer{margin-bottom:10vh;}}@media print{:root{--bg:White;--fg:Black;--pg:White;}article{padding:0}}@page{margin:1in;}</style></head><body><main><article>','</article><footer><small>Made with <a href="https://scrawl.cc/"target="_Blank">Scrawl</a></small></footer></main></body></html>'];
 									const txt=boiler[0]+issu+boiler[1]+nib.x2y()+boiler[2];
 									const bob=new Blob([txt],{type:'text/html;charset=utf-8'});
-									this.dl(bob,issu+'.htm');
+									// this.dl(bob,issu+'.htm');
+									const url=window.URL.createObjectURL(bob);
+									window.open(url);
+									window.URL.revokeObjectURL(url);
 									ok('Downloading');
 								}
 							}
@@ -1237,6 +1240,10 @@
 				}else{
 					switch(e.key){
 						case'Tab':e.preventDefault();lokc();break;
+						case'F1':e.preventDefault();window.open('https://github.com/Starscade/Scrawl#readme');break;
+						case'F2':e.preventDefault();saef();break;
+						case'F3':e.preventDefault();opin();break;
+						case'F4':e.preventDefault();saef(true);break;
 						case'F7':e.preventDefault();proofa();break;
 						case'F8':e.preventDefault();saerk();break;
 						case'F9':e.preventDefault();day();break;
