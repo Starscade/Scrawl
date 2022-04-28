@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"class="day"oncontextmenu="return false">
+<html lang="en"oncontextmenu="return false">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
@@ -24,8 +24,8 @@
 				color:var(--bg);
 			}
 			:root{
-				--bg:#333;
-				--fg:#eca;
+				--bg:#ddd;
+				--fg:#667;
 				--pt:18pt;
 				--bord:2pt solid;
 				--curs:/* url('data:image/svg+xml;utf8,<svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.883 3.007 12 3a1 1 0 0 1 .993.883L13 4v7h7a1 1 0 0 1 .993.883L21 12a1 1 0 0 1-.883.993L20 13h-7v7a1 1 0 0 1-.883.993L12 21a1 1 0 0 1-.993-.883L11 20v-7H4a1 1 0 0 1-.993-.883L3 12a1 1 0 0 1 .883-.993L4 11h7V4a1 1 0 0 1 .883-.993L12 3l-.117.007Z" fill="Gray"/></svg>'), */crosshair;
@@ -113,7 +113,11 @@
 			.act{
 				background-color:var(--fg);
 				color:var(--bg);
-			}
+			}/* .act:hover{
+				border:var(--bord);
+				background-color:var(--bg);
+				color:var(--fg);
+			} */
 			.alurt{
 				background-color:var(--fg);
 				border-radius:var(--rad);
@@ -129,10 +133,6 @@
 				white-space:pre;
 				z-index:10;
 			}
-			.day{
-				--bg:#ddd;
-				--fg:#667;
-			}
 			.glass{
 				opacity:0;
 			}
@@ -143,6 +143,10 @@
 				cursor:var(--curs-no);
 			}.lokc p{
 				text-align:justify;
+			}
+			.owl{
+				--bg:#333;
+				--fg:#eca;
 			}
 			#contex{
 				background-color:var(--fg);
@@ -302,9 +306,9 @@
 					<span id="lokc"title="Read / Write"onclick="lokc()"><svg><path d="M13.94 5 19 10.06 9.062 20a2.25 2.25 0 0 1-.999.58l-5.116 1.395a.75.75 0 0 1-.92-.921l1.395-5.116a2.25 2.25 0 0 1 .58-.999L13.938 5Zm7.09-2.03a3.578 3.578 0 0 1 0 5.06l-.97.97L15 3.94l.97-.97a3.578 3.578 0 0 1 5.06 0Z"/></svg></span>
 				</div>
 				<div>
-					<span title="Dark Mode"onclick="day()"><svg><path d="m15.538 18.999-.29 1.259a2.25 2.25 0 0 1-2.02 1.735l-.173.007h-2.111a2.25 2.25 0 0 1-2.147-1.577l-.046-.167-.29-1.257h7.077ZM12 2.001a7.25 7.25 0 0 1 7.25 7.25c0 2.136-.936 4.093-2.765 5.84a.25.25 0 0 0-.071.125l-.528 2.283H8.114l-.526-2.283a.25.25 0 0 0-.071-.124C5.687 13.344 4.75 11.387 4.75 9.25A7.25 7.25 0 0 1 12 2.001Z"/></svg></span>
-					<span title="Thanks"onclick="window.open('https://patreon.com/starscade/')"><svg><path d="m12.82 5.58-.82.822-.824-.824a5.375 5.375 0 1 0-7.601 7.602l7.895 7.895a.75.75 0 0 0 1.06 0l7.902-7.897a5.376 5.376 0 0 0-.001-7.599 5.38 5.38 0 0 0-7.611 0Z"/></svg></span>
-					<!-- <span title="About"onclick="window.open('https://github.com/Starscade/Scrawl#readme')"><svg><path d="M10.55 2.533a2.25 2.25 0 0 1 2.9 0l6.75 5.695c.508.427.8 1.056.8 1.72v9.802a1.75 1.75 0 0 1-1.75 1.75h-3a1.75 1.75 0 0 1-1.75-1.75v-5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0-.75.75v5a1.75 1.75 0 0 1-1.75 1.75h-3A1.75 1.75 0 0 1 3 19.75V9.947c0-.663.292-1.292.8-1.72l6.75-5.694Z"/></svg></span> -->
+					<span title="Night Owl"onclick="owl()"><svg><path d="m15.538 18.999-.29 1.259a2.25 2.25 0 0 1-2.02 1.735l-.173.007h-2.111a2.25 2.25 0 0 1-2.147-1.577l-.046-.167-.29-1.257h7.077ZM12 2.001a7.25 7.25 0 0 1 7.25 7.25c0 2.136-.936 4.093-2.765 5.84a.25.25 0 0 0-.071.125l-.528 2.283H8.114l-.526-2.283a.25.25 0 0 0-.071-.124C5.687 13.344 4.75 11.387 4.75 9.25A7.25 7.25 0 0 1 12 2.001Z"/></svg></span>
+					<!-- <span title="Thanks"onclick="window.open('https://patreon.com/starscade/')"><svg><path d="m12.82 5.58-.82.822-.824-.824a5.375 5.375 0 1 0-7.601 7.602l7.895 7.895a.75.75 0 0 0 1.06 0l7.902-7.897a5.376 5.376 0 0 0-.001-7.599 5.38 5.38 0 0 0-7.611 0Z"/></svg></span> -->
+					<span title="Home"onclick="location.href='../home/'"><svg><path d="M10.55 2.533a2.25 2.25 0 0 1 2.9 0l6.75 5.695c.508.427.8 1.056.8 1.72v9.802a1.75 1.75 0 0 1-1.75 1.75h-3a1.75 1.75 0 0 1-1.75-1.75v-5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0-.75.75v5a1.75 1.75 0 0 1-1.75 1.75h-3A1.75 1.75 0 0 1 3 19.75V9.947c0-.663.292-1.292.8-1.72l6.75-5.694Z"/></svg></span>
 					<!-- <span title="Configure"onclick="conf()"><svg><path d="M12.012 2.25c.734.008 1.465.093 2.182.253a.75.75 0 0 1 .582.649l.17 1.527a1.384 1.384 0 0 0 1.927 1.116l1.401-.615a.75.75 0 0 1 .85.174 9.792 9.792 0 0 1 2.204 3.792.75.75 0 0 1-.271.825l-1.242.916a1.381 1.381 0 0 0 0 2.226l1.243.915a.75.75 0 0 1 .272.826 9.797 9.797 0 0 1-2.204 3.792.75.75 0 0 1-.848.175l-1.407-.617a1.38 1.38 0 0 0-1.926 1.114l-.169 1.526a.75.75 0 0 1-.572.647 9.518 9.518 0 0 1-4.406 0 .75.75 0 0 1-.572-.647l-.168-1.524a1.382 1.382 0 0 0-1.926-1.11l-1.406.616a.75.75 0 0 1-.849-.175 9.798 9.798 0 0 1-2.204-3.796.75.75 0 0 1 .272-.826l1.243-.916a1.38 1.38 0 0 0 0-2.226l-1.243-.914a.75.75 0 0 1-.271-.826 9.793 9.793 0 0 1 2.204-3.792.75.75 0 0 1 .85-.174l1.4.615a1.387 1.387 0 0 0 1.93-1.118l.17-1.526a.75.75 0 0 1 .583-.65c.717-.159 1.45-.243 2.201-.252ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span> -->
 				</div>
 			</nav>
@@ -447,7 +451,7 @@
 								if(this.cfg('post_url')){
 									this.gurl(new Blob([nib.x2y()]),issu,this.cfg('post_url')).then(resp=>ok(resp)).catch(err=>console.log(err));
 								}else{
-									const boiler=['<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width"><meta name="theme-color"content="#ddd"><link rel="icon"href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><title>','</title><style>@font-face{font-family:\'Font\';src:url(\'https://scrawl.cc/Baloo2.woff2\');}@keyframes faed{from{opacity:0}to{opacity:1}}::-webkit-scrollbar{height:var(--rad)*2;width:var(--rad)*2;}::-webkit-scrollbar-thumb{background-color:var(--fg);border-radius:var(--rad);border:4pt solid var(--bg);}::selection{background-color:var(--fg);color:var(--bg);}:root{--bg:#ddd;--fg:#444;--pg:#eee;--pt:14pt;--font:\'Font\',sans-serif;--rad:calc(var(--pt)/3);background-color:var(--bg);color:var(--fg);cursor:crosshair;font-family:var(--font);font-size:var(--pt);scroll-behavior:smooth;scrollbar-width:thin;text-align:center;}a{color:currentColor;}article{background-color:var(--pg);cursor:text;line-height:200%;margin:auto;max-width:7.5in;padding:1em;}blockquote,body,p{margin:0;}body{animation:faed 1s forwards;}footer{margin:1em;opacity:.5;}h1{font-weight:normal;letter-spacing:2pt;text-transform:uppercase;}p{text-align:justify;}p:not(br+p){text-indent:2em;}@media(orientation:landscape){article{border-radius:var(--rad);margin:10vh auto 10vh auto;padding:1in;}footer{margin-bottom:10vh;}}@media print{:root{--bg:White;--fg:Black;--pg:White;}article{padding:0}}@page{margin:1in;}</style></head><body><main><article>','</article><footer><small>Made with <a href="https://scrawl.cc/"target="_Blank">Scrawl</a></small></footer></main></body></html>'];
+									const boiler=['<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width"><meta name="theme-color"content="#ddd"><link rel="icon"href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><title>','</title><style>@font-face{font-family:\'Font\';src:url(\'https://scrawl.cc/Baloo2.woff2\');}@keyframes faed{from{opacity:0}to{opacity:1}}/* ::-webkit-scrollbar{height:var(--rad)*2;width:var(--rad)*2;}::-webkit-scrollbar-thumb{background-color:var(--fg);border-radius:var(--rad);border:4pt solid var(--bg);} */::selection{background-color:var(--fg);color:var(--bg);}:root{--bg:#ddd;--fg:#444;--pg:#eee;--pt:14pt;--font:\'Font\',sans-serif;--rad:calc(var(--pt)/3);background-color:var(--bg);color:var(--fg);/* cursor:crosshair; */font-family:var(--font);font-size:var(--pt);scroll-behavior:smooth;scrollbar-width:thin;text-align:center;}a{color:currentColor;}article{background-color:var(--pg);cursor:text;line-height:200%;margin:auto;max-width:7.5in;padding:1em;}blockquote,body,p{margin:0;}body{animation:faed 1s forwards;}footer{margin:1em;opacity:.5;}h1{font-weight:normal;letter-spacing:2pt;text-transform:uppercase;}p{text-align:justify;}p:not(br+p){text-indent:2em;}@media(orientation:landscape){article{border-radius:var(--rad);margin:10vh auto 10vh auto;padding:1in;}footer{margin-bottom:10vh;}}@media print{:root{--bg:White;--fg:Black;--pg:White;}article{padding:0}}@page{margin:1in;}</style></head><body><main><article>','</article><footer><small>Made with <a href="https://scrawl.cc/"target="_Blank">Scrawl</a></small></footer></main></body></html>'];
 									const txt=boiler[0]+issu+boiler[1]+nib.x2y()+boiler[2];
 									const bob=new Blob([txt],{type:'text/html;charset=utf-8'});
 									const url=window.URL.createObjectURL(bob);
@@ -651,6 +655,8 @@
 									this.NOTEPAD.innerHTML=this.NOTEPAD.textContent.replaceAll(rx,w[1]);
 									this.raec();
 									msg=k;
+								}else{
+									msg='No matches';
 								}
 							}
 						}
@@ -930,7 +936,7 @@
 					}
 					// LISTEN
 					this.NOTEPAD.addEventListener('beforeinput',e=>{
-						console.log(e);
+						// console.log(e);
 						e.preventDefault();
 						switch(e.inputType){
 							case'deleteByCut':this.ccp();break;
@@ -942,7 +948,7 @@
 							// case'insertFromDrop':this.xom(e.dataTransfer.getData('text'));break;
 							case'insertFromPaste':this.ccp('put');break;
 							case'insertParagraph':this.xom("\n\t");break;
-							case'insertReplacementText':this.selmod();this.raec(this.grang());this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
+							case'insertReplacementText':this.selmod();this.raec(this.grang());this.RANG=this.grang();this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
 							case'insertText':this.xom(e.data);break;
 						}
 						this.mov();
@@ -970,7 +976,7 @@
 					document.addEventListener('selectionchange',()=>{
 						// alurt(this.HISTRY['indx']+'\n'+this.RANG);
 						const selec=window.getSelection().getRangeAt(0);
-						if(selec.endOffset>0){
+						if(this.NOTEPAD===document.activeElement&&selec.endOffset>0){
 							this.RANG=[selec.startOffset,selec.endOffset];
 						}
 					});
@@ -989,6 +995,7 @@
 			const nib=new Nib();
 			const jig=new Jig(nib);
 			const contex=document.getElementById('contex');
+			const cune=document.getElementById('cuneiform');
 			const tooble=document.getElementById('tooble');
 			function alurt(msg='OK!'){
 				const moda=document.createElement('div');
@@ -1019,53 +1026,59 @@
 				if(nib.iswet()){
 					lokc();
 				}
+				const form=document.getElementById('cuneiform');
+				const tin=form.children[1];
+				const butt_ok=form.children[2];
+				const butt_no=form.children[3];
+				butt_no.click();
 				return await new Promise(rezolv=>{
-					const form=document.getElementById('cuneiform');
-					const tin=form.children[1];
-					const butt_ok=form.children[2];
-					const butt_no=form.children[3];
 					let rez=false;
 					form.children[0].textContent=promtp;
-					if(form.classList.contains('hid')){
+					/* if(form.classList.contains('hid')){
 						form.classList.toggle('hid');
-					}
+					} */
+					form.style.display='block';
 					if(inpt){
-						tin.value=inpt;
+						if(inpt===' '){
+							tin.value='';
+						}else{
+							tin.value=inpt;
+						}
 						tin.style.display='block';
 						tin.focus();
 					}else{
 						tin.value='';
 						tin.style.display='none';
 					}
-					butt_ok.onclick=()=>{
-						form.classList.toggle('hid');
+					tin.addEventListener('blur',()=>{tin.focus()});
+					butt_ok.addEventListener('click',()=>{
+						// form.classList.toggle('hid');
+						form.style.display='none';
 						if(inpt){
 							rez=tin.value;
 						}else{
 							rez=true;
 						}
 						rezolv(rez);
-					}
-					butt_no.onclick=()=>{
-						form.classList.toggle('hid');
+					});//,{once:true});
+					butt_no.addEventListener('click',()=>{
+						// form.classList.toggle('hid');
+						form.style.display='none';
 						rezolv(false);
-					}
+					});//,{once:true});
 				});
 			}
-			function day(){
-				let rgb='#333';
-				if(jig.cfg('dark')){
-					jig.cfg('dark',false);
-					rgb='#ddd';
-				}else{
-					jig.cfg('dark',true);
+			/* function cunekill(ok=true){
+				const cune=document.getElementById('cuneiform');
+				let i=3;
+				if(ok){
+					i=2;
 				}
-				document.body.parentElement.classList.toggle('day');
-				document.querySelector("meta[name=theme-color]").setAttribute("content",rgb);
-			}
+				cune.children[i];
+			} */
 			function dinosaur(w=''){
 				if(!w){
-					w=window.getSelection().toString();//.split(' ')[0];
+					w=window.getSelection().toString();
 				}
 				window.open(jig.cfg('thesaurus_url')+w);
 			}
@@ -1073,6 +1086,7 @@
 				if(nib.NOTEPAD.spellcheck==true){
 					proofa();
 				}
+				cune.children[3].click();
 				contex.style.display='none';
 				nib.swop();
 				nib.NOTEPAD.classList.toggle('lokc');
@@ -1080,6 +1094,9 @@
 				const moab=document.getElementById('moab');
 				moab.children[0].classList.toggle('hid');
 				moab.children[2].classList.toggle('hid');
+				if(!nib.iswet()){
+					alurt('Locked');
+				}
 			}
 			function opin(ti=null){
 				if(ti){
@@ -1097,6 +1114,17 @@
 					}
 				}
 			}
+			function owl(){
+				let rgb='#333';
+				if(jig.cfg('dark')){
+					jig.cfg('dark',false);
+					rgb='#ddd';
+				}else{
+					jig.cfg('dark',true);
+				}
+				document.body.parentElement.classList.toggle('owl');
+				document.querySelector("meta[name=theme-color]").setAttribute("content",rgb);
+			}
 			function peekaboo(){
 				tooble.classList.toggle('peek');
 			}
@@ -1112,6 +1140,11 @@
 				}
 				document.getElementById('proof').classList.toggle('act');
 				jig.spex();
+				if(nib.NOTEPAD.spellcheck===true){
+					alurt('Proofing ON');
+				}else{
+					alurt('Proofing OFF');
+				}
 			}
 			function publistche(){
 				let alias=nib.sellama();
@@ -1123,13 +1156,13 @@
 				});
 			}
 			function pub_cfg(){
-				let promtp=' '
+				let promtp='.';
 				if(jig.cfg('post_url')){
 					promtp=jig.cfg('post_url');
 				}
 				cuneiform('API URL',promtp).then(cfg=>{
 					if(cfg){
-						if(cfg===' '){
+						if(cfg==='.'){
 							jig.cfg('post_url','');
 						}else{
 							jig.cfg('post_url',cfg);
@@ -1164,7 +1197,7 @@
 				if(!regx){
 					regx=' ';
 				}
-				cuneiform('REGEX',regx).then(w=>{
+				cuneiform('SEARCH & REPLACE',regx).then(w=>{
 					if(w){
 						if(w.trim()){
 							if(!(nib.iswet())){
@@ -1199,15 +1232,17 @@
 			document.body.addEventListener('keydown',e=>{
 				if(e.ctrlKey||e.metaKey){
 					switch(e.key.toUpperCase()){
-						case'C':e.preventDefault();
+						case'C':
 							if(!(nib.iswet())){
-								e.preventDefault();
-								if(e.shiftKey){
-									nib.cop('BBC');
-									alurt('Clipboard (BBC)');
-								}else{
-									nib.cop('HTML');
-									alurt('Clipboard (HTML)');
+								if(cune.style.display==='none'){
+									e.preventDefault();
+									if(e.shiftKey){
+										nib.cop('BBC');
+										alurt('Clipboard (BBC)');
+									}else{
+										nib.cop('HTML');
+										alurt('Clipboard (HTML)');
+									}
 								}
 							}
 							break;
@@ -1240,14 +1275,15 @@
 					}
 				}else{
 					switch(e.key){
+						case'Enter':if(!nib.iswet()){e.preventDefault()}cune.children[2].click();break;
 						case'Tab':e.preventDefault();lokc();break;
 						case'F1':e.preventDefault();window.open('https://github.com/Starscade/Scrawl#readme');break;
 						case'F2':e.preventDefault();saef();break;
 						case'F3':e.preventDefault();opin();break;
-						case'F4':e.preventDefault();saef(true);break;
+						case'F4':if(!e.altKey){e.preventDefault();saef(true);}break;
 						case'F7':e.preventDefault();proofa();break;
 						case'F8':e.preventDefault();saerk();break;
-						case'F9':e.preventDefault();day();break;
+						case'F9':e.preventDefault();owl();break;
 						case'F10':e.preventDefault();conf();break;
 						case'F12':e.preventDefault();publistche();break;
 					}
@@ -1270,7 +1306,7 @@
 			});
 			// INIT
 			if(jig.cfg('dark')){
-				document.body.parentElement.classList.toggle('day');
+				document.body.parentElement.classList.toggle('owl');
 				document.querySelector("meta[name=theme-color]").setAttribute("content",'#333');
 			}
 			if(nib.memry()!==jig.cfg('promp')){
