@@ -1,8 +1,9 @@
 {
 	"name":"S c r a w l",
 	"short_name":"Scrawl",
-	"description":"The free, Internet typewriter.",
+	"description":"The offline, Internet typewriter.",
 	"start_url":"./once-upon-a-time/",
+	"scope":"./",
 	"display":"fullscreen",
 	"theme_color":"#ddd",
 	"background_color":"#ddd",
@@ -16,6 +17,25 @@
 			"sizes":"512x512",
 			"type":"image/png",
 			"purpose":"any maskable"
+		}
+	],
+	"shortcuts":[
+		{
+			"name":"New Story",
+			"description":"Discard any lingering project and stare at a blank page . . .",
+			"url":"./once-upon-a-time/?gameover",
+			"icons":[
+				{
+					"src":"ico.png",
+					"type":"image/png",
+					"purpose":"any"
+				}
+			]
+		}
+	],
+	"url_handlers":[
+		{
+				"origin":"https://vip.scrawl.cc"
 		}
 	]
 }

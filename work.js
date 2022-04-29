@@ -1,11 +1,12 @@
 'use strict';
 function etAll(){
 	caches.open('Scrawl_CASH').then(cash=>{
-		return cash.addAll(['ico.png','./once-upon-a-time/','Baloo2.woff2']);
+		return cash.addAll(['ico.png',/* './home/', */'./once-upon-a-time/','Baloo2.woff2']);
 	});
 	console.log('Appdated!');
 }
 self.addEventListener('activate',()=>{
+	etAll();
 	return self.clients.claim();
 });
 self.addEventListener('fetch',e=>{
@@ -17,9 +18,9 @@ self.addEventListener('fetch',e=>{
 					const bob=new Blob(['Error'],{type:'text/plain'});
 					return new Response(bob);
 				});
-			}else{
+			}/* else{
 				etAll();
-			}
+			} */
 			return off;
 		})()
 	);

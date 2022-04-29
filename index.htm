@@ -65,9 +65,9 @@
 	<body>
 		<main>
 			<img title="Logo"src="adapticon.png"draggable="false">
-			<h1>The free, Internet typewriter.</h1>
+			<h1>The offline, Internet typewriter.</h1>
 			<br>
-			<button title="☹">Sorry, your browser is not supported.</button>
+			<button>Sorry, your browser is not supported.</button>
 		</main>
 		<script>
 			'use strict';
@@ -76,26 +76,21 @@
 			instal.onclick=async ()=>{
 				if(INSTAL){
 					INSTAL.prompt();
-					const{outcome}=await INSTAL.userChoice;
-					if(outcome==='accepted'){
-						INSTAL=null;
-						location.href='./once-upon-a-time/';
-					}
+					const outcome=await INSTAL.userChoice;
+					location.href='./once-upon-a-time/';
 				}
 			}
 			window.addEventListener('beforeinstallprompt',e=>{
 				INSTAL=e;
 				instal.textContent='Install';
 				instal.classList.toggle('inv');
-				instal.title='💾';
 			});
 			if(localStorage.Scrawl_CFG){
 				instal.textContent='Open';
 				instal.classList.toggle('inv');
-				instal.title='🙂';
 			}
 			if('serviceWorker'in navigator){
-				navigator.serviceWorker.register('work.js');
+				navigator.serviceWorker.register('work.js',{scope:'./'});
 			}
 		</script>
 	</body>
