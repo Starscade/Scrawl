@@ -64,6 +64,7 @@
 				padding:1em;
 				text-align:justify;
 				white-space:pre-wrap;
+				word-wrap:break-word;
 			}article:focus{
 				outline:none;
 			}
@@ -82,12 +83,13 @@
 			}h1::after,h1::before{
 				content:'∾';
 				margin:1em;
-			} */h1,h2,h3,h4,h5,h6{
+			} */h1,h2,h3{
+				text-transform:uppercase;
+			}h1,h2,h3,h4,h5,h6{
 				font-size:100%;
 				font-weight:normal;
 				letter-spacing:2pt;
 				text-align:center;
-				text-transform:uppercase;
 			}
 			hr{
 				background-image:linear-gradient(to right,transparent,currentColor,transparent);
@@ -139,8 +141,8 @@
 				text-indent:2em;
 			}
 			sup{
-				font-size:x-small;
-				line-height:100%;
+				font-size:small;
+				/* line-height:100%; */
 				text-transform:uppercase;
 			}
 			svg{
@@ -931,7 +933,6 @@
 									/\\"/g,
 									/\*\*([^*]*)\*\*/g,
 									/\*([^*]*)\*/g,
-									/\\__/g,
 									/__(.*)__/g,
 									/&lowbar;/g,
 									/~([^~]*)~/g,
@@ -944,7 +945,7 @@
 									/ - /g,
 									/--/g,
 									/\s\s+/g,
-									/\^(\d+)/g,
+									/(\d\s*)\^\s*(\d+)/g,
 									/(\d)(st|nd|rd|th)/g,
 									/<([\w.]*)@(\w*)\.(\w*)>/g,
 									/<([\w#!:.,?+=&%@!\-\/]*) ([^>]*) _>/g,
@@ -956,6 +957,7 @@
 									/(\d\s*)x(\s*\d)/g,
 									/\\%/g,
 									/\+-/g,
+									/\!=/g,
 									/\(1\/4\)/g,
 									/\(1\/2\)/g,
 									/\(3\/4\)/g,
@@ -984,7 +986,6 @@
 									'&quot;',
 									'<b>$1</b>',
 									'<i>$1</i>',
-									'&lowbar;',
 									'<u>$1</u>',
 									'__',
 									'<s>$1</s>',
@@ -997,7 +998,7 @@
 									'–',
 									'—',
 									' ',
-									'<sup>$1</sup>',
+									'$1<sup>$2</sup>',
 									'$1<sup>$2</sup>',
 									'<a href="mailto:$1@$2.$3">$1@$2.$3</a>',
 									'<a href="$1"target="_blank">$2</a>',
@@ -1009,6 +1010,7 @@
 									'$1×$2',
 									'÷',
 									'±',
+									'≠',
 									'¼',
 									'½',
 									'¾',
@@ -1116,10 +1118,12 @@
 									/<\/*u>/g,
 									/\|/g,
 									/<\/*mark>/g,
-									/<sub>([^<]*)<\/sub>/g,
-									/<sup>([^<]*)<\/sup>/g,
+									/(\d\s*)\^(\s*\d)/g,
+									/(\d)(\s*)<sup>([^<]\d+)<\/sup>/g,
+									/(\d)<sup>([^<]\w+)<\/sup>/g,
 									/&amp;/g,
 									/`/g,
+									/--/g,
 									/—/g,
 									/'/g,
 									/"/g,
@@ -1130,7 +1134,14 @@
 									/&gt;/g,
 									/<p>&nbsp;<\/p>/g,
 									/&nbsp;/g,
-									/&bsol;/g
+									/&bsol;/g,
+									/(\d)o/g,
+									/(\d\s*)x(\s*\d)/g,
+									/\+-/g,
+									/\(([C|c])\)/g,
+									/\(R\)/g,
+									/\(TM\)/g,
+									/\(tm\)/g
 								],[
 									'<$1 $3 $2>',
 									'_',
@@ -1150,14 +1161,16 @@
 									"\n",
 									'\\~',
 									'~',
-									'\\__',
+									'_\\_',
 									'__',
 									'\\|',
 									'|',
-									'$1',
-									'$1',
+									'$1\\^$2',
+									'$1$2^$2$3',
+									'$1$2',
 									'&',
 									'\\`',
+									'-\\-',
 									'--',
 									"\\'",
 									'\\"',
@@ -1168,7 +1181,14 @@
 									'\\>',
 									'\t\\\n',
 									'\\',
-									'\\\\'
+									'\\\\',
+									'$1\\o',
+									'$1\\x$2',
+									'+\\-',
+									'(\\$1)',
+									'(\\R)',
+									'(\\TM)',
+									'(\\tm)'
 								]
 							],'md2boo':[
 								[
@@ -1313,7 +1333,7 @@
 			function alurt(msg='OK!'){
 				const moda=document.createElement('div');
 				moda.classList.add('alurt');
-				moda.textContent=msg;
+				moda.innerHTML=msg;
 				console.log('Alurt: '+msg);
 				document.body.appendChild(moda);
 				moda.onclick=()=>{
@@ -1409,8 +1429,10 @@
 				moab.children[2].classList.toggle('hid');
 				if(nib.iswet()){
 					alurt('Unlocked');
+					/* alurt('<svg><path d="M12 2.001a4 4 0 0 1 3.771 2.666 1 1 0 0 1-1.84.774l-.045-.107a2 2 0 0 0-3.88.517L10.002 6v1.999h7.749a2.25 2.25 0 0 1 2.245 2.097l.005.154v9.496a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25A2.25 2.25 0 0 1 4.005 19.9L4 19.746V10.25a2.25 2.25 0 0 1 2.096-2.245L6.25 8l1.751-.001v-2A3.999 3.999 0 0 1 12 2.002Zm0 11.498a1.499 1.499 0 1 0 0 2.998 1.499 1.499 0 0 0 0-2.998Z"/></svg>'); */
 				}else{
 					alurt('Locked');
+					/* alurt('<svg><path d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1.5 0 0 1 20 9.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1 5.5 8H8V6a4 4 0 0 1 4-4Zm0 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM12 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2Z"/></svg>'); */
 				}
 			}
 			function opin(ti=null){
@@ -1567,9 +1589,9 @@
 									e.preventDefault();
 									nib.cop('MD');
 									alurt('Clipboard (MD)');
-								}else{
+								}/* else{
 									alurt('Copied to Clipboard');
-								}
+								} */
 							}
 							break;
 						case'E':e.preventDefault();
@@ -1613,7 +1635,7 @@
 				}else{
 					switch(e.key){
 						case'Enter':if(!nib.iswet()){e.preventDefault()}cune.children[2].click();break;
-						case'Tab':e.preventDefault();lokc();break;
+						case'Tab':e.preventDefault();const cune=document.getElementById('cuneiform');if(cune.style.display=='block'){lokc()};lokc();break;
 						case'F1':e.preventDefault();window.open('https://github.com/Starscade/Scrawl#readme');break;
 						case'F2':e.preventDefault();saef(true);break;
 						case'F3':e.preventDefault();opin();break;
