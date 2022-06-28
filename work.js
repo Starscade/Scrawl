@@ -1,7 +1,7 @@
 'use strict';
 function etAll(){
 	caches.open('Scrawl_CASH').then(cash=>{
-		return cash.addAll(['ico.png','manifest.json','./','./+/','Baloo2.woff2'])
+		return cash.addAll(['./','Baloo2.woff2','manifest.json','ico.png'])
 	});
 	console.log('Appdated!')
 }
