@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en"oncontextmenu="return false">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport"content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width">
+		<meta name="apple-mobile-web-app-capable"content="yes">
+		<meta name="theme-color"content="Silver">
+		<link rel="manifest"href="manifest.json"type="application/manifest+json">
+		<link rel="apple-touch-icon"href="ico.png">
+		<link rel="icon"href="ico.png">
+		<title>S c r a w l</title>
+		<style>
+			@font-face{
+				font-family:'Font';
+				src:url('Baloo2.woff2');
+			}
+			::-webkit-scrollbar{
+				height:calc(var(--px)*2.5);
+				width:calc(var(--px)*2.5);
+			}::-webkit-scrollbar-thumb{
+				background-color:var(--fg);
+				border-radius:var(--rad);
+				border:calc(var(--px)*.76) solid var(--bg);
+			}
+			::selection{
+				background-color:var(--fg);
+				color:var(--bg);
+			}
+			:root{
+				--bg:Silver;
+				--fg:#333;
+				--pt:calc(var(--px)*3);
+				--px:8px;
+				--bord:calc(var(--px)/2) solid;
+				--curs:/* url('data:image/svg+xml;utf8,<svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.883 3.007 12 3a1 1 0 0 1 .993.883L13 4v7h7a1 1 0 0 1 .993.883L21 12a1 1 0 0 1-.883.993L20 13h-7v7a1 1 0 0 1-.883.993L12 21a1 1 0 0 1-.993-.883L11 20v-7H4a1 1 0 0 1-.993-.883L3 12a1 1 0 0 1 .883-.993L4 11h7V4a1 1 0 0 1 .883-.993L12 3l-.117.007Z" fill="Gray"/></svg>'), */crosshair;
+				--curs-no:/* url('data:image/svg+xml;utf8,<svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2Zm6.113 5.654-10.46 10.46a7.5 7.5 0 0 0 10.46-10.46ZM12 4.5a7.5 7.5 0 0 0-6.113 11.846l10.46-10.46A7.466 7.466 0 0 0 12 4.5Z" fill="Gray"/></svg>'), */not-allowed;
+				--curs-poi:/* url('data:image/svg+xml;utf8,<svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.921 2.3C6.936 1.532 5.5 2.234 5.5 3.482v17.009c0 1.422 1.795 2.046 2.677.93l4.19-5.3a1.65 1.65 0 0 1 1.295-.626h6.852c1.428 0 2.049-1.808.921-2.684L7.921 2.299Z" fill="Gray"/></svg>'), */pointer;
+				--curs-txt:text;
+				--font:'Font',sans-serif;
+				--rad:calc(var(--pt)/2);
+				--shado:0 -1em 1em var(--bg);
+				background-color:var(--bg);
+				color:var(--fg);
+				cursor:var(--curs);
+				font-family:var(--font);
+				font-size:var(--pt);
+				/* BUG *//* scroll-behavior:smooth; *//* Causes initial jump on first load */
+				/* scrollbar-color:var(--fg) var(--bg);
+				scrollbar-width:thin; *//* Firefox only */
+				text-align:center;
+				user-select:none;
+			}
+			a{
+				color:inherit;
+				text-decoration-style:dashed;
+			}a:hover{
+				text-decoration-style:solid;
+			}a:visited{
+				color:var(--fg);
+			}
+			article{
+				cursor:var(--curs-txt);
+				line-height:150%;
+				margin:10vh auto 10vh auto;
+				max-width:calc(var(--px)*100);
+				padding:1em;
+				text-align:justify;
+				white-space:pre-wrap;
+				word-wrap:break-word;
+			}article:focus{
+				outline:none;
+			}
+			blockquote{
+				text-align:center;
+			}blockquote,body,h1,h2,h3,h4,h5,h6,p{
+				margin:0;
+			}
+			body{
+				opacity:0;
+				transition:1s opacity;
+			}body:hover::-webkit-scrollbar-thumb{
+				background-color:transparent;
+			}h1,h2,h3{
+				text-transform:uppercase;
+			}h1,h2,h3,h4,h5,h6{
+				font-size:100%;
+				font-weight:normal;
+				letter-spacing:calc(var(--px)/2);
+				text-align:center;
+			}
+			hr{
+				background-image:linear-gradient(to right,transparent,currentColor,transparent);
+				border:none;
+				height:calc(var(--px)*.5);
+			}
+			input{
+				background-color:inherit;
+				border:none;
+				border-radius:var(--rad);
+				color:inherit;
+				display:block;
+				font-family:inherit;
+				font-size:inherit;
+				margin:auto;
+				padding:.5em;
+			}input:focus{
+				outline:none;
+			}input[type="text"]{
+				border-bottom:calc(var(--px)*.5) solid;
+				margin-bottom:1em;
+			}
+			mark{
+				background-color:var(--fg);
+				border-radius:var(--rad);
+				color:var(--bg);
+				font-family:monospace;
+				font-size:50%;
+				letter-spacing:calc(var(--px)*.5);
+				padding:calc(var(--px)*.3);
+				padding-left:calc(var(--px)*.7);
+				vertical-align:middle;
+			}
+			nav{
+				background-color:var(--bg);
+				position:fixed;
+			}nav span{
+				border:var(--bord) transparent;
+				cursor:var(--curs-poi);
+				display:inline-block;
+				height:1em;
+				margin:var(--px);
+				padding:1em;
+				width:1em;
+			}nav span:hover{
+				background-color:var(--fg);
+				color:var(--bg);
+			}
+			p:not(br+p){
+				text-indent:2em;
+			}
+			sup{
+				font-size:67%;
+				/* line-height:100%; */
+				text-transform:uppercase;
+			}
+			svg{
+				fill:currentColor;
+				height:1em;
+				width:1em;
+			}
+			.act{
+				background-color:var(--fg);
+				border-color:var(--fg);
+				border-style:dashed;
+				color:var(--bg);
+			}.act:hover{
+				background-color:var(--bg);
+				color:var(--fg);
+			}
+			.alurt{
+				background-color:var(--fg);
+				border-radius:var(--rad);
+				color:var(--bg);
+				cursor:var(--curs-poi);
+				left:50%;
+				line-height:100%;
+				min-width:6em;
+				padding:.67em;
+				position:fixed;
+				top:9%;
+				transform:translateX(-50%);
+				transition:opacity .5s;
+				white-space:pre;
+				z-index:10;
+			}
+			.glass{
+				opacity:0;
+			}
+			.hid{
+				display:none;
+			}
+			.lokc{
+				cursor:var(--curs-no);
+				hyphens:auto;
+			}
+			.moby{
+				display:none!important;
+			}
+			.owl{
+				--bg:#333;
+				--fg:#eca;
+			}
+			#contex{
+				background-color:var(--fg);
+				border-radius:var(--rad);
+				color:var(--bg);
+				display:none;
+			}#contex div{
+				display:none;
+			}#contex span{
+				margin:0;
+			}#contex span:hover{
+				background-color:var(--bg);
+				color:var(--fg);
+			}#contex span:first-of-type:hover{
+				border-radius:var(--rad) 0 0 var(--rad);
+			}#contex span:last-of-type:hover{
+				border-radius:0 var(--rad) var(--rad) 0;
+			}
+			#cuneiform{
+				background-color:var(--fg);
+				border-radius:var(--rad);
+				color:var(--bg);
+				left:50%;
+				min-width:18em;
+				padding:1em;
+				top:33%;
+				transform:translate(-50%,-50%);
+			}#cuneiform div{
+				margin-bottom:1em;
+			}#cuneiform input{
+				background-color:var(--bg);
+				color:var(--fg);
+				display:none;
+				width:76%;
+			}#cuneiform span{
+				background-color:var(--bg);
+				border:var(--bord) var(--bg);
+				border-radius:var(--rad);
+				color:var(--fg);
+				padding:.5em 1em .5em 1em;
+			}#cuneiform span:hover{
+				background-color:var(--fg);
+				color:var(--bg);
+			}
+			#moab{
+				bottom:0;
+				display:none;
+				height:auto;
+				top:auto;
+				width:100%;
+			}
+			#tooble{
+				bottom:0;
+				box-shadow:var(--shado);
+				direction:rtl;
+				display:flex;
+				flex-direction:column;
+				justify-content:space-between;
+				overflow-y:scroll;
+				/* padding-left:1em; */
+				top:0;
+				transition:.33s opacity;
+			}#tooble:hover{
+				opacity:1;
+			}#tooble div{
+				direction:ltr;
+				display:inline;
+			}#tooble span{
+				border-radius:var(--rad);
+				display:block;
+			}
+			#vign{
+				background-image:linear-gradient(var(--bg) 3%,transparent 7%,transparent 93%,var(--bg) 97%);
+				bottom:0;
+				left:0;
+				pointer-events:none;
+				position:fixed;
+				right:0;
+				top:0;
+			}
+			@media(orientation:portrait){
+				article{
+					margin-bottom:4em;
+					margin-top:1em;
+				}
+				nav span,nav span:hover,#contex{
+					background-color:var(--bg);
+					color:var(--fg);
+				}
+				.act{
+					border-radius:var(--rad)!important;
+				}
+				.moby{
+					display:inline-block!important;
+				}
+				#contex{
+					bottom:3em;
+					box-shadow:var(--shado);
+					left:0;
+					right:0;
+				}#contex div{
+					display:block;
+				}
+				#moab{
+					display:block;
+				}
+				#tooble{
+					bottom:3em;
+					display:none;
+					opacity:1;
+					padding-bottom:1em;
+					top:auto;
+				}#tooble.peek{
+					display:block;
+				}#tooble span{
+					display:inline-block;
+				}
+				#vign{
+					bottom:3em;
+				}
+			}
+			@media print{
+				:root{
+					--bg:White;
+					--fg:Black;
+					--pt:12pt;
+					--font:serif;
+				}
+				a{
+					border-bottom:2pt dashed;
+					color:DodgerBlue!important;
+					text-decoration:none;
+				}
+				article{
+					line-height:200%;
+					margin:0;
+					padding:0;
+				}
+				h1,h2{
+					font-size:150%;
+					font-variant:small-caps;
+					text-transform:none;
+				}
+				nav,.alurt,#vign{
+					display:none!important;
+				}
+			}
+			@page{
+				margin:1in;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<article></article>
+			<div id="vign"></div>
+			<nav id="tooble">
+				<div>
+					<span title="New"onclick="rush(jig.neu)"><svg viewBox="0 0 24 24"><path d="M12 2v6a2 2 0 0 0 2 2h6v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h6Z"/><path d="M13.5 2.5V8a.5.5 0 0 0 .5.5h5.5l-6-6Z"/></svg></span>
+					<span title="Open"onclick="opin()"><svg viewBox="0 0 24 24"><path d="M13.821 6.5h5.929a2.25 2.25 0 0 1 2.229 1.938l.016.158.005.154v9a2.25 2.25 0 0 1-2.096 2.245L19.75 20H4.25a2.25 2.25 0 0 1-2.245-2.096L2 17.75v-7.251l6.207.001.196-.009a2.25 2.25 0 0 0 1.088-.393l.156-.12L13.821 6.5ZM8.207 4c.46 0 .908.141 1.284.402l.156.12 2.103 1.751-3.063 2.553-.085.061a.75.75 0 0 1-.29.106L8.206 9 2 8.999V6.25a2.25 2.25 0 0 1 2.096-2.245L4.25 4h3.957Z"/></svg></span>
+					<span title="Save"onclick="saef()"oncontextmenu="saef(true)"><svg viewBox="0 0 24 24"><path d="M6.75 3h-1A2.75 2.75 0 0 0 3 5.75v12.5A2.75 2.75 0 0 0 5.75 21H6v-6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 15v6h.25A2.75 2.75 0 0 0 21 18.25V8.286a3.25 3.25 0 0 0-.952-2.299l-2.035-2.035A3.25 3.25 0 0 0 15.75 3v4.5a2.25 2.25 0 0 1-2.25 2.25H9A2.25 2.25 0 0 1 6.75 7.5V3Z"/><path d="M14.25 3v4.5a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75V3h6ZM16.5 21v-6a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0-.75.75v6h9Z"/></svg></span>
+					<span title="Print"onclick="prln()"><svg viewBox="0 0 24 24"><path d="M18 17.5v1.25A2.25 2.25 0 0 1 15.75 21h-7.5A2.25 2.25 0 0 1 6 18.75v-1.251l-1.75.001A2.25 2.25 0 0 1 2 15.25V9.254a3.25 3.25 0 0 1 3.25-3.25l.749-.001L6 5.25A2.25 2.25 0 0 1 8.25 3h7.502a2.25 2.25 0 0 1 2.25 2.25v.753h.75a3.254 3.254 0 0 1 3.252 3.25l.003 5.997a2.249 2.249 0 0 1-2.248 2.25H18Zm-2.25-4h-7.5a.75.75 0 0 0-.75.75v4.5c0 .414.336.75.75.75h7.5a.75.75 0 0 0 .75-.75v-4.5a.75.75 0 0 0-.75-.75Zm.002-9H8.25a.75.75 0 0 0-.75.75l-.001.753h9.003V5.25a.75.75 0 0 0-.75-.75Z"/></svg></span>
+					<span title="Publish"onclick="publistche()"oncontextmenu="pub_cfg()"><svg viewBox="0 0 24 24"><path d="m12.815 12.197-7.532 1.256a.5.5 0 0 0-.386.318L2.3 20.728c-.248.64.421 1.25 1.035.943l18-9a.75.75 0 0 0 0-1.342l-18-9c-.614-.307-1.283.304-1.035.943l2.598 6.957a.5.5 0 0 0 .386.319l7.532 1.255a.2.2 0 0 1 0 .394Z"/></svg></span>
+				</div>
+				<div>
+					<span title="Tally"onclick="tally()"><svg viewBox="0 0 24 24"><path d="M2 6a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1ZM2 12a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1Zm16 6a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1ZM14.035 17.128a.501.501 0 0 0-.132.224 1 1 0 1 1-1.93-.522 2.5 2.5 0 0 1 .7-1.167c.43-.4 1.032-.663 1.796-.663C16.08 15 17 16.25 17 17.364c0 .383-.066 1.016-.466 1.584.032.04.062.082.092.125.248.368.374.806.374 1.29 0 .833-.268 1.54-.813 2.026-.524.466-1.172.611-1.718.611-.491 0-1.032-.086-1.513-.407-.494-.33-.797-.823-.973-1.386a1 1 0 0 1 1.91-.596c.079.255.158.308.174.319.03.02.127.07.402.07.22 0 .337-.06.388-.105.028-.025.143-.136.143-.531 0-.126-.028-.166-.031-.171-.007-.01-.03-.04-.103-.075-.172-.085-.433-.118-.652-.118a1 1 0 1 1 0-2c.28 0 .443-.047.532-.086a.347.347 0 0 0 .147-.109c.064-.085.107-.239.107-.441a.355.355 0 0 0-.104-.215c-.064-.066-.185-.149-.427-.149-.276 0-.386.083-.434.128ZM7.813 17.636c0-.159.065-.335.18-.465A.446.446 0 0 1 8.33 17c.23 0 .402.113.481.24.057.093.14.316-.089.728-.105.189-.27.37-.522.58a9.875 9.875 0 0 1-.416.323l-.064.047c-.133.099-.28.209-.423.322-.685.544-1.485 1.346-1.485 2.76a1 1 0 0 0 1 1H9.832a1 1 0 1 0 0-2H8.31a4.69 4.69 0 0 1 .23-.194c.117-.092.236-.18.37-.28l.07-.052c.156-.117.33-.248.5-.39.342-.285.715-.65.99-1.143.53-.952.533-1.956.043-2.75C10.047 15.433 9.206 15 8.331 15c-1.554 0-2.518 1.393-2.518 2.636a1 1 0 0 0 2 0ZM2.552 19.016a1 1 0 0 1-1.127-1.652c.61-.43 1.053-1.114 1.147-1.567a1 1 0 0 1 1.98.203v6a1 1 0 1 1-2 0v-2.984Z"/></svg></span>
+					<span title="Search & Replace"onclick="saerk()"><svg viewBox="0 0 24 24"><path d="M10 2.5a7.5 7.5 0 0 1 5.964 12.048l4.743 4.745a1 1 0 0 1-1.32 1.497l-.094-.083-4.745-4.743A7.5 7.5 0 1 1 10 2.5Zm0 2a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11Z"/></svg></span>
+					<span id="proof"title="Proof"onclick="proofa()"><svg viewBox="0 0 24 24"><path d="M10.961 3c.31.005.586.2.693.492l3.581 9.766-1.163 1.184-.468-1.275H7.998L6.7 16.52a.75.75 0 0 1-1.4-.542l1.484-3.833.003-.008 3.467-8.667a.75.75 0 0 1 .707-.47Zm-.041 2.846-2.329 5.82h4.463l-2.134-5.82Z"/><path d="m20.306 12.557-.129-.106-.003-.002a2.263 2.263 0 0 0-2.951.212l-3.803 3.87c-.236.239-.408.529-.503.845l-.587 1.952a5.044 5.044 0 0 1-1.604-.007.037.037 0 0 1-.028-.051l.037-.08c.066-.137.18-.381.218-.632.02-.14.027-.334-.049-.54a1.002 1.002 0 0 0-.422-.512c-.324-.2-.727-.215-1.073-.195a7.936 7.936 0 0 0-1.031.144c-.462.09-.901.297-1.339.503-.576.272-1.15.542-1.771.542-.223 0-.437-.036-.638-.104-.123-.041-.258.059-.227.185.057.228.162.537.392.775a1.08 1.08 0 0 0 1.106.283c1.454-.426 2.42-.658 3.048-.763.132-.022.23.11.19.238-.063.2-.153.578.034.96.202.416.6.59.944.66 1.143.236 2.13.205 3.336-.112a1.08 1.08 0 0 0 .157-.038l.117-.037c.171-.05.347-.105.529-.166a.752.752 0 0 0 .08-.031l1.387-.449c.338-.11.643-.296.887-.545l3.795-3.86c.786-.801.783-2.035.018-2.826l-.117-.113Z"/></svg></span>
+				</div>
+				<div>
+					<span id="lokc"class="act"title="Read / Write"onclick="lokc()"><svg viewBox="0 0 24 24"><path d="M13.94 5 19 10.06 9.062 20a2.25 2.25 0 0 1-.999.58l-5.116 1.395a.75.75 0 0 1-.92-.921l1.395-5.116a2.25 2.25 0 0 1 .58-.999L13.938 5Zm7.09-2.03a3.578 3.578 0 0 1 0 5.06l-.97.97L15 3.94l.97-.97a3.578 3.578 0 0 1 5.06 0Z"/><!-- <path d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1.5 0 0 1 20 9.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1 5.5 8H8V6a4 4 0 0 1 4-4Zm0 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM12 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2Z"/> --></svg></span>
+				</div>
+				<div>
+					<span title="Night Owl"onclick="owl()"><svg viewBox="0 0 24 24"><path d="m15.538 18.999-.29 1.259a2.25 2.25 0 0 1-2.02 1.735l-.173.007h-2.111a2.25 2.25 0 0 1-2.147-1.577l-.046-.167-.29-1.257h7.077ZM12 2.001a7.25 7.25 0 0 1 7.25 7.25c0 2.136-.936 4.093-2.765 5.84a.25.25 0 0 0-.071.125l-.528 2.283H8.114l-.526-2.283a.25.25 0 0 0-.071-.124C5.687 13.344 4.75 11.387 4.75 9.25A7.25 7.25 0 0 1 12 2.001Z"/></svg></span>
+					<!-- <span title="Thanks"onclick="window.open('https://patreon.com/starscade/')"><svg><path d="m12.82 5.58-.82.822-.824-.824a5.375 5.375 0 1 0-7.601 7.602l7.895 7.895a.75.75 0 0 0 1.06 0l7.902-7.897a5.376 5.376 0 0 0-.001-7.599 5.38 5.38 0 0 0-7.611 0Z"/></svg></span> -->
+					<!-- <span title="Help!"onclick="window.open('https://github.com/Starscade/Scrawl#readme')"><svg><path d="M4 4.5v15A2.5 2.5 0 0 0 6.5 22h13.25a.75.75 0 0 0 0-1.5H6.5a1 1 0 0 1-1-1h14.25a.75.75 0 0 0 .75-.75V4.5A2.5 2.5 0 0 0 18 2H6.5A2.5 2.5 0 0 0 4 4.5Zm7 3.518a.75.75 0 0 1-.75.732c-.75 0-.75-.751-.75-.751V7.99a1.403 1.403 0 0 1 .008-.134 2.222 2.222 0 0 1 .42-1.067c.454-.613 1.27-1.062 2.585-1.039.95.017 1.793.415 2.321 1.07.537.667.718 1.57.362 2.459-.362.905-1.181 1.265-1.652 1.471l-.05.023c-.28.123-.413.187-.493.251l-.001.001v.724a.75.75 0 0 1-1.5.001V11c0-.523.252-.897.563-1.147.25-.2.565-.338.786-.436l.038-.017c.542-.239.8-.387.917-.679a.92.92 0 0 0-.138-.96c-.222-.275-.629-.502-1.179-.511-.935-.016-1.245.285-1.353.432a.722.722 0 0 0-.134.33v.006Zm2.25 6.482a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg></span> -->
+					<!-- <span title="Save the teacups!"onclick="window.open('https://www.buymeacoffee.com/Starscade/')"><svg><path d="M3.941 5C2.87 5 2 5.87 2 6.941V12a8 8 0 0 0 15.911 1.197h.738a3.349 3.349 0 0 0 0-6.697h-.7c-.2-.86-.97-1.5-1.89-1.5H3.94ZM18 8h.649a1.849 1.849 0 1 1 0 3.697H18V8Z"/></svg></span> -->
+					<!-- <span title="Configure"onclick="conf()"><svg viewBox="0 0 24 24"><path d="M12.012 2.25c.734.008 1.465.093 2.182.253a.75.75 0 0 1 .582.649l.17 1.527a1.384 1.384 0 0 0 1.927 1.116l1.401-.615a.75.75 0 0 1 .85.174 9.792 9.792 0 0 1 2.204 3.792.75.75 0 0 1-.271.825l-1.242.916a1.381 1.381 0 0 0 0 2.226l1.243.915a.75.75 0 0 1 .272.826 9.797 9.797 0 0 1-2.204 3.792.75.75 0 0 1-.848.175l-1.407-.617a1.38 1.38 0 0 0-1.926 1.114l-.169 1.526a.75.75 0 0 1-.572.647 9.518 9.518 0 0 1-4.406 0 .75.75 0 0 1-.572-.647l-.168-1.524a1.382 1.382 0 0 0-1.926-1.11l-1.406.616a.75.75 0 0 1-.849-.175 9.798 9.798 0 0 1-2.204-3.796.75.75 0 0 1 .272-.826l1.243-.916a1.38 1.38 0 0 0 0-2.226l-1.243-.914a.75.75 0 0 1-.271-.826 9.793 9.793 0 0 1 2.204-3.792.75.75 0 0 1 .85-.174l1.4.615a1.387 1.387 0 0 0 1.93-1.118l.17-1.526a.75.75 0 0 1 .583-.65c.717-.159 1.45-.243 2.201-.252ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span> -->
+					<span title="README"onclick="window.open('./README.TXT')"><svg viewBox="0 0 24 24"><path d="M10.55 2.533a2.25 2.25 0 0 1 2.9 0l6.75 5.695c.508.427.8 1.056.8 1.72v9.802a1.75 1.75 0 0 1-1.75 1.75h-3a1.75 1.75 0 0 1-1.75-1.75v-5a.75.75 0 0 0-.75-.75h-3.5a.75.75 0 0 0-.75.75v5a1.75 1.75 0 0 1-1.75 1.75h-3A1.75 1.75 0 0 1 3 19.75V9.947c0-.663.292-1.292.8-1.72l6.75-5.694Z"/></svg></span>
+				</div>
+			</nav>
+			<nav id="contex">
+				<span title="Bold"onclick="nib.biu('**')"><svg viewBox="0 0 24 24"><path d="M6 5.75C6 4.784 6.784 4 7.75 4h4.749c2.823 0 4.751 2.34 4.751 4.75 0 .931-.288 1.852-.803 2.632C17.369 12.239 18 13.47 18 15c0 3.133-2.677 5-5 5H7.75A1.75 1.75 0 0 1 6 18.25V5.75Zm3.5 7.75v3H13c.312 0 .71-.138 1.024-.421.288-.26.476-.615.476-1.079 0-.888-.745-1.5-1.5-1.5H9.5Zm0-3.5h3c.715 0 1.25-.592 1.25-1.25 0-.657-.536-1.25-1.251-1.25H9.5V10Z"/></svg></span>
+				<span title="Italic"onclick="nib.biu()"><svg viewBox="0 0 24 24"><path d="M10.649 18.5h3.847a1 1 0 0 1 0 2h-9.5a.997.997 0 0 1-.996-1c0-.552.445-1 .996-1h3.51L13.332 6H9.997a1 1 0 0 1 0-2H18.5a1 1 0 0 1 0 2h-3.025L10.65 18.5Z"/></svg></span>
+				<span title="Underline"onclick="nib.biu('__')"><svg viewBox="0 0 24 24"><path d="M6 4.5a1 1 0 0 1 2 0v6.001c-.003 3.463 1.32 4.999 4.247 4.999 2.928 0 4.253-1.537 4.253-5v-6a1 1 0 1 1 2 0v6c0 4.54-2.18 7-6.253 7S5.996 15.039 6 10.5v-6ZM7 21a1 1 0 1 1 0-2h10.5a1 1 0 1 1 0 2H7Z"/></svg></span>
+				<span title="Strikethrough"onclick="nib.biu('~')"><svg viewBox="0 0 24 24"><path d="M13.848 11.5H19.5a1 1 0 0 1 0 2h-2.387a4.03 4.03 0 0 1 .998 2.684c0 2.93-3.28 4.915-7.033 4.48-2.328-.271-3.965-1.22-4.827-2.833-.26-.487-.207-1.016.248-1.331.455-.316 1.256-.099 1.516.388.533.998 1.604 1.592 3.294 1.789 2.586.3 4.802-.91 4.802-2.492 0-1.099-.547-1.94-2.107-2.685H5a1 1 0 1 1 0-2H13.848ZM6.987 9.695a5.122 5.122 0 0 1-.298-.51c-.3-.59-.468-1.214-.435-1.835.16-2.965 2.934-4.713 6.602-4.287 2.26.263 3.99 1.084 5.147 2.487a.993.993 0 0 1-.153 1.4c-.426.351-1.049.326-1.4-.1-.813-.985-2.068-1.596-3.825-1.8-2.56-.298-4.371.718-4.371 2.323 0 .714.239 1.22.762 1.81.225.254.647.525 1.265.815H7.192a38.03 38.03 0 0 1-.205-.303Z"/></svg></span>
+				<span title="Lookup"onclick="dinosaur()"><svg viewBox="0 0 24 24"><path d="M3.441 9.955a4.926 4.926 0 0 0 6.233 7.571l4.256 4.257a.773.773 0 0 0 1.169-1.007l-.075-.087-4.218-4.218a4.927 4.927 0 0 0-7.365-6.516ZM16.654 16.5c-.225 1.287-.548 2.456-.952 3.454l.029.028.125.14c.22.295.344.624.378.952A10.034 10.034 0 0 0 20.96 16.5h-4.306Zm-4.404-.001 2.284 2.287c.202-.6.381-1.268.53-1.992l.057-.294-2.87-.001Zm-2.936-5.45a3.38 3.38 0 1 1-4.78 4.779 3.38 3.38 0 0 1 4.78-4.78Zm6.136-1.05h-3.7a5.935 5.935 0 0 1 .892 5l2.71.001a26.014 26.014 0 0 0 .132-4.512l-.034-.489Zm1.507 0a28.174 28.174 0 0 1-.033 4.42l-.057.58h4.702a10.047 10.047 0 0 0 .258-5h-4.87Zm-2.095-7.593c.88 1.35 1.536 3.329 1.883 5.654l.062.44h4.59a10.03 10.03 0 0 0-6.109-5.958l-.304-.1-.122-.036ZM12.026 2c-1.277 0-2.561 2.382-3.158 5.839.464.16.912.38 1.331.658l5.088.001c-.54-3.809-1.905-6.498-3.261-6.498Zm-2.837.405a10.027 10.027 0 0 0-6.535 6.093h.995a5.921 5.921 0 0 1 3.743-.968c.322-1.858.846-3.47 1.527-4.68l.162-.275.108-.17Z"/></svg></span>
+				<div>
+					<span title="Cut"onclick="nib.ccp()"><svg viewBox="0 0 24 24"><path d="M7.83 2.44a1 1 0 0 0-1.66 1.117l4.793 7.114-2.326 3.678a4 4 0 1 0 1.57 1.26l1.977-3.126 1.884 2.796a4 4 0 1 0 1.683-1.08l-3.62-5.375v.001L7.83 2.44ZM5 18a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm10 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0ZM14.52 8.79l3.325-5.256a1 1 0 0 0-1.69-1.07L13.3 6.979l1.22 1.812Z"/></svg></span>
+					<span title="Copy"onclick="nib.ccp('get')"><svg viewBox="0 0 24 24"><path d="M13.75 3.5h-3.5a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5ZM10.25 2h3.5a2.25 2.25 0 0 1 2.236 2h1.764A2.25 2.25 0 0 1 20 6.25v13.5A2.25 2.25 0 0 1 17.75 22H6.25A2.25 2.25 0 0 1 4 19.75V6.25A2.25 2.25 0 0 1 6.25 4h1.764a2.25 2.25 0 0 1 2.236-2Z"/></svg></span>
+					<span title="Paste"onclick="nib.ccp('put')"><svg viewBox="0 0 24 24"><path d="M12.753 2c1.158 0 2.111.875 2.234 2h1.763a2.25 2.25 0 0 1 2.245 2.096L19 6.25a.75.75 0 0 1-.647.742L18.249 7a.75.75 0 0 1-.742-.647L17.5 6.25a.75.75 0 0 0-.648-.743L16.75 5.5h-2.132a2.244 2.244 0 0 1-1.865.993H9.247c-.777 0-1.461-.393-1.865-.992L5.25 5.5a.75.75 0 0 0-.743.648L4.5 6.25v13.505c0 .38.282.693.648.743l.102.007h3a.75.75 0 0 1 .743.647l.007.102a.75.75 0 0 1-.75.75h-3a2.25 2.25 0 0 1-2.245-2.095L3 19.755V6.25a2.25 2.25 0 0 1 2.096-2.245L5.25 4h1.763a2.247 2.247 0 0 1 2.234-2h3.506Zm5.997 6a2.25 2.25 0 0 1 2.245 2.096l.005.154v9.5a2.25 2.25 0 0 1-2.096 2.245L18.75 22h-6.5a2.25 2.25 0 0 1-2.245-2.096L10 19.75v-9.5a2.25 2.25 0 0 1 2.096-2.245L12.25 8h6.5Zm-5.997-4.5H9.247a.747.747 0 0 0 0 1.493h3.506a.747.747 0 1 0 0-1.493Z"/></svg></span>
+				</div>
+			</nav>
+			<nav id="moab">
+				<span title="Undo"onclick="nib.undo()"><svg viewBox="0 0 24 24"><path d="m6.907 6.68 2.734-2.73a6.66 6.66 0 1 1 9.42 9.42l-8.338 8.338a1 1 0 0 1-1.415-1.415l8.339-8.336A4.66 4.66 0 0 0 11.229 5.2l-.174.166-3.641 3.633H12a1 1 0 0 1 .993.884L13 10a1 1 0 0 1-.883.993l-.117.006-7.06-.001-.095-.01-.112-.024-.131-.047-.082-.04-.102-.064a.996.996 0 0 1-.125-.107l-.092-.105-.074-.114-.046-.093-.038-.105-.016-.058-.016-.081-.007-.062L4 10V3.002a1 1 0 0 1 1.993-.116L6 3.002v4.584l3.641-3.635L6.907 6.68Z"/></svg></span>
+				<span title="Menu"onclick="peekaboo()"><svg viewBox="0 0 24 24"><path d="M8 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM18 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg></span>
+				<span title="Redo"onclick="nib.undo(true)"><svg viewBox="0 0 24 24"><path d="M18 7.586 14.36 3.951a6.66 6.66 0 1 0-9.42 9.42l8.339 8.337a1 1 0 0 0 1.414-1.415l-8.339-8.336A4.66 4.66 0 0 1 12.771 5.2l.174.166 3.64 3.633H12a1 1 0 0 0-.993.884L11 10a1 1 0 0 0 .883.993l.117.006h7a1 1 0 0 0 .993-.883L20 10V3.002a1 1 0 0 0-1.993-.116L18 3.002v4.584L14.36 3.951 18 7.586Z"/></svg></span>
+			</nav>
+			<nav id="cuneiform"class="hid">
+				<div></div>
+				<input type="text"spellcheck="false">
+				<span title="OK"><svg viewBox="0 0 24 24"><path d="m8.5 16.586-3.793-3.793a1 1 0 0 0-1.414 1.414l4.5 4.5a1 1 0 0 0 1.414 0l11-11a1 1 0 0 0-1.414-1.414L8.5 16.586Z"/></svg></span>
+				<span title="NO"><svg viewBox="0 0 24 24"><path d="m4.21 4.387.083-.094a1 1 0 0 1 1.32-.083l.094.083L12 10.585l6.293-6.292a1 1 0 1 1 1.414 1.414L13.415 12l6.292 6.293a1 1 0 0 1 .083 1.32l-.083.094a1 1 0 0 1-1.32.083l-.094-.083L12 13.415l-6.293 6.292a1 1 0 0 1-1.414-1.414L10.585 12 4.293 5.707a1 1 0 0 1-.083-1.32l.083-.094-.083.094Z"/></svg></span>
+			</nav>
+		</main>
+		<script>
+			'use strict';
+			// Scrawl
+			class Jig{
+				constructor(nib=new Nib()){
+					this.CFG={'dark':false,'post_alias':'','post_url':'','promp':'	# ','thesaurus_url':'https://www.merriam-webster.com/thesaurus/','working_title':''};
+					this.HAND=false;
+					this.CAP;
+					this.HTM=['<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport"content="initial-scale=1,width=device-width"><title>','</title><style>article{margin:10vh auto 10vh auto;max-width:7.5in}h1,h2,h3,h4,h5,h6{margin:0}main{line-height:150%;text-align:center}p{margin:0;text-align:justify}p:not(br+p){text-indent:2em}@media print{article{margin:0}}@page{margin:1in}</style></head><body><main><article>','</article></main></body></html>'];
+					this.cfg=(ky,valu)=>{
+						if(!localStorage.Scrawl_CFG){
+							this.mem(this.CFG);
+						}
+						const cfg=this.mem();
+						if(ky){
+							if(valu!=null){
+								cfg[ky]=valu;
+								this.mem(cfg);
+							}else{
+								return cfg[ky];
+							}
+						}else{
+							if(JSON.stringify(cfg)!==JSON.stringify(this.CFG)){
+								Object.keys(this.CFG).forEach((i,x)=>{
+									if(!(i in cfg)){
+										cfg[i]=this.CFG[i];
+									}
+								});
+								Object.keys(cfg).forEach((i,x)=>{
+									if(!(i in this.CFG)){
+										delete cfg[i];
+									}
+								});
+								this.mem(cfg);
+							}
+							// console.log(cfg);
+							return cfg;
+						}
+					}
+					this.dl=(bob,naem='Untitled.md')=>{
+						const uri=window.URL.createObjectURL(bob);
+						const a=document.createElement('a');
+						document.body.appendChild(a);
+						a.style='display:none';
+						a.href=uri;
+						a.download=naem;
+						a.click();
+						a.remove();
+						window.URL.revokeObjectURL(uri);
+					}
+					this.fx=(naem)=>{
+						return String(naem.toUpperCase().split('.').slice(-1)).trim();
+					}
+					this.gurl=async (bob='',naem=nib.sellama(),url=this.cfg('post_url'))=>{
+						return await new Promise((ok,no)=>{
+							const Formbody=new FormData();
+							Formbody.append(0,document.getElementsByTagName('article')[0].innerHTML);
+							Formbody.append(1,naem);
+							fetch(url,{
+								method:'POST',
+								body:Formbody
+							}).then(resp=>{
+								ok(resp.text());
+							}).catch(err=>{
+								no('Failed');
+							})
+						});
+					}
+					this.lod=(F)=>{
+						const raed=new FileReader();
+						raed.readAsText(F);
+						raed.onload=()=>{
+							const fx=this.fx(F.name);
+							let txt;
+							switch(fx){
+								case'HTM':case'HTML':txt='No |(<)article>| tag detected!';
+									const m=String(raed.result).match(/<article>(.*)<\/article>/);
+										console.log(m);
+									if(m){
+										txt=nib.x2y(m[1],'htm2boo')
+									};
+									break;
+								case'MD':txt=nib.x2y(raed.result,'md2boo');break;
+								case'TXT'://txt=String(raed.result).replaceAll(/\n\n/g,"\n\t\n\t");break;
+								default:txt=raed.result;
+							}
+							nib.memry(txt);
+							this.cfg('post_alias','');
+							this.cfg('working_title',F['name']);
+							location.reload();
+						}
+					}
+					this.mem=(json)=>{
+						if(json){
+							localStorage.Scrawl_CFG=JSON.stringify(json);
+						}
+						return JSON.parse(localStorage.Scrawl_CFG);
+					}
+					this.neu=()=>{
+						nib.memry(this.cfg('promp'));
+						this.cfg('post_alias','');
+						this.cfg('post_url','');
+						this.cfg('working_title','');
+						location.href='./';
+					}
+					this.pub=async (issu)=>{
+						return await new Promise((ok,no)=>{
+							if(issu){
+								if(issu===' '){
+									issu=nib.sellama();
+									this.cfg('post_alias','');
+								}
+								if(issu!==nib.sellama()){
+									this.cfg('post_alias',issu);
+								}
+								if(this.cfg('post_url')){
+									this.gurl(new Blob([nib.x2y()]),issu,this.cfg('post_url')).then(resp=>ok(resp)).catch(err=>console.log(err));
+								}else{
+									const txt=this.HTM[0]+issu+this.HTM[1]+nib.x2y()+this.HTM[2];
+									const bob=new Blob([txt],{type:'text/html;charset=utf-8'});
+									const url=window.URL.createObjectURL(bob);
+									// window.open(url);
+									jig.dl(bob,issu);
+									window.URL.revokeObjectURL(url);
+									ok('Downloading');
+								}
+							}
+						});
+					}
+					this.sav=async (as=false)=>{
+						return await new Promise((ok,no)=>{
+							let naem=nib.sellama();
+							if(this.cfg('working_title')){
+								naem=this.cfg('working_title');
+							}
+							if('showSaveFilePicker'in window){
+								if(as){
+									this.HAND=false;
+								}
+								const that=this;
+								(async function (naem,that){
+									if(that.HAND===false){
+										const ops={
+											suggestedName:naem,
+											types:[
+												{
+													description:'BookMark',
+													accept:{
+														'text/markdown':['.md']
+													}
+												}
+											]
+										};
+										that.HAND=await window.showSaveFilePicker(ops);
+									}
+									const f=await that.HAND.getFile();
+									const fx=that.fx(f.name);
+									let txt;
+									if(f.name){
+										that.cfg('working_title',f.name);
+									}
+									switch(fx){
+										case'HTM':case'HTML':txt=this.HTM[0]+f.name+this.HTM[1]+nib.x2y()+this.HTM[2];break;
+										case'MD':txt=nib.boo();break;
+										default:txt=nib.memry();
+									}
+									const bob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+									const pen=await that.HAND.createWritable();
+									if(pen){
+										await pen.write(bob);
+										await pen.close();
+									}
+								})(naem,that).then(resp=>{
+									ok('Saved');
+								}).catch(err=>{
+									no(err);
+								});
+							}else{
+								const txt=nib.memry();
+								const bob=new Blob([txt],{type:'text/plain;charset=utf-8'});
+								if(!naem.endsWith('.md'.toLowerCase())){
+									naem=naem+'.md';
+								}
+								this.dl(bob,naem);
+							}
+						});
+					}
+					this.spex=()=>{
+						if(nib.NOTEPAD.spellcheck==true){
+							nib.NOTEPAD.setAttribute('spellcheck','false');
+						}else{
+							nib.NOTEPAD.setAttribute('spellcheck','true');
+							// nib.autypo();
+						}
+					}
+					document.addEventListener('keydown',e=>{
+						// iOS
+						if(e.getModifierState('CapsLock')){
+							nib.CAP=true;
+							if(e.shiftKey){
+								nib.CAP=false;
+							}
+						}else{
+							nib.CAP=false;
+							if(e.shiftKey){
+								nib.CAP=true;
+							}
+						}
+					});
+					// INIT
+					this.cfg();
+					document.title=nib.sellama()+'*';
+					if(this.cfg('working_title')){
+						document.title=this.cfg('working_title')+'*';
+					}
+				}
+			}
+			class Nib{
+				constructor(notepad=document.getElementsByTagName('article')[0]){
+					this.NOTEPAD=notepad;
+					this.NOTEPAD.contentEditable=true;
+					this.NOTEPAD.spellcheck=false;
+					this.HISTRY={'txt':[' '],'indx':0,'cart':[[0,0]]};
+					this.RANG=[0,0];
+					this.CAP=false; // iOS
+					this.TYPO={"Aint":"Ain't","aint":"ain't",/*"Cant":"Can't","cant":"can't",*/"Couldnt":"Couldn't","couldnt":"couldn't","Didnt":"Didn't","didnt":"didn't","Dont":"Don't","dont":"don't","Doesnt":"Doesn't","doesnt":"doesn't","Hadnt":"Hadn't","hadnt":"hadn't","Hasnt":"Hasn't","hasnt":"hasn't","Havent":"Haven't","havent":"haven't","Hed":"He'd","hed":"he'd","Hes":"He's","hes":"he's","i":"I","Im":"I'm","i'm":"I'm","im":"I'm","Isnt":"Isn't","isnt":"isn't","Ive":"I've","ive":"I've","Mustnt":"Mustn't","mustnt":"mustn't","Mustve":"Must've","mustve":"must've","Shant":"Shan't","shant":"shan't","Shes":"She's","shes":"she's","Thats":"That's","thats":"that's","Theres":"There's","theres":"there's","Theyd":"They'd","theyd":"they'd","Theyll":"They'll","theyll":"they'll","Theyre":"They're","theyre":"they're","Theyve":"They've","theyve":"they've",/*"Twas":"'Twas","twas":"'twas",*/"Wasnt":"Wasn't","wasnt":"wasn't","Werent":"Weren't","werent":"weren't","Wheres":"Where's","wheres":"where's",/*"Wont":"Won't","wont":"won't",*/"Wouldnt":"Wouldn't",'wouldnt':"wouldn't","Youd":"You'd","youd":"you'd","Youll":"You'll","youll":"you'll","Youre":"You're","youre":"you're","Youve":"You've","youve":"you've"};
+					this.autypo=(typo=this.TYPO)=>{
+						let txt=this.NOTEPAD.textContent;
+						Object.keys(typo).forEach(e=>{
+							const regx=new RegExp("\\b"+e+"\\b",'g');
+							txt=txt.replace(regx,typo[e]).replaceAll(/ +/g,' ');
+						});
+						if(this.NOTEPAD.textContent!=txt){
+							this.NOTEPAD.textContent=txt;
+							this.raec();
+						}
+						return txt;
+					}
+					this.biu=(g='*')=>{
+						this.raec(this.gang());
+						const rang=this.NOTEPAD.textContent.slice(this.RANG[0],this.RANG[1]);
+						let txt;
+						let keep_rang=false;
+						if(rang.length>0){
+							if(rang.startsWith(g)){
+								if(rang===g){
+									txt='';
+								}else{
+									txt=rang.substring(g.length,rang.length-g.length);
+								}
+							}else{
+								txt=g+rang+g;
+							}
+						}else{
+							txt=g;
+							keep_rang=true;
+						}
+						this.xom(txt,keep_rang);
+					}
+					this.boom=()=>{
+						return this.x2y(this.boo(),'boo2md');
+					}
+					this.cart=(pos=null)=>{
+						if(pos){
+							this.RANG=[pos[0],pos[1]];
+						}
+						this.RANG.forEach((r,x)=>{
+							if(r>this.NOTEPAD.textContent.length){
+								this.RANG[x]=this.NOTEPAD.textContent.length;
+							}
+						});
+						const selec=window.getSelection();
+						const rang=document.createRange();
+						rang.setStart(this.NOTEPAD.childNodes[0],this.RANG[0]);
+						rang.setEnd(this.NOTEPAD.childNodes[0],this.RANG[1]);
+						selec.removeAllRanges();
+						selec.addRange(rang);
+					}
+					this.ccp=(mo='cut')=>{
+						const selec=window.getSelection().toString();
+						switch(mo){
+							case'cut':this.raec();navigator.clipboard.writeText(selec);this.xom();break;
+							case'get':navigator.clipboard.writeText(selec);break;
+							case'put':navigator.clipboard.readText().then(txt=>{if(txt===selec)this.cart([this.RANG[1],this.RANG[1]]);this.xom(txt,false)});break;
+						}
+					}
+					this.cop=(lang='HTML')=>{
+						switch(lang){
+							case'BBC':navigator.clipboard.writeText(this.x2y(this.x2y(),'htm2bbc'));break;
+							case'BOO':navigator.clipboard.writeText(this.boo());break;
+							case'HTML':const bob=new Blob([this.x2y().replaceAll(/<h1>/g,'<h1 style="text-align:center">').replaceAll(/<h2>/g,'<h2 style="text-align:center">').replaceAll(/<h3>/g,'<h3 style="text-align:center">').replaceAll(/<h4>/g,'<h4 style="text-align:center">').replaceAll(/<h5>/g,'<h5 style="text-align:center">').replaceAll(/<h6>/g,'<h6 style="text-align:center">').replaceAll(/<p>/g,'<p style="margin:0 auto 0 auto;max-width:7.5in;text-indent:1em;text-align:justify">')],{type:'text/html;charset=utf-8'});const bob2=new Blob([this.x2y()],{type:'text/plain'});const bin=[new ClipboardItem({'text/html':bob,'text/plain':bob2})];navigator.clipboard.write(bin);break;
+							case'MD':navigator.clipboard.writeText(this.boom());break;
+							default:navigator.clipboard.writeText(this.memry());
+						}
+					}
+					this.gang=()=>{
+						const selec=document.getSelection().getRangeAt(0);
+						return [selec.startOffset,selec.endOffset];
+					}
+					this.boo=(txt=this.memry())=>{
+						return String("\t"+this.x2y(this.x2y(txt),'htm2boo'));//.replaceAll(/\n\t\n\t/g,"\n\n");
+					}
+					this.iswet=()=>{
+						let x=false;
+						if(this.NOTEPAD.contentEditable=='true'){
+							x=true;
+						}
+						return x;
+					}
+					this.memry=(txt)=>{
+						if(txt){
+							localStorage.Scrawl_TXT=txt;
+						}
+						return localStorage.Scrawl_TXT;
+					}
+					this.mov=()=>{
+						const rex=window.getSelection().getRangeAt(0).getClientRects()[0]['top'];
+						const pos=Math.round(window.scrollY+rex)-(window.innerHeight/3);
+						window.scrollTo(0,pos);
+					}
+					this.nix=(rec=true)=>{
+						if(this.RANG[0]===this.RANG[1]){
+							if(this.RANG[0]>0){
+								this.RANG[0]--;
+							}
+						}
+						this.xom('',true,rec);
+					}
+					this.preg=(matchbox)=>{
+						let msg='Error';
+						if(matchbox.trim()&&matchbox.includes('~>')){
+							if(this.iswet()){
+								const w=matchbox.split('~>');
+								let k=false;
+								let rx;
+								try{
+									if(w[0].toLowerCase().includes(' ')|w[0].toLowerCase().includes("\\n")|w[0].toLowerCase().includes("\\t")){
+										rx=new RegExp(w[0],'g');
+									}else{
+										rx=new RegExp("\\b"+w[0]+"\\b",'g');
+									}
+									k=[...this.memry().matchAll(rx)].length;
+									console.log(rx);
+								}catch(err){
+									console.log(err);
+								}
+								if(k){
+									this.raec();
+									const w1=w[1].replaceAll(/\\n/g,"\n").replaceAll(/\\t/g,"\t");
+									this.NOTEPAD.textContent=this.memry().replaceAll(rx,w1);
+									const gag=this.RANG;
+									const ran=[gag[0],gag[0]+w[1].length];
+									this.cart(ran);
+									console.log()
+									this.raec();
+									msg=k;
+								}else{
+									msg='No matches';
+								}
+							}
+						}
+						return msg;
+					}
+					this.raec=(rang=this.RANG)=>{
+						this.memry(this.NOTEPAD.textContent);
+						if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+							let oldTxt=this.HISTRY['txt'].splice(this.HISTRY['indx']);
+							let oldCart=this.HISTRY['cart'].splice(this.HISTRY['indx']);
+							this.HISTRY['txt']=this.HISTRY['txt'].concat(oldTxt);
+							oldTxt.pop();
+							oldTxt.reverse();
+							this.HISTRY['txt']=this.HISTRY['txt'].concat(oldTxt);
+							this.HISTRY['cart']=this.HISTRY['cart'].concat(oldCart);
+							oldCart.pop();
+							oldCart.reverse();
+							this.HISTRY['cart']=this.HISTRY['cart'].concat(oldCart);
+							this.HISTRY['indx']=this.HISTRY['txt'].length;
+						}else{
+							this.HISTRY['indx']++;
+						}
+						this.HISTRY['txt'][this.HISTRY['indx']]=this.NOTEPAD.textContent;
+						this.HISTRY['cart'][this.HISTRY['indx']]=rang;
+						if(this.HISTRY['txt'].length>99){
+							this.HISTRY['txt'].shift();
+							this.HISTRY['cart'].shift();
+							this.HISTRY['indx']--;
+						}
+						if(document.title.slice(document.title.length-1)!=='*'){
+							document.title+='*';
+						}
+						console.log('History: ',this.HISTRY);
+					}
+					this.sellama=(naem='Untitled')=>{
+						const h1=this.memry().trim().split("\n")[0].trim();
+						if(h1.startsWith('#')){
+							const tyt=h1.replace(/#+\s*(.*)/,'$1').replace(/\s+/g,' ')
+							if(tyt!=''){
+								naem=tyt;
+							}
+						}
+						return naem;
+					}
+					this.selmod=(scope='word')=>{
+						window.getSelection().modify('move','backward',scope);
+						window.getSelection().modify('extend','forward',scope);
+						const selec=window.getSelection();
+						const rang=selec.getRangeAt(0);
+						const nurang=document.createRange();
+						let beg=0;
+						let nd=0;
+						if(selec.toString()[0]=='	'){
+							beg=1;
+						}
+						if(selec.toString()[selec.toString().length-1]==' '){
+							nd=1;
+						}
+						nurang.setStart(this.NOTEPAD.childNodes[0],rang.startOffset+beg);
+						nurang.setEnd(this.NOTEPAD.childNodes[0],rang.endOffset-nd);
+						selec.removeAllRanges();
+						selec.addRange(nurang);
+					}
+					this.swop=()=>{
+						if(this.iswet()){
+							this.NOTEPAD.contentEditable=false;
+							this.NOTEPAD.innerHTML=this.x2y();
+						}else{
+							this.NOTEPAD.contentEditable=true;
+							this.NOTEPAD.textContent=this.memry();
+							this.NOTEPAD.focus();
+							this.cart();
+						}
+					}
+					this.tally=()=>{
+						let txt='';
+						if(window.getSelection().toString().length>0){
+							txt=this.x2y(window.getSelection().toString());
+						}else{
+							txt=this.x2y();
+						}
+						const wurdz=txt.replaceAll(/ \. \. \./g,'').split(/ +/).length;
+						return wurdz;
+					}
+					this.undo=(re=false)=>{
+						if(this.iswet()){
+							let go=false;
+							if(re){
+								if(this.HISTRY['indx']<(this.HISTRY['txt'].length-1)){
+									this.HISTRY['indx']++;
+									go=true;
+								}
+							}else{
+								if(this.HISTRY['indx']>1){
+									this.HISTRY['indx']--;
+									go=true;
+								}
+							}
+							if(go){
+								this.memry(this.HISTRY['txt'][this.HISTRY['indx']]);
+								this.NOTEPAD.textContent=this.memry();
+								this.cart(this.HISTRY['cart'][this.HISTRY['indx']]);
+								this.mov();
+							}
+						}
+					}
+					this.x2y=(txt=this.memry(),patt='boo2htm')=>{
+						const REGX={
+							'boo2bbc':[
+								[
+									/\t/g,
+									/\n\n\n\n/g,
+									/\n\+\+\+/g,
+									/(^|\n)#+\s(.*)/g,
+									/\*\*([^**]*)\*\*/g,
+									/\*([^*]*)\*/g,
+									/__([^_]*)__/g,
+									/~([^~]*)~/g,
+									/\|([^|]*)\|/g,
+									/<blockquote>([^<]*)<\/blockquote>/g,
+									/<http([^ ]*) ([^>]*)>/g,
+									/ _\[\/url\]/g,
+									/\n===\n/g
+								],[
+									"\n",
+									"\n\n\n",
+									'[c]✶ ✶ ✶[/c]',
+									'[c]$2[/c]',
+									'[b]$1[/b]',
+									'[i]$1[/i]',
+									'[u]$1[/u]',
+									'[s]$1[/s]',
+									'[code]$1[/code]',
+									'[quote]$1[/quote]',
+									'[url=http$1]$2[/url]',
+									'[url]',
+									'-------------------------------------------------------------------------------'
+								]
+							],'boo2htm':[
+								[
+									/\\\\/g,
+									/<script([^>]*)>(.*)<\/script>/g,
+									/\.\.\.|…/g,
+									/\\ \. \. \./g,
+									/\\\*/g,
+									/\\</g,
+									/\\>/g,
+									/\\#/g,
+									/\\~/g,
+									/\\\|/g,
+									/\\`/g,
+									/\\'/g,
+									/\\"/g,
+									/\*\*([^*]*)\*\*/g,
+									/\*([^*]*)\*/g,
+									/__(.*)__/g,
+									/&lowbar;/g,
+									/~([^~]*)~/g,
+									/\|([^|]*)\|/g,
+									/&ast;/g,
+									/"([^"]*)"/g,
+									/"/g,
+									/`/g,
+									/'/g,
+									/ - /g,
+									/--/g,
+									/\s\s+/g,
+									/(\d\s*)\^\s*(\d+)/g,
+									/(\d)(st|nd|rd|th)/g,
+									/<([\w.]*)@(\w*)\.(\w*)>/g,
+									/<([\w#!:.,?+=&%@!\-\/]*) ([^>]*) _>/g,
+									/<(?!a href)([\w#!:.,?+=&%@!\-\/]*) ([^>]*)>/g,
+									/\([C|c]\)/g,
+									/\(R\)/g,
+									/\(TM\)|\(tm\)/g,
+									/(\d)o/g,
+									/(\d\s*)x(\s*\d)/g,
+									/\\%/g,
+									/\+-/g,
+									/\!=/g,
+									/\(1\/4\)/g,
+									/\(1\/2\)/g,
+									/\(3\/4\)/g,
+									/(\d+)’(\d+)“/g,
+									/&tilde;/g,
+									/&vert;/g,
+									/&grave;/g,
+									/&apos;/g,
+									/&quot;/g,
+									/<p>- /g,
+									/\\ /g,
+									/\\/g
+								],[
+									'&bsol;',
+									'<code>$2</code>',
+									' . . . ',
+									'...',
+									'&ast;',
+									'&lt;',
+									'&gt;',
+									'&#35;',
+									'&tilde;',
+									'&vert;',
+									'&grave;',
+									'&apos;',
+									'&quot;',
+									'<b>$1</b>',
+									'<i>$1</i>',
+									'<u>$1</u>',
+									'__',
+									'<s>$1</s>',
+									'<mark>$1</mark>',
+									'*',
+									'“$1”',
+									'“',
+									'‘',
+									'’',
+									'–',
+									'—',
+									' ',
+									'$1<sup>$2</sup>',
+									'$1<sup>$2</sup>',
+									'<a href="mailto:$1@$2.$3">$1@$2.$3</a>',
+									'<a href="$1"target="_blank">$2</a>',
+									'<a href="$1">$2</a>',
+									'©',
+									'®',
+									'™',
+									'$1°',
+									'$1×$2',
+									'÷',
+									'±',
+									'≠',
+									'¼',
+									'½',
+									'¾',
+									"$1'$2\"",
+									'~',
+									'|',
+									'`',
+									"'",
+									'"',
+									'<p>• ',
+									'&nbsp;',
+									''
+								]
+							],'boo2md':[
+								[
+									/\t/g,
+									/\n\n\n\n/g,
+									/ _>/g,
+									/<http([^ ]*) ([^>]*)>/g,
+									/ ]\(/g,
+									/ _Blank]\(/g,
+									/ _Blank>/g,
+									/^\t*===$/g,
+									/__/g,
+									/\|([^|]*)\|/g
+								],[
+									"\n",
+									"\n\n\n",
+									' _Blank>',
+									'[$2](http$1)',
+									'](',
+									'](',
+									' _>',
+									'---',
+									'&lowbar;',
+									'```$1```'
+								]
+							],'htm2bbc':[
+								[
+									/<a href="([^"]*)"(target="_blank")*>([^<]*)<\/a>/g,
+									/\[\/*a/g,
+									/&#35;/g,
+									/&lt;/g,
+									/&gt;/g,
+									/<b>|<strong>/g,
+									/<\/b>|<\/strong>/g,
+									/<i>|<em>/g,
+									/<\/i>|<\/em>/g,
+									/<h(\d)>/g,
+									/<\/h(\d)>/g,
+									/<blockquote>/g,
+									/<\/blockquote>/g,
+									/<mark>/g,
+									/<\/mark>/g,
+									/<hr>/g,
+									/<p> /g,
+									/ <\/p>/g,
+									/<\/p><p>/g,
+									/<br>/g,
+									/&nbsp;|<\/*p>|<p>&nbsp;<\/p>/g,
+								],[
+									'[url=$1]$3[/url]',
+									'url',
+									'#',
+									'<',
+									'>',
+									'[b]',
+									'[/b]',
+									'[i]',
+									'[/i]',
+									'[c]',
+									'[/c]',
+									'[quote]',
+									'[/quote]',
+									'[code]',
+									'[/code]',
+									"-------------------------------------------------------------------------------\n",
+									'<p>',
+									'</p>',
+									"\n\n",
+									"\n\n\n",
+									''
+								]
+							],'htm2boo':[
+								[
+									/<a href="([^"]*)"([^>]*)>([^<]*)<\/a>/g,
+									/target="_blank"/g,
+									/\*/g,
+									/<\/*b>|<\/*strong>/g,
+									/<\/*i>|<\/*em>/g,
+									/<blockquote>(.*)<\/blockquote>/g,
+									/<br>/g,
+									/\.\.\./g,
+									/ \. \. \. |…/g,
+									/&#35;/g,
+									/<h3>✶ ✶ ✶<\/h3>/g,
+									/<h1>([^<]*)<\/h1>/g,
+									/<h2>([^<]*)<\/h2>/g,
+									/<h3>([^<]*)<\/h3>/g,
+									/<h4>([^<]*)<\/h4>/g,
+									/<h5>([^<]*)<\/h5>/g,
+									/<h6>([^<]*)<\/h6>/g,
+									/<hr>/g,
+									/–/g,
+									/<p>/g,
+									/<\/p>/g,
+									/~/g,
+									/<\/*s>/g,
+									/__/g,
+									/<\/*u>/g,
+									/\|/g,
+									/<\/*mark>/g,
+									/(\d\s*)\^(\s*\d)/g,
+									/(\d)(\s*)<sup>([^<]\d+)<\/sup>/g,
+									/(\d)<sup>([^<]\w+)<\/sup>/g,
+									/&amp;/g,
+									/`/g,
+									/•/g,
+									/--/g,
+									/—/g,
+									/'/g,
+									/"/g,
+									/“|”/g,
+									/‘/g,
+									/’/g,
+									/&lt;/g,
+									/&gt;/g,
+									/<p>&nbsp;<\/p>/g,
+									/&nbsp;/g,
+									/&bsol;/g,
+									/(\d)o/g,
+									/(\d\s*)x(\s*\d)/g,
+									/\+-/g,
+									/\(([C|c])\)/g,
+									/\(R\)/g,
+									/\(TM\)/g,
+									/\(tm\)/g
+								],[
+									'<$1 $3 $2>',
+									'_',
+									'\\*',
+									'**',
+									'*',
+									"\t> $1\n",
+									"\t\n",
+									'\\...',
+									'...',
+									'\\#',
+									"\t+++\n",
+									"\t# $1\n",
+									"\t## $1\n",
+									"\t### $1\n",
+									"\t#### $1\n",
+									"\t##### $1\n",
+									"\t###### $1\n",
+									'\t===\n',
+									' - ',
+									"\t",
+									"\n",
+									'\\~',
+									'~',
+									'_\\_',
+									'__',
+									'\\|',
+									'|',
+									'$1\\^$2',
+									'$1$2^$2$3',
+									'$1$2',
+									'&',
+									'\\`',
+									'-',
+									'-\\-',
+									'--',
+									"\\'",
+									'\\"',
+									'"',
+									'`',
+									"'",
+									'\\<',
+									'\\>',
+									'\t\\\n',
+									'\\',
+									'\\\\',
+									'$1\\o',
+									'$1\\x$2',
+									'+\\-',
+									'(\\$1)',
+									'(\\R)',
+									'(\\TM)',
+									'(\\tm)'
+								]
+							],'md2boo':[
+								[
+									/\n\n/g,
+									/```([^`]*)```/g,
+									/\[([^\]]*)\]\(([^)]*)\)/g
+								],[
+									"\n\t",
+									'|$1|',
+									'<$2 $1>'
+								]
+							]
+						};
+						if(patt==='boo2htm'){
+							let htm='';
+							const parry=txt.split(/\n/g,);
+							parry.forEach((line,i)=>{
+								parry[i]=line.trim();
+								switch(parry[i][0]){
+									case'#':
+										const hx=parry[i].match(/#/g).length;
+										parry[i]=parry[i].replace(/^#+\s*(.*)/g,'<h'+hx+'>$1</h'+hx+'>');
+										break;
+									case'>':
+										parry[i]=parry[i].replace(/^>\s*(.*)/g,'<blockquote>$1</blockquote>');
+										break;
+									case'+':
+										if(parry[i]==='+++'){
+											parry[i]='<h3>✶ ✶ ✶</h3>';
+											break;
+										}
+									case'=':
+										if(parry[i]==='==='){
+											parry[i]='<hr>';
+											break;
+										}
+									case'\\':
+										if(parry[i]==='\\'){
+											parry[i]='<p>&nbsp;</p>';
+											break;
+										}
+									default:
+										if(parry[i]==''){
+											parry[i]='<br>';
+										}else{
+											parry[i]=parry[i].replace(/(.*)/g,'<p>$1</p>').replace(/<p><\/p>/g,'');
+										}
+								}
+								REGX[patt][0].forEach((p,x)=>{
+									parry[i]=parry[i].replace(p,REGX[patt][1][x]);
+								});
+								htm+=parry[i];
+							});
+							txt=htm;
+						}else{
+							REGX[patt][0].forEach((p,x)=>{
+								txt=txt.replace(p,REGX[patt][1][x]);
+							});
+						}
+						return txt.trim();
+					}
+					this.xom=(txt='',keep_rang=true,rec=true)=>{
+						if(this.iswet()){
+							this.NOTEPAD.textContent=this.NOTEPAD.textContent.slice(0,this.RANG[0])+txt+this.NOTEPAD.textContent.slice(this.RANG[1]).replace(/\s+$/,'')+' ';
+							if(keep_rang){
+								this.RANG=[this.RANG[0]+txt.length,this.RANG[0]+txt.length];
+							}else{
+								this.RANG[1]=this.RANG[0]+txt.length;
+							}
+							this.cart();
+							if(rec){
+								this.raec();
+							}
+						}
+					}
+					// LISTEN
+					this.NOTEPAD.addEventListener('beforeinput',e=>{
+						e.preventDefault();
+						switch(e.inputType){
+							case'deleteByCut':this.ccp();break;
+							case'deleteContentBackward':if(this.RANG[1]>this.RANG[0])this.raec();this.nix();break;
+							case'formatBold':this.biu('**');break;
+							case'formatItalic':this.biu();break;
+							case'formatUnderline':this.biu('__');break;
+							case'formatStrikethrough':this.biu('~');break;
+							// case'insertFromDrop':this.xom(e.dataTransfer.getData('text'));break;
+							case'insertFromPaste':this.ccp('put');break;
+							case'insertParagraph':this.xom("\n\t");break;
+							case'insertReplacementText':this.selmod();this.raec(this.gang());this.RANG=this.gang();this.nix(false);this.xom(e.dataTransfer.getData('text'),false);break;
+							case'insertText':let txt=e.data.toLowerCase();
+								if(this.CAP){ // iOS
+									txt=txt.toUpperCase();
+								}
+								this.xom(txt);
+								break;
+						}
+						this.mov();
+					});
+					this.NOTEPAD.addEventListener('blur',()=>{
+						if(window.innerHeight<window.innerWidth)this.NOTEPAD.focus();
+					});
+					this.NOTEPAD.addEventListener('contextmenu',e=>{
+						if(this.RANG[0]===this.RANG[1]){
+							this.selmod();
+						}
+					});
+					this.NOTEPAD.addEventListener('dblclick',e=>{
+						this.selmod('sentence');
+					});
+					this.NOTEPAD.addEventListener('input',e=>{
+						e.preventDefault();
+						if(e.inputType==='insertCompositionText'){
+							const up1=1+this.RANG[1];
+							this.cart([up1,up1]);
+							this.raec();
+							// console.log(e);
+						}
+					});
+					document.addEventListener('selectionchange',()=>{
+						const selec=window.getSelection().getRangeAt(0);
+						if(this.NOTEPAD===document.activeElement&&selec.endOffset>0){
+							this.RANG=[selec.startOffset,selec.endOffset];
+						}
+					});
+					// INIT
+					if(!(this.memry())){
+						this.memry('	# ');
+					}
+					this.NOTEPAD.textContent=this.memry();
+					this.NOTEPAD.focus();
+					const l=this.NOTEPAD.textContent.length;
+					this.cart([l,l]);
+					this.raec();
+				}
+			}
+			// X
+			const nib=new Nib();
+			const jig=new Jig(nib);
+			const contex=document.getElementById('contex');
+			const cune=document.getElementById('cuneiform');
+			const tooble=document.getElementById('tooble');
+			function alurt(msg='OK!'){
+				const moda=document.createElement('div');
+				moda.classList.add('alurt');
+				moda.textContent=msg;
+				console.log('Alurt: '+msg);
+				document.body.appendChild(moda);
+				moda.onclick=()=>{
+					moda.remove();
+				}
+				moda.ontransitionend=()=>{
+					moda.remove();
+				}
+				setTimeout(()=>{moda.style.opacity='0'},2000);
+			}
+			function conf(){
+				cuneiform('CONFIGURE',JSON.stringify(jig.mem())).then(cfg=>{
+					if(cfg){
+						if(cfg===' '||cfg==='{}'){
+							jig.cfg();
+						}else{
+							jig.mem(JSON.parse(cfg));
+						}
+					}
+				});
+			}
+			async function cuneiform(promtp='Are you sure?',inpt=''){
+				if(nib.iswet()){
+					lokc();
+				}
+				const form=document.getElementById('cuneiform');
+				const tin=form.children[1];
+				const butt_ok=form.children[2];
+				const butt_no=form.children[3];
+				butt_no.click();
+				return await new Promise(rezolv=>{
+					let rez=false;
+					form.children[0].textContent=promtp;
+					form.style.display='block';
+					if(inpt){
+						if(inpt===' '){
+							tin.value='';
+						}else{
+							tin.value=inpt;
+						}
+						tin.style.display='block';
+						tin.focus();
+					}else{
+						tin.value='';
+						tin.style.display='none';
+					}
+					tin.addEventListener('blur',()=>{tin.focus()});
+					butt_ok.addEventListener('click',()=>{
+						form.style.display='none';
+						if(inpt){
+							rez=tin.value;
+						}else{
+							rez=true;
+						}
+						rezolv(rez);
+					});//,{once:true});
+					butt_no.addEventListener('click',()=>{
+						form.style.display='none';
+						rezolv(false);
+					});//,{once:true});
+				});
+			}
+			function dinosaur(w=''){
+				if(!w){
+					w=window.getSelection().toString();
+				}
+				window.open(jig.cfg('thesaurus_url')+w);
+			}
+			function lokc(){
+				if(nib.NOTEPAD.spellcheck==true){
+					proofa();
+				}
+				cune.children[3].click();
+				contex.style.display='none';
+				nib.swop();
+				nib.NOTEPAD.classList.toggle('lokc');
+				document.getElementById('lokc').classList.toggle('act');
+				const moab=document.getElementById('moab');
+				moab.children[0].classList.toggle('hid');
+				moab.children[2].classList.toggle('hid');
+				if(nib.iswet()){
+					alurt('Write');
+					/* alurt('<svg><path d="M12 2.001a4 4 0 0 1 3.771 2.666 1 1 0 0 1-1.84.774l-.045-.107a2 2 0 0 0-3.88.517L10.002 6v1.999h7.749a2.25 2.25 0 0 1 2.245 2.097l.005.154v9.496a2.25 2.25 0 0 1-2.096 2.245l-.154.005H6.25A2.25 2.25 0 0 1 4.005 19.9L4 19.746V10.25a2.25 2.25 0 0 1 2.096-2.245L6.25 8l1.751-.001v-2A3.999 3.999 0 0 1 12 2.002Zm0 11.498a1.499 1.499 0 1 0 0 2.998 1.499 1.499 0 0 0 0-2.998Z"/></svg>'); */
+				}else{
+					alurt('Read');
+					/* alurt('<svg><path d="M12 2a4 4 0 0 1 4 4v2h2.5A1.5 1.5 0 0 1 20 9.5v11a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 20.5v-11A1.5 1.5 0 0 1 5.5 8H8V6a4 4 0 0 1 4-4Zm0 11.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3ZM12 4a2 2 0 0 0-2 2v2h4V6a2 2 0 0 0-2-2Z"/></svg>'); */
+				}
+			}
+			function opin(ti=null){
+				if(ti){
+					jig.lod(ti);
+				}else{
+					const f=document.createElement('input');
+					f.type='file';
+					f.setAttribute('accept','.md');
+					document.body.appendChild(f);
+					f.style.display='none';
+					f.click();
+					f.onchange=()=>{
+						const bin=f.files[0];
+						jig.lod(bin);
+					}
+				}
+			}
+			function owl(){
+				let rgb='#333';
+				if(jig.cfg('dark')){
+					jig.cfg('dark',false);
+					rgb='Silver';
+				}else{
+					jig.cfg('dark',true);
+				}
+				document.body.parentElement.classList.toggle('owl');
+				document.querySelector("meta[name=theme-color]").setAttribute("content",rgb);
+			}
+			function peekaboo(){
+				tooble.classList.toggle('peek');
+			}
+			function prln(){
+				if(nib.iswet()){
+					lokc();
+				}
+				window.print();
+			}
+			function proofa(){
+				if(!(nib.iswet())){
+					lokc();
+				}
+				document.getElementById('proof').classList.toggle('act');
+				jig.spex();
+				if(nib.NOTEPAD.spellcheck===true){
+					alurt("Proofing ON");
+				}else{
+					alurt("Proofing OFF");
+				}
+			}
+			function publistche(){
+				let alias=nib.sellama();
+				if(jig.cfg('post_alias').trim()){
+					alias=jig.cfg('post_alias');
+				}
+				cuneiform('PUBLISH',alias).then(issu=>{
+					jig.pub(issu).then(resp=>alurt(resp)).catch(err=>{console.log(err);alurt('Error')});
+				});
+			}
+			function pub_cfg(){
+				let promtp='.';
+				if(jig.cfg('post_url')){
+					promtp=jig.cfg('post_url');
+				}
+				cuneiform('API URL',promtp).then(cfg=>{
+					if(cfg){
+						if(cfg==='.'){
+							jig.cfg('post_url','');
+						}else{
+							jig.cfg('post_url',cfg);
+						}
+					}
+				});
+			}
+			function rush(albak,arg){
+				cuneiform('Unsaved changes will be lost!').then(promp=>{
+					if(promp){
+						albak(arg);
+					}
+				});
+			}
+			function saef(as=false){
+				jig.sav(as).then(resp=>{
+					if(resp==='Saved'){
+						document.title=jig.cfg('working_title');
+						alurt(resp);
+					}
+				}).catch(err=>{
+					if(err.includes('The user aborted a request.')){
+						console.log(err);
+					}else{
+						console.log(err);
+						saef(true);
+					}
+				});
+			}
+			function saerk(){
+				let regx=window.getSelection().toString().replaceAll(/([\\|\/|\(|\)|\[|\]|\!|\?|\$|\^|\*|\=|\+|\|])/g,'\\$1').replaceAll(/\n/g,'\\n').replaceAll(/\t/g,'\\t')+'~>';
+				if(regx==='~>'){
+					regx=' ';
+				}
+				cuneiform('SEARCH & REPLACE',regx).then(w=>{
+					if(w){
+						if(w.trim()){
+							if(!(nib.iswet())){
+								lokc();
+							}
+							alurt(nib.preg(w));
+						}
+					}
+				});
+			}
+			function tally(){
+				alurt(nib.tally());
+			}
+			tooble.onclick=()=>{
+				tooble.classList.toggle('peek');
+			}
+			nib.NOTEPAD.addEventListener('contextmenu',e=>{
+				if(nib.iswet()){
+					contex.style.display='block';
+					if(window.innerHeight<window.innerWidth){
+						contex.style.left='calc('+(e.clientX+24)+'px';
+						contex.style.top='calc('+(e.clientY+14)+'px';
+					}else{
+						contex.style.left='0';
+						contex.style.top='auto';
+					}
+				}else{
+					nib.cop('BBC');
+					alurt('Clipboard (BBCode)');
+				}
+			});
+			document.body.addEventListener('click',e=>{
+				contex.style.display='none';
+			});
+			document.body.addEventListener('keydown',e=>{
+				if(e.repeat==false){
+					if(e.ctrlKey||e.metaKey){
+						switch(e.key.toUpperCase()){
+							case'C':
+								if(!(nib.iswet())){
+									if(cune.style.display!='block'){
+										e.preventDefault();
+										if(e.shiftKey){
+											nib.cop('BBC');
+											alurt('Clipboard (BBCode)');
+										}else{
+											nib.cop();
+											alurt('Clipboard (HTML)');
+										}
+									}
+								}else{
+									if(e.shiftKey){
+										e.preventDefault();
+										nib.cop('MD');
+										alurt('Clipboard (MD)');
+									}
+								}
+								break;
+							case'E':e.preventDefault();
+								if(e.shiftKey){
+									pub_cfg();
+								}else{
+									publistche();
+								}
+								break;
+							case'H':e.preventDefault();saerk();break;
+							case'I':case'J':if(e.shiftKey)e.preventDefault();break;
+							case'K':e.preventDefault();nib.biu('~');break;
+							case'L':e.preventDefault();proofa();break;
+							case'M':e.preventDefault();nib.biu('|');break;
+							case'N':e.preventDefault();rush(jig.neu);break;
+							case'O':e.preventDefault();opin();break;
+							case'P':e.preventDefault();prln();break;
+							case'Q':e.preventDefault();rush(window.close);break;
+							case'R':e.preventDefault();saerk();break;
+							case'S':e.preventDefault();
+								if(e.shiftKey){
+									saef(true);
+								}else{
+									saef();
+								}
+								break;
+							case'T':e.preventDefault();tally();break;
+							case'V':
+								if(e.shiftKey){
+									e.preventDefault();
+									navigator.clipboard.read().then(txt=>{
+										txt[0].getType('text/html').then(bob=>bob.text().then(w=>nib.xom(nib.x2y(w,'htm2boo').replaceAll(/<[^>]*>/g,'').replaceAll(/\n\n\n|\(&\?\)/g,"\n\t"))))
+									})
+								};
+								break;
+							case'W':e.preventDefault();rush(window.close);break;
+							case'Y':e.preventDefault();nib.undo(true);break;
+							case'Z':e.preventDefault();nib.undo();break;
+							case'=':case'-':case'_':case'+':e.preventDefault();break;
+						}
+					}else{
+						const cune=document.getElementById('cuneiform');
+						switch(e.key){
+							case'Enter':if(!nib.iswet()){e.preventDefault()}cune.children[2].click();break;
+							case'Tab':e.preventDefault();if(cune.style.display=='block'){lokc()};lokc();break;
+							case'F1':e.preventDefault();window.open('https://github.com/Starscade/Scrawl#readme');break;
+							case'F2':e.preventDefault();saef(true);break;
+							case'F3':e.preventDefault();opin();break;
+							case'F7':e.preventDefault();proofa();break;
+							case'F8':e.preventDefault();saerk();break;
+							case'F9':e.preventDefault();owl();break;
+							case'F10':e.preventDefault();conf();break;
+							case'F12':e.preventDefault();publistche();break;
+						}
+					}
+				}
+			});
+			document.body.onscroll=()=>{
+				contex.style.display='none';
+			};
+			document.body.parentElement.addEventListener('dragover',e=>{
+				e.preventDefault();
+			});
+			document.body.parentElement.addEventListener('drop',e=>{
+				e.preventDefault();
+				const fob=e.dataTransfer.items[0].getAsFile();
+				if(nib.NOTEPAD.textContent===jig.cfg('promp')){
+					opin(fob);
+				}else{
+					rush(opin,fob);
+				}
+			});
+			// INIT
+			if(jig.cfg('dark')){
+				document.body.parentElement.classList.toggle('owl');
+				document.querySelector("meta[name=theme-color]").setAttribute("content",'#333');
+			}
+			if(nib.memry()!==jig.cfg('promp')){
+				lokc();
+			}
+			document.body.style.opacity=1;
+			setTimeout(()=>{
+				tooble.classList.toggle('glass');
+				document.body.parentElement.style.scrollBehavior='Smooth';
+			},1234);
+			if('serviceWorker'in navigator){
+				navigator.serviceWorker.register('work.js',{scope:'./'});
+			}
+		</script>
+	</body>
+</html>

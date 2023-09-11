@@ -1,0 +1,27 @@
+{
+	"name":"S c r a w l",
+	"short_name":"Scrawl",
+	"description":"The offline, Internet typewriter.",
+	"start_url":"./",
+	"scope":"./",
+	"display":"fullscreen",
+	"theme_color":"Silver",
+	"background_color":"Silver",
+	"icons":[
+		{
+			"src":"ico.png",
+			"sizes":"192x192",
+			"type":"image/png"
+		},{
+			"src":"adaptico.png",
+			"sizes":"512x512",
+			"type":"image/png",
+			"purpose":"any maskable"
+		}
+	],
+	"url_handlers":[
+		{
+			"origin":"https://scrawl.cc"
+		}
+	]
+}
